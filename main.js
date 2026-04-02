@@ -457,6 +457,22 @@ class CardiologyResource {
                 color: 'warning-amber'
             },
             {
+                id: 'long-qt-syndrome',
+                name: 'Long QT Syndrome',
+                category: 'Arrhythmia',
+                prevalence: 'Rare',
+                severity: 'High',
+                symptoms: ['syncope', 'palpitations', 'seizures', 'sudden-cardiac-death'],
+                riskFactors: ['genetic', 'family-history', 'medications', 'electrolyte-abnormalities', 'hypothyroidism'],
+                diagnostics: ['ecg', 'holter-monitor', 'genetic-testing', 'epinephrine-qt-stress-test', 'exercise-stress-test'],
+                treatments: ['beta-blockers', 'icd', 'left-cardiac-sympathetic-denervation', 'medication-avoidance', 'genetic-counseling'],
+                description: 'Inherited or acquired condition with prolonged QT interval on ECG predisposing to polymorphic ventricular tachycardia (torsades de pointes) and sudden cardiac death. Multiple genetic subtypes (LQT1-LQT15) with distinct triggers. Leading cause of sudden cardiac death in young people.',
+                incidence: '1 in 2,000 live births',
+                mortality: 'Untreated: 1-2% annual risk of sudden cardiac death; with treatment risk reduced significantly',
+                image: 'resources/lqts.png',
+                color: 'cardiac-purple'
+            },
+            {
                 id: 'deep-vein-thrombosis',
                 name: 'Deep Vein Thrombosis',
                 category: 'Thrombotic Disease',
