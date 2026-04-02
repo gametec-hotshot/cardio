@@ -1165,6 +1165,411 @@
                         </div>
 
                         <!-- Additional protocols would be loaded here dynamically -->
+
+                        <!-- ═══════════════════ CARDIOGENIC SHOCK ═══════════════════ -->
+                        <div id="cardiogenic-shock-protocol" class="protocol-content hidden">
+                            <div class="bg-white rounded-2xl p-8 shadow-lg mb-8">
+                                <div class="flex items-center justify-between mb-6">
+                                    <h2 class="text-3xl font-playfair font-bold text-deep-navy">Cardiogenic Shock Treatment Protocol</h2>
+                                    <span class="evidence-badge">SCAI 2024 / AHA 2023 Updates</span>
+                                </div>
+
+                                <!-- Definition & Diagnosis -->
+                                <div class="mb-8 p-6 bg-red-50 rounded-xl border-l-4 border-red-600">
+                                    <h3 class="text-xl font-playfair font-bold text-deep-navy mb-3 flex items-center gap-2">🚨 Definition — SCAI 2019 Criteria</h3>
+                                    <p class="text-neutral-slate mb-4">Cardiogenic shock (CS) is characterized by <strong>end-organ hypoperfusion</strong> due to cardiac dysfunction. Diagnosis requires all three:</p>
+                                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm text-neutral-slate">
+                                        <div class="bg-white p-4 rounded-lg">
+                                            <h4 class="font-bold text-alert-coral mb-2">Hemodynamics</h4>
+                                            <ul class="space-y-1">
+                                                <li>• SBP &lt;90 mmHg OR MAP &lt;65</li>
+                                                <li>• CI &lt;2.2 L/min/m²</li>
+                                                <li>• RA pressure &gt;15 mmHg OR PA wedge &gt;15</li>
+                                            </ul>
+                                        </div>
+                                        <div class="bg-white p-4 rounded-lg">
+                                            <h4 class="font-bold text-alert-coral mb-2">Hypoperfusion (≥1)</h4>
+                                            <ul class="space-y-1">
+                                                <li>• Altered mentation</li>
+                                                <li>• Cool, clammy extremities</li>
+                                                <li>• Urine output &lt;30 mL/hr</li>
+                                                <li>• Lactate &gt;2 mmol/L</li>
+                                            </ul>
+                                        </div>
+                                        <div class="bg-white p-4 rounded-lg">
+                                            <h4 class="font-bold text-alert-coral mb-2">Cardiac Etiology</h4>
+                                            <ul class="space-y-1">
+                                                <li>• Acute MI (~70% of cases)</li>
+                                                <li>• Decompensated heart failure</li>
+                                                <li>• Fulminant myocarditis</li>
+                                                <li>• Mechanical complications</li>
+                                                <li>• Stress cardiomyopathy</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- SCAI Shock Staging -->
+                                <div class="mb-8">
+                                    <h3 class="text-2xl font-playfair font-bold text-deep-navy mb-6">SCAI Shock Staging Classification (A → E)</h3>
+
+                                    <div class="overflow-x-auto rounded-xl border border-gray-200">
+                                        <table class="w-full text-sm">
+                                            <thead>
+                                                <tr class="bg-deep-navy text-white">
+                                                    <th class="p-4 text-left">Stage</th>
+                                                    <th class="p-4 text-left">Category</th>
+                                                    <th class="p-4 text-left">Key Features</th>
+                                                    <th class="p-4 text-left">Management Goal</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody class="divide-y divide-gray-200">
+                                                <tr class="bg-green-50">
+                                                    <td class="p-4 font-bold text-success-green">A</td>
+                                                    <td class="p-4 font-semibold">Not in Shock</td>
+                                                    <td class="p-4">At risk for CS but normotensive, no hypoperfusion</td>
+                                                    <td class="p-4">Prevent progression; optimize HF therapy</td>
+                                                </tr>
+                                                <tr class="bg-blue-50">
+                                                    <td class="p-4 font-bold text-clinical-blue">B</td>
+                                                    <td class="p-4 font-semibold">Beginning Shock</td>
+                                                    <td class="p-4">SBP &lt;90 but no hypoperfusion; or hypotensive only<br>responds to fluid. No shock index (HR/SBP) &gt;0.9</td>
+                                                    <td class="p-4">Early recognition; vasopressors if fluid-refractory; rule out reversible causes</td>
+                                                </tr>
+                                                <tr class="bg-yellow-50">
+                                                    <td class="p-4 font-bold text-warning-amber">C</td>
+                                                    <td class="p-4 font-semibold">Classic Shock</td>
+                                                    <td class="p-4">Hypotension + hypoperfusion; needs vasoactive drugs to maintain BP/CI; lactate usually elevated</td>
+                                                    <td class="p-4">Full CS bundle — vasoactive drugs, consider MCS, urgent cath if MI</td>
+                                                </tr>
+                                                <tr class="bg-orange-100">
+                                                    <td class="p-4 font-bold text-imaging-orange">D</td>
+                                                    <td class="p-4 font-semibold">Deteriorating</td>
+                                                    <td class="p-4">Clinical deterioration despite therapy; escalating doses of inotropes/pressors; worsening renal function or lactate rise</td>
+                                                    <td class="p-4">Upscale to MCS if not already; consider VA-ECMO; transfer to advanced center</td>
+                                                </tr>
+                                                <tr class="bg-red-100">
+                                                    <td class="p-4 font-bold text-alert-coral">E</td>
+                                                    <td class="p-4 font-semibold">Extremis / Collapse</td>
+                                                    <td class="p-4">Cardiopulmonary arrest; profound shock with imminent death; CPR or VA-ECMO required for survival</td>
+                                                    <td class="p-4">E-CPR with VA-ECMO; emergent PCI if AMI; transplant/LVAD evaluation</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="mt-4 p-4 bg-yellow-50 rounded-lg border border-yellow-200">
+                                        <h5 class="font-semibold text-warning-amber mb-1">💡 Key Concept: The "Shock Spiral"</h5>
+                                        <p class="text-sm text-neutral-slate">Cardiogenic shock is a <strong>vicious cycle</strong>: ↓CO → ↓coronary perfusion → ↓contractility → ↓CO. Early aggressive management breaks the cycle. Every hour of delay in revascularization increases mortality by 12.5% (SHOCK Trial). Staging drives urgency — Stage C/D/E require immediate escalation.</p>
+                                    </div>
+                                </div>
+
+                                <!-- Immediate Management Bundle -->
+                                <div class="mb-8">
+                                    <h3 class="text-2xl font-playfair font-bold text-deep-navy mb-6">Immediate Management (First 30 Minutes)</h3>
+
+                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                        <!-- Diagnostics -->
+                                        <div class="bg-gray-50 rounded-xl p-5">
+                                            <h4 class="font-bold text-deep-navy mb-3 flex items-center gap-2">🔬 Diagnostic Workup (SIMULTANEOUS with treatment)</h4>
+                                            <ul class="text-sm text-neutral-slate space-y-2">
+                                                <li class="flex items-start"><span class="text-alert-coral mr-2">☐</span> 12-lead ECG — STEMI → cath lab NOW</li>
+                                                <li class="flex items-start"><span class="text-alert-coral mr-2">☐</span> Troponin, BNP, lactate, ABG, CBC, BMP, LFTs, coags</li>
+                                                <li class="flex items-start"><span class="text-alert-coral mr-2">☐</span> Bedside echo (POCUS) — EF, valvular, tamponade, RV function</li>
+                                                <li class="flex items-start"><span class="text-alert-coral mr-2">☐</span> Right heart cath (Swan-Ganz) — CI, SVR, wedge pressure if uncertain</li>
+                                                <li class="flex items-start"><span class="text-alert-coral mr-2">☐</span> CXR — pulmonary edema, pneumothorax, device check</li>
+                                                <li class="flex items-start"><span class="text-alert-coral mr-2">☐</span> Foley catheter — serial urine output (target ≥0.5 mL/kg/hr)</li>
+                                                <li class="flex items-start"><span class="text-alert-coral mr-2">☐</span> Arterial line — continuous BP monitoring</li>
+                                            </ul>
+                                        </div>
+
+                                        <!-- Supportive Care -->
+                                        <div class="bg-gray-50 rounded-xl p-5">
+                                            <h4 class="font-bold text-deep-navy mb-3 flex items-center gap-2">🫁 Supportive Care</h4>
+                                            <ul class="text-sm text-neutral-slate space-y-2">
+                                                <li class="flex items-start"><span class="text-clinical-blue mr-2">☐</span> <strong>Oxygen:</strong> SpO₂ target 92–96%, intubate if GCS ↓ or respiratory failure</li>
+                                                <li class="flex items-start"><span class="text-clinical-blue mr-2">☐</span> <strong>Intubation caution:</strong> Positive pressure can worsen RV failure; hemodynamic collapse on induction is common. Use ketamine or etomidate. Have push-dose pressor ready.</li>
+                                                <li class="flex items-start"><span class="text-clinical-blue mr-2">☐</span> <strong>IV access:</strong> 2 large-bore peripheral lines or central venous catheter</li>
+                                                <li class="flex items-start"><span class="text-clinical-blue mr-2">☐</span> <strong>Fluid challenge:</strong> 250–500 mL crystalloid ONLY if no obvious volume overload or echo suggests RV failure</li>
+                                                <li class="flex items-start"><span class="text-clinical-blue mr-2">☐</span> <strong>Diuretics only IF</strong> pulmonary edema WITHOUT shock (rare in CS)</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Vasoactive Agents -->
+                                <div class="mb-8">
+                                    <h3 class="text-2xl font-playfair font-bold text-deep-navy mb-6">Vasoactive Agent Selection &amp; Dosing</h3>
+
+                                    <div class="space-y-6">
+                                        <!-- First-line -->
+                                        <div class="medication-tier first-line p-6">
+                                            <div class="flex items-center mb-4">
+                                                <div class="w-8 h-8 bg-success-green rounded-full flex items-center justify-center text-white font-bold mr-3">1</div>
+                                                <h4 class="text-xl font-semibold text-deep-navy">First-Line Vasoactive Agents</h4>
+                                                <span class="ml-auto text-sm bg-success-green text-white px-3 py-1 rounded">Start Here → Titrate to MAP ≥65</span>
+                                            </div>
+
+                                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                                <div class="bg-white p-4 rounded-lg border border-gray-200">
+                                                    <h5 class="font-bold text-deep-navy mb-2">Norepinephrine (Levophed) — Vasopressor of Choice</h5>
+                                                    <div class="grid grid-cols-2 gap-3 text-sm text-neutral-slate">
+                                                        <div><strong class="text-deep-navy">Dose:</strong><br>0.01–0.5 mcg/kg/min IV infusion</div>
+                                                        <div><strong class="text-deep-navy">Receptor:</strong><br>α₁ &gt; β₁ (vasoconstriction + modest inotropy)</div>
+                                                    </div>
+                                                    <p class="text-xs text-neutral-slate mt-2 p-2 bg-blue-50 rounded"><strong>Why first-line:</strong> Sepsis in CS (SOAP II), NE associated with lower mortality than dopamine in CS. Increases MAP without excessive tachycardia.</p>
+                                                    <p class="text-xs text-neutral-slate mt-1"><strong>Target:</strong> MAP ≥65 mmHg (may need ≥70 in chronic HTN). Titrate q5–15 min.</p>
+                                                </div>
+
+                                                <div class="bg-white p-4 rounded-lg border border-gray-200">
+                                                    <h5 class="font-bold text-deep-navy mb-2">Dobutamine — Inotrope of Choice</h5>
+                                                    <div class="grid grid-cols-2 gap-3 text-sm text-neutral-slate">
+                                                        <div><strong class="text-deep-navy">Dose:</strong><br>2–20 mcg/kg/min IV infusion</div>
+                                                        <div><strong class="text-deep-navy">Receptor:</strong><br>β₁ &gt; β₂ (positive inotropy + vasodilation)</div>
+                                                    </div>
+                                                    <p class="text-xs text-neutral-slate mt-2 p-2 bg-green-50 rounded"><strong>When to use:</strong> Low CO (CI &lt;2.2) despite adequate MAP. Often combined with NE (NE for BP, dobutamine for CO). Start dobutamine only after MAP stabilized with pressor.</p>
+                                                    <p class="text-xs text-neutral-slate mt-1"><strong>Caution:</strong> Can cause vasodilation → hypotension. May increase HR and myocardial O₂ demand. Tachyarrhythmia risk.</p>
+                                                </div>
+
+                                                <div class="bg-white p-4 rounded-lg border border-gray-200">
+                                                    <h5 class="font-bold text-deep-navy mb-2">Milrinone — PDE3 Inhibitor</h5>
+                                                    <div class="grid grid-cols-2 gap-3 text-sm text-neutral-slate">
+                                                        <div><strong class="text-deep-navy">Dose:</strong><br>0.125–0.75 mcg/kg/min (no bolus in shock)</div>
+                                                        <div><strong class="text-deep-navy">Receptor:</strong><br>PDE3 inhibition → ↑cAMP (inotropy + vasodilation)</div>
+                                                    </div>
+                                                    <p class="text-xs text-neutral-slate mt-2 p-2 bg-amber-50 rounded"><strong>Preferred when:</strong> Patient on beta-blockers (dobutamine effect blunted), RV failure (selective pulmonary vasodilation), long-term HF bridge.</p>
+                                                    <p class="text-xs text-neutral-slate mt-1"><strong>Major caution:</strong> Renally cleared — halve dose if CrCl &lt;50. Longer half-life — harder to stop if hypotension worsens. <strong>Must combine with pressor.</strong></p>
+                                                </div>
+
+                                                <div class="bg-white p-4 rounded-lg border border-gray-200">
+                                                    <h5 class="font-bold text-deep-navy mb-2">Epinephrine — Rescue Agent</h5>
+                                                    <div class="grid grid-cols-2 gap-3 text-sm text-neutral-slate">
+                                                        <div><strong class="text-deep-navy">Dose:</strong><br>0.01–0.5 mcg/kg/min IV infusion (bolus 1 mg for arrest)</div>
+                                                        <div><strong class="text-deep-navy">Receptor:</strong><br>α₁, β₁, β₂ (dose-dependent)</div>
+                                                    </div>
+                                                    <p class="text-xs text-neutral-slate mt-2 p-2 bg-red-50 rounded"><strong>When to escalate:</strong> Refractory CS despite NE + dobutamine. Provides both vasopression and inotropy. Higher lactic acidosis and tachyarrhythmia risk vs NE alone.</p>
+                                                    <p class="text-xs text-neutral-slate mt-1"><strong>LOW dose (&lt;0.1):</strong> β → inotropy | <strong>HIGH dose (&gt;0.1):</strong> α → vasoconstriction</p>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Vasopressin -->
+                                        <div class="medication-tier second-line p-6">
+                                            <div class="flex items-center mb-4">
+                                                <div class="w-8 h-8 bg-warning-amber rounded-full flex items-center justify-center text-white font-bold mr-3">2</div>
+                                                <h4 class="text-xl font-semibold text-deep-navy">Vasopressin — Second-Line Adjunct</h4>
+                                                <span class="ml-auto text-sm bg-warning-amber text-white px-3 py-1 rounded">V2 Receptor agonist</span>
+                                            </div>
+                                            <div class="bg-white p-4 rounded-lg border border-gray-200">
+                                                <div class="grid grid-cols-2 gap-4 text-sm text-neutral-slate">
+                                                    <div><strong class="text-deep-navy">Dose:</strong> 0.01–0.04 U/min IV (fixed — do NOT titrate)</div>
+                                                    <div><strong class="text-deep-navy">Use:</strong> Add to NE when NE dose &gt;0.25–0.5 mcg/kg/min. Reduces NE requirement ("catecholamine sparer"). Non-adrenergic mechanism. May worsen RV afterload.</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- MCS Devices -->
+                                <div class="mb-8">
+                                    <h3 class="text-2xl font-playfair font-bold text-deep-navy mb-6">Mechanical Circulatory Support (MCS) Selection</h3>
+
+                                    <div class="overflow-x-auto rounded-xl border border-gray-200">
+                                        <table class="w-full text-sm min-w-[700px]">
+                                            <thead>
+                                                <tr class="bg-deep-navy text-white">
+                                                    <th class="p-4 text-left">Device</th>
+                                                    <th class="p-4 text-left">Type</th>
+                                                    <th class="p-4 text-left">Flow</th>
+                                                    <th class="p-4 text-left">Access</th>
+                                                    <th class="p-4 text-left">Best For</th>
+                                                    <th class="p-4 text-left">Key Limitations</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody class="divide-y divide-gray-200">
+                                                <tr class="bg-blue-50">
+                                                    <td class="p-4 font-semibold text-deep-navy">Intra-Aortic Balloon Pump (IABP)</td>
+                                                    <td class="p-4">Counter-pulsation</td>
+                                                    <td class="p-4">+0.5 L/min</td>
+                                                    <td class="p-4">Femoral artery (7–8 Fr)</td>
+                                                    <td class="p-4">Post-MI CS bridge; mechanical complications (VSD, MR)</td>
+                                                    <td class="p-4">Modest augmentation; IABP-SHOCK II showed no mortality benefit; contraindicated in severe AR</td>
+                                                </tr>
+                                                <tr class="bg-green-50">
+                                                    <td class="p-4 font-semibold text-deep-navy">Impella (CP / 5.0 / 5.5)</td>
+                                                    <td class="p-4">Axial micro-pump</td>
+                                                    <td class="p-4">3.5–5.5 L/min</td>
+                                                    <td class="p-4">Femoral or axillary (12–14 Fr)</td>
+                                                    <td class="p-4">LV unloading; high-risk PCI; AMI-CS with low EF</td>
+                                                    <td class="p-4">Cost (~$15K+); hemolysis risk; limb ischemia; requires adequate RV function; not for LV thrombus or mechanical AV</td>
+                                                </tr>
+                                                <tr class="bg-purple-50">
+                                                    <td class="p-4 font-semibold text-deep-navy">TandemHeart</td>
+                                                    <td class="p-4">Centrifugal pump (LA → Femoral artery)</td>
+                                                    <td class="p-4">~5 L/min</td>
+                                                    <td class="p-4">Transseptal (LA) + arterial (15–17 Fr)</td>
+                                                    <td class="p-4">Profound LV failure; biventricular support with add-on</td>
+                                                    <td class="p-4">Transseptal puncture required (procedural complexity); anticoagulation needed</td>
+                                                </tr>
+                                                <tr class="bg-red-50">
+                                                    <td class="p-4 font-semibold text-alert-coral">VA-ECMO</td>
+                                                    <td class="p-4">Veno-arterial (full cardiopulmonary)</td>
+                                                    <td class="p-4">4–6 L/min</td>
+                                                    <td class="p-4">Femoral artery + vein (15–19 Fr each)</td>
+                                                    <td class="p-4">Stage E shock / E-CPR; biventricular failure; combined cardiopulmonary collapse</td>
+                                                    <td class="p-4">↑LV afterload (may need LV vent); limb ischemia; bleeding; thrombosis; complex weaning. Harlequin syndrome (North-south).</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+                                    <div class="mt-4 p-4 bg-blue-50 rounded-lg border border-blue-200">
+                                        <h5 class="font-semibold text-clinical-blue mb-2">📐 How to Choose MCS</h5>
+                                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-neutral-slate">
+                                            <div class="p-3 bg-white rounded">
+                                                <strong class="text-deep-navy">Early/Stage C CS:</strong> If persistent hypoperfusion despite drugs → Impella CP (LV support) or IABP (post-MI). Consider early — "door to unloading" in STEMI-CS may reduce mortality.
+                                            </div>
+                                            <div class="p-3 bg-white rounded">
+                                                <strong class="text-deep-navy">Escalation/Stage D–E:</strong> If deteriorating on Impella + pressors → VA-ECMO. For arrest or profound biventricular failure → VA-ECMO first. E-CPR if arrest &gt;10 min.
+                                            </div>
+                                            <div class="p-3 bg-white rounded">
+                                                <strong class="text-deep-navy">Right Ventricular Failure:</strong> Consider TandemHeart with RV add-on (TandemHeart Right) or Impella RP. Isolated RV failure: inhaled nitric oxide, milrinone, RVAD.
+                                            </div>
+                                            <div class="p-3 bg-white rounded">
+                                                <strong class="text-deep-navy">Bridge to Decision:</strong> If etiology unclear or potentially reversible (myocarditis, reversible ischemia) → VA-ECMO. If chronic end-stage HF → evaluate for LVAD or heart transplant.
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Etiology-Specific Management -->
+                                <div class="mb-8">
+                                    <h3 class="text-2xl font-playfair font-bold text-deep-navy mb-6">Etiology-Specific Management</h3>
+
+                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                        <!-- AMI-CS -->
+                                        <div class="bg-white rounded-xl p-5 shadow border border-gray-200">
+                                            <h4 class="font-bold text-alert-coral mb-3 flex items-center gap-2">🫀 AMI-Induced CS (~70% of cases)</h4>
+                                            <ul class="text-sm text-neutral-slate space-y-2">
+                                                <li class="flex items-start"><span class="text-red-600 mr-2 font-bold">→</span> <strong>Emergent coronary angiography + revascularization</strong> is Class I recommendation (SHOCK Trial — 18% absolute mortality reduction at 6 months)</li>
+                                                <li class="flex items-start"><span class="text-red-600 mr-2 font-bold">→</span> Multi-vessel PCI: culprit-lesion-first strategy (CULPRIT-SHOCK trial — staged non-culprit PCI)</li>
+                                                <li class="flex items-start"><span class="text-red-600 mr-2 font-bold">→</span> <strong>DAPT:</strong> Aspirin 325 mg + ticagrelor 180 mg (if anatomy defined) or clopidogrel 600 mg if CABG likely</li>
+                                                <li class="flex items-start"><span class="text-red-600 mr-2 font-bold">→</span> Consider Impella before PCI ("door to unloading") to improve outcomes</li>
+                                                <li class="flex items-start"><span class="text-red-600 mr-2 font-bold">→</span> Avoid fibrinolytics in shock (poor efficacy, bleeding risk) — PCI is definitive</li>
+                                            </ul>
+                                        </div>
+
+                                        <!-- Mechanical Complications -->
+                                        <div class="bg-white rounded-xl p-5 shadow border border-gray-200">
+                                            <h4 class="font-bold text-imaging-orange mb-3 flex items-center gap-2">⚙️ Mechanical Complications (Post-MI)</h4>
+                                            <ul class="text-sm text-neutral-slate space-y-2">
+                                                <li class="flex items-start"><span class="text-orange-600 mr-2 font-bold">→</span> <strong>Acute MR (papillary muscle rupture):</strong> IABP + emergent surgery. Nitroprusside if stable enough to bridge.</li>
+                                                <li class="flex items-start"><span class="text-orange-600 mr-2 font-bold">→</span> <strong>VSD:</strong> IABP + emergent surgical repair. Delay if possible (≥2 weeks for tissue integrity) but rarely possible in shock.</li>
+                                                <li class="flex items-start"><span class="text-orange-600 mr-2 font-bold">→</span> <strong>Free wall rupture:</strong> Immediate pericardiocentesis + emergent surgery. Often fatal before intervention.</li>
+                                                <li class="flex items-start"><span class="text-orange-600 mr-2 font-bold">→</span> <strong>LV aneurysm:</strong> Usually subacute; less commonly shock. Managed medically unless thrombus/arrhythmia.</li>
+                                            </ul>
+                                        </div>
+
+                                        <!-- Myocarditis -->
+                                        <div class="bg-white rounded-xl p-5 shadow border border-gray-200">
+                                            <h4 class="font-bold text-diagnostic-teal mb-3 flex items-center gap-2">🦠 Fulminant Myocarditis</h4>
+                                            <ul class="text-sm text-neutral-slate space-y-2">
+                                                <li class="flex items-start"><span class="text-teal-600 mr-2 font-bold">→</span> <strong>Supportive care is mainstay.</strong> Inotropes (dobutamine/milrinone) + pressors (NE)</li>
+                                                <li class="flex items-start"><span class="text-teal-600 mr-2 font-bold">→</span> VA-ECMO for refractory cases — excellent bridge to recovery</li>
+                                                <li class="flex items-start"><span class="text-teal-600 mr-2 font-bold">→</span> Endomyocardial biopsy if diagnosis uncertain or suspecting giant cell/eosinophilic</li>
+                                                <li class="flex items-start"><span class="text-teal-600 mr-2 font-bold">→</span> Immunosuppression (steroids) for giant cell, eosinophilic, sarcoid — NOT for viral</li>
+                                                <li class="flex items-start"><span class="text-teal-600 mr-2 font-bold">→</span> Fulminant myocarditis has ~80% recovery rate with aggressive support</li>
+                                            </ul>
+                                        </div>
+
+                                        <!-- Stress Cardiomyopathy -->
+                                        <div class="bg-white rounded-xl p-5 shadow border border-gray-200">
+                                            <h4 class="font-bold text-cardiac-purple mb-3 flex items-center gap-2">💔 Takotsubo (Stress) Cardiomyopathy</h4>
+                                            <ul class="text-sm text-neutral-slate space-y-2">
+                                                <li class="flex items-start"><span class="text-purple-600 mr-2 font-bold">→</span> Apical ballooning on echo — mimics STEMI ACS presentation</li>
+                                                <li class="flex items-start"><span class="text-purple-600 mr-2 font-bold">→</span> Coronary angiography shows no obstructive CAD</li>
+                                                <li class="flex items-start"><span class="text-purple-600 mr-2 font-bold">→</span> <strong>AVOID inotropes if possible</strong> — catecholamine surge is pathophysiologic mechanism</li>
+                                                <li class="flex items-start"><span class="text-purple-600 mr-2 font-bold">→</span> Use IABP or Impella over catecholamines for hemodynamic support</li>
+                                                <li class="flex items-start"><span class="text-purple-600 mr-2 font-bold">→</span> Most recover within 2–8 weeks. Supportive care. Beta-blockers controversial.</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Endpoints & Monitoring -->
+                                <div class="mb-8">
+                                    <h3 class="text-2xl font-playfair font-bold text-deep-navy mb-6">Therapeutic Endpoints &amp; Monitoring</h3>
+
+                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                        <div class="bg-green-50 rounded-xl p-5">
+                                            <h4 class="font-bold text-success-green mb-3">✅ Hemodynamic Targets</h4>
+                                            <ul class="text-sm text-neutral-slate space-y-2">
+                                                <li>• <strong>MAP ≥ 65 mmHg</strong> (higher, e.g., 70–75, in chronic HTN)</li>
+                                                <li>• <strong>CI ≥ 2.2 L/min/m²</strong></li>
+                                                <li>• <strong>SvO₂ ≥ 65%</strong> (mixed venous O₂ saturation)</li>
+                                                <li>• <strong>Lactate clearance</strong> — trending down by 10% every 2 hours</li>
+                                                <li>• <strong>Urine output ≥ 0.5 mL/kg/hr</strong></li>
+                                                <li>• <strong>SVR:</strong> Target 800–1,200 dyn·s·cm⁻⁵</li>
+                                            </ul>
+                                        </div>
+                                        <div class="bg-amber-50 rounded-xl p-5">
+                                            <h4 class="font-bold text-warning-amber mb-3">📊 Monitoring Tools</h4>
+                                            <ul class="text-sm text-neutral-slate space-y-2">
+                                                <li>• <strong>Arterial line</strong> — continuous BP</li>
+                                                <li>• <strong>Central venous catheter</strong> — CVP, drug delivery</li>
+                                                <li>• <strong>Swan-Ganz (PAC)</strong> — CI, SVR, PA wedge (gold standard for titration)</li>
+                                                <li>• <strong>Serial lactate</strong> — q2-4h until normalization (&lt;2 mmol/L)</li>
+                                                <li>• <strong>POCUS</strong> — IVC, LV function, RV function, pericardium, lung B-lines</li>
+                                                <li>• <strong>Cardiac biomarkers</strong> — q6h troponin (MI evolution tracking)</li>
+                                                <li>• <strong>ScvO₂</strong> from central line — surrogate for SvO₂</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- When NOT to use inotropes -->
+                                <div class="mb-8 p-6 bg-red-50 rounded-xl border-l-4 border-alert-coral">
+                                    <h4 class="font-bold text-alert-coral mb-3 flex items-center gap-2">⚠️ Contraindications &amp; Inotrope Hazards</h4>
+                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-neutral-slate">
+                                        <div>
+                                            <h5 class="font-semibold text-deep-navy mb-2">Do NOT escalate inotropes when:</h5>
+                                            <ul class="space-y-1">
+                                                <li>• <strong>Hypovolemic shock</strong> — give fluids, not pressors/inotropes</li>
+                                                <li>• <strong>Obstructive shock</strong> (tamponade, massive PE, tension PTX) — fix the obstruction</li>
+                                                <li>• <strong>Takotsubo cardiomyopathy</strong> — worsens with catecholamines</li>
+                                                <li>• <strong>Hypertrophic cardiomyopathy</strong> — inotropes worsen LVOT obstruction</li>
+                                            </ul>
+                                        </div>
+                                        <div>
+                                            <h5 class="font-semibold text-deep-navy mb-2">Inotrope toxicity risk factors:</h5>
+                                            <ul class="space-y-1">
+                                                <li>• Prolonged high-dose dobutamine/epinephrine → arrhythmias, increased MVO₂, myocardial necrosis</li>
+                                                <li>• Milrinone accumulation in renal failure → refractory hypotension</li>
+                                                <li>• All inotropes ↑mortality in long-term HF (OPTTIME-CHF)</li>
+                                                <li>• <strong>Key principle:</strong> Inotropes are a bridge — fix the cause (revascularize), unload the LV (MCS), or transition to destination therapy</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- References -->
+                                <div class="p-6 bg-gray-50 rounded-xl">
+                                    <h4 class="font-semibold text-deep-navy mb-3">📚 Key References</h4>
+                                    <ul class="text-sm text-neutral-slate space-y-1.5">
+                                        <li>• Hochman JS et al. Early revascularization in acute MI complicated by CS. <em>N Engl J Med.</em> 1999;341(9):625-634. (SHOCK Trial)</li>
+                                        <li>• De Backer D et al. Dopamine vs norepinephrine in shock. <em>N Engl J Med.</em> 2010;362(9):779-789. (SOAP II)</li>
+                                        <li>• Thiele H et al. PCI of culprit lesion only vs complete revascularization in CS. <em>N Engl J Med.</em> 2018;379(3):227-238. (CULPRIT-SHOCK)</li>
+                                        <li>• Van Diepen S et al. AHA Scientific Statement: Cardiogenic Shock. <em>Circulation.</em> 2017;136(5):e23-e45.</li>
+                                        <li>• Basir MB et al. SCAI 2019 Expert Consensus on Shock Staging. <em>Catheter Cardiovasc Interv.</em> 2019;93(4):683-688.</li>
+                                        <li>• Thiele H et al. IABP in cardiogenic shock. <em>N Engl J Med.</em> 2012;367(14):1287-1296. (IABP-SHOCK II)</li>
+                                        <li>• Kapur NK et al. Door to unloading before PCI. <em>J Am Coll Cardiol.</em> 2017;69(10):1275-1287.</li>
+                                    </ul>
+                                </div>
+
+                                <div class="mt-6 bg-yellow-50 border border-yellow-200 rounded-xl p-4">
+                                    <p class="text-sm text-deep-navy"><strong>⚠️ Disclaimer:</strong> This protocol is an educational reference based on published guidelines and landmark trials. Drug dosing, MCS device selection, and clinical decisions must be individualized to each patient and made by qualified intensivists/cardiologists in a clinical setting. Always follow your institution's protocols and consult current AHA/ACC/SCAI guidelines.</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
