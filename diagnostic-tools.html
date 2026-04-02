@@ -1067,6 +1067,98 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- SCORE2 / SCORE2-OP Risk Calculator -->
+                <div class="bg-white rounded-2xl p-6 shadow-lg border border-gray-200 col-span-1">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-indigo-600 rounded-lg flex items-center justify-center mr-4">
+                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-playfair font-bold text-deep-navy">SCORE2 / SCORE2-OP</h3>
+                            <p class="text-sm text-neutral-slate">ESC 10-Year CVD Risk (European)</p>
+                        </div>
+                    </div>
+
+                    <div class="space-y-4">
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm font-medium text-deep-navy mb-1">Age</label>
+                                <input type="number" id="score2-age" class="w-full p-2 border border-gray-300 rounded text-sm" placeholder="Years" min="40" max="100">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-deep-navy mb-1">Gender</label>
+                                <select id="score2-gender" class="w-full p-2 border border-gray-300 rounded text-sm">
+                                    <option value="">Select</option>
+                                    <option value="male">Male</option>
+                                    <option value="female">Female</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-deep-navy mb-1">Smoking Status</label>
+                            <select id="score2-smoking" class="w-full p-2 border border-gray-300 rounded text-sm">
+                                <option value="">Select</option>
+                                <option value="no">Never / Former smoker</option>
+                                <option value="yes">Current smoker</option>
+                            </select>
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm font-medium text-deep-navy mb-1">Systolic BP</label>
+                                <input type="number" id="score2-sbp" class="w-full p-2 border border-gray-300 rounded text-sm" placeholder="mmHg">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-deep-navy mb-1">Non-HDL Cholesterol</label>
+                                <input type="number" id="score2-nhdl" class="w-full p-2 border border-gray-300 rounded text-sm" placeholder="mmol/L" step="0.1">
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-deep-navy mb-1">Risk Region</label>
+                            <select id="score2-region" class="w-full p-2 border border-gray-300 rounded text-sm">
+                                <option value="">Select region</option>
+                                <option value="low">Low Risk (France, Spain, UK, Denmark)</option>
+                                <option value="moderate" selected>Moderate Risk (Germany, Italy, Greece, Poland)</option>
+                                <option value="high">High Risk (Baltics, Eastern Europe)</option>
+                                <option value="veryhigh">Very High Risk (Ukraine, Belarus, Russia, others)</option>
+                            </select>
+                            <p class="text-xs text-neutral-slate mt-1">Based on ESC regional CVD mortality calibration.</p>
+                        </div>
+
+                        <button id="calculate-score2" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white py-3 px-4 rounded-lg font-semibold transition-colors">
+                            Calculate SCORE2 Risk
+                        </button>
+
+                        <div id="score2-result" class="hidden bg-gray-50 rounded-lg p-4">
+                            <div class="text-center">
+                                <div class="text-3xl font-bold mb-2" id="score2-risk-percent">--</div>
+                                <div class="text-sm text-neutral-slate mb-2">10-Year Fatal + Non-Fatal CVD Risk</div>
+                                <div id="score2-risk-category" class="text-sm font-semibold mb-2"></div>
+                                <div class="w-full bg-gray-200 rounded-full h-3 mb-2">
+                                    <div id="score2-bar" class="h-3 rounded-full transition-all duration-500" style="width: 0%"></div>
+                                </div>
+                                <div class="flex justify-between text-xs text-neutral-slate">
+                                    <span>Low</span>
+                                    <span>Moderate</span>
+                                    <span>High</span>
+                                    <span>Very High</span>
+                                </div>
+                            </div>
+                            <div class="mt-3 border-t pt-3">
+                                <h4 class="text-sm font-semibold text-deep-navy mb-2">Recommendations</h4>
+                                <div id="score2-recommendation" class="text-xs text-neutral-slate space-y-1"></div>
+                            </div>
+                        </div>
+                        <div class="mt-2 p-3 bg-indigo-50 rounded-lg">
+                            <p class="text-xs text-neutral-slate"><strong>Risk thresholds (ESC 2021):</strong> Low Risk (&lt;2.5% ages 40–69; &lt;7.5% ages 70–89) &nbsp;|&nbsp; Moderate Risk (2.5–7.5%) &nbsp;|&nbsp; High Risk (7.5–10%) &nbsp;|&nbsp; Very High Risk (≥10%) &nbsp;|&nbsp; SCORE2-OP used for ages ≥70.</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
