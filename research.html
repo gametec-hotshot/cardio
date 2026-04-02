@@ -135,6 +135,26 @@
             background: #2563EB;
             color: white;
         }
+
+        /* Dark Mode Styles */
+        .dark body { background: #0f172a; color: #e2e8f0; }
+        .dark .bg-white { background-color: #1e293b !important; }
+        .dark .bg-light-gray, .dark .bg-gray-50 { background-color: #111827 !important; }
+        .dark .text-deep-navy { color: #f1f5f9 !important; }
+        .dark .text-neutral-slate { color: #94a3b8 !important; }
+        .dark .shadow-lg, .dark .shadow-2xl { box-shadow: 0 4px 25px rgba(0,0,0,0.5); }
+        .dark .border, .dark .border-gray-200, .dark .border-gray-300, .dark .border-gray-100, .dark .border-b { border-color: #334155 !important; }
+        .dark input, .dark select, .dark textarea { background: #1e293b !important; color: #e2e8f0 !important; border-color: #334155 !important; }
+        .dark .bg-gray-200 { background-color: #334155 !important; }
+        .dark .bg-gray-100 { background-color: #374151 !important; }
+        .dark .research-card { background-color: #1e293b; }
+        .dark .bg-blue-50 { background-color: rgba(37,99,235,0.15) !important; }
+        .dark .bg-green-50 { background-color: rgba(5,150,105,0.1) !important; }
+        .dark .bg-red-50 { background-color: rgba(220,38,38,0.1) !important; }
+        .dark .bg-amber-50, .dark .bg-yellow-50 { background-color: rgba(217,119,6,0.1) !important; }
+        .dark .bg-purple-50 { background-color: rgba(124,58,237,0.1) !important; }
+        .dark .text-gray-300 { color: #94a3b8 !important; }
+        .dark .text-gray-400 { color: #6b7280 !important; }
     </style>
 </head>
 <body class="bg-light-gray font-inter">
@@ -876,6 +896,7 @@
     </footer>
 
     <!-- JavaScript -->
+    <script src="dark-mode.js"></script>
     <script src="research.js"></script>
 </body>
 </html>
