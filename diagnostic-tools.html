@@ -219,6 +219,9 @@
                 <button class="tool-nav-btn text-neutral-slate hover:text-clinical-blue transition-colors pb-2" data-target="drug-interactions">
                     Drug Interactions
                 </button>
+                <button class="tool-nav-btn text-neutral-slate hover:text-clinical-blue transition-colors pb-2" data-target="stemi-equivalents">
+                    ⚡ STEMI Equivalents
+                </button>
                 <button class="tool-nav-btn text-neutral-slate hover:text-clinical-blue transition-colors pb-2" data-target="ecg-quiz">
                     🎓 ECG Quiz
                 </button>
@@ -1534,6 +1537,184 @@
                 <div class="mt-8 bg-yellow-50 border border-yellow-200 rounded-xl p-6">
                     <h4 class="font-semibold text-warning-amber mb-2">⚠️ Clinical Disclaimer</h4>
                     <p class="text-sm text-neutral-slate">This tool is for educational purposes only and is not a substitute for clinical judgment or a comprehensive drug reference. Always verify with current drug interaction databases (e.g., Micromedex, Lexicomp) and consult clinical pharmacists. This database covers common cardiovascular medications but does not represent a complete list of all possible drug interactions.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- STEMI Equivalents & ECG Patterns -->
+    <section id="stemi-equivalents" class="tool-section py-16 bg-light-gray hidden">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-playfair font-bold text-deep-navy mb-4">STEMI Equivalents on ECG</h2>
+                <p class="text-xl text-neutral-slate max-w-3xl mx-auto">
+                    ECG patterns that warrant emergent reperfusion therapy — these are STEMI equivalents requiring immediate cath lab activation.
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Wellens Syndrome -->
+                <div class="bg-white rounded-2xl p-6 shadow-lg">
+                    <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 rounded-full bg-red-100 flex items-center justify-center mr-3">
+                            <span class="text-xl">⚡</span>
+                        </div>
+                        <h3 class="text-xl font-playfair font-bold text-deep-navy">Wellens Syndrome</h3>
+                    </div>
+                    <p class="text-sm text-neutral-slate mb-4">Pattern A: Biphasic T waves in V2-V3. Pattern B: Deeply inverted symmetric T waves in V2-V3 (more common, 76%).</p>
+                    <div class="bg-amber-50 border-l-4 border-amber-500 p-3 rounded text-sm">
+                        <p class="font-semibold text-amber-800 mb-1">Key Points</p>
+                        <ul class="text-neutral-slate space-y-1">
+                            <li>• Indicates critical proximal LAD stenosis</li>
+                            <li>• T waves may normalize when pain returns — don't be fooled</li>
+                            <li>• Cardiac biomarkers typically normal or minimally elevated</li>
+                            <li>• Stress test is <strong>contraindicated</strong> — can trigger massive MI</li>
+                            <li>• Urgent angiography and PCI indicated</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- de Winter T Waves -->
+                <div class="bg-white rounded-2xl p-6 shadow-lg">
+                    <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 rounded-full bg-red-100 flex items-center justify-center mr-3">
+                            <span class="text-xl">⚡</span>
+                        </div>
+                        <h3 class="text-xl font-playfair font-bold text-deep-navy">de Winter T Waves</h3>
+                    </div>
+                    <p class="text-sm text-neutral-slate mb-4">Upsloping ST depression ≥1mm at J point in V1-V6, transitioning to tall prominent symmetric T waves. Often with 0.5-1mm ST elevation in aVR.</p>
+                    <div class="bg-amber-50 border-l-4 border-amber-500 p-3 rounded text-sm">
+                        <p class="font-semibold text-amber-800 mb-1">Key Points</p>
+                        <ul class="text-neutral-slate space-y-1">
+                            <li>• Represents acute proximal LAD occlusion</li>
+                            <li>• Only ~2% of anterior infarctions</li>
+                            <li>• No ST elevation in precordial leads — that's the trap</li>
+                            <li>• Treat as STEMI: emergent reperfusion</li>
+                            <li>• Described in 2008 by de Winter et al. (NEJM)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Posterior MI -->
+                <div class="bg-white rounded-2xl p-6 shadow-lg">
+                    <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 rounded-full bg-orange-100 flex items-center justify-center mr-3">
+                            <span class="text-xl">🔍</span>
+                        </div>
+                        <h3 class="text-xl font-playfair font-bold text-deep-navy">Posterior MI</h3>
+                    </div>
+                    <p class="text-sm text-neutral-slate mb-4">Horizontal ST depression in V1-V3, tall broad R waves (R/S > 1) in V2-V3, upright T waves in leads with terminal S wave. Confirm with posterior leads V7-V9.</p>
+                    <div class="bg-amber-50 border-l-4 border-amber-500 p-3 rounded text-sm">
+                        <p class="font-semibold text-amber-800 mb-1">Key Points</p>
+                        <ul class="text-neutral-slate space-y-1">
+                            <li>• Horizontal ST depression in V1-V3, NOT sagging</li>
+                            <li>• R/S ratio > 1 in V2 = posterior STEMI</li>
+                            <li>• Always place V7-V9 (V7: left posterior axillary line, V8: tip of scapula, V9: paraspinal) all 5th intercostal space</li>
+                            <li>• ≥0.5mm ST elevation in V7-V9 = positive (≥1mm if age <40)</li>
+                            <li>• Often coexists with inferior MI (LCx or RCA occlusion)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- LBBB with STEMI -->
+                <div class="bg-white rounded-2xl p-6 shadow-lg">
+                    <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 rounded-full bg-purple-100 flex items-center justify-center mr-3">
+                            <span class="text-xl">💜</span>
+                        </div>
+                        <h3 class="text-xl font-playfair font-bold text-deep-navy">LBBB & New/Presumed New LBBB</h3>
+                    </div>
+                    <p class="text-sm text-neutral-slate mb-4">Use Sgarbossa criteria: Concordant ST elevation ≥1mm (5 pts), Concordant ST depression ≥1mm in V1-V3 (3 pts), Discordant ST elevation ≥5mm (2 pts). Modified: discordant STE with ratio ≥0.25 (3 pts).</p>
+                    <div class="bg-amber-50 border-l-4 border-amber-500 p-3 rounded text-sm">
+                        <p class="font-semibold text-amber-800 mb-1">Key Points</p>
+                        <ul class="text-neutral-slate space-y-1">
+                            <li>• ≥3 points = STEMI equivalent</li>
+                            <li>• Modified Sgarbossa more specific: discordant STE ÷ depth of preceding S wave ratio ≥0.25</li>
+                            <li>• New LBBB with symptoms still warrants urgent evaluation</li>
+                            <li>• Don't rely on "new vs old" alone — use criteria</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Smith Modified STEMI Criteria -->
+                <div class="bg-white rounded-2xl p-6 shadow-lg">
+                    <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 rounded-full bg-teal-100 flex items-center justify-center mr-3">
+                            <span class="text-xl">📊</span>
+                        </div>
+                        <h3 class="text-xl font-playfair font-bold text-deep-navy">Smith Modified STEMI Criteria</h3>
+                    </div>
+                    <p class="text-sm text-neutral-slate mb-4">For STE in V2-V3: If male <40, ST elevation ≥2.5mm; if male ≥40, ≥2mm; if female, ≥1.5mm. Then apply these rules to distinguish LAD occlusion from other causes.</p>
+                    <div class="bg-amber-50 border-l-4 border-amber-500 p-3 rounded text-sm">
+                        <p class="font-semibold text-amber-800 mb-1">Key Points</p>
+                        <ul class="text-neutral-slate space-y-1">
+                            <li>• LAD occlusion pattern with hyperacute T waves in precordial leads</li>
+                            <li>• Any abnormal Q wave in V2-V3 = pathological</li>
+                            <li>• T waves larger than T wave in lead V6 = hyperacute</li>
+                            <li>• STE 60ms after J point in V3 < 0.5mm favors occlusion</li>
+                            <li>• Smith's formula: 4th power of QTc ÷ amplitude of tallest T wave in V2 < 17.7 = LAD occlusion</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Right Ventricular Infarction -->
+                <div class="bg-white rounded-2xl p-6 shadow-lg">
+                    <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 rounded-full bg-rose-100 flex items-center justify-center mr-3">
+                            <span class="text-xl">🫀</span>
+                        </div>
+                        <h3 class="text-xl font-playfair font-bold text-deep-navy">Right Ventricular Infarction</h3>
+                    </div>
+                    <p class="text-sm text-neutral-slate mb-4">ST elevation in III > II, STE in V1 with V1 STE ÷ V3 STE ratio > 1. Confirm with right-sided leads (V4R most sensitive).</p>
+                    <div class="bg-amber-50 border-l-4 border-amber-500 p-3 rounded text-sm">
+                        <p class="font-semibold text-amber-800 mb-1">Key Points</p>
+                        <ul class="text-neutral-slate space-y-1">
+                            <li>• V4R: right 5th intercostal space at midclavicular line</li>
+                            <li>• ST elevation ≥0.5mm in V4R = RV infarction (sensitivity ~88%, specificity ~78%)</li>
+                            <li>• AVOID nitrates and diuretics — preload dependent</li>
+                            <li>• Treat with IV fluids to maintain preload</li>
+                            <li>• Up to 50% of inferior STEMIs have RV involvement</li>
+                            <li>• Look for clear lungs, elevated JVP, hypotension = classic triad</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Reference Table -->
+            <div class="mt-10 bg-white rounded-2xl p-6 shadow-lg">
+                <h3 class="text-2xl font-playfair font-bold text-deep-navy mb-4">🚨 Quick Reference: Always Place Extra Leads</h3>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm">
+                        <thead class="bg-deep-navy text-white">
+                            <tr>
+                                <th class="p-3 text-left rounded-tl-lg">Scenario</th>
+                                <th class="p-3 text-left">Extra Leads</th>
+                                <th class="p-3 text-left rounded-tr-lg">Why</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-neutral-slate">
+                            <tr class="border-b border-gray-100">
+                                <td class="p-3 font-medium">Inferior STEMI (II, III, aVF)</td>
+                                <td class="p-3">V4R + V7-V9</td>
+                                <td class="p-3">Rule out RV infarction and posterior extension</td>
+                            </tr>
+                            <tr class="border-b border-gray-100">
+                                <td class="p-3 font-medium">ST depression V1-V3</td>
+                                <td class="p-3">V7-V9</td>
+                                <td class="p-3">Posterior MI (LCx occlusion)</td>
+                            </tr>
+                            <tr class="border-b border-gray-100">
+                                <td class="p-3 font-medium">LBBB pattern</td>
+                                <td class="p-3">Apply Sgarbossa / modified Sgarbossa</td>
+                                <td class="p-3">Identify covert occlusion</td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 font-medium">Chest pain with normal ECG</td>
+                                <td class="p-3">Repeat in 15-30 min + serial troponins</td>
+                                <td class="p-3">Dynamic changes may develop</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
