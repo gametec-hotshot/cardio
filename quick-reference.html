@@ -1,0 +1,1067 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quick Reference | CardioReference</title>
+    <meta name="description" content="Rapid drug doses, ACLS algorithms, anticoagulation guide, and clinical checklists for cardiovascular emergencies.">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@400;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'clinical-blue': '#2563EB', 'diagnostic-teal': '#0891B2',
+                        'alert-coral': '#DC2626', 'warning-amber': '#D97706',
+                        'neutral-slate': '#475569', 'light-gray': '#F1F5F9',
+                        'success-green': '#059669', 'deep-navy': '#1E293B',
+                        'cardiac-purple': '#7C3AED', 'imaging-orange': '#EA580C',
+                        'biomarker-rose': '#E11D48'
+                    },
+                    fontFamily: {
+                        'inter': ['Inter', 'sans-serif'],
+                        'playfair': ['Playfair Display', 'serif'],
+                        'mono': ['JetBrains Mono', 'monospace']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        *, *::before, *::after {
+            transition: background-color 0.35s cubic-bezier(.4,0,.2,1),
+                        color 0.35s cubic-bezier(.4,0,.2,1),
+                        border-color 0.35s cubic-bezier(.4,0,.2,1),
+                        box-shadow 0.35s cubic-bezier(.4,0,.2,1);
+        }
+        img, svg, video, canvas { transition: none !important; }
+        .ref-card { transition: all 0.3s ease; border-left: 4px solid transparent; }
+        .ref-card:hover { transform: translateY(-3px); box-shadow: 0 16px 32px -8px rgba(0,0,0,0.15); }
+        .ref-card.emergency { border-left-color: #DC2626; }
+        .ref-card.drug { border-left-color: #2563EB; }
+        .ref-card.anti { border-left-color: #7C3AED; }
+        .ref-card.checklist { border-left-color: #059669; }
+        .ref-card.ecg { border-left-color: #EA580C; }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+        .tab-btn.active-tab { background: #2563EB !important; color: #ffffff !important; border-color: #2563EB !important; }
+        .drug-row:hover { transform: translateX(4px); }
+        .dark body { background: #0b0f1a !important; color: #e2e8f0; }
+        .dark nav { background: #111827 !important; border-color: rgba(37,99,235,0.4) !important; }
+        .dark nav a.text-neutral-slate { color: #94a3b8 !important; }
+        .dark nav a.text-neutral-slate:hover { color: #60a5fa !important; }
+        .dark .bg-white { background: linear-gradient(135deg,#1e293b,#141c2e) !important; }
+        .dark .bg-light-gray, .dark .bg-gray-50, .dark .bg-gray-100 { background: #0f172a !important; }
+        .dark .bg-gray-200 { background: #1e293b !important; }
+        .dark .bg-blue-50 { background: rgba(37,99,235,0.12) !important; }
+        .dark .bg-red-50 { background: rgba(220,38,38,0.12) !important; }
+        .dark .bg-green-50 { background: rgba(5,150,105,0.12) !important; }
+        .dark .bg-yellow-50, .dark .bg-amber-50 { background: rgba(217,119,6,0.12) !important; }
+        .dark .bg-purple-50 { background: rgba(124,58,237,0.12) !important; }
+        .dark .bg-teal-50 { background: rgba(8,145,178,0.12) !important; }
+        .dark .bg-orange-50 { background: rgba(234,88,12,0.12) !important; }
+        .dark .text-deep-navy { color: #f1f5f9 !important; }
+        .dark .text-neutral-slate { color: #94a3b8 !important; }
+        .dark .text-gray-300 { color: #94a3b8 !important; }
+        .dark .text-gray-400 { color: #64748b !important; }
+        .dark .text-gray-500 { color: #64748b !important; }
+        .dark .border, .dark .border-gray-200, .dark .border-gray-300, .dark .border-b, .dark .border-gray-100 { border-color: #1e293b !important; }
+        .dark input, .dark select { background: #1e293b !important; color: #e2e8f0 !important; border-color: #334155 !important; }
+        .dark .tab-btn { background: #1e293b !important; color: #94a3b8 !important; border-color: #334155 !important; }
+        .dark .drug-row { background: #1e293b !important; }
+        .dark .ref-card { background: #1e293b !important; }
+        .dark table { color: #e2e8f0; }
+        .dark .step-item { background: #1e293b !important; }
+        .dark .dark\\:bg-slate-900 { background: #1e293b !important; }
+    </style>
+</head>
+<body class="bg-light-gray font-inter">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg border-b-2 border-clinical-blue sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <a href="index.html" class="flex items-center space-x-4">
+                    <div><svg class="h-8 w-8 text-clinical-blue" fill="currentColor" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg></div>
+                    <div><h1 class="text-xl font-playfair font-bold text-deep-navy">CardioReference</h1><p class="text-xs text-neutral-slate">Professional Cardiology Resource</p></div>
+                </a>
+                <div class="hidden md:flex items-center space-x-6">
+                    <a href="index.html" class="text-neutral-slate hover:text-clinical-blue transition-colors font-medium">Home</a>
+                    <a href="index.html#disorders" class="text-neutral-slate hover:text-clinical-blue transition-colors font-medium">Disorders</a>
+                    <a href="diagnostic-tools.html" class="text-neutral-slate hover:text-clinical-blue transition-colors font-medium">Diagnostic Tools</a>
+                    <a href="treatment-protocols.html" class="text-neutral-slate hover:text-clinical-blue transition-colors font-medium">Treatment Protocols</a>
+                    <a href="quick-reference.html" class="text-clinical-blue font-semibold">Quick Reference</a>
+                    <a href="research.html" class="text-neutral-slate hover:text-clinical-blue transition-colors font-medium">Research</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="bg-gradient-to-br from-deep-navy via-clinical-blue to-diagnostic-teal py-10 md:py-14">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div class="text-5xl mb-3">⚡</div>
+            <h1 class="text-3xl md:text-5xl font-playfair font-bold text-white mb-3">Quick Reference for Clinicians</h1>
+            <p class="text-base md:text-xl text-blue-100 max-w-3xl mx-auto">
+                Emergency doses, ACLS algorithms, anticoagulation tables, and rapid checklists. Built for speed.
+            </p>
+        </div>
+    </section>
+
+    <!-- Tab Navigation -->
+    <section class="bg-white border-b sticky top-16 z-40 shadow">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex overflow-x-auto py-3 gap-2 scrollbar-hide" id="tab-nav">
+                <button class="tab-btn active-tab whitespace-nowrap px-4 py-2 rounded-lg font-semibold text-sm border bg-clinical-blue text-white transition-colors flex-shrink-0" data-tab="drugs">💊 Emergency Drugs</button>
+                <button class="tab-btn whitespace-nowrap px-4 py-2 rounded-lg font-semibold text-sm border text-neutral-slate bg-gray-100 transition-colors flex-shrink-0" data-tab="acls">🫀 ACLS Algorithms</button>
+                <button class="tab-btn whitespace-nowrap px-4 py-2 rounded-lg font-semibold text-sm border text-neutral-slate bg-gray-100 transition-colors flex-shrink-0" data-tab="anticoag">🩸 Anticoagulation</button>
+                <button class="tab-btn whitespace-nowrap px-4 py-2 rounded-lg font-semibold text-sm border text-neutral-slate bg-gray-100 transition-colors flex-shrink-0" data-tab="checklists">✅ Checklists</button>
+                <button class="tab-btn whitespace-nowrap px-4 py-2 rounded-lg font-semibold text-sm border text-neutral-slate bg-gray-100 transition-colors flex-shrink-0" data-tab="ecg-lab">🔬 ECG &amp; Lab</button>
+            </div>
+        </div>
+    </section>
+
+    <main>
+        <!-- ═══════════════════ TAB 1: EMERGENCY DRUGS ═══════════════════ -->
+        <div id="tab-drugs" class="tab-content active py-8 md:py-10">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="mb-8">
+                    <h2 class="text-2xl md:text-3xl font-playfair font-bold text-deep-navy mb-1">Emergency Cardiovascular Drugs</h2>
+                    <p class="text-neutral-slate">IV/IO doses for cardiac arrest code, unstable tachycardia, and hypertensive emergency. All doses for adults unless noted.</p>
+                </div>
+
+                <!-- Cardiac Arrest -->
+                <div class="ref-card emergency bg-white rounded-xl p-5 md:p-6 shadow-lg mb-6">
+                    <h3 class="text-lg md:text-xl font-playfair font-bold text-deep-navy mb-4 flex items-center gap-2">
+                        <span class="text-2xl">🚨</span> Cardiac Arrest — Code Drugs
+                    </h3>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-sm min-w-[600px]">
+                            <thead><tr class="border-b-2 border-red-100 bg-red-50">
+                                <th class="text-left py-3 px-3 font-semibold text-deep-navy">Drug</th>
+                                <th class="text-left py-3 px-3 font-semibold text-deep-navy">Dose</th>
+                                <th class="text-left py-3 px-3 font-semibold text-deep-navy">Route</th>
+                                <th class="text-left py-3 px-3 font-semibold text-deep-navy">Interval</th>
+                                <th class="text-left py-3 px-3 font-semibold text-deep-navy">Notes</th>
+                            </tr></thead>
+                            <tbody class="text-neutral-slate">
+                                <tr class="border-b border-gray-100 drug-row transition-transform">
+                                    <td class="py-3 px-3 font-semibold text-deep-navy">Epinephrine</td>
+                                    <td class="py-3 px-3">1 mg (1:10,000)</td>
+                                    <td class="py-3 px-3">IV/IO</td>
+                                    <td class="py-3 px-3">q3–5 min</td>
+                                    <td class="py-3 px-3">VF/pVT/PEA/asystole</td>
+                                </tr>
+                                <tr class="border-b border-gray-100 drug-row transition-transform">
+                                    <td class="py-3 px-3 font-semibold text-deep-navy">Amiodarone</td>
+                                    <td class="py-3 px-3">300 mg → 150 mg</td>
+                                    <td class="py-3 px-3">IV/IO push</td>
+                                    <td class="py-3 px-3">1–2 doses</td>
+                                    <td class="py-3 px-3">Refractory VF/pVT; max 2.2 g/24 h</td>
+                                </tr>
+                                <tr class="border-b border-gray-100 drug-row transition-transform">
+                                    <td class="py-3 px-3 font-semibold text-deep-navy">Lidocaine</td>
+                                    <td class="py-3 px-3">1–1.5 mg/kg, then 0.5–0.75 mg/kg</td>
+                                    <td class="py-3 px-3">IV/IO</td>
+                                    <td class="py-3 px-3">q5–10 min</td>
+                                    <td class="py-3 px-3">Alt. amiodarone; max 3 mg/kg</td>
+                                </tr>
+                                <tr class="border-b border-gray-100 drug-row transition-transform">
+                                    <td class="py-3 px-3 font-semibold text-deep-navy">MgSO₄</td>
+                                    <td class="py-3 px-3">1–2 g in 10 mL D5W</td>
+                                    <td class="py-3 px-3">IV push</td>
+                                    <td class="py-3 px-3">Once</td>
+                                    <td class="py-3 px-3">Torsades de pointes or suspected hypomagnesemia</td>
+                                </tr>
+                                <tr class="drug-row transition-transform">
+                                    <td class="py-3 px-3 font-semibold text-deep-navy">CaCl₂ 10%</td>
+                                    <td class="py-3 px-3">1–2 g (10–20 mL)</td>
+                                    <td class="py-3 px-3">IV/IO slow</td>
+                                    <td class="py-3 px-3">q5–10 min</td>
+                                    <td class="py-3 px-3">Hyperkalemia, Ca⁺⁺ blocker OD; extravasation risk</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Bradycardia / Tachycardia -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+                    <div class="ref-card drug bg-white rounded-xl p-5 md:p-6 shadow-lg">
+                        <h3 class="text-lg md:text-xl font-playfair font-bold text-deep-navy mb-4 flex items-center gap-2">
+                            <span class="text-2xl">🐌</span> Bradyarrhythmias
+                        </h3>
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-sm min-w-[400px]">
+                                <thead><tr class="border-b-2 border-blue-100 bg-blue-50">
+                                    <th class="text-left py-2 px-3 font-semibold text-deep-navy">Drug</th>
+                                    <th class="text-left py-2 px-3 font-semibold text-deep-navy">Dose</th>
+                                    <th class="text-left py-2 px-3 font-semibold text-deep-navy">Notes</th>
+                                </tr></thead>
+                                <tbody class="text-neutral-slate">
+                                    <tr class="border-b border-gray-100">
+                                        <td class="py-2.5 px-3 font-semibold text-deep-navy">Atropine</td>
+                                        <td class="py-2.5 px-3">1 mg IV q3–5 min</td>
+                                        <td class="py-2.5 px-3">Max 3 mg total; ineffective in transplant</td>
+                                    </tr>
+                                    <tr class="border-b border-gray-100">
+                                        <td class="py-2.5 px-3 font-semibold text-deep-navy">Dopamine</td>
+                                        <td class="py-2.5 px-3">2–10 mcg/kg/min</td>
+                                        <td class="py-2.5 px-3">If atropine fails; continuous infusion</td>
+                                    </tr>
+                                    <tr class="border-b border-gray-100">
+                                        <td class="py-2.5 px-3 font-semibold text-deep-navy">Epinephrine</td>
+                                        <td class="py-2.5 px-3">2–10 mcg/min</td>
+                                        <td class="py-2.5 px-3">Infusion; second-line if atropine fails</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="py-2.5 px-3 font-semibold text-deep-navy">Transcutaneous pacing</td>
+                                        <td class="py-2.5 px-3">Non-pharmacologic</td>
+                                        <td class="py-2.5 px-3">For unstable refractory bradycardia</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="ref-card drug bg-white rounded-xl p-5 md:p-6 shadow-lg">
+                        <h3 class="text-lg md:text-xl font-playfair font-bold text-deep-navy mb-4 flex items-center gap-2">
+                            <span class="text-2xl">⚡</span> Unstable Tachycardia
+                        </h3>
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-sm min-w-[400px]">
+                                <thead><tr class="border-b-2 border-blue-100 bg-blue-50">
+                                    <th class="text-left py-2 px-3 font-semibold text-deep-navy">Drug</th>
+                                    <th class="text-left py-2 px-3 font-semibold text-deep-navy">Dose</th>
+                                    <th class="text-left py-2 px-3 font-semibold text-deep-navy">Notes</th>
+                                </tr></thead>
+                                <tbody class="text-neutral-slate">
+                                    <tr class="border-b border-gray-100">
+                                        <td class="py-2.5 px-3 font-semibold text-deep-navy">Adenosine</td>
+                                        <td class="py-2.5 px-3">6 mg → 12 mg → 12 mg IV push</td>
+                                        <td class="py-2.5 px-3">Narrow complex; rapid push + flush</td>
+                                    </tr>
+                                    <tr class="border-b border-gray-100">
+                                        <td class="py-2.5 px-3 font-semibold text-deep-navy">Amiodarone</td>
+                                        <td class="py-2.5 px-3">150 mg over 10 min</td>
+                                        <td class="py-2.5 px-3">Wide complex, stable VT; repeat as needed</td>
+                                    </tr>
+                                    <tr class="border-b border-gray-100">
+                                        <td class="py-2.5 px-3 font-semibold text-deep-navy">Diltiazem</td>
+                                        <td class="py-2.5 px-3">0.25 mg/kg IV → 5 mg/hr drip</td>
+                                        <td class="py-2.5 px-3">AFib/flutter RVR; avoid in WPW</td>
+                                    </tr>
+                                    <tr class="border-b border-gray-100">
+                                        <td class="py-2.5 px-3 font-semibold text-deep-navy">Metoprolol</td>
+                                        <td class="py-2.5 px-3">5 mg IV q5 min × 3</td>
+                                        <td class="py-2.5 px-3">SVT, AFib RVR; avoid in acute HF</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="py-2.5 px-3 font-semibold text-deep-navy">Synchronized CV</td>
+                                        <td class="py-2.5 px-3">Non-pharmacologic</td>
+                                        <td class="py-2.5 px-3">Unstable rhythm: shock immediately</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Acute HF / HTN Crisis -->
+                <div class="ref-card checklist bg-white rounded-xl p-5 md:p-6 shadow-lg mb-6">
+                    <h3 class="text-lg md:text-xl font-playfair font-bold text-deep-navy mb-4 flex items-center gap-2">
+                        <span class="text-2xl">💉</span> Hypertensive Emergency &amp; Acute HF
+                    </h3>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-sm min-w-[600px]">
+                            <thead><tr class="border-b-2 border-green-100 bg-green-50">
+                                <th class="text-left py-3 px-3 font-semibold text-deep-navy">Drug</th>
+                                <th class="text-left py-3 px-3 font-semibold text-deep-navy">Dose &amp; Route</th>
+                                <th class="text-left py-3 px-3 font-semibold text-deep-navy">Onset</th>
+                                <th class="text-left py-3 px-3 font-semibold text-deep-navy">Duration</th>
+                                <th class="text-left py-3 px-3 font-semibold text-deep-navy">Best For</th>
+                            </tr></thead>
+                            <tbody class="text-neutral-slate">
+                                <tr class="border-b border-gray-100">
+                                    <td class="py-2.5 px-3 font-semibold text-deep-navy">Nitroglycerin</td>
+                                    <td class="py-2.5 px-3">5 mcg/min IV, titrate to 200 mcg/min</td>
+                                    <td class="py-2.5 px-3">1–2 min</td>
+                                    <td class="py-2.5 px-3">3–5 min off</td>
+                                    <td class="py-2.5 px-3">Acute HF, pulmonary edema, ACS</td>
+                                </tr>
+                                <tr class="border-b border-gray-100">
+                                    <td class="py-2.5 px-3 font-semibold text-deep-navy">Nitroprusside</td>
+                                    <td class="py-2.5 px-3">0.3–10 mcg/kg/min IV</td>
+                                    <td class="py-2.5 px-3">&lt;1 min</td>
+                                    <td class="py-2.5 px-3">3–5 min off</td>
+                                    <td class="py-2.5 px-3">Severe HTN, aortic dissection</td>
+                                </tr>
+                                <tr class="border-b border-gray-100">
+                                    <td class="py-2.5 px-3 font-semibold text-deep-navy">Labetalol</td>
+                                    <td class="py-2.5 px-3">10–20 mg IV → 20–80 mg q10 min or drip 0.5–2 mg/min</td>
+                                    <td class="py-2.5 px-3">2–5 min</td>
+                                    <td class="py-2.5 px-3">2–6 h</td>
+                                    <td class="py-2.5 px-3">HTN emergency, aortic dissection</td>
+                                </tr>
+                                <tr class="border-b border-gray-100">
+                                    <td class="py-2.5 px-3 font-semibold text-deep-navy">Nicardipine</td>
+                                    <td class="py-2.5 px-3">5 mg/hr IV → titrate by 2.5 mg q10 min</td>
+                                    <td class="py-2.5 px-3">5–15 min</td>
+                                    <td class="py-2.5 px-3">4–6 h off</td>
+                                    <td class="py-2.5 px-3">HTN emergency (no tachycardia)</td>
+                                </tr>
+                                <tr class="border-b border-gray-100">
+                                    <td class="py-2.5 px-3 font-semibold text-deep-navy">Clevidipine</td>
+                                    <td class="py-2.5 px-3">1–2 mg/hr IV → double q90s</td>
+                                    <td class="py-2.5 px-3">2–4 min</td>
+                                    <td class="py-2.5 px-3">5–15 min off</td>
+                                    <td class="py-2.5 px-3">Rapid BP control in ICU</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-2.5 px-3 font-semibold text-deep-navy">Esmolol</td>
+                                    <td class="py-2.5 px-3">500 mcg/kg load → 50–300 mcg/kg/min</td>
+                                    <td class="py-2.5 px-3">1–2 min</td>
+                                    <td class="py-2.5 px-3">10–30 min off</td>
+                                    <td class="py-2.5 px-3">Aortic dissection, post-op HTN</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Common Oral CV Meds Quick Ref -->
+                <div class="ref-card anti bg-white rounded-xl p-5 md:p-6 shadow-lg mb-6">
+                    <h3 class="text-lg md:text-xl font-playfair font-bold text-deep-navy mb-4 flex items-center gap-2">
+                        <span class="text-2xl">💊</span> Common Oral Antiarrhythmics
+                    </h3>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-sm min-w-[600px]">
+                            <thead><tr class="border-b-2 border-purple-100 bg-purple-50">
+                                <th class="text-left py-3 px-3 font-semibold text-deep-navy">Drug</th>
+                                <th class="text-left py-3 px-3 font-semibold text-deep-navy">Dose</th>
+                                <th class="text-left py-3 px-3 font-semibold text-deep-navy">Key Monitoring</th>
+                                <th class="text-left py-3 px-3 font-semibold text-deep-navy">Contraindications</th>
+                            </tr></thead>
+                            <tbody class="text-neutral-slate">
+                                <tr class="border-b border-gray-100">
+                                    <td class="py-2.5 px-3 font-semibold text-deep-navy">Amiodarone</td>
+                                    <td class="py-2.5 px-3">400 mg TID × 1 wk → 200 mg daily</td>
+                                    <td class="py-2.5 px-3">TSH, LFTs, CXR, ECG q6 mo</td>
+                                    <td class="py-2.5 px-3">Bradycardia (no pacemaker)</td>
+                                </tr>
+                                <tr class="border-b border-gray-100">
+                                    <td class="py-2.5 px-3 font-semibold text-deep-navy">Flecainide</td>
+                                    <td class="py-2.5 px-3">50–150 mg BID</td>
+                                    <td class="py-2.5 px-3">ECG (QRS widening)</td>
+                                    <td class="py-2.5 px-3">Structural heart disease, CAD</td>
+                                </tr>
+                                <tr class="border-b border-gray-100">
+                                    <td class="py-2.5 px-3 font-semibold text-deep-navy">Sotalol</td>
+                                    <td class="py-2.5 px-3">80–240 mg BID</td>
+                                    <td class="py-2.5 px-3">QTc, renal function</td>
+                                    <td class="py-2.5 px-3">QTc &gt;450 ms, CrCl &lt;40</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-2.5 px-3 font-semibold text-deep-navy">Dofetilide</td>
+                                    <td class="py-2.5 px-3">125–500 mcg BID (CrCl-dosed)</td>
+                                    <td class="py-2.5 px-3">Hospital-initiate, q2h ECG × 3d</td>
+                                    <td class="py-2.5 px-3">QTc &gt;440 ms, CrCl &lt;20</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="bg-amber-50 border border-amber-200 rounded-xl p-4 md:p-6">
+                    <p class="text-sm text-deep-navy"><strong>⚠️ Disclaimer:</strong> Doses listed are adult reference values from AHA ACC/AHA/ESC guidelines. Always verify with your institution's formulary and pharmacy. Pediatric dosing requires weight-based calculation. Adjust for renal/hepatic impairment.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ═══════════════════ TAB 2: ACLS ALGORITHMS ═══════════════════ -->
+        <div id="tab-acls" class="tab-content py-8 md:py-10">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="mb-8">
+                    <h2 class="text-2xl md:text-3xl font-playfair font-bold text-deep-navy mb-1">ACLS Core Algorithms</h2>
+                    <p class="text-neutral-slate">Step-by-step decision pathways from AHA 2020 Guidelines (2023 focused update).</p>
+                </div>
+
+                <!-- Algorithm 1: Cardiac Arrest -->
+                <div class="ref-card emergency bg-white rounded-xl p-5 md:p-6 shadow-lg mb-8">
+                    <h3 class="text-lg md:text-xl font-playfair font-bold text-deep-navy mb-6 flex items-center gap-2">
+                        <span class="text-2xl">🫀</span> Adult Cardiac Arrest — Universal Algorithm
+                    </h3>
+                    <div class="space-y-4">
+                        <div class="step-item bg-red-50 rounded-lg p-4 border-l-4 border-red-500">
+                            <div class="flex flex-col md:flex-row md:items-start gap-3">
+                                <div class="w-8 h-8 bg-red-600 text-white rounded-full flex items-center justify-center font-bold flex-shrink-0">1</div>
+                                <div class="flex-1">
+                                    <h4 class="font-semibold text-deep-navy">Recognize cardiac arrest</h4>
+                                    <p class="text-sm text-neutral-slate mt-1">Check responsiveness → Activate emergency response → Get AED/defibrillator → Check pulse ≤10 s</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="step-item bg-red-50 rounded-lg p-4 border-l-4 border-red-500">
+                            <div class="flex flex-col md:flex-row md:items-start gap-3">
+                                <div class="w-8 h-8 bg-red-600 text-white rounded-full flex items-center justify-center font-bold flex-shrink-0">2</div>
+                                <div class="flex-1">
+                                    <h4 class="font-semibold text-deep-navy">Start CPR (30:2)</h4>
+                                    <p class="text-sm text-neutral-slate mt-1">Compressions: depth ≥2 inches, rate 100–120/min. Minimize interruptions. Place defibrillator pads.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="step-item bg-red-50 rounded-lg p-4 border-l-4 border-red-500">
+                            <div class="flex flex-col md:flex-row md:items-start gap-3">
+                                <div class="w-8 h-8 bg-red-600 text-white rounded-full flex items-center justify-center font-bold flex-shrink-0">3</div>
+                                <div class="flex-1">
+                                    <h4 class="font-semibold text-deep-navy">Check rhythm → VF/pVT vs PEA/asystole?</h4>
+                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-3">
+                                        <div class="bg-white rounded-lg p-4 border border-red-200">
+                                            <h5 class="font-bold text-red-700 mb-2">VF / Pulseless VT (Shockable)</h5>
+                                            <ol class="text-sm text-neutral-slate space-y-1.5 list-decimal list-inside">
+                                                <li><strong>Shock</strong> then immediately resume CPR</li>
+                                                <li>CPR × 2 min → establish IV/IO</li>
+                                                <li>CPR × 2 min → <strong>epinephrine 1 mg</strong> q3–5 min</li>
+                                                <li>CPR × 2 min → <strong>shock</strong></li>
+                                                <li>CPR × 2 min → <strong>amiodarone 300 mg</strong></li>
+                                                <li>CPR × 2 min → <strong>shock</strong></li>
+                                                <li>CPR × 2 min → <strong>amiodarone 150 mg</strong></li>
+                                                <li>Repeat shock → epi cycle</li>
+                                            </ol>
+                                        </div>
+                                        <div class="bg-white rounded-lg p-4 border border-gray-200">
+                                            <h5 class="font-bold text-deep-navy mb-2">PEA / Asystole (Non-Shockable)</h5>
+                                            <ol class="text-sm text-neutral-slate space-y-1.5 list-decimal list-inside">
+                                                <li><strong>Do NOT shock</strong></li>
+                                                <li>CPR × 2 min → establish IV/IO</li>
+                                                <li>CPR × 2 min → <strong>epinephrine 1 mg</strong> q3–5 min</li>
+                                                <li>CPR × 2 min → re-evaluate</li>
+                                                <li>Consider <strong>Hs &amp; Ts</strong> (below)</li>
+                                            </ol>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="step-item bg-amber-50 rounded-lg p-4 border-l-4 border-amber-500">
+                            <div class="flex flex-col md:flex-row md:items-start gap-3">
+                                <div class="w-8 h-8 bg-amber-600 text-white rounded-full flex items-center justify-center font-bold flex-shrink-0">4</div>
+                                <div class="flex-1">
+                                    <h4 class="font-semibold text-deep-navy">Search for Reversible Causes (H's &amp; T's)</h4>
+                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mt-3">
+                                        <div class="space-y-1 text-sm text-neutral-slate">
+                                            <p><strong>Hypovolemia</strong> → fluids, blood</p>
+                                            <p><strong>Hypoxia</strong> → secure airway, ventilate</p>
+                                            <p><strong>Hydrogen ion (acidosis)</strong> → ventilation, NaHCO₃ if severe</p>
+                                            <p><strong>Hypo/Hyperkalemia</strong> → K⁺ replacement or Ca²⁺/insulin/glucose</p>
+                                            <p><strong>Hypothermia</strong> → rewarm</p>
+                                        </div>
+                                        <div class="space-y-1 text-sm text-neutral-slate">
+                                            <p><strong>Tension pneumothorax</strong> → needle decompression</p>
+                                            <p><strong>Tamponade, cardiac</strong> → pericardiocentesis</p>
+                                            <p><strong>Toxins</strong> → specific antidotes</p>
+                                            <p><strong>Thrombosis, pulmonary</strong> → consider tPA</p>
+                                            <p><strong>Thrombosis, coronary</strong> → emergent cath</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Post-Cardiac Arrest Care -->
+                <div class="ref-card checklist bg-white rounded-xl p-5 md:p-6 shadow-lg mb-6">
+                    <h3 class="text-lg md:text-xl font-playfair font-bold text-deep-navy mb-4 flex items-center gap-2">
+                        <span class="text-2xl">🏥</span> Post-Cardiac Arrest Care
+                    </h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="bg-blue-50 rounded-lg p-4">
+                            <h4 class="font-semibold text-deep-navy mb-2">Ventilatory Targets</h4>
+                            <ul class="text-sm text-neutral-slate space-y-1">
+                                <li>• SpO₂ 92–98%</li>
+                                <li>• PaCO₂ 35–45 mmHg</li>
+                                <li>• Avoid hyperventilation</li>
+                                <li>• Consider advanced airway early</li>
+                            </ul>
+                        </div>
+                        <div class="bg-green-50 rounded-lg p-4">
+                            <h4 class="font-semibold text-deep-navy mb-2">Hemodynamic Targets</h4>
+                            <ul class="text-sm text-neutral-slate space-y-1">
+                                <li>• MAP ≥ 65 mmHg</li>
+                                <li>• Consider vasopressors if hypotensive</li>
+                                <li>• 12-lead ECG for STEMI → cath lab</li>
+                                <li>• Obtain point-of-care ultrasound</li>
+                            </ul>
+                        </div>
+                        <div class="bg-purple-50 rounded-lg p-4">
+                            <h4 class="font-semibold text-deep-navy mb-2">Neurologic Care</h4>
+                            <ul class="text-sm text-neutral-slate space-y-1">
+                                <li>• Targeted temperature management 32–36°C × 24 h</li>
+                                <li>• Continuous EEG monitoring</li>
+                                <li>• Treat seizures aggressively</li>
+                                <li>• No prophylactic anticonvulsants</li>
+                            </ul>
+                        </div>
+                        <div class="bg-amber-50 rounded-lg p-4">
+                            <h4 class="font-semibold text-deep-navy mb-2">Coronary Reperfusion</h4>
+                            <ul class="text-sm text-neutral-slate space-y-1">
+                                <li>• STEMI on ECG → emergent PCI</li>
+                                <li>• No STEMI + hemodynamic/electrical instability → consider PCI</li>
+                                <li>• No STEMI + stable → early coronary angiography (within 2–6 h)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PALS Pediatric -->
+                <div class="ref-card ecg bg-white rounded-xl p-5 md:p-6 shadow-lg">
+                    <h3 class="text-lg md:text-xl font-playfair font-bold text-deep-navy mb-4 flex items-center gap-2">
+                        <span class="text-2xl">👶</span> PALS Key Differences from ACLS
+                    </h3>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-sm min-w-[500px]">
+                            <thead><tr class="border-b-2 border-orange-100 bg-orange-50">
+                                <th class="text-left py-2 px-3 font-semibold text-deep-navy">Parameter</th>
+                                <th class="text-left py-2 px-3 font-semibold text-deep-navy">ACLS (Adult)</th>
+                                <th class="text-left py-2 px-3 font-semibold text-deep-navy">PALS (Pediatric)</th>
+                            </tr></thead>
+                            <tbody class="text-neutral-slate">
+                                <tr class="border-b border-gray-100">
+                                    <td class="py-2.5 px-3 font-semibold">Compression ratio</td>
+                                    <td class="py-2.5 px-3">30:2 (single rescuer) / continuous w/ advanced airway</td>
+                                    <td class="py-2.5 px-3">15:2 (2 rescuers) / 30:2 (single)</td>
+                                </tr>
+                                <tr class="border-b border-gray-100">
+                                    <td class="py-2.5 px-3 font-semibold">Compression depth</td>
+                                    <td class="py-2.5 px-3">At least 2 in (5 cm)</td>
+                                    <td class="py-2.5 px-3">⅓ AP diameter (~5 cm child, 1.5 cm infant)</td>
+                                </tr>
+                                <tr class="border-b border-gray-100">
+                                    <td class="py-2.5 px-3 font-semibold">Epinephrine</td>
+                                    <td class="py-2.5 px-3">1 mg q3–5 min</td>
+                                    <td class="py-2.5 px-3">0.01 mg/kg (0.1 mL/kg of 1:10,000) q3–5 min</td>
+                                </tr>
+                                <tr class="border-b border-gray-100">
+                                    <td class="py-2.5 px-3 font-semibold">Initial defibrillation</td>
+                                    <td class="py-2.5 px-3">120–200 J (biphasic)</td>
+                                    <td class="py-2.5 px-3">2 J/kg (→ 4 J/kg → ≥4 J/kg)</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-2.5 px-3 font-semibold">Bradycardia algorithm</td>
+                                    <td class="py-2.5 px-3">Atropine → pacing</td>
+                                    <td class="py-2.5 px-3">O₂/ventilation first → epinephrine → pacing</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ═══════════════════ TAB 3: ANTICOAGULATION ═══════════════════ -->
+        <div id="tab-anticoag" class="tab-content py-8 md:py-10">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="mb-8">
+                    <h2 class="text-2xl md:text-3xl font-playfair font-bold text-deep-navy mb-1">Anticoagulation Guide</h2>
+                    <p class="text-neutral-slate">DOAC and warfarin dosing, reversal agents, and bridging guidance. Based on 2023 ACC/AHA/ESC AFib and 2021 ESC VTE guidelines.</p>
+                </div>
+
+                <!-- DOAC Quick Ref -->
+                <div class="ref-card anti bg-white rounded-xl p-5 md:p-6 shadow-lg mb-8">
+                    <h3 class="text-lg md:text-xl font-playfair font-bold text-deep-navy mb-4 flex items-center gap-2">
+                        <span class="text-2xl">💧</span> DOAC Dosing Quick Reference
+                    </h3>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-sm min-w-[700px]">
+                            <thead><tr class="border-b-2 border-purple-100 bg-purple-50">
+                                <th class="text-left py-3 px-3 font-semibold text-deep-navy">Drug</th>
+                                <th class="text-left py-3 px-3 font-semibold text-deep-navy">AFib (Stroke Prevention)</th>
+                                <th class="text-left py-3 px-3 font-semibold text-deep-navy">DVT/PE Treatment</th>
+                                <th class="text-left py-3 px-3 font-semibold text-deep-navy">DVT/PE Prophylaxis</th>
+                                <th class="text-left py-3 px-3 font-semibold text-deep-navy">Reversal Agent</th>
+                            </tr></thead>
+                            <tbody class="text-neutral-slate">
+                                <tr class="border-b border-gray-100">
+                                    <td class="py-3 px-3 font-semibold text-deep-navy">Apixaban (Eliquis)</td>
+                                    <td class="py-3 px-3">5 mg BID<br><small>(2.5 mg BID if ≥2 of: age ≥80, wt ≤60 kg, Cr ≥1.5)</small></td>
+                                    <td class="py-3 px-3">10 mg BID × 7 d → 5 mg BID</td>
+                                    <td class="py-3 px-3">2.5 mg BID (after 6 mo treatment)</td>
+                                    <td class="py-3 px-3"><strong>Andexanet alfa</strong> (andexxa) — 400–800 mg IV</td>
+                                </tr>
+                                <tr class="border-b border-gray-100">
+                                    <td class="py-3 px-3 font-semibold text-deep-navy">Rivaroxaban (Xarelto)</td>
+                                    <td class="py-3 px-3">20 mg daily w/ food<br><small>(15 mg if CrCl 15–50)</small></td>
+                                    <td class="py-3 px-3">15 mg BID × 21 d → 20 mg daily</td>
+                                    <td class="py-3 px-3">10 mg daily (after 6 mo)</td>
+                                    <td class="py-3 px-3"><strong>Andexanet alfa</strong></td>
+                                </tr>
+                                <tr class="border-b border-gray-100">
+                                    <td class="py-3 px-3 font-semibold text-deep-navy">Dabigatran (Pradaxa)</td>
+                                    <td class="py-3 px-3">150 mg BID<br><small>(75 mg BID if CrCl 15–30)</small></td>
+                                    <td class="py-3 px-3">150 mg BID<br><small>(after 5–10 d parenteral AC)</small></td>
+                                    <td class="py-3 px-3">Not FDA-approved</td>
+                                    <td class="py-3 px-3"><strong>Idarucizumab</strong> (Praxbind) — 5 g IV</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-3 px-3 font-semibold text-deep-navy">Edoxaban (Savaysa)</td>
+                                    <td class="py-3 px-3">60 mg daily<br><small>(30 mg if CrCl 15–50, wt ≤60 kg)</small></td>
+                                    <td class="py-3 px-3">60 mg daily<br><small>(30 mg if wt ≤60 kg, CrCl 15–50)</small></td>
+                                    <td class="py-3 px-3">Not FDA-approved</td>
+                                    <td class="py-3 px-3"><strong>PCC / aPCC</strong> (no specific reversal)</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Warfarin + Heparin -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                    <div class="ref-card bg-white rounded-xl p-5 md:p-6 shadow-lg">
+                        <h3 class="text-lg font-playfair font-bold text-deep-navy mb-3 flex items-center gap-2">
+                            <span class="text-2xl">⚗️</span> Warfarin
+                        </h3>
+                        <div class="space-y-2 text-sm text-neutral-slate">
+                            <p><strong>Mechanism:</strong> Vitamin K antagonist (inhibits synthesis of II, VII, IX, X, proteins C &amp; S)</p>
+                            <p><strong>Starting dose:</strong> 5 mg daily (2.5 mg if elderly/frail)</p>
+                            <p><strong>Target INR:</strong> 2–3 most indications; 2.5–3.5 mechanical mitral valve</p>
+                            <p><strong>Monitoring:</strong> INR weekly initially → monthly when stable</p>
+                            <p><strong>Interactions:</strong> Major — amiodarone (↑INR), antibiotics (↑INR), NSAIDs, CYP450 inducers/inhibitors</p>
+                            <p><strong>Reversal:</strong> Vitamin K (oral or IV 5–10 mg) + 4-factor PCC (25–50 U/kg)</p>
+                        </div>
+                    </div>
+                    <div class="ref-card bg-white rounded-xl p-5 md:p-6 shadow-lg">
+                        <h3 class="text-lg font-playfair font-bold text-deep-navy mb-3 flex items-center gap-2">
+                            <span class="text-2xl">💉</span> Heparins
+                        </h3>
+                        <div class="space-y-2 text-sm text-neutral-slate">
+                            <p><strong>UFH bolus:</strong> 80 U/kg IV → 18 U/kg/hr infusion (aPTT goal 1.5–2.5×</p>
+                            <p><strong>Enoxaparin (LMWH):</strong> 1 mg/kg SC q12h (therapeutic) — renally adjust if CrCl &lt;30</p>
+                            <p><strong>Fondaparinux:</strong> 5–10 mg SC daily (based on weight)</p>
+                            <p><strong>UFH reversal:</strong> Protamine sulfate 1 mg per 100 U UFH (max 50 mg)</p>
+                            <p><strong>Enoxaparin reversal:</strong> Protamine 1 mg per 1 mg enoxaparin (partial reversal only)</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bridging -->
+                <div class="ref-card checklist bg-white rounded-xl p-5 md:p-6 shadow-lg mb-6">
+                    <h3 class="text-lg md:text-xl font-playfair font-bold text-deep-navy mb-4 flex items-center gap-2">
+                        <span class="text-2xl">🔄</span> Peri-Procedure Anticoagulation Management (2022 ACC Expert Consensus)
+                    </h3>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-sm min-w-[600px]">
+                            <thead><tr class="border-b-2 border-green-100 bg-green-50">
+                                <th class="text-left py-2 px-3 font-semibold text-deep-navy">Anticoagulant</th>
+                                <th class="text-left py-2 px-3 font-semibold text-deep-navy">When to Stop (normal renal function)</th>
+                                <th class="text-left py-2 px-3 font-semibold text-deep-navy">Bridging?</th>
+                                <th class="text-left py-2 px-3 font-semibold text-deep-navy">When to Resume</th>
+                            </tr></thead>
+                            <tbody class="text-neutral-slate">
+                                <tr class="border-b border-gray-100">
+                                    <td class="py-2.5 px-3 font-semibold text-deep-navy">Warfarin</td>
+                                    <td class="py-2.5 px-3">5 days before</td>
+                                    <td class="py-2.5 px-3">YES — if mech mitral valve, AF w/ recent stroke, CHADS₂ ≥4</td>
+                                    <td class="py-2.5 px-3">12–24 h post-proc (minor) / 48–72 h (major)</td>
+                                </tr>
+                                <tr class="border-b border-gray-100">
+                                    <td class="py-2.5 px-3 font-semibold text-deep-navy">Apixaban</td>
+                                    <td class="py-2.5 px-3">48 h (low-risk proc) / 72 h (high-bleed)</td>
+                                    <td class="py-2.5 px-3">NOT recommended</td>
+                                    <td class="py-2.5 px-3">24–72 h based on hemostasis</td>
+                                </tr>
+                                <tr class="border-b border-gray-100">
+                                    <td class="py-2.5 px-3 font-semibold text-deep-navy">Rivaroxaban</td>
+                                    <td class="py-2.5 px-3">48 h (low-risk) / 72 h (high-bleed)</td>
+                                    <td class="py-2.5 px-3">NOT recommended</td>
+                                    <td class="py-2.5 px-3">24–72 h based on hemostasis</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-2.5 px-3 font-semibold text-deep-navy">Dabigatran</td>
+                                    <td class="py-2.5 px-3">CrCl ≥50: 48 h · CrCl 30–50: 72 h · CrCl &lt;30: 96 h</td>
+                                    <td class="py-2.5 px-3">NOT recommended</td>
+                                    <td class="py-2.5 px-3">24–72 h based on hemostasis</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="bg-amber-50 border border-amber-200 rounded-xl p-4 md:p-6">
+                    <p class="text-sm text-deep-navy"><strong>⚠️ Clinical Note:</strong> DOACs are preferred over warfarin for AFib (Class I). DOAC reversal agents are expensive and reserved for life-threatening bleeding. For minor bleeding, hold the drug and give supportive care. Always check most recent renal function before DOAC dose adjustments. — AHA/ACC/HRS 2023 AFib Guidelines</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ═══════════════════ TAB 4: CHECKLISTS ═══════════════════ -->
+        <div id="tab-checklists" class="tab-content py-8 md:py-10">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="mb-8">
+                    <h2 class="text-2xl md:text-3xl font-playfair font-bold text-deep-navy mb-1">Rapid Assessment Checklists</h2>
+                    <p class="text-neutral-slate">One-page checklists for common cardiovascular scenarios.</p>
+                </div>
+
+                <!-- STEMI -->
+                <div class="ref-card emergency bg-white rounded-xl p-5 md:p-6 shadow-lg mb-6">
+                    <h3 class="text-lg md:text-xl font-playfair font-bold text-deep-navy mb-4 flex items-center gap-2">
+                        <span class="text-2xl">🚑</span> STEMI — ED Management Checklist
+                    </h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="bg-red-50 rounded-lg p-4">
+                            <h4 class="font-bold text-red-700 mb-3">🔴 IMMEDIATE (&lt;10 min)</h4>
+                            <ul class="text-sm space-y-2 text-neutral-slate">
+                                <li class="flex items-start"><span>☐</span> 12-lead ECG — diagnose STEMI criteria met?</li>
+                                <li class="flex items-start"><span>☐</span> Activates code STEMI / cath lab</li>
+                                <li class="flex items-start"><span>☐</span> Aspirin 325 mg chewed</li>
+                                <li class="flex items-start"><span>☐</span> O2 only if SpO2 &lt;90%</li>
+                                <li class="flex items-start"><span>☐</span> IV access × 2, cardiac monitor</li>
+                                <li class="flex items-start"><span>☐</span> Troponin, CBC, BMP, coags, lipid panel</li>
+                                <li class="flex items-start"><span>☐</span> NTG 0.4 mg SL q5 min × 3 (if BP allows)</li>
+                                <li class="flex items-start"><span>☐</span> Morphine (for refractory pain)</li>
+                            </ul>
+                        </div>
+                        <div class="bg-green-50 rounded-lg p-4">
+                            <h4 class="font-bold text-green-700 mb-3">🟢 EARLY (Cath lab &lt;90 min)</h4>
+                            <ul class="text-sm space-y-2 text-neutral-slate">
+                                <li class="flex items-start"><span>☐</span> P2Y12 inhibitor: ticagrelor 180 mg or clopidogrel 600 mg load</li>
+                                <li class="flex items-start"><span>☐</span> Anticoagulation: UFH bolus or enoxaparin</li>
+                                <li class="flex items-start"><span>☐</span> High-intensity statin: atorvastatin 80 mg</li>
+                                <li class="flex items-start"><span>☐</span> Beta-blocker if no contraindication (metoprolol 5 mg IV)</li>
+                                <li class="flex items-start"><span>☐</span> Door-to-balloon time &lt;90 min (PCI)</li>
+                                <li class="flex items-start"><span>☐</span> If fibrinolytics: start within 30 min of arrival</li>
+                                <li class="flex items-start"><span>☐</span> ECHO when stable</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- AFib New-Onset -->
+                <div class="ref-card drug bg-white rounded-xl p-5 md:p-6 shadow-lg mb-6">
+                    <h3 class="text-lg md:text-xl font-playfair font-bold text-deep-navy mb-4 flex items-center gap-2">
+                        <span class="text-2xl">💓</span> New-Onset Atrial Fibrillation
+                    </h3>
+                    <div class="space-y-4">
+                        <div class="bg-blue-50 rounded-lg p-4">
+                            <h4 class="font-bold text-clinical-blue mb-2">Step 1: Assess Stability</h4>
+                            <p class="text-sm text-neutral-slate">Unstable (shock, ischemic chest pain, acute HF, altered mental status)?</p>
+                            <p class="text-sm text-neutral-slate"><strong>→ YES:</strong> Immediate synchronized cardioversion</p>
+                            <p class="text-sm text-neutral-slate"><strong>→ NO:</strong> Proceed to rate vs rhythm control assessment</p>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="bg-gray-50 rounded-lg p-4">
+                                <h4 class="font-bold text-deep-navy mb-2">Step 2: Rate Control (if stable)</h4>
+                                <ul class="text-sm text-neutral-slate space-y-1.5">
+                                    <li>☐ Beta-blocker: metoprolol 5 mg IV or esmolol infusion</li>
+                                    <li>☐ Diltiazem: 0.25 mg/kg IV → 5–15 mg/hr drip</li>
+                                    <li>☐ Avoid non-DHP CCB in HFrEF</li>
+                                    <li>☐ Target HR &lt;110 bpm (RACE II lenient control)</li>
+                                </ul>
+                            </div>
+                            <div class="bg-gray-50 rounded-lg p-4">
+                                <h4 class="font-bold text-deep-navy mb-2">Step 3: Anticoagulation</h4>
+                                <ul class="text-sm text-neutral-slate space-y-1.5">
+                                    <li>☐ Calculate CHADS₂-VASc</li>
+                                    <li>☐ Score ≥2 M / ≥3 F → DOAC</li>
+                                    <li>☐ Score 1 → shared decision</li>
+                                    <li>☐ &gt;48 h onset or unknown → TEE first or anticoagulate × 3 wk</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="bg-purple-50 rounded-lg p-4">
+                            <h4 class="font-bold text-purple-700 mb-2">Step 4: Cardioversion (if rhythm control chosen)</h4>
+                            <p class="text-sm text-neutral-slate">☐ Duration &lt;48 h: cardiovert directly (still consider TEE if high stroke risk)</p>
+                            <p class="text-sm text-neutral-slate">☐ Duration &gt;48 h or unknown: TEE-guided or anticoagulate 3 wk before cardioversion</p>
+                            <p class="text-sm text-neutral-slate">☐ Post-cardioversion anticoagulation: minimum 4 weeks regardless of CHADS₂-VASc</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Aortic Dissection -->
+                <div class="ref-card ecg bg-white rounded-xl p-5 md:p-6 shadow-lg mb-6">
+                    <h3 class="text-lg md:text-xl font-playfair font-bold text-deep-navy mb-4 flex items-center gap-2">
+                        <span class="text-2xl">🔍</span> Aortic Dissection — Rapid Workup
+                    </h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="bg-orange-50 rounded-lg p-4">
+                            <h4 class="font-bold text-orange-700 mb-2">Red Flag Symptoms</h4>
+                            <ul class="text-sm text-neutral-slate space-y-1.5">
+                                <li>☐ "Tearing" chest/back pain (sudden onset)</li>
+                                <li>☐ Pulse deficit between arms</li>
+                                <li>☐ Blood pressure differential &gt;20 mmHg between arms</li>
+                                <li>☐ New diastolic murmur (AR) — aortic regurgitation</li>
+                                <li>☐ Neurologic deficit (stroke-like)</li>
+                                <li>☐ Widened mediastinum on CXR</li>
+                            </ul>
+                        </div>
+                        <div class="bg-gray-50 rounded-lg p-4">
+                            <h4 class="font-bold text-deep-navy mb-2">Diagnostic Steps</h4>
+                            <ul class="text-sm text-neutral-slate space-y-1.5">
+                                <li>☐ CT angiography (gold std if stable)</li>
+                                <li>☐ TEE (if unstable or at bedside)</li>
+                                <li>☐ CXR (widened mediastinum, displaced calcification)</li>
+                                <li>☐ Stanford A → emergent surgery</li>
+                                <li>☐ Stanford B → medical management (BP control)</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="mt-4 bg-red-50 rounded-lg p-4">
+                        <h4 class="font-bold text-red-700 mb-2">Medical Management (Both Types)</h4>
+                        <ul class="text-sm text-neutral-slate space-y-1.5">
+                            <li>☐ Beta-blocker first (esmolol drip): target HR &lt;60 bpm</li>
+                            <li>☐ Add vasodilator (nitroprusside) after beta-blockade: target SBP 100–120 mmHg</li>
+                            <li>☐ NEVER give vasodilator alone (reflex tachycardia ↑dP/dt)</li>
+                            <li>☐ Pain control (morphine/fentanyl)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Acute Decompensated HF -->
+                <div class="ref-card checklist bg-white rounded-xl p-5 md:p-6 shadow-lg mb-6">
+                    <h3 class="text-lg md:text-xl font-playfair font-bold text-deep-navy mb-4 flex items-center gap-2">
+                        <span class="text-2xl">💨</span> Acute Decompensated Heart Failure
+                    </h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="bg-green-50 rounded-lg p-4">
+                            <h4 class="font-bold text-green-700 mb-2">Assessment Profile</h4>
+                            <div class="grid grid-cols-2 gap-2 text-sm">
+                                <div class="bg-white p-2 rounded text-center"><span class="font-bold">WARM + DRY</span><br>Euvolemic, perfusing<br>→ Adjust oral meds</div>
+                                <div class="bg-white p-2 rounded text-center"><span class="font-bold">WARM + WET</span><br>Congested, perfusing<br>→ Diurese</div>
+                                <div class="bg-white p-2 rounded text-center"><span class="font-bold">COLD + DRY</span><br>Low output<br>→ Inotropes ± fluids</div>
+                                <div class="bg-white p-2 rounded text-center"><span class="font-bold">COLD + WET</span><br>Cardiogenic shock<br>→ Inotropes + MCS</div>
+                            </div>
+                        </div>
+                        <div class="bg-gray-50 rounded-lg p-4">
+                            <h4 class="font-bold text-deep-navy mb-2">Initial Management</h4>
+                            <ul class="text-sm text-neutral-slate space-y-1.5">
+                                <li>☐ NTG IV drip (preload/afterload reduction)</li>
+                                <li>☐ IV loop diuretics (furosemide 1–2.5× oral dose)</li>
+                                <li>☐ NPPV/BiPAP if respiratory distress</li>
+                                <li>☐ Continue home beta-blockers unless shock</li>
+                                <li>☐ Check BNP, troponin, BMP</li>
+                                <li>☐ Point-of-care ultrasound (IVC, B-lines)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-amber-50 border border-amber-200 rounded-xl p-4 md:p-6">
+                    <p class="text-sm text-deep-navy"><strong>⚠️ Disclaimer:</strong> Checklists are educational aids, not clinical decision rules. Always use clinical judgment and follow institutional protocols. For full guidelines, see our <a href="treatment-protocols.html" class="text-clinical-blue underline font-semibold">Treatment Protocols</a> page.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ═══════════════════ TAB 5: ECG & LAB PEARLS ═══════════════════ -->
+        <div id="tab-ecg-lab" class="tab-content py-8 md:py-10">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="mb-8">
+                    <h2 class="text-2xl md:text-3xl font-playfair font-bold text-deep-navy mb-1">ECG &amp; Lab Pearls</h2>
+                    <p class="text-neutral-slate">At-a-glance reference values and ECG pattern recognition tips.</p>
+                </div>
+
+                <!-- Lab Values -->
+                <div class="ref-card ecg bg-white rounded-xl p-5 md:p-6 shadow-lg mb-8">
+                    <h3 class="text-lg md:text-xl font-playfair font-bold text-deep-navy mb-4 flex items-center gap-2">
+                        <span class="text-2xl">🔬</span> Essential Lab Reference Values
+                    </h3>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-sm min-w-[600px]">
+                            <thead><tr class="border-b-2 border-teal-100 bg-teal-50">
+                                <th class="text-left py-2.5 px-3 font-semibold text-deep-navy">Test</th>
+                                <th class="text-left py-2.5 px-3 font-semibold text-deep-navy">Normal Range</th>
+                                <th class="text-left py-2.5 px-3 font-semibold text-deep-navy">Critical Values</th>
+                                <th class="text-left py-2.5 px-3 font-semibold text-deep-navy">Clinical Pearls</th>
+                            </tr></thead>
+                            <tbody class="text-neutral-slate">
+                                <tr class="border-b border-gray-100">
+                                    <td class="py-2.5 px-3 font-semibold text-deep-navy">Troponin I (hs)</td>
+                                    <td class="py-2.5 px-3">&lt;26 ng/L (F), &lt;34 ng/L (M)</td>
+                                    <td class="py-2.5 px-3 text-red-600 font-semibold">&gt;100 ng/L</td>
+                                    <td class="py-2.5 px-3">Delta × 3 in 2 h = MI; chronic elevation in CKD, myocarditis</td>
+                                </tr>
+                                <tr class="border-b border-gray-100">
+                                    <td class="py-2.5 px-3 font-semibold text-deep-navy">BNP</td>
+                                    <td class="py-2.5 px-3">&lt;100 pg/mL</td>
+                                    <td class="py-2.5 px-3 text-red-600 font-semibold">&gt;400 pg/mL</td>
+                                    <td class="py-2.5 px-3">&lt;100 rules out HF; elevated in CKD, AFib, elderly</td>
+                                </tr>
+                                <tr class="border-b border-gray-100">
+                                    <td class="py-2.5 px-3 font-semibold text-deep-navy">NT-proBNP</td>
+                                    <td class="py-2.5 px-3">&lt;125 pg/mL (&lt;75 y); &lt;450 (&lt;50 y); &lt;900 (50–75 y); &lt;1800 (&gt;75 y)</td>
+                                    <td class="py-2.5 px-3 text-red-600 font-semibold">&gt;5000 pg/mL</td>
+                                    <td class="py-2.5 px-3">Longer half-life than BNP; age-adjusted cutoffs critical</td>
+                                </tr>
+                                <tr class="border-b border-gray-100">
+                                    <td class="py-2.5 px-3 font-semibold text-deep-navy">D-Dimer</td>
+                                    <td class="py-2.5 px-3">&lt;500 ng/mL FEU</td>
+                                    <td class="py-2.5 px-3">Age-adjusted: age × 10 ng/mL (if &gt;50 y)</td>
+                                    <td class="py-2.5 px-3">High NPV but low PPV; elevated in infection, pregnancy, cancer</td>
+                                </tr>
+                                <tr class="border-b border-gray-100">
+                                    <td class="py-2.5 px-3 font-semibold text-deep-navy">LDL-C</td>
+                                    <td class="py-2.5 px-3">&lt;100 mg/dL (&lt;2.6 mmol/L)</td>
+                                    <td class="py-2.5 px-3">&lt;70 mg/dL if ASCVD</td>
+                                    <td class="py-2.5 px-3">&lt;55 mg/dL target for very high-risk ASCVD (ESC 2019)</td>
+                                </tr>
+                                <tr class="border-b border-gray-100">
+                                    <td class="py-2.5 px-3 font-semibold text-deep-navy">Potassium</td>
+                                    <td class="py-2.5 px-3">3.5–5.0 mEq/L</td>
+                                    <td class="py-2.5 px-3 text-red-600 font-semibold">&lt;2.5 or &gt;6.0 mEq/L</td>
+                                    <td class="py-2.5 px-3">K⁺ &gt;5.5: peaked T waves; K⁺ &gt;6.5: sine wave → VF</td>
+                                </tr>
+                                <tr class="border-b border-gray-100">
+                                    <td class="py-2.5 px-3 font-semibold text-deep-navy">Magnesium</td>
+                                    <td class="py-2.5 px-3">1.7–2.2 mg/dL</td>
+                                    <td class="py-2.5 px-3 text-red-600 font-semibold">&lt;1.0 mg/dL</td>
+                                    <td class="py-2.5 px-3">Keep &gt;2.0 mg/dL in arrhythmia; replace K⁺ &amp; Mg²⁺ together</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-2.5 px-3 font-semibold text-deep-navy">Creatinine Clearance (CrCl)</td>
+                                    <td class="py-2.5 px-3">90–120 mL/min</td>
+                                    <td class="py-2.5 px-3 text-red-600 font-semibold">&lt;15 mL/min</td>
+                                    <td class="py-2.5 px-3">Cockcroft-Gault: dose-adjust DOACs &amp; LMWH when &lt;30 mL/min</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- ECG Quick Reference -->
+                <div class="ref-card ecg bg-white rounded-xl p-5 md:p-6 shadow-lg mb-6">
+                    <h3 class="text-lg md:text-xl font-playfair font-bold text-deep-navy mb-4 flex items-center gap-2">
+                        <span class="text-2xl">📈</span> Normal ECG Values &amp; Intervals
+                    </h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="bg-gray-50 rounded-lg p-4">
+                            <h4 class="font-bold text-deep-navy mb-3">Intervals &amp; Durations</h4>
+                            <div class="space-y-2 text-sm text-neutral-slate">
+                                <p><strong>Heart rate:</strong> 60–100 bpm (sinus)</p>
+                                <p><strong>PR interval:</strong> 120–200 ms (3–5 small boxes)</p>
+                                <p><strong>QRS duration:</strong> &lt;120 ms (&lt;3 small boxes)</p>
+                                <p><strong>QTc:</strong> &lt;440 ms (men), &lt;460 ms (women)</p>
+                                <p><strong>Axial deviation:</strong> -30° to +90° (normal axis)</p>
+                                <p><strong>ST elevation (normal):</strong> &lt;1 mm (all leads except V2-V3)</p>
+                                <p><strong>ST elevation (V2-V3 normal):</strong> &lt;2.5 mm (men &lt;40), &lt;2 mm (men &gt;40), &lt;1.5 mm (women)</p>
+                            </div>
+                        </div>
+                        <div class="bg-gray-50 rounded-lg p-4">
+                            <h4 class="font-bold text-deep-navy mb-3">Rate Calculation Methods</h4>
+                            <div class="space-y-2 text-sm text-neutral-slate">
+                                <p><strong>300 method:</strong> Count large boxes between R-R; 300 ÷ #boxes</p>
+                                <p><strong>1500 method:</strong> Count small boxes between R-R; 1500 ÷ #boxes (more precise)</p>
+                                <p><strong>6-second strip:</strong> Count QRS complexes × 10 (irregular rhythms)</p>
+                            </div>
+                            <h4 class="font-bold text-deep-navy mb-2 mt-4">Axis Quick Check</h4>
+                            <div class="space-y-1.5 text-sm text-neutral-slate">
+                                <p>Lead I +/aVF +: <strong>Normal axis</strong></p>
+                                <p>Lead I +/aVF -: <strong>Left axis deviation</strong> (consider LAFB, LVH, inferior MI)</p>
+                                <p>Lead I -/aVF +: <strong>Right axis deviation</strong> (consider RAD, PE, RVH)</p>
+                                <p>Lead I -/aVF -: <strong>Extreme axis</strong> (VT, hyperkalemia)</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ECG Emergency Patterns -->
+                <div class="ref-card emergency bg-white rounded-xl p-5 md:p-6 shadow-lg mb-6">
+                    <h3 class="text-lg md:text-xl font-playfair font-bold text-deep-navy mb-4 flex items-center gap-2">
+                        <span class="text-2xl">⚠️</span> ECG Patterns That Kill — Don't Miss These
+                    </h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                        <div class="bg-red-50 rounded-lg p-4">
+                            <h4 class="font-bold text-red-700 mb-2">STEMI</h4>
+                            <p class="text-xs text-neutral-slate mb-1">New ST ≥1 mm (2 mm in V2-V3 men, 1.5 mm women) in 2+ contiguous leads</p>
+                            <p class="text-xs text-neutral-slate font-semibold">Action → Cath lab within 90 min</p>
+                        </div>
+                        <div class="bg-red-50 rounded-lg p-4">
+                            <h4 class="font-bold text-red-700 mb-2">Hyperkalemia</h4>
+                            <p class="text-xs text-neutral-slate mb-1">Peaked T → wide QRS → sine wave. K⁺ &gt;6.5</p>
+                            <p class="text-xs text-neutral-slate font-semibold">Action → CaCl₂ + insulin/glucose + albuterol + kayexalate</p>
+                        </div>
+                        <div class="bg-red-50 rounded-lg p-4">
+                            <h4 class="font-bold text-red-700 mb-2">Torsades de Pointes</h4>
+                            <p class="text-xs text-neutral-slate mb-1">Polymorphic VT with prolonged QTc. Twisting QRS axis</p>
+                            <p class="text-xs text-neutral-slate font-semibold">Action → MgSO₄ 2g IV, overdrive pacing, stop QT-prolonging drugs</p>
+                        </div>
+                        <div class="bg-red-50 rounded-lg p-4">
+                            <h4 class="font-bold text-red-700 mb-2">Complete Heart Block</h4>
+                            <p class="text-xs text-neutral-slate mb-1">AV dissociation: P and QRS march independently. Wide escape rhythm</p>
+                            <p class="text-xs text-neutral-slate font-semibold">Action → Atropine → transcutaneous pacing → transvenous pacer</p>
+                        </div>
+                        <div class="bg-red-50 rounded-lg p-4">
+                            <h4 class="font-bold text-red-700 mb-2">Wellens Syndrome</h4>
+                            <p class="text-xs text-neutral-slate mb-1">Deep symmetric or biphasic T waves in V2-V3. Critical proximal LAD stenosis</p>
+                            <p class="text-xs text-neutral-slate font-semibold">Action → Urgent cath (NOT a stress test — can cause MI)</p>
+                        </div>
+                        <div class="bg-red-50 rounded-lg p-4">
+                            <h4 class="font-bold text-red-700 mb-2">Brugada Pattern</h4>
+                            <p class="text-xs text-neutral-slate mb-1">Coved ST elevation in V1-V2 (≥2 mm) with negative T. Type I is diagnostic</p>
+                            <p class="text-xs text-neutral-slate font-semibold">Action → ICD, avoid fever, avoid Na⁺ channel blockers</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- QT-Corrected Formula Reference -->
+                <div class="ref-card bg-white rounded-xl p-5 md:p-6 shadow-lg mb-6">
+                    <h3 class="text-lg md:text-xl font-playfair font-bold text-deep-navy mb-4 flex items-center gap-2">
+                        <span class="text-2xl">📐</span> QTc Correction Formulas &amp; Drug-Induced QT Prolongation
+                    </h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <h4 class="font-bold text-deep-navy mb-2">QTc Formulas</h4>
+                            <div class="space-y-2 text-sm text-neutral-slate bg-gray-50 rounded-lg p-4">
+                                <p><strong>Bazett's (most common):</strong> QTc = QT ÷ √RR</p>
+                                <p class="text-xs">Fastest to calculate; overestimates at high HR, underestimates at low HR</p>
+                                <p class="mt-3 font-semibold">Danger level:</p>
+                                <p><strong>Moderate:</strong> QTc 450–499 ms (men), 460–499 ms (women)</p>
+                                <p><strong>Severe/stop drug:</strong> QTc ≥500 ms or ΔQTc &gt;60 ms from baseline</p>
+                            </div>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-deep-navy mb-2">Major QT-Prolonging CV Drugs</h4>
+                            <div class="space-y-2 text-sm text-neutral-slate bg-gray-50 rounded-lg p-4">
+                                <p><strong>Very high risk:</strong> Amiodarone, Sotalol, Dofetilide, Ibutilide</p>
+                                <p class="mt-2"><strong>High risk:</strong> Quinidine, Procainamide, Disopyramide</p>
+                                <p class="mt-2"><strong>Moderate risk:</strong> Diltiazem, Verapamil, Flecainide</p>
+                                <p class="mt-2"><strong>Other classes:</strong> Fluoroquinolones, Macrolides, Antipsychotics, Ondansetron, Methadone</p>
+                                <p class="mt-2 text-xs">Risk ↑ with: hypokalemia, hypomagnesemia, bradycardia, structural heart disease, female sex, age &gt;65</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-amber-50 border border-amber-200 rounded-xl p-4 md:p-6">
+                    <p class="text-sm text-deep-navy"><strong>⚠️ Disclaimer:</strong> Lab reference ranges may vary by assay and institution. Always verify with your local laboratory values and clinical context. ECG interpretation requires clinical correlation with patient presentation.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-deep-navy text-white py-10 mt-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div class="flex items-center justify-center space-x-4 mb-4">
+                <svg class="h-8 w-8 text-clinical-blue" fill="currentColor" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                <h3 class="text-2xl font-playfair font-bold">CardioReference</h3>
+            </div>
+            <p class="text-sm text-gray-400 mb-2">Designed &amp; Developed by <span class="text-clinical-blue font-semibold">Ritik Dhage</span></p>
+            <p class="text-xs text-gray-500 italic">⚠️ For educational purposes only. Not a substitute for clinical judgment. Always verify doses with your institution's formulary.</p>
+        </div>
+    </footer>
+
+    <script src="dark-mode.js"></script>
+    <script>
+    // Tab switching
+    const tabBtns = document.querySelectorAll('.tab-btn');
+    const tabContents = document.querySelectorAll('.tab-content');
+    tabBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            tabBtns.forEach(b => b.classList.remove('active-tab'));
+            tabContents.forEach(c => c.classList.remove('active'));
+            btn.classList.add('active-tab');
+            const target = document.getElementById('tab-' + btn.dataset.tab);
+            if (target) target.classList.add('active');
+        });
+    });
+    </script>
+</body>
+</html>
