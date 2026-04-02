@@ -444,6 +444,35 @@ class DiagnosticTools {
                 }
                 break;
 
+            case 'junctional-rhythm':
+                for (let i = 0; i < totalSamples; i++) {
+                    const phase = (i % samplesPerRR) / samplesPerRR;
+                    let y = centerY;
+                    
+                    // Junctional rhythm: narrow QRS, absent or retrograde P waves, rate 40-60 bpm
+                    // Retrograde P wave may appear just before or buried in/after QRS
+                    
+                    if (phase < 0.08) { // Retrograde P wave (inverted, often buried in QRS)
+                        y = centerY + 10 * Math.sin(phase * Math.PI / 0.08); // Inverted compared to normal
+                    } else if (phase < 0.18) { // PR segment (short or absent PR interval)
+                        y = centerY;
+                    } else if (phase < 0.33) { // Narrow QRS complex (junctional origin)
+                        if (phase < 0.2) y = centerY - 8; // Minimal Q wave
+                        else if (phase < 0.27) y = centerY + 65; // R wave (narrower since junctional)
+                        else if (phase < 0.31) y = centerY - 22; // S wave
+                        else y = centerY;
+                    } else if (phase < 0.5) { // ST segment
+                        y = centerY;
+                    } else if (phase < 0.8) { // T wave
+                        y = centerY - 20 * Math.sin((phase - 0.5) * Math.PI / 0.3);
+                    } else {
+                        y = centerY;
+                    }
+                    
+                    path += ` L ${(i / totalSamples) * width} ${y}`;
+                }
+                break;
+
             case 'wpw-pattern':
                 for (let i = 0; i < totalSamples; i++) {
                     const phase = (i % samplesPerRR) / samplesPerRR;
@@ -693,6 +722,18 @@ class DiagnosticTools {
                     'May predispose to AVRT (supraventricular tachycardia via accessory pathway)'
                 ],
                 clinical: 'Pre-excitation syndrome with accessory pathway (Bundle of Kent). Risk of orthodromic and antidromic AVRT. Antidromic AVRT and AFib with WPW can degenerate to VF. AV nodal-blocking agents (adenosine, verapamil, beta-blockers) are CONTRAINDICATED in AFib with WPW. Definitive treatment: catheter ablation of accessory pathway.'
+            },
+            'junctional-rhythm': {
+                name: 'Junctional Escape Rhythm',
+                rate: this.currentHeartRate,
+                characteristics: [
+                    'Narrow QRS complex (<0.12 seconds)',
+                    'Rate typically 40-60 bpm (AV junctional pacemaker discharge rate)',
+                    'Absent, retrograde (inverted), or buried P waves',
+                    'If retrograde P wave visible: may appear before, during, or after QRS',
+                    'Regular rhythm with no preceding sinus P wave'
+                ],
+                clinical: 'Junctional rhythm arises when the SA node fails and the AV junction takes over as the pacemaker of last resort. Common in complete heart block, sick sinus syndrome, digoxin toxicity, inferior MI, and after cardiac surgery. A junctional escape rhythm is a protective mechanism; suppressing it may cause asystole. Treatment addresses the underlying cause. If patient is stable and asymptomatic, observation may be appropriate. If symptomatic or underlying cause not reversible, pacemaker may be required.'
             }
         };
         
@@ -1335,54 +1376,170 @@ class DiagnosticTools {
         });
     }
 
+    // Helper: safely convert to displayable number for NNT
+    _chadsFiniteNumber(val) {
+        if (typeof val === 'number' && isFinite(val) && val > 0) return Math.round(val);
+        if (val > 10000) return '>10,000';
+        return 'N/A';
+    }
+
     calculateCHADS2VASc() {
         let score = 0;
-        
-        const age = parseInt(document.getElementById('chads-age').value);
+
+        const age65_74 = document.getElementById('chads-age-65-74')?.checked || false;
+        const age75plus = document.getElementById('chads-age-75-plus')?.checked || false;
         const gender = document.getElementById('chads-gender').value;
-        
-        // Age scoring
-        if (age >= 75) score += 2;
-        else if (age >= 65) score += 1;
-        
-        // Clinical risk factors
+
+        // C — Congestive Heart Failure (1 point)
         if (document.getElementById('chads-chf').checked) score += 1;
+        // H — Hypertension (1 point)
         if (document.getElementById('chads-hypertension').checked) score += 1;
+        // A — Age 65-74 (1 point)
+        if (age65_74) score += 1;
+        // A — Age ≥75 (2 points)
+        if (age75plus) score += 2;
+        // D — Diabetes Mellitus (1 point)
         if (document.getElementById('chads-diabetes').checked) score += 1;
+        // S — Stroke / TIA / Thromboembolism (2 points)
         if (document.getElementById('chads-stroke-tia').checked) score += 2;
+        // V — Vascular Disease (prior MI, PAD, or aortic plaque) (1 point)
         if (document.getElementById('chads-vascular-disease').checked) score += 1;
+        // Sc — Sex Category: Female (1 point)
+        if (gender === 'female') score += 1;
+
+        // Validate mutual exclusivity: can't have both age ranges
+        if (age65_74 && age75plus) {
+            alert('Please select only one age range: either 65-74 years OR ≥75 years — not both.');
+            return;
+        }
+
+        // Annual stroke risk (ischemic stroke / thromboembolism per year)
+        // Derived from MACE/ESC 2020 AFib guidelines — pooled rates from multiple large cohort studies
+        // (Friberg 2012, Lip 2010, Olesen 2011, Roldan 2013 meta-analysis)
+        // Female: higher risk at same score when score ≥1; males and females diverge
+        const maleRate = [0.0, 0.2, 1.0, 2.2, 4.0, 6.7, 9.8, 9.6, 6.7, 15.2, 12.2];
+        const femaleRateMap = { 0: 0.0, 1: 0.2, 2: 1.1, 3: 3.0, 4: 5.5, 5: 7.2, 6: 8.0, 7: 9.5, 8: 11.0, 9: 15.2 };
         
-        // Female gender adds 1 point if age ≥65 or other risk factors present
-        if (gender === 'female' && (age >= 65 || score > 0)) score += 1;
+        // Clamp score to valid range (0-9)
+        const clampedScore = Math.min(9, score);
+        const annualRiskPct = gender === 'female'
+            ? (femaleRateMap[clampedScore] || 15.2)
+            : (maleRate[clampedScore] || 12.2);
+
+        // Number needed to treat (NNT) to prevent 1 stroke per year with warfarin/DOAC
+        // Based on ARR ≈ 2/3 of annual event rate (relative risk reduction ~64-67% for warfarin, ~70-80% for DOACs)
+        const annualEventRate = annualRiskPct / 100;
+        const absoluteRiskReduction = annualEventRate * 0.66;
+        const nntPerYear = absoluteRiskReduction > 0 ? Math.round(1 / absoluteRiskReduction) : Math.huge;
+
+        // DOAC dosing guidance when anticoagulation is indicated
+        let doacGuidance = '';
+        if (score >= 1) {
+            doacGuidance = `
+                <div class="mt-3 pt-3 border-t border-gray-200">
+                    <h6 class="text-xs font-semibold text-deep-navy mb-2">DOAC Dosing Options (if anticoagulation indicated):</h6>
+                    <div class="grid grid-cols-1 gap-2 text-xs">
+                        <div class="bg-white rounded p-2">
+                            <strong class="text-clinical-blue">Apixaban (Eliquis®):</strong> 5mg BID
+                            <span class="text-neutral-slate block mt-0.5">↓→ 2.5mg BID if ≥2 of: age ≥80, weight ≤60kg, or Cr ≥1.5 mg/dL</span>
+                        </div>
+                        <div class="bg-white rounded p-2">
+                            <strong class="text-clinical-blue">Rivaroxaban (Xarelto®):</strong> 20mg once daily with food
+                            <span class="text-neutral-slate block mt-0.5">↓→ 15mg once daily if CrCl 15-50 mL/min</span>
+                        </div>
+                        <div class="bg-white rounded p-2">
+                            <strong class="text-clinical-blue">Dabigatran (Pradaxa®):</strong> 150mg BID
+                            <span class="text-neutral-slate block mt-0.5">↓→ 110mg BID if available (elderly, high bleeding risk); ↓→ 75mg BID if CrCl 30-50 mL/min (US)</span>
+                        </div>
+                        <div class="bg-white rounded p-2">
+                            <strong class="text-clinical-blue">Edoxaban (Lixiana®):</strong> 60mg once daily
+                            <span class="text-neutral-slate block mt-0.5">↓→ 30mg once daily if weight ≤60kg, CrCl 15-50 mL/min, or concomitant P-gp inhibitor</span>
+                        </div>
+                        <div class="bg-white rounded p-2">
+                            <strong class="text-clinical-blue">Warfarin:</strong> Target INR 2.0–3.0
+                            <span class="text-neutral-slate block mt-0.5">Use if valve disease (moderate-severe mitral stenosis), mechanical heart valve, CrCl &lt;15 mL/min or on dialysis, antiphospholipid syndrome, DOAC contraindication. Check INR weekly until stable, then every 4-12 weeks. Target TTR &gt;70%.</span>
+                        </div>
+                    </div>
+                </div>`;
+        }
 
         // Display results
         document.getElementById('chads-score').textContent = score;
-        
-        let recommendation = '';
+
+        let riskGroup, recommendation, colorClass, strokeRate, nntText, clinicalRec = '';
         if (score === 0) {
-            recommendation = 'Low risk. Antithrombotic therapy not recommended.';
+            riskGroup = gender === 'male' ? 'Truly Low Risk (Male)' : 'Low Risk (Female)';
+            colorClass = 'text-success-green';
+            strokeRate = annualRiskPct.toFixed(1) + '% per year';
+            nntText = 'NNT to prevent 1 stroke/year: Not indicated — risk too low';
+            clinicalRec = gender === 'male'
+                ? 'True low-risk category. No antithrombotic therapy recommended. Annual reassessment for new risk factors (HTN, age, HF, diabetes, etc.). Emphasis on risk factor modification: blood pressure control, weight management, exercise, sleep apnea screening.'
+                : 'Low-risk female with no other risk factors. No antithrombotic therapy recommended. Female sex category alone is not sufficient indication for anticoagulation per 2020 ESC guidelines (Class III, Level of Evidence A). Reassess annually.';
         } else if (score === 1) {
-            recommendation = 'Moderate risk. Consider anticoagulation or aspirin.';
+            riskGroup = 'Borderline / Low-Moderate Risk';
+            colorClass = 'text-warning-amber';
+            strokeRate = annualRiskPct.toFixed(1) + '% per year';
+            const nntVal = this._chadsFiniteNumber(nntPerYear);
+            nntText = 'NNT to prevent 1 stroke/year with OAC ≈ ' + nntVal;
+            clinicalRec = gender === 'male'
+                ? 'Single non-sex risk factor. Oral anticoagulation should be CONSIDERED (Class IIa, ESC 2020). Shared decision-making essential — discussion of patient preference, bleeding risk (see HAS-BLED/ORBIT score), and quality of life preferred. DOACs are preferred over warfarin (Class I, LOE A). No aspirin — it is inferior to OAC for stroke prevention and carries similar bleeding risk.'
+                : 'Two risk factors (female sex + one additional). Oral anticoagulation should be CONSIDERED (Class IIa, ESC 2020). Risk is comparable to males with score ≥2. Shared decision-making recommended. DOAC preferred over warfarin. Aspirin has no role (inferior stroke prevention, inadequate bleeding risk profile).';
         } else {
-            recommendation = 'High risk. Anticoagulation recommended unless contraindicated.';
+            riskGroup = score <= 3 ? 'High Risk' : 'Very High Risk';
+            colorClass = score <= 3 ? 'text-imaging-orange' : 'text-alert-coral';
+            strokeRate = annualRiskPct.toFixed(1) + '% per year';
+            const nntVal = this._chadsFiniteNumber(nntPerYear);
+            nntText = 'NNT to prevent 1 stroke/year with OAC ≈ ' + nntVal;
+            clinicalRec = 'Oral anticoagulation is STRONGLY RECOMMENDED (Class I, LOE A for score ≥2). DOACs are first-line over warfarin (Class I, LOE A) — lower ICH risk, non-inferior or superior stroke prevention. Calculate bleeding risk (HAS-BLED or ORBIT) to identify modifiable risk factors — NOT to exclude anticoagulation. Address uncontrolled HTN, anemia, alcohol excess, and review concomitant medications. Reassess at least annually and after AFib recurrence or new comorbidities. Consider LAA closure (Watchman/Amulet) if OAC truly contraindicated (absolute contraindication, not just high HAS-BLED).';
         }
-        
-        document.getElementById('chads-recommendation').textContent = recommendation;
-        document.getElementById('chads-recommendation').className = `text-sm ${
-            score === 0 ? 'text-success-green' : 
-            score === 1 ? 'text-warning-amber' : 'text-alert-coral'
-        }`;
-        
-        document.getElementById('chads-result').classList.remove('hidden');
-        
+
+        // Aspirin warning
+        const aspirinWarning = score >= 1
+            ? '<div class="mt-2 p-2 bg-amber-50 rounded text-xs text-amber-800"><strong>⚠ Aspirin is NOT recommended:</strong> Aspirin provides no meaningful stroke reduction in AFib compared to placebo (relative risk reduction ~12-19%) but carries similar bleeding risk to DOACs. The 2019 AHA/ACC/HRS AFib guideline and 2020 ESC guidelines no longer recommend aspirin for AFib stroke prevention.</div>'
+            : '';
+
+        // Render result
+        const resultDiv = document.getElementById('chads-result');
+        resultDiv.classList.remove('hidden');
+        resultDiv.innerHTML = `
+            <div class="space-y-3">
+                <div class="text-center">
+                    <div class="text-4xl font-bold ${colorClass} mb-1" id="chads-score-display">${score} / 9</div>
+                    <div class="text-sm text-neutral-slate mb-1">CHA₂DS₂-VASc Score</div>
+                    <div class="text-sm font-semibold ${colorClass}" id="chads-risk-group">${riskGroup}</div>
+                </div>
+                <div class="grid grid-cols-2 gap-3">
+                    <div class="bg-white rounded-lg p-3 text-center shadow-sm">
+                        <div class="text-lg font-bold text-clinical-blue">${strokeRate}</div>
+                        <div class="text-xs text-neutral-slate">Annual Stroke Risk</div>
+                    </div>
+                    <div class="bg-white rounded-lg p-3 text-center shadow-sm">
+                        <div class="text-lg font-bold text-imaging-orange">${nntText}</div>
+                        <div class="text-xs text-neutral-slate">Anticoagulation Impact</div>
+                    </div>
+                </div>
+                <div class="bg-white rounded-lg p-4 border-l-4 ${colorClass.replace('text-', 'border-')}">
+                    <p class="text-sm text-neutral-slate leading-relaxed">${clinicalRec}</p>
+                    ${aspirinWarning}
+                </div>
+                ${doacGuidance}
+                <div class="text-xs text-neutral-slate text-center pt-2 border-t border-gray-200">
+                    Data: ESC 2020 AFib Guidelines, EHJ 2020; Friberg JACC 2012; Lip Eur Heart J 2010;
+                    Olesen BMJ 2011; Roldán Stroke 2013 meta-analysis
+                </div>
+            </div>
+        `;
+
         // Animate result
-        anime({
-            targets: '#chads-result',
-            opacity: [0, 1],
-            scale: [0.9, 1],
-            duration: 500,
-            easing: 'easeOutCubic'
-        });
+        if (typeof anime !== 'undefined') {
+            anime({
+                targets: resultDiv,
+                opacity: [0, 1],
+                scale: [0.9, 1],
+                duration: 500,
+                easing: 'easeOutCubic'
+            });
+        }
     }
 
     interpretBNP() {
@@ -3389,6 +3546,7 @@ class ECGQuiz {
             { key: 'left-bundle-branch-block', name: 'Left Bundle Branch Block', difficulty: 'advanced' },
             { key: 'right-bundle-branch-block', name: 'Right Bundle Branch Block', difficulty: 'advanced' },
             { key: 'wpw-pattern', name: 'Wolff-Parkinson-White (WPW)', difficulty: 'advanced' },
+            { key: 'junctional-rhythm', name: 'Junctional Escape Rhythm', difficulty: 'advanced' },
         ];
         this.allRhythms = allRhythms;
     }
@@ -3572,6 +3730,7 @@ class ECGQuiz {
             'left-bundle-branch-block': 'Left Bundle Branch Block: wide QRS (≥0.12 s), broad notched/monophasic R in lateral leads, absent septal Q waves, discordant ST-T changes. New LBBB with chest pain = STEMI equivalent. Consider Sgarbossa criteria.',
             'right-bundle-branch-block': 'Right Bundle Branch Block: wide QRS (≥0.12 s), RSR\' pattern in V1-V2 (rabbit ears), wide slurred S in I and V6. May be benign or indicate cor pulmonale, PE, or progressive conduction disease.',
             'wpw-pattern': 'Wolff-Parkinson-White: short PR (<0.12 s), delta wave (slurred QRS upstroke), wide QRS. Risk of AVRT and sudden cardiac death if AFib via accessory pathway. AV nodal blockers contraindicated in AFib+WPW. Definitive tx: catheter ablation.',
+            'junctional-rhythm': 'Junctional escape rhythm: narrow QRS at 40-60 bpm with absent or retrograde P waves. AV junction fires as backup pacemaker when SA node fails. Seen in complete heart block, sick sinus syndrome, digoxin toxicity, inferior MI. May require permanent pacing if symptomatic.',
         };
         return explanations[key] || '';
     }
