@@ -623,6 +623,14 @@ class DiagnosticTools {
                 this.calculateWells();
             });
         }
+
+        // HEART Score Calculator
+        const calculateHeartBtn = document.getElementById('calculate-heart');
+        if (calculateHeartBtn) {
+            calculateHeartBtn.addEventListener('click', () => {
+                this.calculateHeartScore();
+            });
+        }
     }
 
     calculateWells() {
@@ -664,6 +672,54 @@ class DiagnosticTools {
         if (typeof anime !== 'undefined') {
             anime({
                 targets: '#wells-result',
+                opacity: [0, 1],
+                scale: [0.9, 1],
+                duration: 500,
+                easing: 'easeOutCubic'
+            });
+        }
+    }
+
+    calculateHeartScore() {
+        const history = parseInt(document.getElementById('heart-history').value) || 0;
+        const ecg = parseInt(document.getElementById('heart-ecg').value) || 0;
+        const age = parseInt(document.getElementById('heart-age').value) || 0;
+        const risk = parseInt(document.getElementById('heart-risk').value) || 0;
+        const troponin = parseInt(document.getElementById('heart-troponin').value) || 0;
+
+        const score = history + ecg + age + risk + troponin;
+
+        document.getElementById('heart-score-value').textContent = score;
+
+        let riskGroup, recommendation, colorClass;
+        if (score <= 3) {
+            riskGroup = 'Low Risk';
+            colorClass = 'text-success-green';
+            recommendation = 'MACE rate ≤1.7%. Consider outpatient management with follow-up in 1–2 weeks. Early discharge with cardiac workup as outpatient may be appropriate if no concerning features.';
+        } else if (score <= 6) {
+            riskGroup = 'Moderate Risk';
+            colorClass = 'text-warning-amber';
+            recommendation = 'MACE rate 12–16.6%. Admit for observation and further workup including serial troponins, stress testing or coronary CT angiography. Consider cardiology consultation.';
+        } else {
+            riskGroup = 'High Risk';
+            colorClass = 'text-alert-coral';
+            recommendation = 'MACE rate ≥50%. Early invasive strategy recommended. Admit for urgent cardiology evaluation, consider early coronary angiography and revascularization. Initiate dual antiplatelet therapy and anticoagulation per ACS protocol.';
+        }
+
+        const scoreEl = document.getElementById('heart-score-value');
+        scoreEl.className = `text-3xl font-bold mb-2 ${colorClass}`;
+
+        const riskGroupEl = document.getElementById('heart-risk-group');
+        riskGroupEl.textContent = riskGroup;
+        riskGroupEl.className = `text-sm font-semibold ${colorClass}`;
+
+        document.getElementById('heart-recommendation').textContent = recommendation;
+        document.getElementById('heart-result').classList.remove('hidden');
+
+        // Animate result
+        if (typeof anime !== 'undefined') {
+            anime({
+                targets: '#heart-result',
                 opacity: [0, 1],
                 scale: [0.9, 1],
                 duration: 500,

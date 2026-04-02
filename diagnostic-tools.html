@@ -559,6 +559,75 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- HEART Score Calculator -->
+                <div class="bg-white rounded-2xl p-6 shadow-lg border border-gray-200">
+                    <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 bg-red-600 rounded-lg flex items-center justify-center mr-3">
+                            <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-playfair font-bold text-deep-navy">HEART Score</h3>
+                            <p class="text-xs text-neutral-slate">Chest Pain Risk Stratification (ED)</p>
+                        </div>
+                    </div>
+                    <div class="space-y-3">
+                        <div>
+                            <label class="block text-sm font-semibold text-deep-navy mb-1">History</label>
+                            <select id="heart-history" class="w-full p-2 border border-gray-300 rounded text-sm">
+                                <option value="0">Slightly suspicious (0)</option>
+                                <option value="1">Moderately suspicious (1)</option>
+                                <option value="2">Highly suspicious (2)</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-deep-navy mb-1">ECG</label>
+                            <select id="heart-ecg" class="w-full p-2 border border-gray-300 rounded text-sm">
+                                <option value="0">Normal (0)</option>
+                                <option value="1">Nonspecific changes (1)</option>
+                                <option value="2">Significant ST-depression (2)</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-deep-navy mb-1">Age</label>
+                            <select id="heart-age" class="w-full p-2 border border-gray-300 rounded text-sm">
+                                <option value="0">&lt;45 years (0)</option>
+                                <option value="1">45–64 years (1)</option>
+                                <option value="2">≥65 years (2)</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-deep-navy mb-1">Risk Factors</label>
+                            <p class="text-xs text-neutral-slate mb-1">HTN, HLD, DM, smoking, obesity, family Hx</p>
+                            <select id="heart-risk" class="w-full p-2 border border-gray-300 rounded text-sm">
+                                <option value="0">No known risk factors (0)</option>
+                                <option value="1">1–2 risk factors (1)</option>
+                                <option value="2">≥3 risk factors or known atherosclerosis (2)</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-deep-navy mb-1">Troponin</label>
+                            <select id="heart-troponin" class="w-full p-2 border border-gray-300 rounded text-sm">
+                                <option value="0">≤ Normal limit (0)</option>
+                                <option value="1">1–2× normal limit (1)</option>
+                                <option value="2">≥3× normal limit (2)</option>
+                            </select>
+                        </div>
+                        <button id="calculate-heart" class="w-full bg-red-600 hover:bg-red-800 text-white py-3 px-4 rounded-lg font-semibold transition-colors mt-2">
+                            Calculate HEART Score
+                        </button>
+                        <div id="heart-result" class="hidden bg-gray-50 rounded-lg p-4">
+                            <div class="text-center">
+                                <div class="text-3xl font-bold mb-2" id="heart-score-value">--</div>
+                                <div class="text-sm text-neutral-slate mb-2">HEART Score</div>
+                                <div class="text-sm font-semibold" id="heart-risk-group"></div>
+                                <div class="text-xs text-neutral-slate mt-3 border-t pt-3" id="heart-recommendation"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
