@@ -610,6 +610,64 @@ class DiagnosticTools {
                 }
                 break;
 
+            case 'sinus-arrhythmia':
+                for (let i = 0; i < totalSamples; i++) {
+                    const basePhase = (i % samplesPerRR) / samplesPerRR;
+                    // Respiratory sinus arrhythmia: RR interval varies cyclically
+                    // Faster RR (shorter cycle) during inspiration, slower during expiration
+                    const respMod = 1.0 + 0.15 * Math.sin(i / samplesPerRR * Math.PI * 0.5);
+                    const phase = (i % (samplesPerRR * respMod)) / (samplesPerRR * respMod);
+                    let y = centerY;
+                    
+                    if (phase < 0.1) { // P wave
+                        y = centerY - 20 * Math.sin(phase * Math.PI / 0.1);
+                    } else if (phase < 0.2) { // PR segment
+                        y = centerY;
+                    } else if (phase < 0.35) { // QRS complex
+                        if (phase < 0.22) y = centerY - 15; // Q wave
+                        else if (phase < 0.28) y = centerY + 80; // R wave
+                        else if (phase < 0.32) y = centerY - 30; // S wave
+                        else y = centerY;
+                    } else if (phase < 0.55) { // ST segment
+                        y = centerY;
+                    } else if (phase < 0.85) { // T wave
+                        y = centerY - 25 * Math.sin((phase - 0.55) * Math.PI / 0.3);
+                    } else {
+                        y = centerY;
+                    }
+                    
+                    path += ` L ${(i / totalSamples) * width} ${y}`;
+                }
+                break;
+
+            case 'accelerated-junctional':
+                for (let i = 0; i < totalSamples; i++) {
+                    // Accelerated junctional: rate 60-100 bpm (faster than junctional escape 40-60)
+                    // Narrow QRS, inverted/buried P waves
+                    const phase = (i % (samplesPerRR * 0.85)) / (samplesPerRR * 0.85);
+                    let y = centerY;
+                    
+                    if (phase < 0.06) { // Retrograde (inverted) P wave — often buried in/before QRS
+                        y = centerY + 12 * Math.sin(phase * Math.PI / 0.06); // Inverted compared to sinus P
+                    } else if (phase < 0.14) { // Short/absent PR interval (junctional origin)
+                        y = centerY;
+                    } else if (phase < 0.29) { // Narrow QRS (junctional, supraventricular QRS morphology)
+                        if (phase < 0.16) y = centerY - 6; // Minimal Q wave
+                        else if (phase < 0.23) y = centerY + 65; // R wave (narrow)
+                        else if (phase < 0.27) y = centerY - 22; // S wave
+                        else y = centerY;
+                    } else if (phase < 0.42) { // ST segment
+                        y = centerY;
+                    } else if (phase < 0.72) { // T wave
+                        y = centerY - 20 * Math.sin((phase - 0.42) * Math.PI / 0.3);
+                    } else {
+                        y = centerY;
+                    }
+                    
+                    path += ` L ${(i / totalSamples) * width} ${y}`;
+                }
+                break;
+
             case 'wpw-pattern':
                 for (let i = 0; i < totalSamples; i++) {
                     const phase = (i % samplesPerRR) / samplesPerRR;
@@ -910,6 +968,44 @@ class DiagnosticTools {
                     'Often described as a "slow VTach" or "slow wide complex rhythm"'
                 ],
                 clinical: 'Accelerated Idioventricular Rhythm (AIVR) is a relatively benign rhythm that most commonly occurs as a reperfusion phenomenon after successful thrombolysis or PCI in STEMI. The ventricular pacemaker accelerates to rates competitive with the sinus node. It is typically self-limiting and does NOT degenerate to VF or VT. AIVR does NOT require antiarrhythmic treatment — in the reperfusion context, it is actually an encouraging sign of restored flow. Suppression with lidocaine or amiodarone is dangerous (may result in asystole if the sinus node does not recover). If the AIVR persists with hemodynamic compromise, atropine or temporary pacing to override the ventricular focus may be used. Other causes: digoxin toxicity, electrolyte disturbances, post-cardiac surgery, and myocarditis.'
+            },
+            'first-degree-avb': {
+                name: 'First-Degree AV Block',
+                rate: this.currentHeartRate,
+                characteristics: [
+                    'Prolonged PR interval (&gt;0.20 seconds / &gt;1 large box) on every beat',
+                    '1:1 AV conduction — every P wave is followed by a QRS complex',
+                    'Normal QRS morphology and duration (unless concurrent bundle branch block exists)',
+                    'Regular rhythm with unchanged P-P and R-R intervals',
+                    'PR interval remains constant (does NOT progressively lengthen)'
+                ],
+                clinical: 'First-degree AV block represents delayed conduction through the AV node or His-Purkinje system. It is usually benign and asymptomatic, requiring no specific treatment. Common causes include increased vagal tone, athletic conditioning, medications (beta-blockers, calcium channel blockers, digoxin), and degenerative conduction system disease (Lev-Lenègre disease). Unlike higher-degree AV blocks, first-degree AV block does NOT predispose to complete heart block on its own. However, it may indicate underlying conduction system disease and warrants follow-up. If PR interval is markedly prolonged (&gt;0.30 s), it may cause symptoms resembling pacemaker syndrome due to suboptimal AV timing — in such cases, AV-sequential pacing may be considered.'
+            },
+            'sinus-arrhythmia': {
+                name: 'Sinus Arrhythmia',
+                rate: this.currentHeartRate,
+                characteristics: [
+                    'Normal P wave morphology — each P wave has sinus origin',
+                    'PP and RR intervals vary by more than 0.12 seconds (respiratory cyclic pattern)',
+                    'PR interval is constant and normal (0.12–0.20 s)',
+                    'P wave precedes every QRS complex (sinus mechanism preserved)',
+                    'Heart rate increases during inspiration and decreases during expiration',
+                    'Variation is typically smooth and cyclical (phasic with respiration)'
+                ],
+                clinical: 'Sinus arrhythmia is a normal physiologic variant, most commonly seen in young, healthy individuals. It reflects normal autonomic modulation of the SA node by the vagus nerve during the respiratory cycle. No treatment is required. It is particularly pronounced in children, young adults, and athletes. Non-respiratory sinus arrhythmia (not cycling with breathing) may be seen in elderly patients or with cardiac disease and may indicate underlying pathology. A marked sinus arrhythmia may be accentuated by digoxin or may be unmasked by vagal maneuvers. It should be distinguished from other irregular rhythms like atrial fibrillation, PACs, or sinus node dysfunction.'
+            },
+            'accelerated-junctional': {
+                name: 'Accelerated Junctional Rhythm',
+                rate: this.currentHeartRate,
+                characteristics: [
+                    'Narrow QRS complex (&lt;0.12 seconds) — supraventricular QRS morphology',
+                    'Rate 60-100 bpm (faster than junctional escape rate of 40-60 bpm)',
+                    'Retrograde (inverted) P waves — may appear before, within, or after QRS complex',
+                    'Short PR interval (&lt;0.12 s) if retrograde P wave precedes QRS',
+                    'Regular rhythm with stable R-R intervals',
+                    'P wave may be buried within the QRS complex (not visible on surface ECG)'
+                ],
+                clinical: 'Accelerated junctional rhythm occurs when the AV junction fires at an enhanced rate, faster than the SA node and faster than the normal junctional escape rate. Common causes include: digoxin toxicity (enhanced automaticity + AV block is classic), post-cardiac surgery (especially valve surgery), rheumatic heart disease, inferior myocardial infarction, myocarditis, and sympathetic overdrive. Unlike junctional escape rhythm (which is a protective backup mechanism), accelerated junctional rhythm represents enhanced automaticity of the junctional pacemaker cells. Digoxin toxicity should ALWAYS be considered in a patient presenting with accelerated junctional rhythm. If the patient is hemodynamically stable and the underlying cause is reversible (e.g., digoxin excess), treating the cause is often sufficient. If persistent and symptomatic, beta-blockers or calcium channel blockers may suppress the accelerated junctional focus. Permanent pacing is rarely indicated unless there is underlying sinus node dysfunction.'
             }
         };
         
@@ -3723,6 +3819,10 @@ class ECGQuiz {
             { key: 'right-bundle-branch-block', name: 'Right Bundle Branch Block', difficulty: 'advanced' },
             { key: 'wpw-pattern', name: 'Wolff-Parkinson-White (WPW)', difficulty: 'advanced' },
             { key: 'junctional-rhythm', name: 'Junctional Escape Rhythm', difficulty: 'advanced' },
+            { key: 'sinus-arrhythmia', name: 'Sinus Arrhythmia', difficulty: 'basic' },
+            { key: 'accelerated-idioventricular', name: 'Accelerated Idioventricular Rhythm', difficulty: 'intermediate' },
+            { key: 'accelerated-junctional', name: 'Accelerated Junctional Rhythm', difficulty: 'intermediate' },
+            { key: 'first-degree-avb', name: 'First-Degree AV Block', difficulty: 'basic' },
         ];
         this.allRhythms = allRhythms;
     }
@@ -3907,6 +4007,10 @@ class ECGQuiz {
             'right-bundle-branch-block': 'Right Bundle Branch Block: wide QRS (≥0.12 s), RSR\' pattern in V1-V2 (rabbit ears), wide slurred S in I and V6. May be benign or indicate cor pulmonale, PE, or progressive conduction disease.',
             'wpw-pattern': 'Wolff-Parkinson-White: short PR (<0.12 s), delta wave (slurred QRS upstroke), wide QRS. Risk of AVRT and sudden cardiac death if AFib via accessory pathway. AV nodal blockers contraindicated in AFib+WPW. Definitive tx: catheter ablation.',
             'junctional-rhythm': 'Junctional escape rhythm: narrow QRS at 40-60 bpm with absent or retrograde P waves. AV junction fires as backup pacemaker when SA node fails. Seen in complete heart block, sick sinus syndrome, digoxin toxicity, inferior MI. May require permanent pacing if symptomatic.',
+            'sinus-arrhythmia': 'Sinus arrhythmia: normal P-QRS-T sequence with cyclical variation in RR intervals (>0.12 s), typically phasic with respiration. Heart rate increases during inspiration and decreases during expiration. Common and benign, especially in young healthy individuals. No treatment required.',
+            'accelerated-idioventricular': 'Accelerated idioventricular rhythm (AIVR): wide QRS at 40-100 bpm of ventricular origin. Gradual onset/termination, benign and often self-limiting. Classically seen as a reperfusion sign after thrombolysis/PCI in STEMI. Does NOT require antiarrhythmic treatment — suppression may cause asystole. Discordant ST-T changes present.',
+            'accelerated-junctional': 'Accelerated junctional rhythm: narrow QRS at 60-100 bpm with absent or retrograde (inverted) P waves. Enhanced AV junctional automaticity. ALWAYS suspect digoxin toxicity. Other causes: post-cardiac surgery, inferior MI, myocarditis, sympathetic overdrive. If stable, treat underlying cause; if symptomatic, beta-blockers may suppress the focus.',
+            'first-degree-avb': 'First-degree AV block: prolonged PR interval (>0.20 s) with 1:1 AV conduction. Every P wave is followed by a QRS complex. Usually benign and asymptomatic. Common causes: increased vagal tone, athletic conditioning, AV nodal-blocking drugs (beta-blockers, CCBs, digoxin), degenerative conduction disease. No acute treatment needed. Markedly prolonged PR (>0.30 s) may cause symptoms from AV dyssynchrony.',
         };
         return explanations[key] || '';
     }
