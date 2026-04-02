@@ -473,6 +473,143 @@ class DiagnosticTools {
                 }
                 break;
 
+            case 'mobitz-type-i':
+                for (let i = 0; i < totalSamples; i++) {
+                    const cycle = i % (samplesPerRR * 4); // 4-beat Wenckebach cycle: P-P, P-PR-prolonged, P-PR-very-long, dropped
+                    const phase = cycle / samplesPerRR;
+                    let y = centerY;
+                    
+                    // Wenckebach: progressive PR lengthening, then dropped QRS
+                    if (cycle < samplesPerRR) { // Beat 1: normal PR
+                        if (phase < 0.08) { // Normal P wave
+                            y = centerY - 18 * Math.sin(phase * Math.PI / 0.08);
+                        } else if (phase < 0.17) { // Normal PR segment
+                            y = centerY;
+                        } else if (phase < 0.32) { // Normal QRS
+                            if (phase < 0.19) y = centerY - 12;
+                            else if (phase < 0.25) y = centerY + 75;
+                            else if (phase < 0.30) y = centerY - 28;
+                            else y = centerY;
+                        } else if (phase < 0.5) { y = centerY; }
+                        else if (phase < 0.80) { // T wave
+                            y = centerY - 22 * Math.sin((phase - 0.5) * Math.PI / 0.3);
+                        } else { y = centerY; }
+                    } else if (cycle < samplesPerRR * 2) { // Beat 2: prolonged PR
+                        if (phase < 0.08) { // P wave
+                            y = centerY - 18 * Math.sin(phase * Math.PI / 0.08);
+                        } else if (phase < 0.22) { // Prolonged PR segment
+                            y = centerY;
+                        } else if (phase < 0.37) { // QRS
+                            if (phase < 0.24) y = centerY - 12;
+                            else if (phase < 0.30) y = centerY + 75;
+                            else if (phase < 0.35) y = centerY - 28;
+                            else y = centerY;
+                        } else if (phase < 0.55) { y = centerY; }
+                        else if (phase < 0.85) { y = centerY - 22 * Math.sin((phase - 0.55) * Math.PI / 0.3); }
+                        else { y = centerY; }
+                    } else if (cycle < samplesPerRR * 3) { // Beat 3: very long PR
+                        if (phase < 0.08) { // P wave
+                            y = centerY - 18 * Math.sin(phase * Math.PI / 0.08);
+                        } else if (phase < 0.27) { // Very prolonged PR segment
+                            y = centerY;
+                        } else if (phase < 0.42) { // QRS
+                            if (phase < 0.29) y = centerY - 12;
+                            else if (phase < 0.35) y = centerY + 75;
+                            else if (phase < 0.40) y = centerY - 28;
+                            else y = centerY;
+                        } else if (phase < 0.6) { y = centerY; }
+                        else if (phase < 0.90) { y = centerY - 22 * Math.sin((phase - 0.6) * Math.PI / 0.3); }
+                        else { y = centerY; }
+                    } else { // Beat 4: DROPPED BEAT — only P wave, no QRS
+                        if (phase < 0.08) { // P wave present
+                            y = centerY - 18 * Math.sin(phase * Math.PI / 0.08);
+                        } else if (phase < 0.27) { // Long PR — but NO QRS follows
+                            y = centerY;
+                        } else if (phase < 0.6) { // ST segment without QRS
+                            y = centerY - 3 * Math.sin((phase - 0.27) * Math.PI / 0.33); // tiny blip
+                        } else if (phase < 0.85) {
+                            y = centerY - 10 * Math.sin((phase - 0.6) * Math.PI / 0.25); // tiny T-like wave
+                        } else { y = centerY; }
+                    }
+                    
+                    path += ` L ${(i / totalSamples) * width} ${y}`;
+                }
+                break;
+
+            case 'mobitz-type-ii':
+                for (let i = 0; i < totalSamples; i++) {
+                    const cycle = i % (samplesPerRR * 3); // 3 beats: 2 conducted, 1 dropped — no PR change
+                    const phase = cycle / samplesPerRR;
+                    let y = centerY;
+                    
+                    // Mobitz II: constant PR interval, sudden dropped QRS
+                    if (cycle < samplesPerRR) { // Beat 1: conducted normally
+                        if (phase < 0.08) { // Normal P wave
+                            y = centerY - 18 * Math.sin(phase * Math.PI / 0.08);
+                        } else if (phase < 0.18) { // Normal PR (constant)
+                            y = centerY;
+                        } else if (phase < 0.33) { // Normal QRS
+                            if (phase < 0.20) y = centerY - 12;
+                            else if (phase < 0.26) y = centerY + 78;
+                            else if (phase < 0.31) y = centerY - 30;
+                            else y = centerY;
+                        } else if (phase < 0.5) { y = centerY; }
+                        else if (phase < 0.80) { y = centerY - 23 * Math.sin((phase - 0.5) * Math.PI / 0.3); }
+                        else { y = centerY; }
+                    } else if (cycle < samplesPerRR * 2) { // Beat 2: conducted normally — SAME PR
+                        if (phase < 0.08) { // P wave
+                            y = centerY - 18 * Math.sin(phase * Math.PI / 0.08);
+                        } else if (phase < 0.18) { // Same PR interval (constant — key feature)
+                            y = centerY;
+                        } else if (phase < 0.33) { // QRS
+                            if (phase < 0.20) y = centerY - 12;
+                            else if (phase < 0.26) y = centerY + 78;
+                            else if (phase < 0.31) y = centerY - 30;
+                            else y = centerY;
+                        } else if (phase < 0.5) { y = centerY; }
+                        else if (phase < 0.80) { y = centerY - 23 * Math.sin((phase - 0.5) * Math.PI / 0.3); }
+                        else { y = centerY; }
+                    } else { // Beat 3: DROPPED — flatline except P wave
+                        if (phase < 0.08) { // P wave still occurs
+                            y = centerY - 18 * Math.sin(phase * Math.PI / 0.08);
+                        } else { // No QRS — sudden block
+                            y = centerY;
+                        }
+                    }
+                    
+                    path += ` L ${(i / totalSamples) * width} ${y}`;
+                }
+                break;
+
+            case 'accelerated-idioventricular':
+                for (let i = 0; i < totalSamples; i++) {
+                    const phase = (i % samplesPerRR) / samplesPerRR;
+                    let y = centerY;
+                    
+                    // AIVR: ventricular escape at 40-100 bpm (faster than normal escape 20-40)
+                    // Wide QRS, dissociated P waves (may be absent), benign post-reperfusion rhythm
+                    // Wide, bizarre QRS — ventricular origin
+                    
+                    if (phase < 0.06) { // Small initial deflection
+                        y = centerY + 8 * Math.sin(phase * Math.PI / 0.06);
+                    } else if (phase < 0.38) { // Very wide, bizarre QRS complex (ventricular origin)
+                        if (phase < 0.10) y = centerY - 5; // Small q
+                        else if (phase < 0.18) y = centerY + 70; // Tall R (wide)
+                        else if (phase < 0.28) y = centerY + 50; // Wide plateau
+                        else if (phase < 0.35) y = centerY - 20; // Deep S
+                        else y = centerY;
+                    } else if (phase < 0.50) { // ST segment elevation (common in AIVR, concordant with QRS)
+                        y = centerY + 8;
+                    } else if (phase < 0.85) { // Large T wave discordant (opposite direction to QRS)
+                        y = centerY + 28 * Math.sin((phase - 0.50) * Math.PI / 0.35);
+                    } else {
+                        y = centerY;
+                    }
+                    
+                    path += ` L ${(i / totalSamples) * width} ${y}`;
+                }
+                break;
+
             case 'wpw-pattern':
                 for (let i = 0; i < totalSamples; i++) {
                     const phase = (i % samplesPerRR) / samplesPerRR;
@@ -734,6 +871,45 @@ class DiagnosticTools {
                     'Regular rhythm with no preceding sinus P wave'
                 ],
                 clinical: 'Junctional rhythm arises when the SA node fails and the AV junction takes over as the pacemaker of last resort. Common in complete heart block, sick sinus syndrome, digoxin toxicity, inferior MI, and after cardiac surgery. A junctional escape rhythm is a protective mechanism; suppressing it may cause asystole. Treatment addresses the underlying cause. If patient is stable and asymptomatic, observation may be appropriate. If symptomatic or underlying cause not reversible, pacemaker may be required.'
+            },
+            'mobitz-type-i': {
+                name: 'Mobitz Type I (Wenckebach) AV Block',
+                rate: this.currentHeartRate,
+                characteristics: [
+                    'Progressive prolongation of the PR interval before each dropped QRS',
+                    'Cyclical pattern: PR interval gets longer, then a QRS is dropped',
+                    'RR intervals progressively shorten before the pause',
+                    'The pause containing the dropped beat is less than 2 normal RR intervals',
+                    'QRS is typically narrow (block is above the His bundle)',
+                    'P waves are regular and "march through" despite dropped QRS'
+                ],
+                clinical: 'Mobitz Type I (Wenckebach) second-degree AV block is usually benign and often reversible. Common causes: increased vagal tone, athletic conditioning, inferior MI (supplies AV node — usually RCA), digoxin toxicity, and beta-blocker or calcium channel blocker use. Unlike Mobitz II, it rarely progresses to complete heart block. Asymptomatic patients may not require treatment. Symptomatic patients or those with inferior MI may benefit from atropine. Permanent pacemaker is rarely indicated unless the block is symptomatic and not reversible. Differentiate from Mobitz Type II, which has constant PR with dropped QRS and a much higher risk of progression to complete heart block.'
+            },
+            'mobitz-type-ii': {
+                name: 'Mobitz Type II Second-Degree AV Block',
+                rate: this.currentHeartRate,
+                characteristics: [
+                    'Constant, normal PR intervals on conducted beats',
+                    'Intermittent, unexpected dropped QRS complexes',
+                    'No progressive PR prolongation before the dropped beat',
+                    'May occur in a ratio pattern (2:1, 3:1 conduction)',
+                    'QRS complex may be wide (infranodal block, often with bundle branch block)',
+                    'PP intervals are regular throughout'
+                ],
+                clinical: 'Mobitz Type II second-degree AV block is an ominous finding indicating disease of the His-Purkinje system (below the AV node). It carries a high risk of sudden progression to complete (third-degree) heart block with an unstable ventricular escape rhythm. Causes: anterior MI (LAD supplies His-Purkinje), Lenègre disease (degenerative conduction disease), Lyme cardiology, cardiac surgery, and cardiomyopathy. Unlike Mobitz Type I, there is NO progressive PR prolongation — the block happens suddenly. Atropine may worsen Mobitz Type II (by increasing SA rate without improving His-Purkinje conduction). Permanent pacemaker implantation is indicated even in asymptomatic patients. This is a Class I indication (ACC/AHA/HRS guidelines).'
+            },
+            'accelerated-idioventricular': {
+                name: 'Accelerated Idioventricular Rhythm (AIVR)',
+                rate: this.currentHeartRate,
+                characteristics: [
+                    'Wide QRS complex (≥0.12 seconds) — ventricular origin',
+                    'Rate 40-100 bpm (faster than typical ventricular escape of 20-40 bpm)',
+                    'Absent or dissociated P waves (AV dissociation common)',
+                    'Discordant ST-T changes (ST segments and T waves opposite to QRS direction)',
+                    'Gradual onset and termination (unlike VTach which bursts)',
+                    'Often described as a "slow VTach" or "slow wide complex rhythm"'
+                ],
+                clinical: 'Accelerated Idioventricular Rhythm (AIVR) is a relatively benign rhythm that most commonly occurs as a reperfusion phenomenon after successful thrombolysis or PCI in STEMI. The ventricular pacemaker accelerates to rates competitive with the sinus node. It is typically self-limiting and does NOT degenerate to VF or VT. AIVR does NOT require antiarrhythmic treatment — in the reperfusion context, it is actually an encouraging sign of restored flow. Suppression with lidocaine or amiodarone is dangerous (may result in asystole if the sinus node does not recover). If the AIVR persists with hemodynamic compromise, atropine or temporary pacing to override the ventricular focus may be used. Other causes: digoxin toxicity, electrolyte disturbances, post-cardiac surgery, and myocarditis.'
             }
         };
         
