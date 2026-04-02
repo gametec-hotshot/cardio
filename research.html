@@ -154,10 +154,12 @@
         .dark .quiz-option.correct { background: rgba(5,150,105,0.15) !important; border-color: rgba(5,150,105,0.4) !important; }
         .dark .quiz-option.incorrect { background: rgba(220,38,38,0.15) !important; border-color: rgba(220,38,38,0.4) !important; }
     </style>
+    <!-- Accessibility: Skip Navigation Link -->
+    <a id="skip-to-content" href="#disorders" class="skip-link" style="position:absolute;top:-100%;left:50%;transform:translateX(-50%);z-index:9999;background:#2563EB;color:#fff;padding:12px 24px;border-radius:0 0 8px 8px;font-weight:600;font-size:14px;text-decoration:none;transition:top 0.2s ease;">Skip to Main Content</a>
 </head>
 <body class="bg-light-gray font-inter">
     <!-- Navigation -->
-    <nav class="bg-white shadow-lg border-b-2 border-clinical-blue sticky top-0 z-50">
+    <nav class="bg-white shadow-lg border-b-2 border-clinical-blue sticky top-0 z-50" role="navigation" aria-label="Main navigation">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-16">
                 <a href="index.html" class="flex items-center space-x-4">
@@ -895,6 +897,7 @@
 
     <!-- JavaScript -->
     <script src="dark-mode.js"></script>
+    <script src="accessibility.js"></script>
     <script src="research.js"></script>
 </body>
 </html>
