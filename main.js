@@ -104,6 +104,22 @@ class CardiologyResource {
                 image: 'resources/rcm.png',
                 color: 'cardiac-purple'
             },
+            {
+                id: 'takotsubo-cardiomyopathy',
+                name: 'Takotsubo Cardiomyopathy',
+                category: 'Cardiomyopathy',
+                prevalence: 'Uncommon',
+                severity: 'Moderate',
+                symptoms: ['chest-pain', 'dyspnea', 'syncope', 'palpitations', 'st-segment-changes'],
+                riskFactors: ['emotional-stress', 'physical-stress', 'female', 'postmenopausal', 'pheochromocytoma'],
+                diagnostics: ['echocardiogram', 'cardiac-cath', 'cardiac-mri', 'troponin', 'ecg'],
+                treatments: ['supportive-care', 'beta-blockers', 'ace-inhibitors', 'antiplatelet-agents', 'avoid-catecholamines'],
+                description: 'Transient left ventricular dysfunction triggered by acute emotional or physical stress. Characterized by apical ballooning and basal hyperkinesis. Also known as "broken heart syndrome". Predominantly affects postmenopausal women.',
+                incidence: '2% of suspected ACS cases',
+                mortality: 'Low, generally recovers in days to weeks',
+                image: 'resources/takotsubo.png',
+                color: 'biomarker-rose'
+            },
             
             // Heart Failure
             {
