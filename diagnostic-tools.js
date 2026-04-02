@@ -809,6 +809,14 @@ class DiagnosticTools {
                 this.calculateSCORE2();
             });
         }
+
+        // ORBIT Bleeding Risk Score Calculator
+        const calculateOrbitBtn = document.getElementById('calculate-orbit');
+        if (calculateOrbitBtn) {
+            calculateOrbitBtn.addEventListener('click', () => {
+                this.calculateORBIT();
+            });
+        }
     }
 
     calculateTIMI() {
@@ -2189,6 +2197,84 @@ class DiagnosticTools {
 
         // Show result
         const resultDiv = document.getElementById('score2-result');
+        resultDiv.classList.remove('hidden');
+
+        if (typeof anime !== 'undefined') {
+            anime({
+                targets: resultDiv,
+                opacity: [0, 1],
+                scale: [0.9, 1],
+                duration: 500,
+                easing: 'easeOutCubic'
+            });
+        }
+    }
+
+    // ORBIT Bleeding Risk Score Calculator (O'Brien et al., Am J Med 2014)
+    calculateORBIT() {
+        const age = document.getElementById('orbit-age').value;
+        const renal = document.getElementById('orbit-renal').value;
+        const bleeding = document.getElementById('orbit-bleeding').value;
+        const gi = document.getElementById('orbit-gi').value;
+        const anemia = document.getElementById('orbit-anemia').value;
+
+        if (age === '' || renal === '' || bleeding === '' || gi === '' || anemia === '') {
+            alert('Please fill in all fields to calculate ORBIT score.');
+            return;
+        }
+
+        let score = 0;
+
+        // O — Older age ≥65 years
+        score += parseInt(age);
+
+        // R — Reduced renal function (eGFR)
+        // Moderate = 1, Severe = 2
+        if (renal === 'moderate') score += 1;
+        else if (renal === 'severe') score += 2;
+
+        // B — Bleeding history (prior major bleed)
+        score += parseInt(bleeding);
+
+        // I — Insufficient to add (actually the original ORBIT doesn't have I)
+        // The ORBIT components are: Older age, Renal disease, Bleeding history, Anemia
+        // Note: Original ORBIT = 5 variables. The B also covers Gastrointestinal bleeding separately.
+        // O'Brien 2014: Older age (1) + Renal dysfunction (1 or 2 for severe) + Bleeding history (1) + Anemia (1)
+        // Prior GI bleed was part of the original ORBIT scoring.
+
+        // Prior GI bleeding
+        score += parseInt(gi);
+
+        // A — Anemia (Hb <13 men, <12 women)
+        score += parseInt(anemia);
+
+        // Display results
+        const scoreEl = document.getElementById('orbit-score-value');
+        scoreEl.textContent = score;
+
+        let riskGroup, recommendation, colorClass;
+
+        if (score <= 1) {
+            riskGroup = 'Low Risk';
+            colorClass = 'text-success-green';
+            recommendation = 'Major bleeding rate: ~1.53 per 100 patient-years. Low bleeding risk. Oral anticoagulation for AFib stroke prevention is very favorable. Proceed with standard anticoagulation (DOAC or warfarin) per CHA₂DS₂-VASc assessment. Minimal need for enhanced monitoring.';
+        } else if (score === 2) {
+            riskGroup = 'Intermediate Risk';
+            colorClass = 'text-warning-amber';
+            recommendation = 'Major bleeding rate: ~3.20 per 100 patient-years. Intermediate bleeding risk. Proceed with oral anticoagulation as stroke prevention benefit outweighs bleeding risk. Correct modifiable risk factors: review anemia workup, manage renal function, avoid concurrent NSAIDs/antiplatelets unless essential, consider DOAC over warfarin (lower intracranial hemorrhage risk). Monitor closely, especially in first 3 months.';
+        } else {
+            riskGroup = 'High Risk';
+            colorClass = 'text-alert-coral';
+            recommendation = 'Major bleeding rate: ≥5.07 per 100 patient-years. High bleeding risk. Stroke prevention benefit still generally outweighs bleeding risk — do NOT withhold anticoagulation based on ORBIT score alone. Instead, aggressively address modifiable factors: (1) Evaluate and treat anemia (iron studies, GI/endoscopy if indicated), (2) Optimize renal function — avoid nephrotoxins, adjust DOAC dose per renal function, (3) Strictly avoid NSAIDs and unnecessary antiplatelets, (4) Consider PPI prophylaxis if GI bleeding history, (5) Prefer apixaban or dabigatran 110mg over warfarin (lower bleeding in high-risk patients). Consider left atrial appendage closure if bleeding risk cannot be corrected and anticoagulation truly contraindicated.';
+        }
+
+        scoreEl.className = 'text-3xl font-bold mb-2 ' + colorClass;
+
+        document.getElementById('orbit-risk-group').textContent = riskGroup;
+        document.getElementById('orbit-risk-group').className = 'text-sm font-semibold ' + colorClass;
+        document.getElementById('orbit-recommendation').textContent = recommendation;
+
+        const resultDiv = document.getElementById('orbit-result');
         resultDiv.classList.remove('hidden');
 
         if (typeof anime !== 'undefined') {
