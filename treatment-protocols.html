@@ -44,52 +44,61 @@
     </script>
     
     <style>
+        /* ─── Smooth theme transitions ─────────────────── */
+        *, *::before, *::after {
+            transition: background-color 0.35s cubic-bezier(.4,0,.2,1),
+                        color 0.35s cubic-bezier(.4,0,.2,1),
+                        border-color 0.35s cubic-bezier(.4,0,.2,1),
+                        box-shadow 0.35s cubic-bezier(.4,0,.2,1);
+        }
+        img, svg, video, canvas { transition: none !important; }
+
         .protocol-card {
             transition: all 0.3s ease;
             border-left: 4px solid transparent;
         }
-        
+
         .protocol-card:hover {
             transform: translateY(-4px);
             box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
         }
-        
+
         .protocol-card.active {
             border-left-color: #2563EB;
             background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
         }
-        
+
         .medication-tier {
             border-radius: 12px;
             border: 2px solid #e2e8f0;
             transition: all 0.3s ease;
         }
-        
+
         .medication-tier.first-line {
             border-color: #059669;
             background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
         }
-        
+
         .medication-tier.second-line {
             border-color: #D97706;
             background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
         }
-        
+
         .medication-tier.third-line {
             border-color: #DC2626;
             background: linear-gradient(135deg, #fef2f2 0%, #fecaca 100%);
         }
-        
+
         .dosing-calculator {
             background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
             border: 1px solid #cbd5e1;
         }
-        
+
         .treatment-step {
             position: relative;
             padding-left: 2rem;
         }
-        
+
         .treatment-step::before {
             content: '';
             position: absolute;
@@ -100,7 +109,7 @@
             border-radius: 50%;
             background: #2563EB;
         }
-        
+
         .treatment-step::after {
             content: '';
             position: absolute;
@@ -110,11 +119,11 @@
             height: calc(100% - 1rem);
             background: #e2e8f0;
         }
-        
+
         .treatment-step:last-child::after {
             display: none;
         }
-        
+
         .evidence-badge {
             background: linear-gradient(135deg, #7c3aed 0%, #5b21b6 100%);
             color: white;
@@ -124,32 +133,50 @@
             font-weight: 600;
         }
 
-        /* Dark Mode Styles */
-        .dark body { background: #0f172a; color: #e2e8f0; }
-        .dark .bg-white { background-color: #1e293b !important; }
-        .dark .bg-light-gray, .dark .bg-gray-50 { background-color: #111827 !important; }
+        /* ═══════════════════════════════════════════════════
+           DARK MODE
+           ═══════════════════════════════════════════════════ */
+        .dark body { background: #0b0f1a !important; color: #e2e8f0; }
+        .dark nav { background: #111827 !important; border-color: rgba(37,99,235,0.4) !important; box-shadow: 0 2px 16px rgba(0,0,0,0.6); }
+        .dark nav a.text-neutral-slate { color: #94a3b8 !important; }
+        .dark nav a.text-neutral-slate:hover { color: #60a5fa !important; }
+        .dark .bg-white { background: linear-gradient(135deg,#1e293b,#141c2e) !important; box-shadow: 0 2px 12px rgba(0,0,0,0.4); }
+        .dark .bg-light-gray, .dark .bg-gray-50, .dark .bg-gray-100 { background: #0f172a !important; }
+        .dark .bg-gray-200 { background: #1e293b !important; }
         .dark .text-deep-navy { color: #f1f5f9 !important; }
         .dark .text-neutral-slate { color: #94a3b8 !important; }
-        .dark .shadow-lg, .dark .shadow-2xl { box-shadow: 0 4px 25px rgba(0,0,0,0.5); }
-        .dark .border, .dark .border-gray-200, .dark .border-gray-300, .dark .border-gray-100, .dark .border-b { border-color: #334155 !important; }
-        .dark input, .dark select, .dark textarea { background: #1e293b !important; color: #e2e8f0 !important; border-color: #334155 !important; }
-        .dark .bg-gray-200 { background-color: #334155 !important; }
-        .dark .bg-gray-100 { background-color: #374151 !important; }
-        .dark .protocol-card { background: #1e293b; }
-        .dark .protocol-card.active { background: linear-gradient(135deg, #1e293b, #0f172a) !important; }
-        .dark .medication-tier { border-color: #334155; }
-        .dark .medication-tier.first-line { background: linear-gradient(135deg, rgba(5,150,105,0.15), rgba(5,150,105,0.08)); }
-        .dark .medication-tier.second-line { background: linear-gradient(135deg, rgba(217,119,6,0.15), rgba(217,119,6,0.08)); }
-        .dark .medication-tier.third-line { background: linear-gradient(135deg, rgba(220,38,38,0.15), rgba(220,38,38,0.08)); }
-        .dark .medication-tier.emergency { background: linear-gradient(135deg, rgba(220,38,38,0.15), rgba(220,38,38,0.08)); border-color: #dc2626; }
-        .dark .dosing-calculator { background: linear-gradient(135deg, #1e293b, #0f172a); border-color: #334155; }
-        .dark .bg-blue-50 { background-color: rgba(37,99,235,0.15) !important; }
         .dark .text-gray-300 { color: #94a3b8 !important; }
         .dark .text-gray-400 { color: #6b7280 !important; }
-        .dark .treatment-tier { background-color: #1e293b; }
-        .dark .treatment-tier.first-line { border-color: #059669; background: linear-gradient(135deg, rgba(5,150,105,0.15), rgba(5,150,105,0.08)); }
-        .dark .treatment-tier.second-line { border-color: #d97706; background: linear-gradient(135deg, rgba(217,119,6,0.15), rgba(217,119,6,0.08)); }
-        .dark .treatment-tier.emergency { border-color: #dc2626; background: linear-gradient(135deg, rgba(220,38,38,0.15), rgba(220,38,38,0.08)); }
+        .dark .text-gray-500 { color: #64748b !important; }
+        .dark .text-gray-600 { color: #475569 !important; }
+        .dark .shadow-lg, .dark .shadow-2xl { box-shadow: 0 8px 32px rgba(0,0,0,0.55) !important; }
+        .dark .border, .dark .border-gray-200, .dark .border-gray-300, .dark .border-b, .dark .border-gray-100 { border-color: #1e293b !important; }
+        .dark input, .dark select, .dark textarea { background: #1e293b !important; color: #e2e8f0 !important; border-color: #334155 !important; }
+        .dark input::placeholder, .dark select::placeholder, .dark textarea::placeholder { color: #64748b !important; }
+        .dark .disorder-card { background-color: #1e293b !important; }
+        .dark .protocol-card { background: #1e293b !important; }
+        .dark .protocol-card.active { background: linear-gradient(135deg,#1e293b,#0f172a) !important; }
+        .dark .medication-tier { border-color: #334155; }
+        .dark .medication-tier.first-line { background: linear-gradient(135deg,rgba(5,150,105,0.18),rgba(5,150,105,0.08)); }
+        .dark .medication-tier.second-line { background: linear-gradient(135deg,rgba(217,119,6,0.18),rgba(217,119,6,0.08)); }
+        .dark .medication-tier.third-line { background: linear-gradient(135deg,rgba(220,38,38,0.18),rgba(220,38,38,0.08)); }
+        .dark .medication-tier.emergency { background: linear-gradient(135deg,rgba(220,38,38,0.18),rgba(220,38,38,0.08)); border-color: #dc2626; }
+        .dark .dosing-calculator { background: linear-gradient(135deg,#1e293b,#141c2e) !important; border-color: #334155; }
+        .dark .treatment-tier { background-color: #1e293b !important; }
+        .dark .treatment-tier.first-line { border-color: #059669; background: linear-gradient(135deg,rgba(5,150,105,0.18),rgba(5,150,105,0.08)); }
+        .dark .treatment-tier.second-line { border-color: #d97706; background: linear-gradient(135deg,rgba(217,119,6,0.18),rgba(217,119,6,0.08)); }
+        .dark .treatment-tier.emergency { border-color: #dc2626; background: linear-gradient(135deg,rgba(220,38,38,0.18),rgba(220,38,38,0.08)); }
+        .dark .bg-blue-50 { background: rgba(37,99,235,0.12) !important; }
+        .dark .bg-green-50 { background: rgba(5,150,105,0.10) !important; }
+        .dark .bg-red-50 { background: rgba(220,38,38,0.10) !important; }
+        .dark .bg-yellow-50, .dark .bg-amber-50 { background: rgba(217,119,6,0.10) !important; }
+        .dark .bg-purple-50 { background: rgba(124,58,237,0.10) !important; }
+        .dark .bg-emerald-50 { background: rgba(5,150,105,0.10) !important; }
+        .dark .bg-gradient-to-br { background-image: linear-gradient(135deg,#0b0f1a,#1e293b,#0b0f1a) !important; }
+        .dark ::-webkit-scrollbar { width: 8px; }
+        .dark ::-webkit-scrollbar-track { background: #0b0f1a; }
+        .dark ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
+        .dark ::selection { background: rgba(37,99,235,0.35); color: #e2e8f0; }
     </style>
 </head>
 <body class="bg-light-gray font-inter">

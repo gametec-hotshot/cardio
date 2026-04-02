@@ -44,117 +44,115 @@
     </script>
     
     <style>
-        .research-card {
-            transition: all 0.3s ease;
-            border-left: 4px solid transparent;
+        /* ─── Smooth theme transitions ─────────────────── */
+        *, *::before, *::after {
+            transition: background-color 0.35s cubic-bezier(.4,0,.2,1),
+                        color 0.35s cubic-bezier(.4,0,.2,1),
+                        border-color 0.35s cubic-bezier(.4,0,.2,1),
+                        box-shadow 0.35s cubic-bezier(.4,0,.2,1);
         }
-        
-        .research-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
-        }
-        
-        .research-card.breakthrough {
-            border-left-color: #059669;
-        }
-        
-        .research-card.clinical-trial {
-            border-left-color: #7C3AED;
-        }
-        
-        .research-card.meta-analysis {
-            border-left-color: #D97706;
-        }
-        
-        .research-card.guideline {
-            border-left-color: #2563EB;
-        }
-        
-        .timeline-item {
-            position: relative;
-            padding-left: 2rem;
-        }
-        
-        .timeline-item::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0.5rem;
-            width: 1rem;
-            height: 1rem;
-            border-radius: 50%;
-            background: #2563EB;
-        }
-        
-        .timeline-item::after {
-            content: '';
-            position: absolute;
-            left: 0.375rem;
-            top: 1.5rem;
-            width: 0.25rem;
-            height: calc(100% - 1rem);
-            background: #e2e8f0;
-        }
-        
-        .timeline-item:last-child::after {
-            display: none;
-        }
-        
-        .breakthrough-badge {
-            background: linear-gradient(135deg, #059669 0%, #047857 100%);
-            color: white;
-            padding: 0.25rem 0.5rem;
-            border-radius: 0.375rem;
-            font-size: 0.75rem;
-            font-weight: 600;
-        }
-        
-        .trial-badge {
-            background: linear-gradient(135deg, #7c3aed 0%, #5b21b6 100%);
-            color: white;
-            padding: 0.25rem 0.5rem;
-            border-radius: 0.375rem;
-            font-size: 0.75rem;
-            font-weight: 600;
-        }
-        
-        .guideline-badge {
-            background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
-            color: white;
-            padding: 0.25rem 0.5rem;
-            border-radius: 0.375rem;
-            font-size: 0.75rem;
-            font-weight: 600;
-        }
-        
-        .research-filter {
-            transition: all 0.3s ease;
-        }
-        
-        .research-filter.active {
-            background: #2563EB;
-            color: white;
-        }
+        img, svg, video, canvas { transition: none !important; }
 
-        /* Dark Mode Styles */
-        .dark body { background: #0f172a; color: #e2e8f0; }
-        .dark .bg-white { background-color: #1e293b !important; }
-        .dark .bg-light-gray, .dark .bg-gray-50 { background-color: #111827 !important; }
+        /* ═══════════════════════════════════════════════════
+           DARK MODE — Beautiful & Comprehensive
+           ═══════════════════════════════════════════════════ */
+
+        /* Base */
+        .dark body { background: #0b0f1a !important; color: #e2e8f0; }
+
+        /* Nav */
+        .dark nav { background: #111827 !important; border-color: rgba(37,99,235,0.4) !important; box-shadow: 0 2px 16px rgba(0,0,0,0.6); }
+        .dark nav a.text-neutral-slate { color: #94a3b8 !important; }
+        .dark nav a.text-neutral-slate:hover { color: #60a5fa !important; }
+
+        /* Cards & Backgrounds */
+        .dark .bg-white { background: linear-gradient(135deg,#1e293b,#141c2e) !important; box-shadow: 0 2px 12px rgba(0,0,0,0.4); }
+        .dark .bg-light-gray, .dark .bg-gray-50 { background: #0f172a !important; }
+        .dark .bg-gray-100 { background: #0f172a !important; }
+        .dark .bg-gray-200 { background: #1e293b !important; }
+
+        /* Typography */
         .dark .text-deep-navy { color: #f1f5f9 !important; }
         .dark .text-neutral-slate { color: #94a3b8 !important; }
-        .dark .shadow-lg, .dark .shadow-2xl { box-shadow: 0 4px 25px rgba(0,0,0,0.5); }
-        .dark .border, .dark .border-gray-200, .dark .border-gray-300, .dark .border-gray-100, .dark .border-b { border-color: #334155 !important; }
-        .dark input, .dark select, .dark textarea { background: #1e293b !important; color: #e2e8f0 !important; border-color: #334155 !important; }
-        .dark .bg-gray-200 { background-color: #334155 !important; }
-        .dark .bg-gray-100 { background-color: #374151 !important; }
-        .dark .research-card { background-color: #1e293b; }
-        .dark .bg-blue-50 { background-color: rgba(37,99,235,0.15) !important; }
-        .dark .bg-green-50 { background-color: rgba(5,150,105,0.1) !important; }
-        .dark .bg-red-50 { background-color: rgba(220,38,38,0.1) !important; }
-        .dark .bg-amber-50, .dark .bg-yellow-50 { background-color: rgba(217,119,6,0.1) !important; }
-        .dark .bg-purple-50 { background-color: rgba(124,58,237,0.1) !important; }
         .dark .text-gray-300 { color: #94a3b8 !important; }
         .dark .text-gray-400 { color: #6b7280 !important; }
+        .dark .text-gray-200 { color: #cbd5e1 !important; }
+        .dark .text-gray-500 { color: #64748b !important; }
+        .dark .text-gray-600 { color: #475569 !important; }
+        .dark .text-gray-700 { color: #94a3b8 !important; }
+
+        /* Shadows */
+        .dark .shadow-lg, .dark .shadow-2xl { box-shadow: 0 8px 32px rgba(0,0,0,0.55) !important; }
+
+        /* Borders */
+        .dark .border, .dark .border-gray-100, .dark .border-gray-200, .dark .border-gray-300, .dark .border-b { border-color: #1e293b !important; }
+        .dark .border-yellow-200 { border-color: rgba(217,119,6,0.25) !important; }
+
+        /* Interactive Elements */
+        .dark input, .dark select, .dark textarea { background: #1e293b !important; color: #e2e8f0 !important; border-color: #334155 !important; }
+        .dark input::placeholder, .dark select::placeholder, .dark textarea::placeholder { color: #64748b !important; }
+
+        /* Cards */
+        .dark .calculator-card { background: linear-gradient(135deg,#1e293b,#141c2e) !important; border-color: #334155; }
+        .dark .disorder-card { background-color: #1e293b !important; }
+        .dark .protocol-card { background: #1e293b !important; }
+        .dark .research-card { background-color: #1e293b !important; }
+        .dark .treatment-tier { background-color: #1e293b; }
+
+        /* Search */
+        .dark .search-container { background: rgba(30,41,59,0.97) !important; border-color: rgba(96,165,250,0.35) !important; }
+
+        /* Accent Tint Backgrounds */
+        .dark .bg-blue-50 { background: rgba(37,99,235,0.12) !important; }
+        .dark .bg-green-50, .dark .bg-emerald-50 { background: rgba(5,150,105,0.10) !important; }
+        .dark .bg-yellow-50, .dark .bg-amber-50 { background: rgba(217,119,6,0.10) !important; }
+        .dark .bg-red-50 { background: rgba(220,38,38,0.10) !important; }
+        .dark .bg-purple-50 { background: rgba(124,58,237,0.10) !important; }
+
+        /* Tiers */
+        .dark .medication-tier { border-color: #334155; }
+        .dark .medication-tier.first-line { background: linear-gradient(135deg,rgba(5,150,105,0.18),rgba(5,150,105,0.08)); }
+        .dark .medication-tier.second-line { background: linear-gradient(135deg,rgba(217,119,6,0.18),rgba(217,119,6,0.08)); }
+        .dark .medication-tier.third-line { background: linear-gradient(135deg,rgba(220,38,38,0.18),rgba(220,38,38,0.08)); }
+        .dark .medication-tier.emergency { background: linear-gradient(135deg,rgba(220,38,38,0.18),rgba(220,38,38,0.08)); border-color: #dc2626; }
+
+        .dark .treatment-tier.first-line { border-color: #059669; background: linear-gradient(135deg,rgba(5,150,105,0.18),rgba(5,150,105,0.08)); }
+        .dark .treatment-tier.second-line { border-color: #d97706; background: linear-gradient(135deg,rgba(217,119,6,0.18),rgba(217,119,6,0.08)); }
+        .dark .treatment-tier.emergency { border-color: #dc2626; background: linear-gradient(135deg,rgba(220,38,38,0.18),rgba(220,38,38,0.08)); }
+
+        .dark .protocol-card.active { background: linear-gradient(135deg,#1e293b,#0f172a) !important; }
+        .dark .dosing-calculator { background: linear-gradient(135deg,#1e293b,#141c2e) !important; border-color: #334155; }
+
+        /* Gradients */
+        .dark .bg-gradient-to-br { background-image: linear-gradient(135deg,#0b0f1a,#1e293b,#0b0f1a) !important; }
+
+        /* ECG */
+        .dark .ecg-container { background: #0a0e1a; }
+
+        /* Hero text in dark mode */
+        .dark .hero-text {
+            background: linear-gradient(135deg,#93c5fd,#60a5fa,#22d3ee) !important;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Scrollbar */
+        .dark ::-webkit-scrollbar { width: 8px; }
+        .dark ::-webkit-scrollbar-track { background: #0b0f1a; }
+        .dark ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
+        .dark ::-webkit-scrollbar-thumb:hover { background: #475569; }
+
+        /* Selection */
+        .dark ::selection { background: rgba(37,99,235,0.35); color: #e2e8f0; }
+
+        /* Patient education extras */
+        .dark .medical-term:hover::after {
+            background: #1e293b;
+            border: 1px solid #334155;
+        }
+        .dark .quiz-option.correct { background: rgba(5,150,105,0.15) !important; border-color: rgba(5,150,105,0.4) !important; }
+        .dark .quiz-option.incorrect { background: rgba(220,38,38,0.15) !important; border-color: rgba(220,38,38,0.4) !important; }
     </style>
 </head>
 <body class="bg-light-gray font-inter">
