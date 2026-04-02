@@ -496,6 +496,69 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- Wells Criteria for PE Calculator -->
+                <div class="bg-white rounded-2xl p-6 shadow-lg border border-gray-200">
+                    <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 bg-imaging-orange rounded-lg flex items-center justify-center mr-3">
+                            <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-playfair font-bold text-deep-navy">Wells Criteria (PE)</h3>
+                            <p class="text-xs text-neutral-slate">Pulmonary Embolism Risk Stratification</p>
+                        </div>
+                    </div>
+                    <div class="space-y-3">
+                        <label class="flex items-center justify-between p-2 bg-gray-50 rounded cursor-pointer hover:bg-gray-100 transition-colors">
+                            <span class="text-sm text-deep-navy">Clinical signs/symptoms of DVT</span>
+                            <input type="checkbox" id="wells-dvt-signs" class="w-4 h-4 accent-imaging-orange">
+                            <span class="text-xs text-neutral-slate ml-2 w-6 text-right">+3</span>
+                        </label>
+                        <label class="flex items-center justify-between p-2 bg-gray-50 rounded cursor-pointer hover:bg-gray-100 transition-colors">
+                            <span class="text-sm text-deep-navy">PE is #1 diagnosis or equally likely</span>
+                            <input type="checkbox" id="wells-pe-likely" class="w-4 h-4 accent-imaging-orange">
+                            <span class="text-xs text-neutral-slate ml-2 w-6 text-right">+3</span>
+                        </label>
+                        <label class="flex items-center justify-between p-2 bg-gray-50 rounded cursor-pointer hover:bg-gray-100 transition-colors">
+                            <span class="text-sm text-deep-navy">Heart rate >100 bpm</span>
+                            <input type="checkbox" id="wells-tachycardia" class="w-4 h-4 accent-imaging-orange">
+                            <span class="text-xs text-neutral-slate ml-2 w-6 text-right">+1.5</span>
+                        </label>
+                        <label class="flex items-center justify-between p-2 bg-gray-50 rounded cursor-pointer hover:bg-gray-100 transition-colors">
+                            <span class="text-sm text-deep-navy">Immobilization (≥3 days) or surgery (≤4 weeks)</span>
+                            <input type="checkbox" id="wells-immobilization" class="w-4 h-4 accent-imaging-orange">
+                            <span class="text-xs text-neutral-slate ml-2 w-6 text-right">+1.5</span>
+                        </label>
+                        <label class="flex items-center justify-between p-2 bg-gray-50 rounded cursor-pointer hover:bg-gray-100 transition-colors">
+                            <span class="text-sm text-deep-navy">Previous DVT/PE</span>
+                            <input type="checkbox" id="wells-prior-dvt" class="w-4 h-4 accent-imaging-orange">
+                            <span class="text-xs text-neutral-slate ml-2 w-6 text-right">+1.5</span>
+                        </label>
+                        <label class="flex items-center justify-between p-2 bg-gray-50 rounded cursor-pointer hover:bg-gray-100 transition-colors">
+                            <span class="text-sm text-deep-navy">Hemoptysis</span>
+                            <input type="checkbox" id="wells-hemoptysis" class="w-4 h-4 accent-imaging-orange">
+                            <span class="text-xs text-neutral-slate ml-2 w-6 text-right">+1</span>
+                        </label>
+                        <label class="flex items-center justify-between p-2 bg-gray-50 rounded cursor-pointer hover:bg-gray-100 transition-colors">
+                            <span class="text-sm text-deep-navy">Active malignancy (treatment within 6 months)</span>
+                            <input type="checkbox" id="wells-malignancy" class="w-4 h-4 accent-imaging-orange">
+                            <span class="text-xs text-neutral-slate ml-2 w-6 text-right">+1</span>
+                        </label>
+                        <button id="calculate-wells" class="w-full bg-imaging-orange hover:bg-orange-700 text-white py-3 px-4 rounded-lg font-semibold transition-colors mt-2">
+                            Calculate Wells Score
+                        </button>
+                        <div id="wells-result" class="hidden bg-gray-50 rounded-lg p-4">
+                            <div class="text-center">
+                                <div class="text-3xl font-bold text-imaging-orange mb-2" id="wells-score">--</div>
+                                <div class="text-sm text-neutral-slate mb-2">Wells Score</div>
+                                <div class="text-sm font-semibold" id="wells-risk-group"></div>
+                                <div class="text-xs text-neutral-slate mt-3 border-t pt-3" id="wells-recommendation"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>

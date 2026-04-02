@@ -615,6 +615,61 @@ class DiagnosticTools {
                 this.interpretBNP();
             });
         }
+
+        // Wells Criteria for PE Calculator
+        const calculateWellsBtn = document.getElementById('calculate-wells');
+        if (calculateWellsBtn) {
+            calculateWellsBtn.addEventListener('click', () => {
+                this.calculateWells();
+            });
+        }
+    }
+
+    calculateWells() {
+        let score = 0;
+
+        if (document.getElementById('wells-dvt-signs').checked) score += 3;
+        if (document.getElementById('wells-pe-likely').checked) score += 3;
+        if (document.getElementById('wells-tachycardia').checked) score += 1.5;
+        if (document.getElementById('wells-immobilization').checked) score += 1.5;
+        if (document.getElementById('wells-prior-dvt').checked) score += 1.5;
+        if (document.getElementById('wells-hemoptysis').checked) score += 1;
+        if (document.getElementById('wells-malignancy').checked) score += 1;
+
+        document.getElementById('wells-score').textContent = score.toFixed(1);
+
+        let riskGroup, recommendation, colorClass;
+        if (score <= 4) {
+            riskGroup = 'PE Unlikely (Low Risk)';
+            colorClass = 'text-success-green';
+            recommendation = 'Consider D-dimer testing. If negative, PE can be effectively excluded. If positive, proceed to imaging (CTPA or V/Q scan).';
+        } else if (score <= 6) {
+            riskGroup = 'PE Moderate Probability';
+            colorClass = 'text-warning-amber';
+            recommendation = 'Moderate probability of PE. Proceed with CT pulmonary angiography (CTPA) or V/Q scan for definitive diagnosis.';
+        } else {
+            riskGroup = 'PE Likely (High Risk)';
+            colorClass = 'text-alert-coral';
+            recommendation = 'High probability of PE. Initiate anticoagulation while awaiting imaging. Consider empiric treatment if imaging is delayed. Obtain CTPA urgently.';
+        }
+
+        const riskGroupEl = document.getElementById('wells-risk-group');
+        riskGroupEl.textContent = riskGroup;
+        riskGroupEl.className = `text-sm font-semibold ${colorClass}`;
+
+        document.getElementById('wells-recommendation').textContent = recommendation;
+        document.getElementById('wells-result').classList.remove('hidden');
+
+        // Animate result
+        if (typeof anime !== 'undefined') {
+            anime({
+                targets: '#wells-result',
+                opacity: [0, 1],
+                scale: [0.9, 1],
+                duration: 500,
+                easing: 'easeOutCubic'
+            });
+        }
     }
 
     calculateASCVD() {
