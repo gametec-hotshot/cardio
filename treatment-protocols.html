@@ -265,6 +265,9 @@
                             <button class="protocol-nav-btn w-full text-left p-3 rounded-lg text-neutral-slate hover:bg-gray-100 transition-colors" data-protocol="cardiogenic-shock">
                                 Cardiogenic Shock
                             </button>
+                            <button class="protocol-nav-btn w-full text-left p-3 rounded-lg text-neutral-slate hover:bg-gray-100 transition-colors" data-protocol="aortic-dissection">
+                                Aortic Dissection
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -1571,6 +1574,300 @@
                             </div>
                         </div>
                     </div>
+                        <!-- Aortic Dissection Protocol -->
+                        <div id="aortic-dissection-protocol" class="protocol-content hidden">
+                            <div class="bg-white rounded-2xl p-8 shadow-lg mb-8">
+                                <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-8">
+                                    <div>
+                                        <h2 class="text-3xl font-playfair font-bold text-deep-navy">Aortic Dissection Management Protocol</h2>
+                                        <p class="text-neutral-slate mt-2">Evidence-based approach to diagnosis, classification, and management of acute and chronic aortic dissection</p>
+                                    </div>
+                                    <div class="mt-4 md:mt-0">
+                                        <span class="inline-block bg-alert-coral text-white px-4 py-2 rounded-full text-sm font-semibold">LIFE-THREATENING EMERGENCY</span>
+                                    </div>
+                                </div>
+
+                                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                                    <div class="bg-red-50 border border-red-200 rounded-xl p-6 text-center">
+                                        <div class="text-4xl font-bold text-alert-coral mb-2">2.6<span class="text-lg">/hr</span></div>
+                                        <p class="text-sm text-neutral-slate">Mortality in first 48h if untreated (Type A)</p>
+                                        <p class="text-xs text-clinical-blue font-semibold mt-1">Hagan et al., JAMA 2000</p>
+                                    </div>
+                                    <div class="bg-amber-50 border border-amber-200 rounded-xl p-6 text-center">
+                                        <div class="text-4xl font-bold text-warning-amber mb-2">0.05<span class="text-lg">%</span></div>
+                                        <p class="text-sm text-neutral-slate">Estimated prevalence in general autopsy studies</p>
+                                        <p class="text-xs text-clinical-blue font-semibold mt-1">IRAD Registry (Nienaber et al.)</p>
+                                    </div>
+                                    <div class="bg-blue-50 border border-blue-200 rounded-xl p-6 text-center">
+                                        <div class="text-4xl font-bold text-clinical-blue mb-2">&lt;25<span class="text-lg">%</span></div>
+                                        <p class="text-sm text-neutral-slate">Survival at 24h without surgical intervention (Type A)</p>
+                                        <p class="text-xs text-clinical-blue font-semibold mt-1">Booher &amp; Eagle, Lancet 2012</p>
+                                    </div>
+                                </div>
+
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                                    <div class="bg-red-50 border-2 border-red-200 rounded-xl p-6">
+                                        <div class="flex items-center mb-4">
+                                            <span class="bg-alert-coral text-white px-3 py-1 rounded-full text-sm font-bold mr-3">Type A</span>
+                                            <h3 class="text-xl font-playfair font-bold text-deep-navy">Ascending Aorta Involved</h3>
+                                        </div>
+                                        <ul class="space-y-2 text-neutral-slate">
+                                            <li class="flex items-start"><span class="text-red-500 mr-2">●</span> Affects ascending aorta ± arch ± descending</li>
+                                            <li class="flex items-start"><span class="text-red-500 mr-2">●</span> ~60-70% of all dissections</li>
+                                            <li class="flex items-start"><span class="text-red-500 mr-2">●</span> <strong>Immediate surgical emergency</strong></li>
+                                            <li class="flex items-start"><span class="text-red-500 mr-2">●</span> Highest mortality without timely intervention</li>
+                                        </ul>
+                                    </div>
+                                    <div class="bg-amber-50 border-2 border-amber-200 rounded-xl p-6">
+                                        <div class="flex items-center mb-4">
+                                            <span class="bg-warning-amber text-white px-3 py-1 rounded-full text-sm font-bold mr-3">Type B</span>
+                                            <h3 class="text-xl font-playfair font-bold text-deep-navy">Descending Aorta Only</h3>
+                                        </div>
+                                        <ul class="space-y-2 text-neutral-slate">
+                                            <li class="flex items-start"><span class="text-amber-500 mr-2">●</span> Distal to left subclavian artery origin</li>
+                                            <li class="flex items-start"><span class="text-amber-500 mr-2">●</span> ~30-40% of all dissections</li>
+                                            <li class="flex items-start"><span class="text-amber-500 mr-2">●</span> Medical management if uncomplicated</li>
+                                            <li class="flex items-start"><span class="text-amber-500 mr-2">●</span> TEVAR/endovascular for complicated cases</li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                                <div class="mb-8">
+                                    <h3 class="text-xl font-playfair font-bold text-deep-navy mb-4">DeBakey Classification</h3>
+                                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                        <div class="bg-white border border-gray-200 rounded-lg p-4">
+                                            <h4 class="font-bold text-deep-navy mb-2">Type I</h4>
+                                            <p class="text-sm text-neutral-slate">Originates in ascending aorta, extends through arch into descending aorta</p>
+                                        </div>
+                                        <div class="bg-white border border-gray-200 rounded-lg p-4">
+                                            <h4 class="font-bold text-deep-navy mb-2">Type II</h4>
+                                            <p class="text-sm text-neutral-slate">Confined to ascending aorta only</p>
+                                        </div>
+                                        <div class="bg-white border border-gray-200 rounded-lg p-4">
+                                            <h4 class="font-bold text-deep-navy mb-2">Type III</h4>
+                                            <p class="text-sm text-neutral-slate">Originates in descending aorta (IIIa = above diaphragm, IIIb = below)</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="mb-8">
+                                    <h3 class="text-xl font-playfair font-bold text-deep-navy mb-4">Predisposing Conditions &amp; Risk Factors</h3>
+                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                        <div>
+                                            <h4 class="font-semibold text-deep-navy mb-3">Heritable Connective Tissue Disorders</h4>
+                                            <ul class="space-y-2 text-sm text-neutral-slate">
+                                                <li class="flex items-start"><span class="text-clinical-blue mr-2">◆</span> <strong>Marfan syndrome</strong> — FBN1 mutation, fibrillin-1 deficiency. Cystic medial necrosis.</li>
+                                                <li class="flex items-start"><span class="text-clinical-blue mr-2">◆</span> <strong>Loeys-Dietz syndrome</strong> — TGFBR1/2 mutations. Aggressive at smaller aortic diameters.</li>
+                                                <li class="flex items-start"><span class="text-clinical-blue mr-2">◆</span> <strong>Ehlers-Danlos (vascular)</strong> — COL3A1 mutation. Fragile vessels, extreme surgical risk.</li>
+                                                <li class="flex items-start"><span class="text-clinical-blue mr-2">◆</span> <strong>Turner syndrome</strong> — Bicuspid aortic valve, ascending aortopathy.</li>
+                                            </ul>
+                                        </div>
+                                        <div>
+                                            <h4 class="font-semibold text-deep-navy mb-3">Acquired Risk Factors</h4>
+                                            <ul class="space-y-2 text-sm text-neutral-slate">
+                                                <li class="flex items-start"><span class="text-clinical-blue mr-2">◆</span> <strong>Chronic hypertension</strong> — Present in 70-80%. Most important modifiable factor.</li>
+                                                <li class="flex items-start"><span class="text-clinical-blue mr-2">◆</span> <strong>Bicuspid aortic valve</strong> — Associated aortopathy independent of valve dysfunction.</li>
+                                                <li class="flex items-start"><span class="text-clinical-blue mr-2">◆</span> <strong>Cocaine/amphetamine</strong> — Catecholamine surge. Consider in young patients.</li>
+                                                <li class="flex items-start"><span class="text-clinical-blue mr-2">◆</span> <strong>Atherosclerosis</strong> — Penetrating ulcer can evolve into dissection.</li>
+                                                <li class="flex items-start"><span class="text-clinical-blue mr-2">◆</span> <strong>Iatrogenic</strong> — Post-catheterization, post-cardiac surgery.</li>
+                                                <li class="flex items-start"><span class="text-clinical-blue mr-2">◆</span> <strong>Aortitis</strong> — Giant cell arteritis, Takayasu, syphilitic aortitis.</li>
+                                                <li class="flex items-start"><span class="text-clinical-blue mr-2">◆</span> <strong>Pregnancy</strong> — Hormonal weakening of media. 3rd trimester/postpartum peak risk.</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="mb-8">
+                                    <h3 class="text-xl font-playfair font-bold text-deep-navy mb-4">Clinical Presentation</h3>
+                                    <div class="bg-yellow-50 border border-yellow-200 rounded-xl p-6 mb-6">
+                                        <h4 class="font-semibold text-yellow-800 mb-3">Classic Presentation — "The 3 A's"</h4>
+                                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                            <div class="bg-white rounded-lg p-4"><h5 class="font-bold text-deep-navy mb-1">⚡ Abrupt Onset</h5><p class="text-sm text-neutral-slate">Sudden, maximal pain at onset. Reaches peak instantly (unlike MI which builds).</p></div>
+                                            <div class="bg-white rounded-lg p-4"><h5 class="font-bold text-deep-navy mb-1">🔪 "Tearing" Pain</h5><p class="text-sm text-neutral-slate">Severe, ripping/tearing quality. Pain follows dissection path.</p></div>
+                                            <div class="bg-white rounded-lg p-4"><h5 class="font-bold text-deep-navy mb-1">📍 Anterior → Posterior</h5><p class="text-sm text-neutral-slate">Pain migrates: substernal → interscapular → abdominal → flank.</p></div>
+                                        </div>
+                                    </div>
+                                    <div class="overflow-x-auto mb-6">
+                                        <table class="w-full text-sm">
+                                            <thead><tr class="bg-deep-navy text-white"><th class="text-left p-3 rounded-tl-lg">Finding</th><th class="text-left p-3">Prevalence</th><th class="text-left p-3 rounded-tr-lg">Notes</th></tr></thead>
+                                            <tbody class="text-neutral-slate">
+                                                <tr class="border-b border-gray-100"><td class="p-3 font-semibold text-deep-navy">Pulse deficit / BP asymmetry</td><td class="p-3">~30%</td><td class="p-3">BP difference &gt;20 mmHg between arms. Dissection compromising arch vessels.</td></tr>
+                                                <tr class="border-b border-gray-100"><td class="p-3 font-semibold text-deep-navy">New AR murmur</td><td class="p-3">~32%</td><td class="p-3">Early diastolic decrescendo. Aortic root dilation / leaflet malcoaptation.</td></tr>
+                                                <tr class="border-b border-gray-100"><td class="p-3 font-semibold text-deep-navy">Neurologic deficit</td><td class="p-3">~6–17%</td><td class="p-3">Stroke (carotid involvement), spinal cord ischemia, mononeuropathy.</td></tr>
+                                                <tr class="border-b border-gray-100"><td class="p-3 font-semibold text-deep-navy">Hypotension / Shock</td><td class="p-3">~15–30%</td><td class="p-3">Tamponade, acute AI, rupture, hypovolemia. Poor prognostic sign.</td></tr>
+                                                <tr class="border-b border-gray-100"><td class="p-3 font-semibold text-deep-navy">Widened mediastinum</td><td class="p-3">~60–90%</td><td class="p-3">Insensitive but classic. Cannot rule out with normal CXR.</td></tr>
+                                                <tr><td class="p-3 font-semibold text-deep-navy">Pericardial effusion</td><td class="p-3">~40%</td><td class="p-3">Ascending dissection with pericardial involvement. Echo essential.</td></tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="bg-blue-50 border border-blue-200 rounded-xl p-6 mb-6">
+                                        <h4 class="font-bold text-deep-navy mb-3">Aortic Dissection Detection Risk Score (ADD-RS)</h4>
+                                        <p class="text-sm text-neutral-slate mb-3">Three high-risk categories. Score 1 point each (max = 3):</p>
+                                        <div class="bg-white rounded-lg p-5 mb-4"><p class="font-semibold text-deep-navy mb-2">1. High-Risk Conditions:</p><p class="text-sm text-neutral-slate">Marfan syndrome, known aortic aneurysm/dissection, recent aortic manipulation, family history</p></div>
+                                        <div class="bg-white rounded-lg p-5 mb-4"><p class="font-semibold text-deep-navy mb-2">2. High-Risk Pain Features:</p><p class="text-sm text-neutral-slate">Abrupt onset, severe intensity, tearing/ripping quality</p></div>
+                                        <div class="bg-white rounded-lg p-5 mb-4"><p class="font-semibold text-deep-navy mb-2">3. High-Risk Exam Findings:</p><p class="text-sm text-neutral-slate">Perfusion deficit (pulse deficit, BP diff &gt;20 mmHg), focal neuro deficit, new AR murmur, shock</p></div>
+                                        <div class="bg-white rounded-lg p-5">
+                                            <p class="font-semibold text-deep-navy mb-2">Scoring &amp; Action:</p>
+                                            <ul class="text-sm text-neutral-slate space-y-1">
+                                                <li>• <strong>ADD-RS = 0:</strong> Low risk → D-dimer may exclude</li>
+                                                <li>• <strong>ADD-RS = 1:</strong> Intermediate risk → Imaging recommended</li>
+                                                <li>• <strong>ADD-RS ≥ 2:</strong> High risk → <span class="text-alert-coral font-bold">Immediate CTA mandatory</span></li>
+                                            </ul>
+                                            <p class="text-xs text-neutral-slate mt-2 italic">Nienaber CA et al. Eur Heart J 2011;32:2627–2636</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="mb-8">
+                                    <h3 class="text-xl font-playfair font-bold text-deep-navy mb-4">Immediate Management (First Hour)</h3>
+                                    <div class="bg-red-50 border-2 border-red-200 rounded-xl p-6 mb-6">
+                                        <h4 class="font-bold text-red-700 text-lg mb-3">🚨 Anti-Impulse Therapy</h4>
+                                        <p class="text-sm text-neutral-slate mb-4">Goal: Reduce aortic wall shear stress (dP/dt). <strong>Target SBP 100–120 mmHg, HR &lt;60 bpm</strong>.</p>
+                                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                            <div class="medication-tier first-line">
+                                                <h5 class="font-bold text-success-green mb-3">Step 1: Beta-Blockade (ALWAYS FIRST)</h5>
+                                                <p class="text-sm text-neutral-slate mb-2">Reduce HR BEFORE vasodilators to prevent reflex tachycardia.</p>
+                                                <div class="space-y-2 text-sm text-neutral-slate">
+                                                    <div class="bg-white/60 rounded-lg p-3"><p class="font-semibold text-deep-navy">Esmolol (Preferred)</p><p>• Bolus: 500 mcg/kg IV → Inf: 50–200 mcg/kg/min</p><p class="text-xs text-warning-amber mt-1">Ultra-short acting, easy titration</p></div>
+                                                    <div class="bg-white/60 rounded-lg p-3"><p class="font-semibold text-deep-navy">Labetalol</p><p>• 20 mg IV q10min (max 300 mg) or infusion 0.5–2 mg/min</p><p class="text-xs text-warning-amber mt-1">Alpha + beta. Avoid in asthma.</p></div>
+                                                </div>
+                                            </div>
+                                            <div class="medication-tier second-line">
+                                                <h5 class="font-bold text-warning-amber mb-3">Step 2: Vasodilators (AFTER Beta-Blockade)</h5>
+                                                <p class="text-sm text-neutral-slate mb-2">If SBP &gt;120 despite adequate beta-blockade.</p>
+                                                <div class="space-y-2 text-sm text-neutral-slate">
+                                                    <div class="bg-white/60 rounded-lg p-3"><p class="font-semibold text-deep-navy">Nitroprusside</p><p>• Start 0.5 mcg/kg/min, max 10 mcg/kg/min</p><p class="text-xs text-alert-coral mt-1">⚠️ Must have beta-blockade first!</p></div>
+                                                    <div class="bg-white/60 rounded-lg p-3"><p class="font-semibold text-deep-navy">Nicardipine</p><p>• 5 mg/hr, increase by 2.5 mg/hr q15min, max 15 mg/hr</p></div>
+                                                    <div class="bg-white/60 rounded-lg p-3"><p class="font-semibold text-deep-navy">Clevidipine</p><p>• 1–2 mg/hr, double q90sec, max 21 mg/hr</p></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="mb-8">
+                                    <h3 class="text-xl font-playfair font-bold text-deep-navy mb-4">Type A — Surgical Management</h3>
+                                    <p class="text-neutral-slate mb-4">Operative mortality 2–17% in experienced centers. In-hospital mortality without surgery &gt;50%.</p>
+                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                                        <div class="bg-white border border-gray-200 rounded-xl p-6">
+                                            <h4 class="font-bold text-deep-navy mb-3 flex items-center"><span class="bg-success-green text-white w-8 h-8 rounded-full flex items-center justify-center mr-3 text-sm font-bold">1</span>Pericardiocentesis Decision</h4>
+                                            <div class="text-sm text-neutral-slate space-y-1">
+                                                <p>• <strong>YES + unstable:</strong> Pericardiocentesis → immediate OR</p>
+                                                <p>• <strong>YES + stable:</strong> Avoid. Take directly to OR.</p>
+                                                <p class="text-alert-coral">• Caution: Overly rapid drainage → increases dissection propagation</p>
+                                            </div>
+                                        </div>
+                                        <div class="bg-white border border-gray-200 rounded-xl p-6">
+                                            <h4 class="font-bold text-deep-navy mb-3 flex items-center"><span class="bg-success-green text-white w-8 h-8 rounded-full flex items-center justify-center mr-3 text-sm font-bold">2</span>Surgical Techniques</h4>
+                                            <div class="text-sm text-neutral-slate space-y-1">
+                                                <p>• Ascending aorta replacement with graft</p>
+                                                <p>• Valve-sparing if root intact; Bentall if root involved</p>
+                                                <p>• Hemiarch/total arch for arch extension</p>
+                                                <p>• DHCA 18–25°C for arch repair</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="bg-amber-50 border border-amber-200 rounded-xl p-5">
+                                        <h4 class="font-bold text-warning-amber mb-2">Pre-Op Checklist</h4>
+                                        <div class="grid grid-cols-1 md:grid-cols-2 gap-2 text-sm text-neutral-slate">
+                                            <div>☐ Type &amp; crossmatch (4–6 units)</div><div>☐ CTA aorta</div>
+                                            <div>☐ Echo — valve, root, effusion</div><div>☐ Anti-impulse therapy started</div>
+                                            <div>☐ Arterial lines (both arms + femoral)</div><div>☐ Central venous access</div>
+                                            <div>☐ Neuro assessment documented</div><div>☐ Renal function assessed</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="mb-8">
+                                    <h3 class="text-xl font-playfair font-bold text-deep-navy mb-4">Type B — Medical vs. Endovascular</h3>
+                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                                        <div class="bg-green-50 border-2 border-green-200 rounded-xl p-6">
+                                            <h4 class="font-bold text-success-green mb-3">Uncomplicated — Medical Management</h4>
+                                            <div class="space-y-3">
+                                                <div class="bg-white rounded-lg p-3 text-sm font-semibold text-deep-navy">Acute Phase
+                                                    <ul class="text-neutral-slate text-xs space-y-1 mt-1 font-normal"><li>• IV beta-blocker → oral</li><li>• SBP 100–120, HR &lt;60</li><li>• ICU ≥48–72h, CTA at 2–3 days</li></ul>
+                                                </div>
+                                                <div class="bg-white rounded-lg p-3 text-sm font-semibold text-deep-navy">Chronic Phase
+                                                    <ul class="text-neutral-slate text-xs space-y-1 mt-1 font-normal"><li>• Oral BB + ARB if Marfan/Loeys-Dietz</li><li>• Target SBP &lt;130, HR &lt;70</li><li>• CTA at 1, 3, 6, 12 months</li></ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="bg-red-50 border-2 border-red-200 rounded-xl p-6">
+                                            <h4 class="font-bold text-alert-coral mb-3">Complicated — Intervention (TEVAR)</h4>
+                                            <div class="bg-white rounded-lg p-4">
+                                                <p class="font-semibold text-deep-navy mb-2 text-sm">Indications for TEVAR/Surgery:</p>
+                                                <ul class="text-xs text-neutral-slate space-y-1">
+                                                    <li>❌ Organ malperfusion</li><li>❌ Rupture/impending rupture</li>
+                                                    <li>❌ Refractory pain or HTN</li><li>❌ Rapid expansion (&gt;5mm/6mo)</li>
+                                                    <li>❌ Max diameter ≥5.5 cm</li>
+                                                </ul>
+                                            </div>
+                                            <div class="bg-white rounded-lg p-3 mt-3 text-sm text-neutral-slate">
+                                                <p class="font-semibold text-deep-navy">Preferred: TEVAR</p>
+                                                <p>Mortality 2–5% vs. open surgery 10–33%.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="bg-blue-50 border border-blue-200 rounded-xl p-5">
+                                        <h4 class="font-bold text-deep-navy mb-2">Key Trial: INSTEAD-XL</h4>
+                                        <p class="text-sm text-neutral-slate mb-2">Nienaber et al. <em>JACC</em> 2017;69:2032–2048. TEVAR + MT vs. MT alone in uncomplicated Type B.</p>
+                                        <ul class="text-sm text-neutral-slate space-y-1">
+                                            <li>• 5-yr aorta-specific mortality: 11.1% (TEVAR) vs. 19.3% (MT), HR 0.48, p=0.04</li>
+                                            <li>• Complete aortic remodeling: 70% (TEVAR) vs. 13% (MT)</li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                                <div class="mb-8">
+                                    <h3 class="text-xl font-playfair font-bold text-deep-navy mb-4">Complications</h3>
+                                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                        <div class="bg-red-50 border border-red-200 rounded-lg p-4"><h4 class="font-bold text-alert-coral mb-2 text-sm">Immediate</h4><ul class="text-xs text-neutral-slate space-y-1"><li>• Cardiac tamponade</li><li>• Aortic rupture</li><li>• Stroke</li><li>• Spinal cord ischemia</li></ul></div>
+                                        <div class="bg-amber-50 border border-amber-200 rounded-lg p-4"><h4 class="font-bold text-warning-amber mb-2 text-sm">Early Post-Op</h4><ul class="text-xs text-neutral-slate space-y-1"><li>• Acute kidney injury</li><li>• Paraplegia</li><li>• Mesenteric ischemia</li><li>• Respiratory failure</li></ul></div>
+                                        <div class="bg-blue-50 border border-blue-200 rounded-lg p-4"><h4 class="font-bold text-clinical-blue mb-2 text-sm">Late / Chronic</h4><ul class="text-xs text-neutral-slate space-y-1"><li>• False lumen expansion</li><li>• Late rupture</li><li>• Endoleak (post-TEVAR)</li><li>• Retrograde Type A</li></ul></div>
+                                    </div>
+                                </div>
+
+                                <div class="mb-8">
+                                    <h3 class="text-xl font-playfair font-bold text-deep-navy mb-4">Critical Differentials</h3>
+                                    <div class="overflow-x-auto">
+                                        <table class="w-full text-sm">
+                                            <thead><tr class="bg-deep-navy text-white"><th class="text-left p-3 rounded-tl-lg">Condition</th><th class="text-left p-3">Key Distinction</th><th class="text-left p-3 rounded-tr-lg">Why It Matters</th></tr></thead>
+                                            <tbody class="text-neutral-slate">
+                                                <tr class="border-b border-gray-100"><td class="p-3 font-semibold text-deep-navy">Acute MI</td><td class="p-3">Pain gradual, not tearing. ECG + troponin changes.</td><td class="p-3"><strong class="text-alert-coral">Thrombolytics fatal in dissection!</strong></td></tr>
+                                                <tr class="border-b border-gray-100"><td class="p-3 font-semibold text-deep-navy">PE</td><td class="p-3">Pleuritic pain, dyspnea. CTPA: filling defect.</td><td class="p-3">Thrombolysis catastrophic in dissection.</td></tr>
+                                                <tr><td class="p-3 font-semibold text-deep-navy">Musculoskeletal</td><td class="p-3">Reproducible tenderness. No systemic signs.</td><td class="p-3">Common misdiagnosis. Exclude dissection in high-risk pts.</td></tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+
+                                <div class="mb-8">
+                                    <h3 class="text-xl font-playfair font-bold text-deep-navy mb-4">Post-Discharge Surveillance</h3>
+                                    <div class="bg-white border border-gray-200 rounded-xl p-6 overflow-x-auto">
+                                        <table class="w-full text-sm">
+                                            <thead><tr class="bg-gray-100"><th class="text-left p-3 rounded-tl-lg">Timepoint</th><th class="text-left p-3">Imaging</th><th class="text-left p-3">BP Target</th><th class="text-left p-3 rounded-tr-lg">Actions</th></tr></thead>
+                                            <tbody class="text-neutral-slate">
+                                                <tr class="border-b border-gray-100"><td class="p-3 font-semibold">Discharge</td><td class="p-3">CTA baseline</td><td class="p-3">SBP&lt;130/80, HR&lt;70</td><td class="p-3">Establish medical regimen</td></tr>
+                                                <tr class="border-b border-gray-100"><td class="p-3 font-semibold">1, 3, 6, 12 mo</td><td class="p-3">CTA or MRA</td><td class="p-3">SBP&lt;130/80, HR&lt;70</td><td class="p-3">Assess aortic dimensions</td></tr>
+                                                <tr><td class="p-3 font-semibold">Annually</td><td class="p-3">CTA/MRA lifelong</td><td class="p-3">SBP&lt;130/80, HR&lt;70</td><td class="p-3"><strong class="text-alert-coral">Lifelong follow-up mandatory</strong></td></tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <h3 class="text-xl font-playfair font-bold text-deep-navy mb-4">Key References &amp; Guidelines</h3>
+                                    <div class="bg-gray-50 rounded-lg p-6 space-y-2 text-sm text-neutral-slate">
+                                        <p>1. <strong>2022 ACC/AHA Guideline for Aortic Disease</strong> — Isselbacher EM et al. <em>Circulation</em> 2022;146:e334–e482.</p>
+                                        <p>2. <strong>2014 ESC Guidelines on Aortic Diseases</strong> — Erbel R et al. <em>Eur Heart J</em> 2014;35:2873–2926.</p>
+                                        <p>3. <strong>IRAD</strong> — Hagan PG et al. <em>JAMA</em> 2000;283:897–903.</p>
+                                        <p>4. <strong>INSTEAD-XL</strong> — Nienaber CA et al. <em>JACC</em> 2017;69:2032–2048.</p>
+                                        <p>5. <strong>Diagnosis &amp; Management</strong> — Booher AC, Eagle KA. <em>Lancet</em> 2012;379:924–934.</p>
+                                        <p>6. <strong>ADD-RS</strong> — Erbel R et al. <em>Eur Heart J</em> 2011;32:2627–2636.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                 </div>
             </div>
         </div>
