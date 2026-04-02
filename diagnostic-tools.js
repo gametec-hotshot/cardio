@@ -631,6 +631,14 @@ class DiagnosticTools {
                 this.calculateHeartScore();
             });
         }
+
+        // Framingham Risk Score Calculator
+        const calculateFrsBtn = document.getElementById('calculate-frs');
+        if (calculateFrsBtn) {
+            calculateFrsBtn.addEventListener('click', () => {
+                this.calculateFramingham();
+            });
+        }
     }
 
     calculateWells() {
@@ -1133,6 +1141,258 @@ class DiagnosticTools {
             duration: 500,
             easing: 'easeOutCubic'
         });
+    }
+
+    calculateFramingham() {
+        const age = parseInt(document.getElementById('frs-age').value);
+        const gender = document.getElementById('frs-gender').value;
+        const tc = parseInt(document.getElementById('frs-tc').value);
+        const hdl = parseInt(document.getElementById('frs-hdl').value);
+        const sbp = parseInt(document.getElementById('frs-sbp').value);
+        const bpTreated = document.getElementById('frs-bp-treated').value === 'yes';
+        const smoking = document.getElementById('frs-smoking').value === 'yes';
+        const diabetes = document.getElementById('frs-diabetes').value === 'yes';
+
+        if (!age || !gender || !tc || !hdl || !sbp) {
+            this.showNotification('Please fill in all required fields', 'error');
+            return;
+        }
+
+        if (age < 20 || age > 79) {
+            this.showNotification('Framingham Risk Score is validated for ages 20–79', 'warning');
+        }
+
+        let points = 0;
+
+        // Points based on the 2008 Framingham general CVD risk score
+        if (gender === 'male') {
+            // Age
+            if (age >= 20 && age <= 34) points -= 9;
+            else if (age <= 39) points -= 4;
+            else if (age <= 44) points += 0;
+            else if (age <= 49) points += 3;
+            else if (age <= 54) points += 6;
+            else if (age <= 59) points += 8;
+            else if (age <= 64) points += 10;
+            else if (age <= 69) points += 11;
+            else if (age <= 74) points += 12;
+            else if (age <= 79) points += 13;
+
+            // Total Cholesterol
+            if (age >= 20 && age <= 39) {
+                if (tc < 160) points += 0;
+                else if (tc <= 199) points += 4;
+                else if (tc <= 239) points += 7;
+                else if (tc <= 279) points += 9;
+                else points += 11;
+            } else if (age >= 40 && age <= 49) {
+                if (tc < 160) points += 0;
+                else if (tc <= 199) points += 3;
+                else if (tc <= 239) points += 5;
+                else if (tc <= 279) points += 6;
+                else points += 8;
+            } else if (age >= 50 && age <= 59) {
+                if (tc < 160) points += 0;
+                else if (tc <= 199) points += 2;
+                else if (tc <= 239) points += 3;
+                else if (tc <= 279) points += 4;
+                else points += 5;
+            } else if (age >= 60 && age <= 69) {
+                if (tc < 160) points += 0;
+                else if (tc <= 199) points += 1;
+                else if (tc <= 239) points += 1;
+                else if (tc <= 279) points += 2;
+                else points += 3;
+            } else if (age >= 70 && age <= 79) {
+                if (tc < 160) points += 0;
+                else if (tc <= 199) points += 0;
+                else if (tc <= 239) points += 0;
+                else if (tc <= 279) points += 1;
+                else points += 1;
+            }
+
+            // HDL
+            if (hdl >= 60) points -= 1;
+            else if (hdl >= 50) points += 0;
+            else if (hdl >= 40) points += 1;
+            else points += 2;
+
+            // Systolic BP
+            if (bpTreated) {
+                if (sbp < 120) points += 0;
+                else if (sbp <= 129) points += 1;
+                else if (sbp <= 139) points += 2;
+                else if (sbp <= 159) points += 2;
+                else points += 3;
+            } else {
+                if (sbp < 120) points += 0;
+                else if (sbp <= 129) points += 0;
+                else if (sbp <= 139) points += 1;
+                else if (sbp <= 159) points += 1;
+                else points += 2;
+            }
+
+            // Smoking
+            if (smoking) {
+                if (age >= 20 && age <= 39) points += 8;
+                else if (age <= 49) points += 5;
+                else if (age <= 59) points += 3;
+                else if (age <= 69) points += 1;
+                else if (age <= 79) points += 1;
+            }
+
+            // Diabetes
+            if (diabetes) points += 2;
+
+        } else {
+            // Female
+            // Age
+            if (age >= 20 && age <= 34) points -= 7;
+            else if (age <= 39) points -= 3;
+            else if (age <= 44) points += 0;
+            else if (age <= 49) points += 3;
+            else if (age <= 54) points += 6;
+            else if (age <= 59) points += 8;
+            else if (age <= 64) points += 10;
+            else if (age <= 69) points += 12;
+            else if (age <= 74) points += 14;
+            else if (age <= 79) points += 16;
+
+            // Total Cholesterol
+            if (age >= 20 && age <= 39) {
+                if (tc < 160) points += 0;
+                else if (tc <= 199) points += 4;
+                else if (tc <= 239) points += 8;
+                else if (tc <= 279) points += 11;
+                else points += 13;
+            } else if (age >= 40 && age <= 49) {
+                if (tc < 160) points += 0;
+                else if (tc <= 199) points += 3;
+                else if (tc <= 239) points += 6;
+                else if (tc <= 279) points += 8;
+                else points += 10;
+            } else if (age >= 50 && age <= 59) {
+                if (tc < 160) points += 0;
+                else if (tc <= 199) points += 2;
+                else if (tc <= 239) points += 4;
+                else if (tc <= 279) points += 5;
+                else points += 7;
+            } else if (age >= 60 && age <= 69) {
+                if (tc < 160) points += 0;
+                else if (tc <= 199) points += 1;
+                else if (tc <= 239) points += 2;
+                else if (tc <= 279) points += 3;
+                else points += 4;
+            } else if (age >= 70 && age <= 79) {
+                if (tc < 160) points += 0;
+                else if (tc <= 199) points += 1;
+                else if (tc <= 239) points += 1;
+                else if (tc <= 279) points += 2;
+                else points += 2;
+            }
+
+            // HDL
+            if (hdl >= 60) points -= 1;
+            else if (hdl >= 50) points += 0;
+            else if (hdl >= 40) points += 1;
+            else points += 2;
+
+            // Systolic BP
+            if (bpTreated) {
+                if (sbp < 120) points += 0;
+                else if (sbp <= 129) points += 3;
+                else if (sbp <= 139) points += 4;
+                else if (sbp <= 159) points += 5;
+                else points += 6;
+            } else {
+                if (sbp < 120) points += 0;
+                else if (sbp <= 129) points += 1;
+                else if (sbp <= 139) points += 2;
+                else if (sbp <= 159) points += 3;
+                else points += 4;
+            }
+
+            // Smoking
+            if (smoking) {
+                if (age >= 20 && age <= 39) points += 9;
+                else if (age <= 49) points += 7;
+                else if (age <= 59) points += 4;
+                else if (age <= 69) points += 2;
+                else if (age <= 79) points += 1;
+            }
+
+            // Diabetes
+            if (diabetes) points += 3;
+        }
+
+        // Convert points to 10-year risk percentage
+        let riskPercent;
+        if (gender === 'male') {
+            if (points < 0) riskPercent = '<1';
+            else if (points <= 4) riskPercent = '1';
+            else if (points <= 6) riskPercent = '2';
+            else if (points <= 7) riskPercent = '3';
+            else if (points <= 8) riskPercent = '4';
+            else if (points <= 9) riskPercent = '5';
+            else if (points <= 10) riskPercent = '6';
+            else if (points <= 11) riskPercent = '8';
+            else if (points <= 12) riskPercent = '10';
+            else if (points <= 13) riskPercent = '12';
+            else if (points <= 14) riskPercent = '16';
+            else if (points <= 15) riskPercent = '20';
+            else if (points <= 16) riskPercent = '25';
+            else riskPercent = '≥30';
+        } else {
+            if (points < 9) riskPercent = '<1';
+            else if (points <= 12) riskPercent = '1';
+            else if (points <= 14) riskPercent = '2';
+            else if (points <= 15) riskPercent = '3';
+            else if (points <= 16) riskPercent = '4';
+            else if (points <= 17) riskPercent = '5';
+            else if (points <= 18) riskPercent = '6';
+            else if (points <= 19) riskPercent = '8';
+            else if (points <= 20) riskPercent = '11';
+            else if (points <= 21) riskPercent = '14';
+            else if (points <= 22) riskPercent = '17';
+            else if (points <= 23) riskPercent = '22';
+            else if (points <= 24) riskPercent = '27';
+            else riskPercent = '≥30';
+        }
+
+        const riskValue = parseInt(riskPercent) || (riskPercent.startsWith('<') ? 0 : 30);
+
+        let riskCategory, colorClass, recommendation;
+        if (riskValue < 10) {
+            riskCategory = 'Low Risk';
+            colorClass = 'text-success-green';
+            recommendation = 'Lifestyle modifications recommended. Reassess in 5 years. Consider reinforcing healthy diet, regular exercise, and smoking cessation.';
+        } else if (riskValue < 20) {
+            riskCategory = 'Intermediate Risk';
+            colorClass = 'text-warning-amber';
+            recommendation = 'Consider statin therapy. Aggressive lifestyle modifications. Discuss aspirin therapy. Assess coronary artery calcium if borderline decision-making.';
+        } else {
+            riskCategory = 'High Risk';
+            colorClass = 'text-critical-red';
+            recommendation = 'High-intensity statin therapy recommended. Aggressive risk factor modification. Consider aspirin therapy if not contraindicated. Follow up within 1 year.';
+        }
+
+        document.getElementById('frs-risk-percent').textContent = riskPercent + '%';
+        document.getElementById('frs-risk-category').textContent = riskCategory;
+        document.getElementById('frs-risk-category').className = 'text-sm font-semibold ' + colorClass;
+        document.getElementById('frs-recommendation').textContent = recommendation;
+
+        const resultDiv = document.getElementById('frs-result');
+        resultDiv.classList.remove('hidden');
+        resultDiv.classList.add('bg-emerald-50');
+
+        if (typeof anime !== 'undefined') {
+            anime({
+                targets: resultDiv,
+                scale: [0.9, 1],
+                duration: 500,
+                easing: 'easeOutCubic'
+            });
+        }
     }
 }
 

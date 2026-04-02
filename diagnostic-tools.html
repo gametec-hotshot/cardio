@@ -628,6 +628,93 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- Framingham Risk Score Calculator -->
+                <div class="calculator-card rounded-2xl p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-emerald-600 rounded-lg flex items-center justify-center mr-4">
+                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-playfair font-bold text-deep-navy">Framingham</h3>
+                            <p class="text-sm text-neutral-slate">10-Year CVD Risk</p>
+                        </div>
+                    </div>
+
+                    <div class="space-y-4">
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm font-medium text-deep-navy mb-1">Age</label>
+                                <input type="number" id="frs-age" class="w-full p-2 border border-gray-300 rounded text-sm" placeholder="Years" min="20" max="79">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-deep-navy mb-1">Gender</label>
+                                <select id="frs-gender" class="w-full p-2 border border-gray-300 rounded text-sm">
+                                    <option value="">Select</option>
+                                    <option value="male">Male</option>
+                                    <option value="female">Female</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm font-medium text-deep-navy mb-1">Total Cholesterol</label>
+                                <input type="number" id="frs-tc" class="w-full p-2 border border-gray-300 rounded text-sm" placeholder="mg/dL">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-deep-navy mb-1">HDL Cholesterol</label>
+                                <input type="number" id="frs-hdl" class="w-full p-2 border border-gray-300 rounded text-sm" placeholder="mg/dL">
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm font-medium text-deep-navy mb-1">Systolic BP</label>
+                                <input type="number" id="frs-sbp" class="w-full p-2 border border-gray-300 rounded text-sm" placeholder="mmHg">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-deep-navy mb-1">BP Treated?</label>
+                                <select id="frs-bp-treated" class="w-full p-2 border border-gray-300 rounded text-sm">
+                                    <option value="no">No</option>
+                                    <option value="yes">Yes</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm font-medium text-deep-navy mb-1">Smoking</label>
+                                <select id="frs-smoking" class="w-full p-2 border border-gray-300 rounded text-sm">
+                                    <option value="no">No</option>
+                                    <option value="yes">Yes</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-deep-navy mb-1">Diabetes</label>
+                                <select id="frs-diabetes" class="w-full p-2 border border-gray-300 rounded text-sm">
+                                    <option value="no">No</option>
+                                    <option value="yes">Yes</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <button id="calculate-frs" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white py-3 px-4 rounded-lg font-semibold transition-colors">
+                            Calculate Framingham Risk
+                        </button>
+
+                        <div id="frs-result" class="hidden bg-gray-50 rounded-lg p-4">
+                            <div class="text-center">
+                                <div class="text-3xl font-bold text-emerald-600 mb-2" id="frs-risk-percent">--</div>
+                                <div class="text-sm text-neutral-slate mb-2">10-Year CVD Risk</div>
+                                <div id="frs-risk-category" class="text-sm font-semibold"></div>
+                                <div class="text-xs text-neutral-slate mt-3 border-t pt-3" id="frs-recommendation"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
