@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Long QT Syndrome | CardioReference</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+    tailwind.config = {
+        theme: {
+            extend: {
+                colors: {
+                    'clinical-blue': '#2563EB', 'diagnostic-teal': '#0891B2',
+                    'alert-coral': '#DC2626', 'neutral-slate': '#475569',
+                    'light-gray': '#F1F5F9', 'deep-navy': '#1E293B',
+                    'success-green': '#059669', 'cardiac-purple': '#7C3AED',
+                    'ecg-chartreuse': '#84CC16', 'warning-amber': '#D97706',
+                    'biomarker-rose': '#E11D48', 'imaging-orange': '#EA580C'
+                },
+                fontFamily: { 'inter': ['Inter','sans-serif'], 'playfair': ['Playfair Display','serif'] }
+            }
+        }
+    };
+    </script>
+</head>
+<body class="bg-light-gray font-inter">
+    <!-- Nav -->
+    <nav class="bg-white shadow-lg border-b-2 border-clinical-blue sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <a href="../index.html" class="flex items-center space-x-4">
+                    <svg class="h-8 w-8 text-clinical-blue" fill="currentColor" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                    <div><h1 class="text-xl font-playfair font-bold text-deep-navy">CardioReference</h1><p class="text-xs text-neutral-slate">Professional Cardiology Resource</p></div>
+                </a>
+                <a href="../index.html#disorders" class="px-4 py-2 bg-clinical-blue text-white rounded-lg hover:bg-blue-700 font-semibold">← Back to Disorders</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="bg-gradient-to-r from-deep-navy to-clinical-blue text-white py-12">
+        <div class="max-w-4xl mx-auto px-4">
+            <span class="inline-block px-4 py-1.5 text-xs font-semibold rounded-full bg-white bg-opacity-20 mb-4">Arrhythmia</span>
+            <h1 class="text-3xl md:text-5xl font-playfair font-bold mb-4">Long QT Syndrome</h1>
+            <p class="text-lg md:text-xl text-gray-200 leading-relaxed max-w-3xl">Inherited or acquired condition with prolonged QT interval on ECG predisposing to polymorphic ventricular tachycardia (torsades de pointes) and sudden cardiac death. Multiple genetic subtypes (LQT1-LQT15) with distinct triggers. Leading cause of sudden cardiac death in young people.</p>
+        </div>
+    </section>
+
+    <!-- Stats -->
+    <div class="max-w-7xl mx-auto px-4 -mt-8 relative z-20">
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+            <div class="bg-white rounded-2xl p-5 shadow-lg text-center hover:shadow-xl transition-shadow"><p class="text-sm text-neutral-slate mb-1">Prevalence</p><p class="text-lg font-bold text-deep-navy">Rare</p></div>
+            <div class="bg-white rounded-2xl p-5 shadow-lg text-center hover:shadow-xl transition-shadow"><p class="text-sm text-neutral-slate mb-1">Severity</p><p class="text-lg font-bold text-alert-coral">High</p></div>
+            <div class="bg-white rounded-2xl p-5 shadow-lg text-center hover:shadow-xl transition-shadow"><p class="text-sm text-neutral-slate mb-1">Incidence</p><p class="text-sm font-semibold text-deep-navy">1 in 2,000 live births</p></div>
+            <div class="bg-white rounded-2xl p-5 shadow-lg text-center hover:shadow-xl transition-shadow"><p class="text-sm text-neutral-slate mb-1">Mortality</p><p class="text-sm font-semibold text-deep-navy">Untreated: 1-2% annual risk of sudden cardiac death; with treatment risk reduced significantly</p></div>
+        </div>
+    </div>
+
+    <!-- Content Sections -->
+    <div class="max-w-7xl mx-auto px-4 py-12 space-y-6">
+        <div class="bg-white rounded-2xl p-6 shadow-lg"><div class="flex items-center mb-4"><div class="w-3 h-3 bg-alert-coral rounded-full mr-3"></div><h2 class="text-2xl font-playfair font-bold text-deep-navy">Symptoms</h2></div><div class="flex flex-wrap gap-3"><span class="inline-block px-3 py-1 bg-alert-coral bg-opacity-10 text-alert-coral rounded-full text-sm font-medium">syncope</span>
+                <span class="inline-block px-3 py-1 bg-alert-coral bg-opacity-10 text-alert-coral rounded-full text-sm font-medium">palpitations</span>
+                <span class="inline-block px-3 py-1 bg-alert-coral bg-opacity-10 text-alert-coral rounded-full text-sm font-medium">seizures</span>
+                <span class="inline-block px-3 py-1 bg-alert-coral bg-opacity-10 text-alert-coral rounded-full text-sm font-medium">sudden cardiac death</span></div></div>
+        <div class="bg-white rounded-2xl p-6 shadow-lg"><div class="flex items-center mb-4"><div class="w-3 h-3 bg-clinical-blue rounded-full mr-3"></div><h2 class="text-2xl font-playfair font-bold text-deep-navy">Risk Factors</h2></div><div class="flex flex-wrap gap-3"><span class="inline-block px-3 py-1 bg-clinical-blue bg-opacity-10 text-clinical-blue rounded-full text-sm font-medium">genetic</span>
+                <span class="inline-block px-3 py-1 bg-clinical-blue bg-opacity-10 text-clinical-blue rounded-full text-sm font-medium">family history</span>
+                <span class="inline-block px-3 py-1 bg-clinical-blue bg-opacity-10 text-clinical-blue rounded-full text-sm font-medium">medications</span>
+                <span class="inline-block px-3 py-1 bg-clinical-blue bg-opacity-10 text-clinical-blue rounded-full text-sm font-medium">electrolyte abnormalities</span>
+                <span class="inline-block px-3 py-1 bg-clinical-blue bg-opacity-10 text-clinical-blue rounded-full text-sm font-medium">hypothyroidism</span></div></div>
+        <div class="bg-white rounded-2xl p-6 shadow-lg"><div class="flex items-center mb-4"><div class="w-3 h-3 bg-diagnostic-teal rounded-full mr-3"></div><h2 class="text-2xl font-playfair font-bold text-deep-navy">Diagnostic Tests</h2></div><div class="flex flex-wrap gap-3"><span class="inline-block px-3 py-1 bg-diagnostic-teal bg-opacity-10 text-diagnostic-teal rounded-full text-sm font-medium">ecg</span>
+                <span class="inline-block px-3 py-1 bg-diagnostic-teal bg-opacity-10 text-diagnostic-teal rounded-full text-sm font-medium">holter monitor</span>
+                <span class="inline-block px-3 py-1 bg-diagnostic-teal bg-opacity-10 text-diagnostic-teal rounded-full text-sm font-medium">genetic testing</span>
+                <span class="inline-block px-3 py-1 bg-diagnostic-teal bg-opacity-10 text-diagnostic-teal rounded-full text-sm font-medium">epinephrine qt stress test</span>
+                <span class="inline-block px-3 py-1 bg-diagnostic-teal bg-opacity-10 text-diagnostic-teal rounded-full text-sm font-medium">exercise stress test</span></div></div>
+        <div class="bg-white rounded-2xl p-6 shadow-lg"><div class="flex items-center mb-4"><div class="w-3 h-3 bg-success-green rounded-full mr-3"></div><h2 class="text-2xl font-playfair font-bold text-deep-navy">Treatment Options</h2></div><div class="flex flex-wrap gap-3"><span class="inline-block px-3 py-1 bg-success-green bg-opacity-10 text-success-green rounded-full text-sm font-medium">beta blockers</span>
+                <span class="inline-block px-3 py-1 bg-success-green bg-opacity-10 text-success-green rounded-full text-sm font-medium">icd</span>
+                <span class="inline-block px-3 py-1 bg-success-green bg-opacity-10 text-success-green rounded-full text-sm font-medium">left cardiac sympathetic denervation</span>
+                <span class="inline-block px-3 py-1 bg-success-green bg-opacity-10 text-success-green rounded-full text-sm font-medium">medication avoidance</span>
+                <span class="inline-block px-3 py-1 bg-success-green bg-opacity-10 text-success-green rounded-full text-sm font-medium">genetic counseling</span></div></div>
+
+        <div class="bg-gradient-to-r from-light-gray to-white rounded-2xl p-6 shadow-lg border border-gray-200">
+            <p class="text-sm text-neutral-slate italic">⚠️ <strong>Medical Disclaimer:</strong> This resource is for educational purposes only. Not a substitute for professional medical advice.</p>
+        </div>
+
+        <div class="text-center py-4">
+            <a href="../index.html#disorders" class="inline-block px-8 py-4 bg-clinical-blue text-white rounded-lg font-semibold hover:bg-blue-700 transition-all">← Back to All Disorders</a>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-deep-navy text-white py-8 text-center">
+        <p class="text-sm text-gray-400">© 2024 CardioReference. Evidence-based content.</p>
+        <p class="text-sm text-gray-400">Designed & Developed by <span class="text-clinical-blue font-semibold">Ritik Dhage</span></p>
+    </footer>
+</body>
+</html>
