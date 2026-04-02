@@ -2616,8 +2616,251 @@ class DrugInteractionChecker {
     }
 }
 
+// ============================================================
+// ECG Rhythm Quiz — tests knowledge of cardiac rhythms
+// ============================================================
+class ECGQuiz {
+    constructor() {
+        this.questionCount = 10;
+        this.currentQuestion = 0;
+        this.score = 0;
+        this.currentRhythm = '';
+        this.answered = false;
+        this.quizPool = [];
+        this.initRhythmPool();
+        this.init();
+    }
+
+    initRhythmPool() {
+        const allRhythms = [
+            { key: 'normal-sinus', name: 'Normal Sinus Rhythm', difficulty: 'basic' },
+            { key: 'sinus-tachycardia', name: 'Sinus Tachycardia', difficulty: 'basic' },
+            { key: 'sinus-bradycardia', name: 'Sinus Bradycardia', difficulty: 'basic' },
+            { key: 'atrial-fibrillation', name: 'Atrial Fibrillation', difficulty: 'intermediate' },
+            { key: 'atrial-flutter', name: 'Atrial Flutter', difficulty: 'intermediate' },
+            { key: 'ventricular-tachycardia', name: 'Ventricular Tachycardia', difficulty: 'intermediate' },
+            { key: 'ventricular-fibrillation', name: 'Ventricular Fibrillation', difficulty: 'intermediate' },
+            { key: 'first-degree-avb', name: 'First-Degree AV Block', difficulty: 'advanced' },
+            { key: 'second-degree-avb', name: 'Second-Degree AV Block', difficulty: 'advanced' },
+            { key: 'third-degree-avb', name: 'Third-Degree (Complete) AV Block', difficulty: 'advanced' },
+            { key: 'premature-ventricular', name: 'Premature Ventricular Contractions', difficulty: 'advanced' },
+            { key: 'supraventricular-tachycardia', name: 'Supraventricular Tachycardia', difficulty: 'advanced' },
+        ];
+        this.allRhythms = allRhythms;
+    }
+
+    init() {
+        const startBtn = document.getElementById('quiz-start-btn');
+        const nextBtn = document.getElementById('quiz-next-btn');
+        const restartBtn = document.getElementById('quiz-restart-btn');
+        if (startBtn) startBtn.addEventListener('click', () => this.startQuiz());
+        if (nextBtn) nextBtn.addEventListener('click', () => this.nextQuestion());
+        if (restartBtn) restartBtn.addEventListener('click', () => this.startQuiz());
+    }
+
+    getDifficultyPool() {
+        const diff = document.getElementById('quiz-difficulty').value;
+        if (diff === 'basic') return this.allRhythms.filter(r => r.difficulty === 'basic');
+        if (diff === 'intermediate') return this.allRhythms.filter(r => r.difficulty === 'intermediate');
+        if (diff === 'advanced') return this.allRhythms.filter(r => r.difficulty === 'advanced');
+        return [...this.allRhythms];
+    }
+
+    shuffle(arr) {
+        const a = [...arr];
+        for (let i = a.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [a[i], a[j]] = [a[j], a[i]];
+        }
+        return a;
+    }
+
+    startQuiz() {
+        const pool = this.getDifficultyPool();
+        if (pool.length < 4) {
+            alert('Need at least 4 rhythms for this difficulty. Try "All Rhythms" mode.');
+            return;
+        }
+        const shuffled = this.shuffle(pool);
+        this.quizPool = shuffled.slice(0, Math.min(this.questionCount, shuffled.length));
+        this.currentQuestion = 0;
+        this.score = 0;
+        this.answered = false;
+
+        document.getElementById('quiz-start-panel').classList.add('hidden');
+        document.getElementById('quiz-end-panel').classList.add('hidden');
+        document.getElementById('quiz-active-panel').classList.remove('hidden');
+
+        this.updateScoreDisplay();
+        this.loadQuestion();
+    }
+
+    updateScoreDisplay() {
+        document.getElementById('quiz-question-num').textContent = this.currentQuestion;
+        document.getElementById('quiz-total').textContent = this.quizPool.length;
+        document.getElementById('quiz-score').textContent = this.score;
+    }
+
+    loadQuestion() {
+        if (this.currentQuestion >= this.quizPool.length) {
+            this.endQuiz();
+            return;
+        }
+
+        this.answered = false;
+        const current = this.quizPool[this.currentQuestion];
+        this.currentRhythm = current.key;
+
+        // Generate ECG waveform using the existing simulator
+        const heartRate = current.key === 'sinus-bradycardia' ? 50 :
+                          current.key === 'sinus-tachycardia' ? 120 :
+                          current.key === 'supraventricular-tachycardia' ? 160 :
+                          current.key === 'ventricular-tachycardia' ? 150 : 72;
+
+        document.getElementById('quiz-hr-display').textContent = heartRate;
+
+        // Draw the SVG path
+        const ecgPath = document.getElementById('quiz-ecg-path');
+        if (ecgPath && window.diagnosticTools) {
+            const savedRhythm = window.diagnosticTools.currentRhythm;
+            const savedHR = window.diagnosticTools.currentHeartRate;
+
+            window.diagnosticTools.currentRhythm = current.key;
+            window.diagnosticTools.currentHeartRate = heartRate;
+            const waveform = window.diagnosticTools.generateECGWaveform(current.key, heartRate);
+            ecgPath.setAttribute('d', waveform);
+
+            window.diagnosticTools.currentRhythm = savedRhythm;
+            window.diagnosticTools.currentHeartRate = savedHR;
+        }
+
+        // Generate 4 options (1 correct + 3 distractors)
+        const pool = this.allRhythms;
+        const distractors = this.shuffle(pool.filter(r => r.key !== current.key)).slice(0, 3);
+        const options = this.shuffle([current, ...distractors]);
+
+        const optionsDiv = document.getElementById('quiz-options');
+        optionsDiv.innerHTML = options.map(opt => `
+            <button class="quiz-option-btn bg-white border-2 border-gray-200 rounded-xl p-4 text-left hover:border-clinical-blue hover:shadow-md transition-all duration-200"
+                data-key="${opt.key}" data-name="${opt.name}">
+                <span class="font-semibold text-deep-navy">${opt.name}</span>
+            </button>
+        `).join('');
+
+        // Bind clicks
+        optionsDiv.querySelectorAll('.quiz-option-btn').forEach(btn => {
+            btn.addEventListener('click', () => this.checkAnswer(btn));
+        });
+
+        // Hide feedback and next
+        document.getElementById('quiz-feedback').classList.add('hidden');
+        document.getElementById('quiz-next-btn').classList.add('hidden');
+
+        this.updateScoreDisplay();
+    }
+
+    checkAnswer(btn) {
+        if (this.answered) return;
+        this.answered = true;
+
+        const chosen = btn.dataset.key;
+        const correct = this.currentRhythm;
+        const isCorrect = chosen === correct;
+
+        if (isCorrect) this.score++;
+
+        // Visual feedback on options
+        const optionsDiv = document.getElementById('quiz-options');
+        optionsDiv.querySelectorAll('.quiz-option-btn').forEach(b => {
+            b.classList.add('cursor-default');
+            if (b.dataset.key === correct) {
+                b.classList.remove('border-gray-200', 'hover:border-clinical-blue');
+                b.classList.add('border-success-green', 'bg-green-50');
+            } else if (b === btn && !isCorrect) {
+                b.classList.remove('border-gray-200', 'hover:border-clinical-blue');
+                b.classList.add('border-alert-coral', 'bg-red-50');
+            }
+            b.disabled = true;
+        });
+
+        // Build feedback
+        const rhythmInfo = this.allRhythms.find(r => r.key === correct);
+        const feedbackDiv = document.getElementById('quiz-feedback');
+        const icon = document.getElementById('quiz-feedback-icon');
+        const title = document.getElementById('quiz-feedback-title');
+        const text = document.getElementById('quiz-feedback-text');
+
+        feedbackDiv.classList.remove('hidden', 'bg-green-50', 'bg-red-50', 'border-green-300', 'border-red-300');
+
+        if (isCorrect) {
+            feedbackDiv.classList.add('bg-green-50', 'border', 'border-green-300');
+            icon.textContent = '✅';
+            title.textContent = 'Correct!';
+            title.className = 'text-xl font-bold mb-1 text-success-green';
+        } else {
+            feedbackDiv.classList.add('bg-red-50', 'border', 'border-red-300');
+            icon.textContent = '❌';
+            title.textContent = `Incorrect — the answer is ${rhythmInfo.name}`;
+            title.className = 'text-xl font-bold mb-1 text-alert-coral';
+        }
+
+        text.textContent = this.getRhythmExplanation(correct);
+        this.updateScoreDisplay();
+
+        // Show next button
+        document.getElementById('quiz-next-btn').classList.remove('hidden');
+    }
+
+    getRhythmExplanation(key) {
+        const explanations = {
+            'normal-sinus': 'Normal sinus rhythm: regular rhythm, P wave before every QRS, normal PR interval (0.12–0.20 s), rate 60–100 bpm. This is the standard cardiac rhythm.',
+            'sinus-tachycardia': 'Sinus tachycardia: normal P-QRS-T sequence with rate >100 bpm. Gradual onset and offset. Common in exercise, fever, anxiety, anemia, hyperthyroidism.',
+            'sinus-bradycardia': 'Sinus bradycardia: normal P-QRS-T sequence with rate <60 bpm. Common in athletes, during sleep, or with beta-blockers. Symptomatic bradycardia may require atropine or pacing.',
+            'atrial-fibrillation': 'Atrial fibrillation: irregularly irregular rhythm with no discernible P waves and chaotic fibrillatory baseline. Most common sustained arrhythmia. Requires anticoagulation assessment (CHA₂DS₂-VASc) and rate/rhythm control.',
+            'atrial-flutter': 'Atrial flutter: sawtooth flutter waves (typically at 300 bpm) with regular or variable AV conduction. Commonly 2:1 block (ventricular rate ~150 bpm). Ablation is curative.',
+            'ventricular-tachycardia': 'Ventricular tachycardia: wide QRS (>0.12 s), rate 100–250 bpm, AV dissociation. Medical emergency — may degenerate to VF. Unstable patients require immediate cardioversion.',
+            'ventricular-fibrillation': 'Ventricular fibrillation: completely chaotic waveform with no organized QRS complexes. Cardiac arrest rhythm — requires immediate defibrillation (unsynchronized shock) and CPR.',
+            'first-degree-avb': 'First-degree AV block: prolonged PR interval (>0.20 s) with 1:1 AV conduction. Usually benign unless symptomatic. No acute treatment needed.',
+            'second-degree-avb': 'Second-degree AV block: intermittently dropped QRS complexes. Mobitz I (Wenckebach) has progressive PR prolongation before a dropped beat. Mobitz II has constant PR with dropped beats — more ominous.',
+            'third-degree-avb': 'Third-degree (complete) AV block: complete AV dissociation with independent atrial and ventricular rhythms. P waves march through QRS complexes at unrelated rates. Usually requires permanent pacing.',
+            'premature-ventricular': 'Premature ventricular contractions (PVCs): wide, bizarre QRS without preceding P wave, followed by a compensatory pause. Frequent PVCs (>10-15%/24h) may warrant treatment.',
+            'supraventricular-tachycardia': 'Supraventricular tachycardia: narrow QRS, very regular rhythm, rate typically 150–220 bpm. May have retrograde P waves buried in QRS. Vagal maneuvers or adenosine can terminate.',
+        };
+        return explanations[key] || '';
+    }
+
+    nextQuestion() {
+        this.currentQuestion++;
+        if (this.currentQuestion >= this.quizPool.length) {
+            this.endQuiz();
+        } else {
+            this.loadQuestion();
+        }
+    }
+
+    endQuiz() {
+        document.getElementById('quiz-active-panel').classList.add('hidden');
+        document.getElementById('quiz-end-panel').classList.remove('hidden');
+
+        document.getElementById('quiz-final-score').textContent = this.score;
+        document.getElementById('quiz-final-total').textContent = this.quizPool.length;
+
+        const pct = this.score / this.quizPool.length;
+        let emoji, msg;
+        if (pct === 1) { emoji = '🏆'; msg = 'Perfect score! Outstanding ECG interpretation skills!'; }
+        else if (pct >= 0.8) { emoji = '🌟'; msg = 'Excellent work! You have strong rhythm recognition.'; }
+        else if (pct >= 0.6) { emoji = '👍'; msg = 'Good effort! Review the rhythms you missed and try again.'; }
+        else if (pct >= 0.4) { emoji = '📚'; msg = 'Keep studying! Try the ECG Simulator first, then retake the quiz.'; }
+        else { emoji = '💪'; msg = 'Don\'t give up! Use the ECG Simulator to practice each rhythm, then retry.'; }
+
+        document.getElementById('quiz-end-emoji').textContent = emoji;
+        document.getElementById('quiz-final-msg').textContent = msg;
+    }
+}
+
 // Initialize the diagnostic & drug interaction tools
 document.addEventListener('DOMContentLoaded', () => {
     window.diagnosticTools = new DiagnosticTools();
     window.drugChecker = new DrugInteractionChecker();
+    window.ecgQuiz = new ECGQuiz();
 });

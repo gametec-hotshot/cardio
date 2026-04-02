@@ -188,6 +188,9 @@
                 <button class="tool-nav-btn text-neutral-slate hover:text-clinical-blue transition-colors pb-2" data-target="drug-interactions">
                     Drug Interactions
                 </button>
+                <button class="tool-nav-btn text-neutral-slate hover:text-clinical-blue transition-colors pb-2" data-target="ecg-quiz">
+                    🎓 ECG Quiz
+                </button>
             </div>
         </div>
     </section>
@@ -1072,6 +1075,105 @@
                     <h4 class="font-semibold text-warning-amber mb-2">⚠️ Clinical Disclaimer</h4>
                     <p class="text-sm text-neutral-slate">This tool is for educational purposes only and is not a substitute for clinical judgment or a comprehensive drug reference. Always verify with current drug interaction databases (e.g., Micromedex, Lexicomp) and consult clinical pharmacists. This database covers common cardiovascular medications but does not represent a complete list of all possible drug interactions.</p>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ECG Rhythm Quiz -->
+    <section id="ecg-quiz" class="tool-section py-16 bg-white hidden">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-playfair font-bold text-deep-navy mb-4">🎓 ECG Rhythm Quiz</h2>
+                <p class="text-xl text-neutral-slate max-w-3xl mx-auto">
+                    Test your ECG interpretation skills. Identify the rhythm from a generated waveform, then check your answer with a detailed explanation.
+                </p>
+            </div>
+
+            <!-- Quiz Start / Score Panel -->
+            <div id="quiz-start-panel" class="bg-light-gray rounded-2xl p-8 mb-8 text-center">
+                <h3 class="text-2xl font-playfair font-bold text-deep-navy mb-4">Ready to Test Your Knowledge?</h3>
+                <p class="text-neutral-slate mb-6">Each round presents a randomly generated ECG waveform. Choose the correct rhythm from the options. Track your score and improve!</p>
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                    <div class="bg-white rounded-xl px-6 py-3 shadow">
+                        <span class="text-sm text-neutral-slate">Question</span>
+                        <span id="quiz-question-num" class="text-2xl font-bold text-clinical-blue ml-2">0</span>
+                        <span class="text-neutral-slate text-sm ml-1">/ <span id="quiz-total">10</span></span>
+                    </div>
+                    <div class="bg-white rounded-xl px-6 py-3 shadow">
+                        <span class="text-sm text-neutral-slate">Score</span>
+                        <span id="quiz-score" class="text-2xl font-bold text-success-green ml-2">0</span>
+                        <span class="text-neutral-slate text-sm ml-1">correct</span>
+                    </div>
+                    <div class="bg-white rounded-xl px-6 py-3 shadow">
+                        <span class="text-sm text-neutral-slate">Difficulty</span>
+                        <select id="quiz-difficulty" class="ml-2 bg-transparent border-none font-semibold text-deep-navy outline-none">
+                            <option value="all">All Rhythms</option>
+                            <option value="basic">Basic (NSR, Brady, Tachy)</option>
+                            <option value="intermediate">Intermediate</option>
+                            <option value="advanced">Advanced</option>
+                        </select>
+                    </div>
+                </div>
+                <button id="quiz-start-btn" class="mt-6 bg-clinical-blue hover:bg-blue-700 text-white px-10 py-4 rounded-lg font-semibold text-lg transition-all duration-300 transform hover:scale-105">
+                    ▶ Start Quiz
+                </button>
+            </div>
+
+            <!-- Active Quiz Area -->
+            <div id="quiz-active-panel" class="hidden">
+                <!-- ECG Display -->
+                <div class="ecg-container rounded-2xl overflow-hidden mb-8 relative" style="height: 260px;">
+                    <div class="ecg-grid"></div>
+                    <svg id="quiz-ecg-svg" class="w-full h-full" viewBox="0 0 800 400">
+                        <defs>
+                            <filter id="quiz-glow">
+                                <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+                                <feMerge>
+                                    <feMergeNode in="coloredBlur"/>
+                                    <feMergeNode in="SourceGraphic"/>
+                                </feMerge>
+                            </filter>
+                        </defs>
+                        <path id="quiz-ecg-path" class="ecg-waveform" filter="url(#quiz-glow)"></path>
+                    </svg>
+                </div>
+
+                <div class="text-center mb-6">
+                    <p class="text-lg font-semibold text-deep-navy">What rhythm is shown above?</p>
+                    <p class="text-sm text-neutral-slate mt-1">Heart Rate: <span id="quiz-hr-display" class="font-bold text-clinical-blue">--</span> bpm</p>
+                </div>
+
+                <!-- Answer Options -->
+                <div id="quiz-options" class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
+                    <!-- Dynamically generated -->
+                </div>
+
+                <!-- Feedback -->
+                <div id="quiz-feedback" class="hidden rounded-xl p-6 mb-6 transition-all duration-300">
+                    <div id="quiz-feedback-icon" class="text-3xl mb-2"></div>
+                    <h4 id="quiz-feedback-title" class="text-xl font-bold mb-1"></h4>
+                    <p id="quiz-feedback-text" class="text-sm text-neutral-slate"></p>
+                </div>
+
+                <!-- Next / Finish -->
+                <div class="flex justify-center gap-4">
+                    <button id="quiz-next-btn" class="hidden bg-clinical-blue hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-semibold transition-colors">
+                        Next Question →
+                    </button>
+                </div>
+            </div>
+
+            <!-- Quiz End -->
+            <div id="quiz-end-panel" class="hidden bg-light-gray rounded-2xl p-10 text-center">
+                <div class="text-5xl mb-4" id="quiz-end-emoji">🏆</div>
+                <h3 class="text-3xl font-playfair font-bold text-deep-navy mb-2">Quiz Complete!</h3>
+                <p class="text-xl text-neutral-slate mb-6">
+                    <span id="quiz-final-score" class="font-bold text-clinical-blue">0</span> / <span id="quiz-final-total">0</span> correct
+                </p>
+                <p id="quiz-final-msg" class="text-neutral-slate mb-8"></p>
+                <button id="quiz-restart-btn" class="bg-clinical-blue hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-semibold transition-colors">
+                    🔄 Try Again
+                </button>
             </div>
         </div>
     </section>
