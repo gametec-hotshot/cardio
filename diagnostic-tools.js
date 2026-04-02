@@ -1548,7 +1548,1076 @@ class DiagnosticTools {
     }
 }
 
-// Initialize the diagnostic tools
+// Drug Interaction Checker
+class DrugInteractionChecker {
+    constructor() {
+        this.selectedDrugs = [];
+        this.init();
+    }
+
+    init() {
+        this.initializeSearch();
+        this.initializeButtons();
+    }
+
+    initializeSearch() {
+        const searchInput = document.getElementById('drug-search');
+        if (!searchInput) return;
+
+        searchInput.addEventListener('input', (e) => {
+            const query = e.target.value.toLowerCase().trim();
+            const suggestionsDiv = document.getElementById('drug-suggestions');
+
+            if (!query || this.selectedDrugs.length >= 10) {
+                suggestionsDiv.classList.add('hidden');
+                return;
+            }
+
+            const matches = this.getDrugDatabase().filter(drug =>
+                !this.selectedDrugs.find(d => d.id === drug.id) &&
+                (drug.name.toLowerCase().includes(query) || drug.category.toLowerCase().includes(query))
+            ).slice(0, 10);
+
+            if (matches.length === 0) {
+                suggestionsDiv.classList.add('hidden');
+                return;
+            }
+
+            suggestionsDiv.innerHTML = matches.map(drug => `
+                <div class="px-4 py-2.5 hover:bg-blue-50 cursor-pointer flex items-center gap-3 transition-colors" data-drug-id="${drug.id}">
+                    <span class="text-lg">${drug.emoji}</span>
+                    <div class="flex-1">
+                        <div class="font-medium text-deep-navy text-sm">${drug.name}</div>
+                        <div class="text-xs text-neutral-slate">${drug.category}</div>
+                    </div>
+                    <span class="text-xs ${this.severityBadgeClass(drug.riskLevel)} px-2 py-0.5 rounded-full">${drug.riskLevel}</span>
+                </div>
+            `).join('');
+
+            suggestionsDiv.classList.remove('hidden');
+            suggestionsDiv.style.cssText = `top:${searchInput.offsetTop + searchInput.offsetHeight + 4}px;left:${searchInput.offsetLeft}px;width:${searchInput.offsetWidth}px;position:relative;`;
+
+            suggestionsDiv.querySelectorAll('[data-drug-id]').forEach(el => {
+                el.addEventListener('click', () => {
+                    const drug = this.getDrugDatabase().find(d => d.id === parseInt(el.dataset.drugId));
+                    if (drug && !this.selectedDrugs.find(d => d.id === drug.id)) {
+                        this.addDrug(drug);
+                    }
+                    searchInput.value = '';
+                    suggestionsDiv.classList.add('hidden');
+                });
+            });
+        });
+
+        // Hide suggestions on outside click
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('#drug-search') && !e.target.closest('#drug-suggestions')) {
+                document.getElementById('drug-suggestions').classList.add('hidden');
+            }
+        });
+    }
+
+    initializeButtons() {
+        const checkBtn = document.getElementById('check-interactions-btn');
+        const clearBtn = document.getElementById('clear-drugs-btn');
+
+        if (checkBtn) {
+            checkBtn.addEventListener('click', () => this.checkInteractions());
+        }
+        if (clearBtn) {
+            clearBtn.addEventListener('click', () => this.clearAll());
+        }
+    }
+
+    severityBadgeClass(riskLevel) {
+        switch (riskLevel) {
+            case 'major': return 'bg-red-100 text-red-700';
+            case 'moderate': return 'bg-amber-100 text-amber-700';
+            case 'minor': return 'bg-blue-100 text-blue-700';
+            default: return 'bg-gray-100 text-gray-700';
+        }
+    }
+
+    severityBannerClass(severity) {
+        switch (severity) {
+            case 'major': return 'border-red-500 bg-red-50 dark:bg-red-900/30';
+            case 'moderate': return 'border-amber-500 bg-amber-50 dark:bg-amber-900/30';
+            case 'minor': return 'border-blue-500 bg-blue-50 dark:bg-blue-900/30';
+            default: return 'border-gray-300 bg-gray-50';
+        }
+    }
+
+    addDrug(drug) {
+        this.selectedDrugs.push({ ...drug });
+        this.renderSelectedDrugs();
+    }
+
+    removeDrug(drugId) {
+        this.selectedDrugs = this.selectedDrugs.filter(d => d.id !== drugId);
+        this.renderSelectedDrugs();
+        this.clearResults();
+    }
+
+    clearAll() {
+        this.selectedDrugs = [];
+        this.renderSelectedDrugs();
+        this.clearResults();
+        document.getElementById('drug-search').value = '';
+    }
+
+    clearResults() {
+        document.getElementById('interaction-results').innerHTML = '';
+    }
+
+    renderSelectedDrugs() {
+        const container = document.getElementById('selected-drugs');
+        if (this.selectedDrugs.length === 0) {
+            container.innerHTML = '<span class="text-sm text-neutral-slate italic">No medications selected</span>';
+            return;
+        }
+
+        container.innerHTML = this.selectedDrugs.map(drug => `
+            <div class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-clinical-blue text-white rounded-full text-sm font-medium shadow-sm">
+                <span>${drug.emoji}</span>
+                <span>${drug.name}</span>
+                <button onclick="window.drugChecker.removeDrug(${drug.id})" class="ml-1 text-white/80 hover:text-white transition-colors" aria-label="Remove ${drug.name}">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+                </button>
+            </div>
+        `).join('');
+    }
+
+    checkInteractions() {
+        const resultsDiv = document.getElementById('interaction-results');
+        if (this.selectedDrugs.length < 2) {
+            resultsDiv.innerHTML = `
+                <div class="bg-yellow-50 border border-yellow-200 rounded-xl p-6">
+                    <p class="text-warning-amber font-semibold">Please select at least 2 medications to check interactions.</p>
+                </div>`;
+            return;
+        }
+
+        const interactions = this.findInteractions();
+        const summary = this.buildSummary(interactions);
+
+        if (interactions.length === 0) {
+            resultsDiv.innerHTML = `
+                <div class="bg-green-50 border border-green-200 rounded-xl p-8 text-center">
+                    <span class="text-4xl mb-4 block">✅</span>
+                    <h3 class="text-xl font-playfair font-bold text-deep-navy mb-2">No Known Interactions Found</h3>
+                    <p class="text-neutral-slate">No clinically significant interactions were found in the database for the selected combination. Always verify with clinical resources.</p>
+                </div>`;
+            return;
+        }
+
+        resultsDiv.innerHTML = `
+            ${summary}
+            <div class="space-y-4">
+                ${interactions.map(i => this.renderInteractionCard(i)).join('')}
+            </div>`;
+
+        if (typeof anime !== 'undefined') {
+            anime({
+                targets: '#interaction-results',
+                opacity: [0, 1],
+                translateY: [20, 0],
+                duration: 500,
+                easing: 'easeOutCubic'
+            });
+        }
+    }
+
+    buildSummary(interactions) {
+        const major = interactions.filter(i => i.severity === 'major').length;
+        const moderate = interactions.filter(i => i.severity === 'moderate').length;
+        const minor = interactions.filter(i => i.severity === 'minor').length;
+
+        return `
+            <div class="bg-white rounded-xl p-6 shadow-lg border-l-4 ${major > 0 ? 'border-red-500' : moderate > 0 ? 'border-amber-500' : 'border-blue-500'}">
+                <h3 class="text-lg font-playfair font-bold text-deep-navy mb-4">Interaction Summary</h3>
+                <div class="grid grid-cols-3 gap-4">
+                    <div class="text-center p-3 bg-red-50 rounded-lg">
+                        <div class="text-2xl font-bold text-red-600">${major}</div>
+                        <div class="text-xs text-red-700 font-medium">Major</div>
+                    </div>
+                    <div class="text-center p-3 bg-amber-50 rounded-lg">
+                        <div class="text-2xl font-bold text-amber-600">${moderate}</div>
+                        <div class="text-xs text-amber-700 font-medium">Moderate</div>
+                    </div>
+                    <div class="text-center p-3 bg-blue-50 rounded-lg">
+                        <div class="text-2xl font-bold text-blue-600">${minor}</div>
+                        <div class="text-xs text-blue-700 font-medium">Minor</div>
+                    </div>
+                </div>
+            </div>`;
+    }
+
+    renderInteractionCard(interaction) {
+        const icon = interaction.severity === 'major' ? '⚠️' : interaction.severity === 'moderate' ? '🔶' : '💡';
+
+        return `
+            <div class="bg-white rounded-xl p-6 shadow border-l-4 ${this.severityBadgeClass(interaction.severity).split(' ')[0].replace('text-','border-').replace('red-700','red-500').replace('amber-700','amber-500').replace('blue-700','blue-500')} ${this.severityBannerClass(interaction.severity)}">
+                <div class="flex items-start gap-3">
+                    <span class="text-2xl flex-shrink-0">${icon}</span>
+                    <div class="flex-1">
+                        <div class="flex items-center gap-3 mb-2 flex-wrap">
+                            <h4 class="font-bold text-deep-navy">${interaction.drug1} + ${interaction.drug2}</h4>
+                            <span class="
+                                ${interaction.severity === 'major' ? 'bg-red-100 text-red-700' : ''}
+                                ${interaction.severity === 'moderate' ? 'bg-amber-100 text-amber-700' : ''}
+                                ${interaction.severity === 'minor' ? 'bg-blue-100 text-blue-700' : ''}
+                                text-xs font-semibold px-2.5 py-0.5 rounded-full uppercase tracking-wide">
+                                ${interaction.severity}
+                            </span>
+                            ${interaction.mechanism ? `<span class="text-xs text-neutral-slate bg-gray-100 px-2 py-0.5 rounded-full">${interaction.mechanism}</span>` : ''}
+                        </div>
+                        <p class="text-sm text-neutral-slate mb-3">${interaction.description}</p>
+                        ${interaction.clinicalEffect ? `<p class="text-sm text-deep-navy"><strong>Effect:</strong> ${interaction.clinicalEffect}</p>` : ''}
+                        ${interaction.management ? `<div class="mt-3 p-3 bg-white/70 rounded-lg border border-gray-200"><p class="text-sm"><strong class="text-clinical-blue">Management:</strong> <span class="text-neutral-slate">${interaction.management}</span></p></div>` : ''}
+                    </div>
+                </div>
+            </div>`;
+    }
+
+    findInteractions() {
+        const interactions = [];
+        for (let i = 0; i < this.selectedDrugs.length; i++) {
+            for (let j = i + 1; j < this.selectedDrugs.length; j++) {
+                const results = this.lookupInteraction(this.selectedDrugs[i], this.selectedDrugs[j]);
+                interactions.push(...results);
+            }
+        }
+        // Sort: major first, then moderate, then minor
+        const severityOrder = { major: 0, moderate: 1, minor: 2 };
+        interactions.sort((a, b) => severityOrder[a.severity] - severityOrder[b.severity]);
+        return interactions;
+    }
+
+    lookupInteraction(drug1, drug2) {
+        const ids = [drug1.id, drug2].map(d => d.id || d).sort((a, b) => a - b);
+        // Find all interactions where both drugs match
+        const matches = this.getInteractionsDatabase().filter(inter => {
+            const interIds = [inter.drug1Id, inter.drug2Id].sort((a, b) => a - b);
+            return interIds[0] === ids[0] && interIds[1] === ids[1];
+        });
+
+        if (matches.length > 0) return matches.map(inter => ({
+            ...inter,
+            drug1: drug1.name,
+            drug2: drug2.name || inter.drug2Name
+        }));
+
+        return [];
+    }
+
+    getDrugDatabase() {
+        return [
+            { id: 1, name: 'Warfarin', category: 'Anticoagulant — Oral', emoji: '💊', riskLevel: 'major' },
+            { id: 2, name: 'Aspirin', category: 'Antiplatelet — NSAID', emoji: '💊', riskLevel: 'moderate' },
+            { id: 3, name: 'Clopidogrel', category: 'Antiplatelet — P2Y12 inhibitor', emoji: '💊', riskLevel: 'moderate' },
+            { id: 4, name: 'Ticagrelor', category: 'Antiplatelet — P2Y12 inhibitor', emoji: '💊', riskLevel: 'moderate' },
+            { id: 5, name: 'Prasugrel', category: 'Antiplatelet — P2Y12 inhibitor', emoji: '💊', riskLevel: 'moderate' },
+            { id: 6, name: 'Heparin (UFH)', category: 'Anticoagulant — Parenteral', emoji: '💉', riskLevel: 'major' },
+            { id: 7, name: 'Enoxaparin', category: 'Anticoagulant — LMWH', emoji: '💉', riskLevel: 'major' },
+            { id: 8, name: 'Apixaban', category: 'Anticoagulant — DOAC (FXa)', emoji: '💊', riskLevel: 'major' },
+            { id: 9, name: 'Rivaroxaban', category: 'Anticoagulant — DOAC (FXa)', emoji: '💊', riskLevel: 'major' },
+            { id: 10, name: 'Dabigatran', category: 'Anticoagulant — DOAC (DTI)', emoji: '💊', riskLevel: 'major' },
+            { id: 11, name: 'Amiodarone', category: 'Antiarrhythmic — Class III', emoji: '❤️', riskLevel: 'major' },
+            { id: 12, name: 'Digoxin', category: 'Cardiac glycoside', emoji: '❤️', riskLevel: 'moderate' },
+            { id: 13, name: 'Metoprolol', category: 'Beta-blocker — Cardioselective', emoji: '💊', riskLevel: 'minor' },
+            { id: 14, name: 'Carvedilol', category: 'Beta-blocker — Non-selective α1-block', emoji: '💊', riskLevel: 'minor' },
+            { id: 15, name: 'Bisoprolol', category: 'Beta-blocker — Cardioselective', emoji: '💊', riskLevel: 'minor' },
+            { id: 16, name: 'Atenolol', category: 'Beta-blocker — Cardioselective', emoji: '💊', riskLevel: 'minor' },
+            { id: 17, name: 'Lisinopril', category: 'ACE Inhibitor', emoji: '💊', riskLevel: 'moderate' },
+            { id: 18, name: 'Ramipril', category: 'ACE Inhibitor', emoji: '💊', riskLevel: 'moderate' },
+            { id: 19, name: 'Enalapril', category: 'ACE Inhibitor', emoji: '💊', riskLevel: 'moderate' },
+            { id: 20, name: 'Losartan', category: 'ARB (AT1 blocker)', emoji: '💊', riskLevel: 'moderate' },
+            { id: 21, name: 'Valsartan', category: 'ARB (AT1 blocker)', emoji: '💊', riskLevel: 'moderate' },
+            { id: 22, name: 'Spironolactone', category: 'MRA (Aldosterone antagonist)', emoji: '💊', riskLevel: 'moderate' },
+            { id: 23, name: 'Eplerenone', category: 'MRA (Aldosterone antagonist)', emoji: '💊', riskLevel: 'moderate' },
+            { id: 24, name: 'Furosemide', category: 'Loop diuretic', emoji: '💊', riskLevel: 'minor' },
+            { id: 25, name: 'Hydrochlorothiazide', category: 'Thiazide diuretic', emoji: '💊', riskLevel: 'minor' },
+            { id: 26, name: 'Amlodipine', category: 'CCB — Dihydropyridine', emoji: '💊', riskLevel: 'minor' },
+            { id: 27, name: 'Diltiazem', category: 'CCB — Non-DHP', emoji: '💊', riskLevel: 'moderate' },
+            { id: 28, name: 'Verapamil', category: 'CCB — Non-DHP', emoji: '💊', riskLevel: 'moderate' },
+            { id: 29, name: 'Atorvastatin', category: 'Statin — High intensity', emoji: '💊', riskLevel: 'moderate' },
+            { id: 33, name: 'Rosuvastatin', category: 'Statin — High intensity', emoji: '💊', riskLevel: 'moderate' },
+            { id: 30, name: 'Simvastatin', category: 'Statin — Moderate', emoji: '💊', riskLevel: 'major' },
+            { id: 31, name: 'Sacubitril/Valsartan', category: 'ARNI', emoji: '💊', riskLevel: 'major' },
+            { id: 32, name: 'Dapagliflozin', category: 'SGLT2 inhibitor', emoji: '💊', riskLevel: 'minor' },
+            { id: 34, name: 'Empagliflozin', category: 'SGLT2 inhibitor', emoji: '💊', riskLevel: 'minor' },
+            { id: 35, name: 'Ivabradine', category: 'If-channel blocker', emoji: '💊', riskLevel: 'moderate' },
+            { id: 36, name: 'Ibuprofen', category: 'NSAID', emoji: '💊', riskLevel: 'moderate' },
+            { id: 37, name: 'Naproxen', category: 'NSAID', emoji: '💊', riskLevel: 'moderate' },
+            { id: 38, name: 'Fluconazole', category: 'Antifungal — CYP inhibitor', emoji: '💊', riskLevel: 'major' },
+            { id: 39, name: 'Rifampin', category: 'Antibiotic — CYP inducer', emoji: '💊', riskLevel: 'major' },
+            { id: 40, name: 'Metformin', category: 'Biguanide (Antidiabetic)', emoji: '💊', riskLevel: 'minor' },
+        ];
+    }
+
+    getInteractionsDatabase() {
+        return [
+            // === MAJOR INTERACTIONS ===
+            {
+                drug1Id: 1, drug2Id: 2, drug2Name: 'Aspirin',
+                severity: 'major', mechanism: 'Pharmacodynamic',
+                description: 'Combined use significantly increases risk of major bleeding including GI hemorrhage and intracranial bleeding.',
+                clinicalEffect: '3-5× increase in major bleeding events.',
+                management: 'Generally avoid combination unless specifically indicated (e.g., mechanical valve). If necessary, use lowest aspirin dose (81mg), add PPI gastroprotection, and monitor INR closely. Target INR 2.0-2.5 for mechanical valves.'
+            },
+            {
+                drug1Id: 1, drug2Id: 3, drug2Name: 'Clopidogrel',
+                severity: 'major', mechanism: 'Pharmacodynamic',
+                description: 'Dual anticoagulation dramatically increases bleeding risk. Triple therapy with DAPT plus warfarin carries highest risk.',
+                clinicalEffect: 'Annual major bleeding rates of 5-14% with triple therapy vs 1-3% with warfarin alone.',
+                management: 'Avoid if possible. If triple therapy is essential (e.g., AFib post-PCI stent), minimize duration to 1-4 weeks using clopidogrel only (not ticagrelor/prasugrel), target INR 2.0-2.5, add PPI, reassess frequently.'
+            },
+            {
+                drug1Id: 1, drug2Id: 4, drug2Name: 'Ticagrelor',
+                severity: 'major', mechanism: 'Pharmacodynamic',
+                description: 'Triple therapy with ticagrelor + warfarin carries very high bleeding risk. Ticagrelor is more potent than clopidogrel.',
+                clinicalEffect: 'Bleeding risk 2-4× higher than dual therapy alone.',
+                management: 'Strongly prefer clopidogrel over ticagrelor if triple therapy unavoidable. If DAPT required, prefer DOAC over warfarin. Minimize duration. Consider left atrial appendage closure for high bleeding risk AFib patients.'
+            },
+            {
+                drug1Id: 1, drug2Id: 6, drug2Name: 'Heparin (UFH)',
+                severity: 'major', mechanism: 'Pharmacodynamic',
+                description: 'Concurrent use of warfarin and heparin causes overlapping anticoagulation. This is standard practice during transition but requires very close monitoring.',
+                clinicalEffect: 'HIT risk with heparin combined; supratherapeutic INR with bleeding.',
+                management: 'Standard bridging protocol: start both together, discontinue heparin when INR ≥2.0 for 24h on therapeutic warfarin. Monitor aPTT and INR daily. Watch for HIT on heparin day 4-14.'
+            },
+            {
+                drug1Id: 1, drug2Id: 7, drug2Name: 'Enoxaparin',
+                severity: 'major', mechanism: 'Pharmacodynamic',
+                description: 'LMWH + warfarin increases bleeding risk. Standard bridging therapy with overlapping anticoagulation.',
+                clinicalEffect: 'Major bleeding 1-3% during bridging period.',
+                management: 'Use therapeutic enoxaparin 1mg/kg BID when bridging. Stop enoxaparin after INR ≥2.0 for 2 consecutive days. Extended bridging (>7 days) increases bleeding risk — minimize overlap duration.'
+            },
+            {
+                drug1Id: 1, drug2Id: 8, drug2Name: 'Apixaban',
+                severity: 'major', mechanism: 'Pharmacodynamic',
+                description: 'Combining two oral anticoagulants is contraindicated — dramatically increases major bleeding risk.',
+                clinicalEffect: 'DOAC + warfarin combination is absolutely contraindicated. Major bleeding >10% annual rate.',
+                management: 'CONTRAINDICATED — never use together. If switching, discontinue one before starting the other per standard switching guidance. No evidence-based indication for dual OAC therapy.'
+            },
+            {
+                drug1Id: 1, drug2Id: 9, drug2Name: 'Rivaroxaban',
+                severity: 'major', mechanism: 'Pharmacodynamic',
+                description: 'Combining two oral anticoagulants is contraindicated.',
+                clinicalEffect: 'Major bleeding >10% annual rate.',
+                management: 'CONTRAINDICATED — never use together. For switching: start rivaroxaban when INR <2.5 for rivaroxaban dosing BID; start warfarin 2-3 days before stopping rivaroxaban (check INR).'
+            },
+            {
+                drug1Id: 1, drug2Id: 10, drug2Name: 'Dabigatran',
+                severity: 'major', mechanism: 'Pharmacodynamic',
+                description: 'Combining two oral anticoagulants is contraindicated.',
+                clinicalEffect: 'Major bleeding >10% annual rate.',
+                management: 'CONTRAINDICATED — never use together. Switching: start dabigatran when INR <2.0; start warfarin and overlap, check INR just before next dabigatran dose.'
+            },
+            {
+                drug1Id: 1, drug2Id: 11, drug2Name: 'Amiodarone',
+                severity: 'major', mechanism: 'CYP2C9 inhibition',
+                description: 'Amiodarone potently inhibits CYP2C9, dramatically reducing warfarin metabolism and increasing INR.',
+                clinicalEffect: 'INR increases 30-50% within 1-2 weeks. May persist for weeks after amiodarone discontinuation (half-life 58 days).',
+                management: 'Reduce warfarin dose by 30-50% when starting amiodarone. Monitor INR twice weekly for first 6 weeks, then weekly. When stopping amiodarone, gradually increase warfarin dose over 4-8 weeks.'
+            },
+            {
+                drug1Id: 1, drug2Id: 29, drug2Name: 'Atorvastatin',
+                severity: 'moderate', mechanism: 'CYP3A4 metabolism',
+                description: 'Both metabolized by CYP3A4. Atorvastatin may modestly increase INR; warfarin does not significantly affect statin levels.',
+                clinicalEffect: 'Small INR increase, usually clinically insignificant. Rosuvastatin is preferred alternative (no CYP3A4 metabolism).',
+                management: 'Monitor INR more closely when starting or stopping statin. Rosuvastatin or pravastatin preferred with warfarin (less CYP involvement).'
+            },
+            {
+                drug1Id: 1, drug2Id: 30, drug2Name: 'Simvastatin',
+                severity: 'major', mechanism: 'CYP3A4 inhibition',
+                description: 'Warfarin can increase simvastatin exposure. More importantly, simvastatin has narrow therapeutic index and multiple interactions.',
+                clinicalEffect: 'Increased risk of myopathy with supratherapeutic INR.',
+                management: 'Switch to atorvastatin or rosuvastatin. If simvastatin must be used, limit dose to 10mg daily and monitor INR weekly when starting.'
+            },
+            {
+                drug1Id: 2, drug2Id: 6, drug2Name: 'Heparin (UFH)',
+                severity: 'major', mechanism: 'Pharmacodynamic',
+                description: 'Combined antiplatelet + anticoagulant significantly increases bleeding risk.',
+                clinicalEffect: 'Major bleeding 2-4% when used together.',
+                management: 'Common combination in ACS — use lowest effective aspirin dose (81mg). Monitor aPTT. Watch for bleeding. Generally acceptable with clinical indication (PCI, stroke).'
+            },
+            {
+                drug1Id: 2, drug2Id: 7, drug2Name: 'Enoxaparin',
+                severity: 'major', mechanism: 'Pharmacodynamic',
+                description: 'Aspirin + LMWH significantly increases bleeding risk, especially GI.',
+                clinicalEffect: 'Major bleeding 1-5% depending on dose and indication.',
+                management: 'Standard for ACS. Acceptable combination with clinical indication. Use aspirin 81mg (not 325mg) to reduce GI bleeding. Add PPI for high-risk patients.'
+            },
+            {
+                drug1Id: 2, drug2Id: 8, drug2Name: 'Apixaban',
+                severity: 'major', mechanism: 'Pharmacodynamic',
+                description: 'Aspirin + apixaban significantly increases bleeding risk compared to apixaban monotherapy.',
+                clinicalEffect: 'Major bleeding 3-4% vs ~2% with apixaban alone.',
+                management: 'Avoid routine combination. After PCI, DAPT is required for limited duration — then drop aspirin (continue DOAC + clopidogrel) per FIRE trial. Use apixaban 5mg BID.'
+            },
+            {
+                drug1Id: 2, drug2Id: 9, drug2Name: 'Rivaroxaban',
+                severity: 'major', mechanism: 'Pharmacodynamic',
+                description: 'Aspirin + rivaroxaban increases bleeding. Rivaroxaban 2.5mg BID + aspirin (COMPASS regimen) is evidence-based but increases GI bleeding.',
+                clinicalEffect: 'Major bleeding 2.0% vs 1.3% with aspirin alone (COMPASS). GI bleeding risk particularly increased.',
+                management: 'If using COMPASS regimen (stable CAD): rivaroxaban 2.5mg BID + aspirin 81mg. Add PPI. Reassess need at 1 year. Avoid with history of GI bleed.'
+            },
+            {
+                drug1Id: 2, drug2Id: 36, drug2Name: 'Ibuprofen',
+                severity: 'moderate', mechanism: 'Pharmacodynamic + CYP',
+                description: 'Ibuprofen blocks aspirin antiplatelet effect by competing for COX-1 binding site. Also increases GI bleeding.',
+                clinicalEffect: 'Reduced cardioprotective effect of aspirin; 2-3× GI bleeding risk.',
+                management: 'If ibuprofen necessary: take aspirin ≥30 minutes before or ≥8 hours after ibuprofen. Prefer acetaminophen for pain in aspirin users. If NSAID required, naproxen preferred with lowest dose and shortest duration.'
+            },
+            {
+                drug1Id: 2, drug2Id: 37, drug2Name: 'Naproxen',
+                severity: 'moderate', mechanism: 'Pharmacodynamic',
+                description: 'Naproxen has less interference with aspirin antiplatelet effect than ibuprofen, but still increases GI bleeding risk.',
+                clinicalEffect: 'GI bleeding risk 2-4× higher with combination vs aspirin alone.',
+                management: 'If NSAID required for aspirin user, naproxen at lowest dose is preferred NSAID per AHA. Always co-prescribe PPI (e.g., omeprazole 20mg daily). Monitor for GI symptoms.'
+            },
+            {
+                drug1Id: 6, drug2Id: 8, drug2Name: 'Apixaban',
+                severity: 'major', mechanism: 'Pharmacodynamic',
+                description: 'Combining heparin with DOAC is contraindicated — extreme bleeding risk.',
+                clinicalEffect: 'Major bleeding >15%. Absolutely contraindicated.',
+                management: 'CONTRAINDICATED — never combine. If switching: stop heparin and start DOAC at time of next scheduled dose.'
+            },
+            {
+                drug1Id: 11, drug2Id: 12, drug2Name: 'Digoxin',
+                severity: 'major', mechanism: 'P-glycoprotein inhibition',
+                description: 'Amiodarone inhibits P-gp, increasing digoxin levels by 70-100%. Can cause fatal digoxin toxicity.',
+                clinicalEffect: 'Digoxin levels double within 1-2 weeks. Toxicity: nausea, visual changes (yellow halos), arrhythmias (VT, VF, VTach, junctional tachycardia).',
+                management: 'REDUCE DIGOXIN DOSE BY 50% when starting amiodarone. Check digoxin levels 5-7 days after starting amiodarone, then every 1-3 months. Target digoxin level 0.5-0.9 ng/mL. Monitor for digoxin toxicity symptoms.'
+            },
+            {
+                drug1Id: 11, drug2Id: 13, drug2Name: 'Metoprolol',
+                severity: 'major', mechanism: 'Pharmacodynamic',
+                description: 'Both drugs depress sinus node and AV conduction. Risk of severe bradycardia, AV block, and asystole.',
+                clinicalEffect: 'Symptomatic bradycardia in 5-10% of patients. Complete heart block risk.',
+                management: 'Start with low beta-blocker dose (metoprolol 12.5-25mg BID). Monitor heart rate closely. Avoid in patients with baseline bradycardia (<50 bpm) or AV block. Consider dose reduction if HR <50 bpm.'
+            },
+            {
+                drug1Id: 11, drug2Id: 26, drug2Name: 'Amlodipine',
+                severity: 'moderate', mechanism: 'CYP3A4',
+                description: 'Amlodipine inhibits CYP3A4, potentially increasing amiodarone levels. Additive effects on AV node conduction.',
+                clinicalEffect: 'Mild increase in amiodarone exposure; additive bradycardia.',
+                management: 'Generally safe combination (common for rate/rhythm control). Start amlodipine at 2.5mg daily if on amiodarone. Monitor HR and BP.'
+            },
+            {
+                drug1Id: 11, drug2Id: 29, drug2Name: 'Atorvastatin',
+                severity: 'moderate', mechanism: 'CYP3A4',
+                description: 'Amiodarone inhibits CYP3A4, increasing statin levels and myopathy risk. Maximum atorvastatin dose limited to 40mg with amiodarone.',
+                clinicalEffect: '2-3× increase in statin AUC; myopathy risk 4× higher.',
+                management: 'Max atorvastatin 40mg/day with amiodarone. Prefer rosuvastatin or pravastatin with amiodarone (not CYP3A4 metabolized). Watch for myalgias, check CK if symptomatic.'
+            },
+            {
+                drug1Id: 11, drug2Id: 30, drug2Name: 'Simvastatin',
+                severity: 'major', mechanism: 'CYP3A4 inhibition',
+                description: 'Amiodarone dramatically increases simvastatin levels (4-7×). FDA recommends max simvastatin 20mg with amiodarone.',
+                clinicalEffect: 'Severe myopathy and rhabdomyolysis risk. Max 20mg simvastatin with amiodarone.',
+                management: 'AVOID simvastatin with amiodarone if possible. If used, max dose simvastatin 20mg daily. Prefer atorvastatin (max 40mg) or rosuvastatin with amiodarone.'
+            },
+            {
+                drug1Id: 11, drug2Id: 27, drug2Name: 'Diltiazem',
+                severity: 'major', mechanism: 'CYP3A4 + Pharmacodynamic',
+                description: 'Both inhibit AV node conduction and both inhibit CYP3A4. Risk of severe bradycardia, AV block, and asystole.',
+                clinicalEffect: 'Severe bradycardia and complete heart block. Risk of cardiac arrest in susceptible patients.',
+                management: 'Strongly avoid combined use unless specifically required for rhythm control under EP supervision. If used: continuous telemetry, reduce doses of both by 50%. Monitor closely for bradycardia.'
+            },
+            {
+                drug1Id: 11, drug2Id: 28, drug2Name: 'Verapamil',
+                severity: 'major', mechanism: 'CYP3A4 + Pharmacodynamic',
+                description: 'Both depress sinus node and AV node function profoundly. Additive CYP3A4 inhibition.',
+                clinicalEffect: 'Severe bradycardia, sinus arrest, or complete AV block. Cardiac arrest reported.',
+                management: 'Strongly avoid combination. If absolutely necessary under EP guidance: continuous cardiac monitoring, start both at very low doses, have pacing capability available.'
+            },
+            {
+                drug1Id: 11, drug2Id: 38, drug2Name: 'Fluconazole',
+                severity: 'major', mechanism: 'CYP2C9 + CYP3A4 inhibition',
+                description: 'Fluconazole inhibits both CYP2C9 and CYP3A4, dramatically increasing amiodarone levels.',
+                clinicalEffect: 'Significantly increased amiodarone exposure. QT prolongation and torsades risk.',
+                management: 'Avoid combination if possible. If essential: reduce amiodarone dose, monitor ECG (QTc), consider azole alternative with less CYP inhibition.'
+            },
+            {
+                drug1Id: 8, drug2Id: 38, drug2Name: 'Fluconazole',
+                severity: 'moderate', mechanism: 'CYP3A4 + P-gp inhibition',
+                description: 'Azoles inhibit P-glycoprotein and CYP3A4, increasing DOAC exposure.',
+                clinicalEffect: 'Apixaban levels increase 40-60%. Bleeding risk increased.',
+                management: 'For apixaban: reduce dose (or monitor closely). Consider DOAC dose reduction or switch to alternative anticoagulant during azole therapy. Monitor for bleeding signs.'
+            },
+            {
+                drug1Id: 9, drug2Id: 39, drug2Name: 'Rifampin',
+                severity: 'major', mechanism: 'CYP3A4 + P-gp induction',
+                description: 'Rifampin potently induces both CYP3A4 and P-gp, reducing DOAC levels by 50-65%. This can lead to therapeutic failure (stroke, DVT, PE).',
+                clinicalEffect: 'Subtherapeutic DOAC levels; stroke/VTE risk significantly increased. AUC reduction ~50%.',
+                management: 'CONTRAINDICATED — avoid combination. If rifampin treatment essential, switch to warfarin (therapeutic monitoring compensates for CYP induction). Reassess need for DOAC after rifampin course.'
+            },
+            {
+                drug1Id: 8, drug2Id: 39, drug2Name: 'Rifampin',
+                severity: 'major', mechanism: 'CYP3A4 + P-gp induction',
+                description: 'Rifampin dramatically reduces apixaban levels, rendering it ineffective.',
+                clinicalEffect: 'AUC reduced ~55%. Stroke and VTE prophylaxis failure.',
+                management: 'AVOID combination. Switch to warfarin during rifampin therapy. If short rifampin course, consider LMWH bridge.'
+            },
+            {
+                drug1Id: 10, drug2Id: 38, drug2Name: 'Fluconazole',
+                severity: 'moderate', mechanism: 'P-gp inhibition',
+                description: 'Azoles inhibit P-glycoprotein, increasing dabigatran exposure.',
+                clinicalEffect: 'Dabigatran AUC increased ~50-70%. Bleeding risk.',
+                management: 'Reduce dabigatran dose (e.g., 110mg instead of 150mg BID if available). Monitor renal function. Avoid in CrCl <50 mL/min.'
+            },
+            {
+                drug1Id: 12, drug2Id: 28, drug2Name: 'Verapamil',
+                severity: 'major', mechanism: 'P-glycoprotein inhibition',
+                description: 'Verapamil inhibits P-gp, increasing digoxin levels by 50-75%. Additive AV node depression.',
+                clinicalEffect: 'Digoxin toxicity. Symptomatic AV block.',
+                management: 'Reduce digoxin dose by 33-50% when starting verapamil. Monitor digoxin levels 5-7 days after initiation. Check potassium. ECG monitoring.'
+            },
+            {
+                drug1Id: 12, drug2Id: 27, drug2Name: 'Diltiazem',
+                severity: 'moderate', mechanism: 'P-gp inhibition',
+                description: 'Diltiazem inhibits P-gp, modestly increasing digoxin levels.',
+                clinicalEffect: 'Digoxin levels increase 20-40%.',
+                management: 'Monitor digoxin levels 1-2 weeks after starting diltiazem. Consider 25% digoxin dose reduction. Watch for toxicity symptoms.'
+            },
+            {
+                drug1Id: 12, drug2Id: 24, drug2Name: 'Furosemide',
+                severity: 'moderate', mechanism: 'Electrolyte disturbance',
+                description: 'Loop diuretics cause hypokalemia and hypomagnesemia, which significantly increase risk of digoxin toxicity.',
+                clinicalEffect: 'Hypokalemia (target K+ >4.0 mEq/L in digoxin patients) can cause digoxin toxicity even at "normal" levels due to increased Na+/K+ ATPase sensitivity.',
+                management: 'Target K+ 4.0-4.5 mEq/L. Target Mg2+ >2.0 mg/dL. Monitor electrolytes every 1-3 months or after dose changes. Add potassium supplement and/or potassium-sparing agent (spironolactone) as needed.'
+            },
+            {
+                drug1Id: 12, drug2Id: 25, drug2Name: 'Hydrochlorothiazide',
+                severity: 'moderate', mechanism: 'Electrolyte disturbance',
+                description: 'Thiazide diuretics cause hypokalemia and hypomagnesemia, increasing digoxin toxicity risk.',
+                clinicalEffect: 'Increased digoxin toxicity risk even at therapeutic digoxin levels.',
+                management: 'Monitor potassium weekly for first month, then monthly. Target K+ >4.0 mEq/L. Consider adding potassium-sparing diuretic (spironolactone 25mg).'
+            },
+            {
+                drug1Id: 17, drug2Id: 20, drug2Name: 'Losartan',
+                severity: 'moderate', mechanism: 'Pharmacodynamic',
+                description: 'ACE inhibitor + ARB dual blockade of RAAS provides minimal additional benefit with significantly increased risk.',
+                clinicalEffect: 'Hyperkalemia, AKI, hypotension. No mortality benefit (ONTARGET trial). Discontinued combination.',
+                management: 'AVOID routine combination of ACE inhibitor + ARB. Choose one or the other. Sacubitril/valsartan (ARNI) replaces ACE inhibitor in HFrEF — must observe 36-hour washout.'
+            },
+            {
+                drug1Id: 31, drug2Id: 17, drug2Name: 'Lisinopril',
+                severity: 'major', mechanism: 'Pharmacodynamic',
+                description: 'ACE inhibitor + ARNI: concurrent use causes angioedema risk (both increase bradykinin). 36-hour washout required.',
+                clinicalEffect: 'Angioedema risk 2-3× higher than either alone. Can be fatal.',
+                management: 'STOP ACE inhibitor, wait minimum 36 hours before starting ARNI. Do NOT restart ACE inhibitor for 36 hours after stopping ARNI. ARNI (sacubitril/valsartan) REPLACE ACE inhibitor — do not combine.'
+            },
+            {
+                drug1Id: 31, drug2Id: 18, drug2Name: 'Ramipril',
+                severity: 'major', mechanism: 'Pharmacodynamic',
+                description: 'ACE inhibitor + ARNI: concurrent use causes angioedema risk.',
+                clinicalEffect: 'Angioedema risk 2-3× higher. Can be fatal.',
+                management: 'STOP ACE inhibitor, wait minimum 36 hours before starting ARNI. ARNI replaces ACE inhibitor in HFrEF.'
+            },
+            {
+                drug1Id: 31, drug2Id: 19, drug2Name: 'Enalapril',
+                severity: 'major', mechanism: 'Pharmacodynamic',
+                description: 'ACE inhibitor + ARNI: concurrent use causes angioedema risk.',
+                clinicalEffect: 'Angioedema risk 2-3× higher. Can be fatal.',
+                management: 'STOP ACE inhibitor, wait minimum 36 hours before starting ARNI. ARNI replaces ACE inhibitor in HFrEF.'
+            },
+            {
+                drug1Id: 31, drug2Id: 20, drug2Name: 'Losartan',
+                severity: 'moderate', mechanism: 'Pharmacodynamic',
+                description: 'ARNI contains valsartan (ARB). Adding another ARB is redundant and increases hyperkalemia/hypotension risk.',
+                clinicalEffect: 'Hyperkalemia, hypotension, renal impairment.',
+                management: 'Do NOT combine ARNI with separate ARB. Sacubitril/valsartan already provides ARB activity. Choose sacubitril/valsartan OR losartan, not both.'
+            },
+            {
+                drug1Id: 31, drug2Id: 22, drug2Name: 'Spironolactone',
+                severity: 'moderate', mechanism: 'Pharmacodynamic',
+                description: 'ARNI + MRA: both increase potassium. PARADIGM-HF excluded patients with K+ >5.0.',
+                clinicalEffect: 'Hyperkalemia (K+ >5.5) in 10-14% of patients.',
+                management: 'Safe combination in HFrEF when monitored. Check K+ at baseline, 2 weeks after starting, monthly for 3 months, then quarterly. Do not start if K+ >5.0. Reduce MRA dose if K+ >5.5.'
+            },
+            {
+                drug1Id: 17, drug2Id: 22, drug2Name: 'Spironolactone',
+                severity: 'moderate', mechanism: 'Pharmacodynamic',
+                description: 'ACE inhibitor + MRA: both increase potassium significantly.',
+                clinicalEffect: 'Hyperkalemia in 10-15% of patients. RALES trial stopped early for hyperkalemia deaths. Monitor closely.',
+                management: 'Standard HFrEF combination with RALES/EMPHASIS-HF evidence. Check K+ and creatinine at baseline, 3 days, 1 week, 1 month, then every 3-6 months. Do not initiate if K+ >5.0 or eGFR <30.'
+            },
+            {
+                drug1Id: 22, drug2Id: 20, drug2Name: 'Losartan',
+                severity: 'moderate', mechanism: 'Pharmacodynamic',
+                description: 'ARB + MRA: similar hyperkalemia risk as ACE-I + MRA.',
+                clinicalEffect: 'Hyperkalemia in 8-12% of patients.',
+                management: 'Standard HFrEF combination (TOPCAT, EMPHASIS-HF). Monitor K+ and renal function. Start spironolactone at 12.5-25mg. Target K+ 4.0-5.0.'
+            },
+            {
+                drug1Id: 13, drug2Id: 15, drug2Name: 'Bisoprolol',
+                severity: 'moderate', mechanism: 'Pharmacodynamic',
+                description: 'Dual beta-blockade: combining two beta-blockers has no clinical benefit and significantly increases risks of bradycardia, heart block, and heart failure decompensation.',
+                clinicalEffect: 'Severe bradycardia, hypotension, cardiac arrest risk. No therapeutic advantage.',
+                management: 'DO NOT COMBINE two beta-blockers. Choose one beta-blocker with proven mortality benefit in heart failure (bisoprolol, carvedilol, metoprolol succinate) and titrate to target dose. Discontinue the less proven agent first.'
+            },
+            {
+                drug1Id: 13, drug2Id: 14, drug2Name: 'Carvedilol',
+                severity: 'moderate', mechanism: 'Pharmacodynamic',
+                description: 'Dual beta-blockade provides no benefit and increases risks.',
+                clinicalEffect: 'Excessive beta-blockade: bradycardia, hypotension, HF decompensation.',
+                management: 'DO NOT COMBINE. Choose one evidence-based HF beta-blocker and titrate to target. Do not add carvedilol to metoprolol or vice versa.'
+            },
+            {
+                drug1Id: 13, drug2Id: 16, drug2Name: 'Atenolol',
+                severity: 'moderate', mechanism: 'Pharmacodynamic',
+
+                description: 'Dual beta-blockade: combining beta-blockers has no advantage.',
+                clinicalEffect: 'Excessive beta-blockade.',
+                management: 'DO NOT COMBINE two beta-blockers. In AFib with angina, metoprolol alone is preferred. If rate control on metoprolol inadequate, consider digoxin or diltiazem instead of second beta-blocker.'
+            },
+            {
+                drug1Id: 14, drug2Id: 15, drug2Name: 'Bisoprolol',
+                severity: 'moderate', mechanism: 'Pharmacodynamic',
+                description: 'Dual beta-blockade.',
+                clinicalEffect: 'Bradycardia, hypotension.',
+                management: 'AVOID. Choose one HF beta-blocker.'
+            },
+            {
+                drug1Id: 11, drug2Id: 35, drug2Name: 'Ivabradine',
+                severity: 'moderate', mechanism: 'CYP3A4 + Pharmacodynamic',
+                description: 'Both lower heart rate and both are CYP3A4 substrates/metabolized. Amiodarone increases ivabradine levels.',
+                clinicalEffect: 'Excessive bradycardia.',
+                management: 'START ivabradine at 2.5mg BID (half dose) when on amiodarone. Monitor HR. Adjust based on HR response. Maximum ivabradine 5mg BID with amiodarone.'
+            },
+            {
+                drug1Id: 27, drug2Id: 13, drug2Name: 'Metoprolol',
+                severity: 'major', mechanism: 'CYP2D6 + Pharmacodynamic',
+
+                description: 'Diltiazem inhibits CYP2D6 (increasing metoprolol 3-5×) AND both depress AV node conduction. Both bradycardia and metoprolol toxicity.',
+                clinicalEffect: 'Severe bradycardia, AV block, hypotension.',
+                management: 'Avoid combination if possible. If essential: start metoprolol at 12.5mg BID, reduce diltiazem dose by 50%. Monitor HR and ECG. Consider alternative rate control agent.'
+            },
+            {
+                drug1Id: 28, drug2Id: 14, drug2Name: 'Carvedilol',
+                severity: 'moderate', mechanism: 'Pharmacodynamic',
+                description: 'Verapamil + carvedilol: additive AV node depression.',
+                clinicalEffect: 'Bradycardia, hypotension.',
+                management: 'Caution: avoid high-dose both. Monitor HR. Start carvedilol at 3.125mg.'
+            },
+            {
+                drug1Id: 30, drug2Id: 27, drug2Name: 'Diltiazem',
+                severity: 'major', mechanism: 'CYP3A4 inhibition',
+                description: 'Diltiazem inhibits CYP3A4, increasing simvastatin levels 5-10×. FDA limits simvastatin to 10mg with diltiazem.',
+                clinicalEffect: 'Myopathy and rhabdomyolysis risk dramatically increased.',
+                management: 'Max simvastatin 10mg daily with diltiazem. Prefer atorvastatin or rosuvastatin with diltiazem (less interaction).'
+            },
+            {
+                drug1Id: 30, drug2Id: 28, drug2Name: 'Verapamil',
+                severity: 'major', mechanism: 'CYP3A4 inhibition',
+                description: 'Verapamil inhibits CYP3A4, increasing simvastatin levels 4-7×. FDA limits simvastatin to 10mg with verapamil.',
+                clinicalEffect: 'Rhabdomyolysis risk.',
+                management: 'Max simvastatin 10mg. Prefer atorvastatin or rosuvastatin instead.'
+            },
+            {
+                drug1Id: 29, drug2Id: 38, drug2Name: 'Fluconazole',
+                severity: 'moderate', mechanism: 'CYP3A4 inhibition',
+                description: 'Azole antifungals inhibit CYP3A4, increasing atorvastatin exposure.',
+                clinicalEffect: '2-3× atorvastatin levels. Myopathy risk.',
+                management: 'Consider temporary statin hold or dose reduction during azole course. Monitor for myalgias. Alternative: use pravastatin or rosuvastatin if prolonged azole therapy needed. Check CK if symptomatic.'
+            },
+            {
+                drug1Id: 30, drug2Id: 29, drug2Name: 'Atorvastatin',
+
+                severity: 'moderate', mechanism: 'Pharmacodynamic',
+                description: 'Both are statins. Dual statin therapy provides no additional benefit but dramatically increases myopathy risk.',
+                clinicalEffect: 'No LDL-C benefit beyond monotherapy. Myopathy risk proportional to total statin dose.',
+                management: 'NEVER combine two statins. Switch to single higher-potency statin if needed (rosuvastatin 40mg) or add ezetimibe/PCSK9 instead of second statin.'
+            },
+            {
+                drug1Id: 22, drug2Id: 23, drug2Name: 'Eplerenone',
+                severity: 'moderate', mechanism: 'Pharmacodynamic',
+                description: 'Both are MRAs. Dual MRA therapy provides no additional benefit but increases hyperkalemia risk.',
+                clinicalEffect: 'Severe hyperkalemia without clinical benefit.',
+                management: 'DO NOT COMBINE two MRAs. Choose one (spironolactone preferred for HF; eplerenone if gynecomastia with spironolactone).'
+            },
+            {
+                drug1Id: 6, drug2Id: 7, drug2Name: 'Enoxaparin',
+                severity: 'major', mechanism: 'Pharmacodynamic',
+                description: 'Both are anticoagulants with different mechanisms. Concurrent use is sometimes required for transition.',
+                clinicalEffect: 'Bleeding risk increases during overlap period.',
+                management: 'If transitioning between UFH and LMWH, brief overlap is acceptable with monitoring. Do not use therapeutic doses of both simultaneously unless specifically indicated. Monitor anti-Xa levels if overlap >24h.'
+            },
+            {
+                drug1Id: 10, drug2Id: 39, drug2Name: 'Rifampin',
+                severity: 'major', mechanism: 'P-gp induction',
+                description: 'Rifampin induces P-gp, reducing dabigatran levels by ~65%. Therapeutic failure risk.',
+                clinicalEffect: 'Stroke/VTE risk significantly increased due to subtherapeutic dabigatran levels.',
+                management: 'AVOID combination. Switch to warfarin during rifampin treatment. Reconsider DOAC after rifampin course. No dose adjustment can fully compensate for the interaction.'
+            },
+            {
+                drug1Id: 35, drug2Id: 27, drug2Name: 'Diltiazem',
+                severity: 'moderate', mechanism: 'CYP3A4 inhibition',
+                description: 'Diltiazem inhibits CYP3A4, increasing ivabradine levels 2-3×.',
+                clinicalEffect: 'Excessive heart rate reduction, bradycardia.',
+                management: 'CONTRAINDICATED COMBINATION per FDA label — avoid entirely. If ivabradine needed for rate control, use different rate agent or avoid diltiazem. Choose alternative approach (beta-blocker adjustment).'
+            },
+            {
+                drug1Id: 35, drug2Id: 28, drug2Name: 'Verapamil',
+                severity: 'moderate', mechanism: 'CYP3A4 + Pharmacodynamic',
+                description: 'Verapamil inhibits CYP3A4 and both lower heart rate.',
+                clinicalEffect: 'Bradycardia.',
+                management: 'CONTRAINDICATED per FDA label — avoid. Use alternative rate control agent.'
+            },
+            {
+                drug1Id: 28, drug2Id: 3, drug2Name: 'Clopidogrel',
+                severity: 'moderate', mechanism: 'CYP2C8',
+                description: 'Verapamil may reduce clopidogrel antiplatelet effect via CYP2C8 interaction.',
+                clinicalEffect: 'Potentially reduced clopidogrel efficacy after PCI.',
+                management: 'Monitor for stent thrombosis. Consider using prasugrel or ticagrelor if potent antiplatelet effect essential. Otherwise, continue with vigilance.'
+            },
+            {
+                drug1Id: 27, drug2Id: 3, drug2Name: 'Clopidogrel',
+                severity: 'minor', mechanism: 'CYP3A4',
+                description: 'Diltiazem may modestly reduce clopidogrel activation.',
+                clinicalEffect: 'Small reduction in platelet inhibition.',
+                management: 'Generally safe. Monitor for stent thrombosis. Clinical significance uncertain; continue with standard DAPT regimen.'
+            },
+            {
+                drug1Id: 17, drug2Id: 36, drug2Name: 'Ibuprofen',
+                severity: 'moderate', mechanism: 'Pharmacodynamic + Renal',
+                description: 'NSAIDs reduce ACE inhibitor antihypertensive effect by 10-15mmHg. Also increase AKI risk.',
+                clinicalEffect: 'BP increase; acute kidney injury risk, especially in volume-depleted patients.',
+                management: 'Avoid NSAIDs in patients on ACE inhibitors when possible. If NSAID necessary: use lowest dose, shortest duration. Check renal function 1-2 weeks after starting. Hydrate adequately. Consider acetaminophen alternative.'
+            },
+            {
+                drug1Id: 20, drug2Id: 36, drug2Name: 'Ibuprofen',
+                severity: 'moderate', mechanism: 'Pharmacodynamic + Renal',
+                description: 'NSAIDs reduce ARB antihypertensive effect and increase AKI risk.',
+                clinicalEffect: 'BP increase; renal function deterioration.',
+                management: 'Avoid NSAIDs in ARB patients. If essential: short course, lowest dose, hydrate well, check creatinine in 1 week. Consider acetaminophen.'
+            },
+            {
+                drug1Id: 24, drug2Id: 36, drug2Name: 'Ibuprofen',
+                severity: 'moderate', mechanism: 'Renal',
+                description: 'Both affect renal function through different mechanisms. NSAIDs reduce diuretic efficacy.',
+                clinicalEffect: 'Reduced diuretic response; AKI risk.',
+                management: 'Avoid NSAIDs in diuretic users. If needed: short course, hydrate, monitor renal function.'
+            },
+            {
+                drug1Id: 22, drug2Id: 36, drug2Name: 'Ibuprofen',
+                severity: 'moderate', mechanism: 'Renal + Pharmacodynamic',
+                description: 'NSAIDs reduce spironolactone diuretic effect and add to hyperkalemia risk.',
+                clinicalEffect: 'Hyperkalemia, reduced diuretic efficacy, AKI.',
+                management: 'Avoid NSAIDs with MRA. Check K+ if unavoidable.'
+            },
+            {
+                drug1Id: 3, drug2Id: 29, drug2Name: 'Atorvastatin',
+                severity: 'minor', mechanism: 'CYP3A4',
+                description: 'Both are CYP3A4 substrates. Minor interaction with possible small increase in statin levels.',
+                clinicalEffect: 'Minimal clinical significance.',
+                management: 'Generally safe. No dose adjustment needed. Monitor for myalgias.'
+            },
+            {
+                drug1Id: 3, drug2Id: 30, drug2Name: 'Simvastatin',
+                severity: 'moderate', mechanism: 'CYP3A4',
+                description: 'Clopidogrel and simvastatin both use CYP3A4. Small increase in statin exposure.',
+                clinicalEffect: 'Slight increase in myopathy risk.',
+                management: 'Generally safe. Limit simvastatin to 20mg with clopidogrel. Prefer atorvastatin.'
+            },
+            {
+                drug1Id: 13, drug2Id: 24, drug2Name: 'Furosemide',
+                severity: 'minor', mechanism: 'Pharmacodynamic',
+                description: 'Beta-blocker + loop diuretic: standard HF combination.',
+                clinicalEffect: 'Additive BP reduction.',
+                management: 'Standard evidence-based HF combination (GEMINI, MERIT-HF). No special interaction management. Titrate each independently.'
+            },
+            {
+                drug1Id: 24, drug2Id: 32, drug2Name: 'Dapagliflozin',
+                severity: 'minor', mechanism: 'Diuretic additive',
+                description: 'Both have diuretic effects. Additive volume depletion risk.',
+                clinicalEffect: 'Hypotension, especially on initiation.',
+                management: 'When starting SGLT2 inhibitor on loop diuretic, may need to reduce diuretic dose by 20-25% in the first 1-2 weeks. Monitor volume status, BP, and renal function.'
+            },
+            {
+                drug1Id: 25, drug2Id: 32, drug2Name: 'Dapagliflozin',
+                severity: 'minor', mechanism: 'Diuretic additive',
+                description: 'Thiazide + SGLT2i: additive diuresis.',
+                clinicalEffect: 'Potential mild volume depletion.',
+                management: 'Monitor BP. Consider thiazide dose reduction if hypotension develops.'
+            },
+            {
+                drug1Id: 15, drug2Id: 32, drug2Name: 'Dapagliflozin',
+                severity: 'minor', mechanism: 'No known significant interaction',
+                description: 'Standard HFrEF combination (DAPA-HF trial).',
+                clinicalEffect: 'Synergistic HF benefit.',
+                management: 'Continue both per HF guidelines. No interaction concerns.'
+            },
+            {
+                drug1Id: 14, drug2Id: 32, drug2Name: 'Dapagliflozin',
+                severity: 'minor', mechanism: 'No known significant interaction',
+                description: 'Standard HF combination.',
+                clinicalEffect: 'Synergistic benefit.',
+                management: 'No interaction management needed. Continue per guidelines.'
+            },
+            {
+                drug1Id: 22, drug2Id: 32, drug2Name: 'Dapagliflozin',
+                severity: 'minor', mechanism: 'None',
+                description: 'MRA + SGLT2i: both evidence-based in HF. DAPA-HF excluded K+ >5.5.',
+                clinicalEffect: 'Minimal interaction risk.',
+                management: 'Continue both. Monitor K+ per MRA requirements.'
+            },
+            {
+                drug1Id: 17, drug2Id: 32, drug2Name: 'Dapagliflozin',
+                severity: 'minor', mechanism: 'None',
+                description: 'ACE-I + SGLT2i: standard HFrEF combination.',
+                clinicalEffect: 'Synergistic renal and CV protection.',
+                management: 'No dose adjustment needed. Monitor renal function and K+ per HF guidelines.'
+            },
+            {
+                drug1Id: 20, drug2Id: 32, drug2Name: 'Dapagliflozin',
+                severity: 'minor', mechanism: 'None',
+                description: 'ARB + SGLT2i: standard combination.',
+                clinicalEffect: 'Renal and CV benefit.',
+                management: 'Continue per guidelines.'
+            },
+            {
+                drug1Id: 8, drug2Id: 27, drug2Name: 'Diltiazem',
+                severity: 'moderate', mechanism: 'CYP3A4 + P-gp inhibition',
+                description: 'Diltiazem inhibits both CYP3A4 and P-gp, increasing apixaban exposure by ~40%.',
+                clinicalEffect: 'Modestly increased apixaban levels and bleeding risk.',
+                management: 'Generally acceptable with monitoring. Apixaban 5mg BID + diltiazem is well-studied. Consider apixaban 5mg BID (or 2.5mg if meeting dose reduction criteria). Monitor for bleeding.'
+            },
+            {
+                drug1Id: 8, drug2Id: 28, drug2Name: 'Verapamil',
+                severity: 'moderate', mechanism: 'CYP3A4 + P-gp inhibition',
+                description: 'Verapamil inhibits CYP3A4 and P-gp, increasing apixaban exposure by ~40%.',
+                clinicalEffect: 'Increased bleeding risk.',
+                management: 'Apixaban 5mg BID with verapamil is acceptable. Monitor for bleeding. If also meeting dose reduction criteria (age ≥80, Wt ≤60kg, Cr ≥1.5), reduce to 2.5mg BID.'
+            },
+            {
+                drug1Id: 8, drug2Id: 11, drug2Name: 'Amiodarone',
+                severity: 'moderate', mechanism: 'CYP3A4 + P-gp inhibition',
+                description: 'Amiodarone inhibits CYP3A4 and P-gp, increasing apixaban exposure by ~40%.',
+                clinicalEffect: 'Modest increase in bleeding risk.',
+                management: 'Acceptable combination. Apixaban 5mg BID; if meeting ≥2 dose reduction criteria, use 2.5mg BID. Monitor for bleeding. ECG for QTc if on amiodarone.'
+            },
+            {
+                drug1Id: 26, drug2Id: 13, drug2Name: 'Metoprolol',
+                severity: 'minor', mechanism: 'Additive',
+
+                description: 'Amlodipine + metoprolol: standard HTN/HF combination.',
+                clinicalEffect: 'Additive BP reduction. Safe.',
+                management: 'Standard combination. No interaction management needed.'
+            },
+            {
+                drug1Id: 14, drug2Id: 12, drug2Name: 'Digoxin',
+                severity: 'minor', mechanism: 'Additive AV node effect',
+                description: 'Carvedilol + digoxin: additive AV node depression.',
+                clinicalEffect: 'Usually well-tolerated; modest HR reduction.',
+                management: 'Standard AFib/HF combination. Monitor HR. Digoxin target 0.5-0.9 ng/mL.'
+            },
+            {
+                drug1Id: 13, drug2Id: 12, drug2Name: 'Digoxin',
+                severity: 'minor', mechanism: 'Additive AV node effect',
+                description: 'Metoprolol + digoxin: additive AV node depression. Standard AFib rate control.',
+                clinicalEffect: 'Well-tolerated; synergistic rate control in AFib.',
+                management: 'Standard AFib combination. Monitor HR and digoxin level.'
+            },
+            {
+                drug1Id: 16, drug2Id: 12, drug2Name: 'Digoxin',
+                severity: 'minor', mechanism: 'Additive AV node effect',
+                description: 'Atenolol + digoxin: additive AV node depression.',
+                clinicalEffect: 'Modest HR reduction.',
+                management: 'Monitor HR, especially on initiation.'
+            },
+            {
+                drug1Id: 27, drug2Id: 28, drug2Name: 'Verapamil',
+                severity: 'moderate', mechanism: 'Pharmacodynamic',
+                description: 'Two CCBs. Dual CCB therapy increases risk of severe bradycardia, AV block, and heart failure.',
+                clinicalEffect: 'Bradycardia, hypotension, cardiac dysfunction.',
+                management: 'AVOID combination of two CCBs. Choose either DHP (amlodipine) or non-DHP (diltiazem/verapamil) but not both. If additional HTN control needed, add different class (ACE-I, thiazide).'
+            },
+            {
+                drug1Id: 26, drug2Id: 28, drug2Name: 'Verapamil',
+                severity: 'moderate', mechanism: 'Pharmacodynamic',
+                description: 'DHP + non-DHP CCB: additive AV node depression.',
+                clinicalEffect: 'Bradycardia, hypotension.',
+                management: 'Can be used together with caution. Start low doses. Monitor BP and HR. Generally, prefer amlodipine + beta-blocker over amlodipine + verapamil.'
+            },
+            {
+                drug1Id: 26, drug2Id: 27, drug2Name: 'Diltiazem',
+
+                severity: 'moderate', mechanism: 'Pharmacodynamic',
+                description: 'DHP + non-DHP CCB: additive effect.',
+                clinicalEffect: 'Excessive vasodilation and AV node depression.',
+                management: 'Use with caution. Monitor BP and HR.'
+            },
+            {
+                drug1Id: 12, drug2Id: 35, drug2Name: 'Ivabradine',
+                severity: 'minor', mechanism: 'Pharmacodynamic',
+                description: 'Both affect heart rate at different targets (digoxin: Na+/K+ ATPase; ivabradine: If channel).',
+                clinicalEffect: 'Additive HR reduction.',
+                management: 'Monitor HR. Generally safe combination. Target HR 60-70 bpm.'
+            },
+            {
+                drug1Id: 15, drug2Id: 35, drug2Name: 'Ivabradine',
+                severity: 'minor', mechanism: 'Pharmacodynamic',
+                description: 'Bisoprolol + ivabradine: standard HFrEF combination (SHIFT trial).',
+                clinicalEffect: 'Additive HR reduction.',
+                management: 'Bisoprolol must be at max tolerated dose before adding ivabradine. Target HR 60-70. Start ivabradine 5mg BID. Discontinue if HR <50.'
+            },
+            {
+                drug1Id: 14, drug2Id: 35, drug2Name: 'Ivabradine',
+                severity: 'minor', mechanism: 'Pharmacodynamic',
+                description: 'Carvedilol + ivabradine: combination used in HF.',
+                clinicalEffect: 'HR reduction.',
+                management: 'Standard combination. SHIFT trial included carvedilol patients. Titrate carvediolol to max tolerated before adding ivabradine.'
+            },
+            {
+                drug1Id: 13, drug2Id: 35, drug2Name: 'Ivabradine',
+                severity: 'minor', mechanism: 'Pharmacodynamic',
+                description: 'Metoprolol + ivabradine: standard combination.',
+                clinicalEffect: 'HR reduction.',
+                management: 'Maximize metoprolol dose first. Then add ivabradine 5mg BID if still HR >70.'
+            },
+            {
+                drug1Id: 16, drug2Id: 35, drug2Name: 'Ivabradine',
+                severity: 'minor', mechanism: 'Pharmacodynamic',
+                description: 'Atenolol + ivabradine.',
+                clinicalEffect: 'HR reduction.',
+                management: 'Monitor HR.'
+            },
+            {
+                drug1Id: 34, drug2Id: 22, drug2Name: 'Spironolactone',
+                severity: 'moderate', mechanism: 'Hyperkalemia synergism',
+                description: 'Both increase potassium through different mechanisms (SGLT2i: distal delivery; MRA: K+ retention).',
+                clinicalEffect: 'Hyperkalemia, especially on initiation.',
+                management: 'Safe combination per DAPA-HF. Check K+ at baseline, 2 weeks, 1 month, then q3 months. Do not start if K+ >5.0. Consider MRA dose reduction if K+ >5.5.'
+            },
+            {
+                drug1Id: 34, drug2Id: 12, drug2Name: 'Digoxin',
+                severity: 'minor', mechanism: 'Renal function',
+                description: 'SGLT2 inhibitors may slightly alter digoxin renal clearance. Clinical significance unclear.',
+                clinicalEffect: 'Probably insignificant.',
+                management: 'No dose adjustment needed. Monitor digoxin levels as usual.'
+            },
+            {
+                drug1Id: 12, drug2Id: 11, drug2Name: 'Amiodarone',
+                severity: 'major', mechanism: 'P-gp + AV suppression',
+                description: 'Amiodarone inhibits P-gp, increasing digoxin levels 70-100%. Both suppress AV node.',
+                clinicalEffect: 'Digoxin toxicity. Severe bradycardia.',
+                management: 'Reduce digoxin dose by 50% when starting/stopping amiodarone. Check levels in 5-7 days, then monthly. Target 0.5-0.9 ng/mL.'
+            },
+            {
+                drug1Id: 36, drug2Id: 17, drug2Name: 'Lisinopril',
+                severity: 'moderate', mechanism: 'Renal',
+                description: 'NSAIDs reduce ACE-I antihypertensive effect and increase AKI risk.',
+                clinicalEffect: 'BP increase 10-15mmHg; AKI risk.',
+                management: 'Avoid NSAIDs with ACE-I. If necessary: shortest duration, lowest dose, hydrate, check Cr in 1 week.'
+            },
+            {
+                drug1Id: 36, drug2Id: 22, drug2Name: 'Spironolactone',
+                severity: 'moderate', mechanism: 'Renal + Hyperkalemia',
+                description: 'NSAIDs reduce MRA diuretic effect and add to hyperkalemia risk.',
+                clinicalEffect: 'Hyperkalemia, reduced diuresis.',
+                management: 'Avoid NSAIDs with MRA. Check K+ if unavoidable NSAID use.'
+            },
+            {
+                drug1Id: 37, drug2Id: 1, drug2Name: 'Warfarin',
+                severity: 'moderate', mechanism: 'Pharmacodynamic + gastric',
+                description: 'Naproxen increases GI bleeding risk with warfarin.',
+                clinicalEffect: 'GI bleeding risk 3-5× higher.',
+                management: 'Avoid if possible. If needed: lowest dose, shortest duration, add PPI, monitor INR closely.'
+            },
+            {
+                drug1Id: 4, drug2Id: 8, drug2Name: 'Apixaban',
+                severity: 'major', mechanism: 'Pharmacodynamic',
+                description: 'Ticagrelor + DOAC: significantly increased bleeding risk.',
+                clinicalEffect: 'Major bleeding 4-6% annually.',
+                management: 'Avoid routine combination. After PCI, use short DAPT then drop aspirin, continue DOAC + clopidogrel per AUGUSTUS/FIRE trials. Avoid ticagrelor+DOAC if possible — prefer clopidogrel.'
+            },
+            {
+                drug1Id: 5, drug2Id: 8, drug2Name: 'Apixaban',
+                severity: 'major', mechanism: 'Pharmacodynamic',
+                description: 'Prasugrel + DOAC: very high bleeding risk.',
+                clinicalEffect: 'Major bleeding risk significantly elevated.',
+                management: 'AVOID — never use prasugrel with DOAC. Prasugrel contraindicated in patients with prior stroke/TIA. Use clopidogrel + DOAC if combination needed.'
+            },
+            {
+                drug1Id: 4, drug2Id: 1, drug2Name: 'Warfarin',
+                severity: 'major', mechanism: 'Pharmacodynamic',
+                description: 'Ticagrelor + warfarin: high bleeding risk in triple therapy.',
+                clinicalEffect: 'Bleeding 2-4× higher than warfarin alone.',
+                management: 'Avoid. If triple therapy unavoidable, use clopidogrel instead of ticagrelor. Per WOEST/PIONEER-AF trials.'
+            },
+            {
+                drug1Id: 5, drug2Id: 1, drug2Name: 'Warfarin',
+                severity: 'major', mechanism: 'Pharmacodynamic',
+                description: 'Prasugrel + warfarin: very high bleeding risk.',
+                clinicalEffect: 'Bleeding risk 3-5× higher.',
+                management: 'AVOID — prasugrel contraindicated with warfarin. Use clopidogrel instead.'
+            },
+            {
+                drug1Id: 3, drug2Id: 4, drug2Name: 'Ticagrelor',
+                severity: 'moderate', mechanism: 'Pharmacodynamic',
+                description: 'Two P2Y12 inhibitors: no additional antiplatelet benefit, increased bleeding.',
+                clinicalEffect: 'Increased bleeding without additional antiplatelet effect.',
+                management: 'NEVER combine two P2Y12 inhibitors. Choose one for DAPT with aspirin.'
+            },
+            {
+                drug1Id: 3, drug2Id: 5, drug2Name: 'Prasugrel',
+                severity: 'moderate', mechanism: 'Pharmacodynamic',
+                description: 'Two P2Y12 inhibitors.',
+                clinicalEffect: 'Increased bleeding.',
+                management: 'Never combine two P2Y12 inhibitors.'
+            },
+            {
+                drug1Id: 4, drug2Id: 5, drug2Name: 'Prasugrel',
+                severity: 'moderate', mechanism: 'Pharmacodynamic',
+                description: 'Two P2Y12 inhibitors.',
+                clinicalEffect: 'Increased bleeding.',
+                management: 'Never combine two P2Y12 inhibitors.'
+            },
+            {
+                drug1Id: 26, drug2Id: 29, drug2Name: 'Atorvastatin',
+                severity: 'minor', mechanism: 'CYP3A4',
+                description: 'Amlodipine modestly increases atorvastatin levels (~20%).',
+                clinicalEffect: 'Minor increase in statin exposure.',
+                management: 'Generally safe. No dose adjustment needed. Max atorvastatin 80mg with amlodipine (FDA label).'
+            },
+            {
+                drug1Id: 2, drug2Id: 12, drug2Name: 'Digoxin',
+                severity: 'minor', mechanism: 'Renal clearance',
+                description: 'No clinically significant interaction.',
+                clinicalEffect: 'Minimal.',
+                management: 'No dose adjustment needed.'
+            },
+            {
+                drug1Id: 1, drug2Id: 33, drug2Name: 'Rosuvastatin',
+                severity: 'minor', mechanism: 'Minimal CYP involvement',
+                description: 'Warfarin may slightly increase rosuvastatin levels. Rosuvastatin does not use CYP3A4.',
+                clinicalEffect: 'Minimal clinical significance.',
+                management: 'Rosuvastatin is preferred statin with warfarin due to minimal CYP involvement. Standard monitoring.'
+            },
+            {
+                drug1Id: 30, drug2Id: 38, drug2Name: 'Fluconazole',
+                severity: 'major', mechanism: 'CYP3A4 inhibition',
+                description: 'Fluconazole inhibits CYP3A4, increasing simvastatin levels 3-4×.',
+                clinicalEffect: 'Rhabdomyolysis risk.',
+                management: 'AVOID simvastatin with fluconazole. Suspend simvastatin during fluconazole course or switch to pravastatin/rosuvastatin.'
+            },
+            {
+                drug1Id: 29, drug2Id: 33, drug2Name: 'Rosuvastatin',
+                severity: 'moderate', mechanism: 'Pharmacodynamic',
+                description: 'Two statins: no additional benefit, increased myopathy.',
+                clinicalEffect: 'No LDL benefit. Myopathy risk.',
+                management: 'Never combine statins. Switch to single higher-potency statin.'
+            }
+        ];
+    }
+}
+
+// Initialize the diagnostic & drug interaction tools
 document.addEventListener('DOMContentLoaded', () => {
     window.diagnosticTools = new DiagnosticTools();
+    window.drugChecker = new DrugInteractionChecker();
 });
