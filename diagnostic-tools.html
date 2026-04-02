@@ -739,6 +739,73 @@
                     </div>
                 </div>
 
+                <!-- TIMI Risk Score — UA/NSTEMI -->
+                <div class="bg-white rounded-2xl p-6 shadow-lg border border-gray-200">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-cardiac-purple rounded-lg flex items-center justify-center mr-4">
+                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-playfair font-bold text-deep-navy">TIMI Score</h3>
+                            <p class="text-sm text-neutral-slate">UA/NSTEMI Risk Stratification</p>
+                        </div>
+                    </div>
+                    <div class="space-y-3">
+                        <label class="flex items-center justify-between p-2 bg-gray-50 rounded cursor-pointer hover:bg-gray-100 transition-colors">
+                            <span class="text-sm text-deep-navy">Age ≥ 65 years</span>
+                            <input type="checkbox" id="timi-age" class="w-4 h-4 accent-cardiac-purple">
+                            <span class="text-xs text-neutral-slate ml-2 w-4 text-right">1</span>
+                        </label>
+                        <label class="flex items-center justify-between p-2 bg-gray-50 rounded cursor-pointer hover:bg-gray-100 transition-colors">
+                            <span class="text-sm text-deep-navy">≥ 3 CAD risk factors</span>
+                            <input type="checkbox" id="timi-cad-risk" class="w-4 h-4 accent-cardiac-purple">
+                            <span class="text-xs text-neutral-slate ml-2 w-4 text-right">1</span>
+                        </label>
+                        <label class="flex items-center justify-between p-2 bg-gray-50 rounded cursor-pointer hover:bg-gray-100 transition-colors">
+                            <span class="text-sm text-deep-navy">Known CAD (≥ 50% stenosis)</span>
+                            <input type="checkbox" id="timi-known-cad" class="w-4 h-4 accent-cardiac-purple">
+                            <span class="text-xs text-neutral-slate ml-2 w-4 text-right">1</span>
+                        </label>
+                        <label class="flex items-center justify-between p-2 bg-gray-50 rounded cursor-pointer hover:bg-gray-100 transition-colors">
+                            <span class="text-sm text-deep-navy">Aspirin use in past 7 days</span>
+                            <input type="checkbox" id="timi-aspirin" class="w-4 h-4 accent-cardiac-purple">
+                            <span class="text-xs text-neutral-slate ml-2 w-4 text-right">1</span>
+                        </label>
+                        <label class="flex items-center justify-between p-2 bg-gray-50 rounded cursor-pointer hover:bg-gray-100 transition-colors">
+                            <span class="text-sm text-deep-navy">≥ 2 anginal episodes in 24 h</span>
+                            <input type="checkbox" id="timi-angina" class="w-4 h-4 accent-cardiac-purple">
+                            <span class="text-xs text-neutral-slate ml-2 w-4 text-right">1</span>
+                        </label>
+                        <label class="flex items-center justify-between p-2 bg-gray-50 rounded cursor-pointer hover:bg-gray-100 transition-colors">
+                            <span class="text-sm text-deep-navy">ST deviation ≥ 0.5 mm</span>
+                            <input type="checkbox" id="timi-st" class="w-4 h-4 accent-cardiac-purple">
+                            <span class="text-xs text-neutral-slate ml-2 w-4 text-right">1</span>
+                        </label>
+                        <label class="flex items-center justify-between p-2 bg-gray-50 rounded cursor-pointer hover:bg-gray-100 transition-colors">
+                            <span class="text-sm text-deep-navy">Positive cardiac marker (troponin)</span>
+                            <input type="checkbox" id="timi-troponin" class="w-4 h-4 accent-cardiac-purple">
+                            <span class="text-xs text-neutral-slate ml-2 w-4 text-right">1</span>
+                        </label>
+                        <button id="calculate-timi" class="w-full bg-cardiac-purple hover:bg-purple-700 text-white py-3 px-4 rounded-lg font-semibold transition-colors mt-2">
+                            Calculate TIMI Score
+                        </button>
+                        <div id="timi-result" class="hidden bg-gray-50 rounded-lg p-4">
+                            <div class="text-center">
+                                <div class="text-3xl font-bold text-cardiac-purple mb-2" id="timi-score-value">--</div>
+                                <div class="text-sm text-neutral-slate mb-2">TIMI Risk Score</div>
+                                <div class="text-sm font-semibold" id="timi-risk-group"></div>
+                                <p class="text-xs text-neutral-slate mt-2 border-t pt-2" id="timi-mace"></p>
+                                <p class="text-xs text-neutral-slate mt-1" id="timi-recommendation"></p>
+                            </div>
+                        </div>
+                        <div class="mt-2 p-3 bg-purple-50 rounded-lg">
+                            <p class="text-xs text-neutral-slate"><strong>Score 0–1:</strong> Low risk (MACE ~4.7%) &nbsp;|&nbsp; <strong>2:</strong> Intermediate (~8.3%) &nbsp;|&nbsp; <strong>3–4:</strong> High (~15–20%) &nbsp;|&nbsp; <strong>5–7:</strong> Very high (~41%)</p>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- BMI & Cardiovascular Body Metrics Calculator -->
                 <div class="calculator-card rounded-2xl p-6">
                     <div class="flex items-center mb-4">

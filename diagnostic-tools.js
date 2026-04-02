@@ -662,6 +662,72 @@ class DiagnosticTools {
                 this.calculateFramingham();
             });
         }
+
+        // TIMI Risk Score Calculator
+        const calculateTimiBtn = document.getElementById('calculate-timi');
+        if (calculateTimiBtn) {
+            calculateTimiBtn.addEventListener('click', () => {
+                this.calculateTIMI();
+            });
+        }
+    }
+
+    calculateTIMI() {
+        let score = 0;
+
+        if (document.getElementById('timi-age').checked) score++;
+        if (document.getElementById('timi-cad-risk').checked) score++;
+        if (document.getElementById('timi-known-cad').checked) score++;
+        if (document.getElementById('timi-aspirin').checked) score++;
+        if (document.getElementById('timi-angina').checked) score++;
+        if (document.getElementById('timi-st').checked) score++;
+        if (document.getElementById('timi-troponin').checked) score++;
+
+        document.getElementById('timi-score-value').textContent = score + ' / 7';
+
+        let riskGroup, mace, recommendation, colorClass;
+
+        if (score <= 1) {
+            riskGroup = 'Low Risk';
+            colorClass = 'text-success-green';
+            mace = '14-day MACE (death/MI/urgent revascularization): ~4.7%';
+            recommendation = 'Consider conservative management. Outpatient stress testing or CCTA may be appropriate. Early discharge is likely safe if serial troponins remain negative and no high-risk features develop.';
+        } else if (score === 2) {
+            riskGroup = 'Intermediate Risk';
+            colorClass = 'text-warning-amber';
+            mace = '14-day MACE: ~8.3%';
+            recommendation = 'Admit for observation with serial troponins. Consider non-invasive stress testing or coronary CT angiography. Early invasive strategy may be considered if additional risk factors present.';
+        } else if (score <= 4) {
+            riskGroup = 'High Risk';
+            colorClass = 'text-imaging-orange';
+            mace = '14-day MACE: ~15–20%';
+            recommendation = 'Early invasive strategy recommended. Coronary angiography within 24 hours. Initiate dual antiplatelet therapy and anticoagulation per ACS protocol. Cardiology consultation.';
+        } else {
+            riskGroup = 'Very High Risk';
+            colorClass = 'text-alert-coral';
+            mace = '14-day MACE: ~41%';
+            recommendation = 'Urgent early invasive strategy — coronary angiography within 24 hours (sooner if unstable). Dual antiplatelet therapy, anticoagulation, high-intensity statin. Consider CABG if multivessel or left main disease.';
+        }
+
+        const scoreEl = document.getElementById('timi-score-value');
+        scoreEl.className = `text-3xl font-bold mb-2 ${colorClass}`;
+
+        document.getElementById('timi-risk-group').textContent = riskGroup;
+        document.getElementById('timi-risk-group').className = `text-sm font-semibold ${colorClass}`;
+
+        document.getElementById('timi-mace').textContent = mace;
+        document.getElementById('timi-recommendation').textContent = recommendation;
+        document.getElementById('timi-result').classList.remove('hidden');
+
+        if (typeof anime !== 'undefined') {
+            anime({
+                targets: '#timi-result',
+                opacity: [0, 1],
+                scale: [0.9, 1],
+                duration: 500,
+                easing: 'easeOutCubic'
+            });
+        }
     }
 
     calculateWells() {
