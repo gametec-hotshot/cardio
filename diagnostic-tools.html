@@ -227,7 +227,10 @@
                                     <option value="second-degree-avb">2nd Degree AV Block</option>
                                     <option value="third-degree-avb">3rd Degree AV Block</option>
                                     <option value="premature-ventricular">Premature Ventricular Contractions</option>
-                                    <option value="supraventricular-tachycardia">Supraventricular Tachycardia</option>
+                                    <option value="supraventricular-tachycardia">Supraventricular Tachycardia (SVT)</option>
+                                    <option value="left-bundle-branch-block">Left Bundle Branch Block</option>
+                                    <option value="right-bundle-branch-block">Right Bundle Branch Block</option>
+                                    <option value="wpw-pattern">Wolff-Parkinson-White (WPW)</option>
                                 </select>
                             </div>
                             
@@ -802,6 +805,86 @@
                         </div>
                         <div class="mt-2 p-3 bg-purple-50 rounded-lg">
                             <p class="text-xs text-neutral-slate"><strong>Score 0–1:</strong> Low risk (MACE ~4.7%) &nbsp;|&nbsp; <strong>2:</strong> Intermediate (~8.3%) &nbsp;|&nbsp; <strong>3–4:</strong> High (~15–20%) &nbsp;|&nbsp; <strong>5–7:</strong> Very high (~41%)</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- HAS-BLED Score Calculator -->
+                <div class="bg-white rounded-2xl p-6 shadow-lg border border-gray-200">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-red-700 rounded-lg flex items-center justify-center mr-4">
+                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4.5c-.77-.833-2.694-.833-3.464 0L3.34 16.5c-.77.833.192 2.5 1.732 2.5z"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-playfair font-bold text-deep-navy">HAS-BLED</h3>
+                            <p class="text-sm text-neutral-slate">AFib Bleeding Risk Score</p>
+                        </div>
+                    </div>
+                    <div class="space-y-3">
+                        <label class="flex items-center justify-between p-2 bg-gray-50 rounded cursor-pointer hover:bg-gray-100 transition-colors">
+                            <span class="text-sm text-deep-navy"><strong>H</strong> — Hypertension (uncontrolled, &gt;160 mmHg systolic)</span>
+                            <input type="checkbox" id="hasbled-htn" class="w-4 h-4 accent-red-700">
+                            <span class="text-xs text-neutral-slate ml-2 w-4 text-right">1</span>
+                        </label>
+                        <label class="flex items-center justify-between p-2 bg-gray-50 rounded cursor-pointer hover:bg-gray-100 transition-colors">
+                            <span class="text-sm text-deep-navy"><strong>A</strong> — Abnormal Renal Function (dialysis, transplant, Cr &gt;2.26 mg/dL)</span>
+                            <input type="checkbox" id="hasbled-renal" class="w-4 h-4 accent-red-700">
+                            <span class="text-xs text-neutral-slate ml-2 w-4 text-right">1</span>
+                        </label>
+                        <label class="flex items-center justify-between p-2 bg-gray-50 rounded cursor-pointer hover:bg-gray-100 transition-colors">
+                            <span class="text-sm text-deep-navy"><strong>A</strong> — Abnormal Liver Function (cirrhosis, bilirubin &gt;2× ULN)</span>
+                            <input type="checkbox" id="hasbled-liver" class="w-4 h-4 accent-red-700">
+                            <span class="text-xs text-neutral-slate ml-2 w-4 text-right">1</span>
+                        </label>
+                        <label class="flex items-center justify-between p-2 bg-gray-50 rounded cursor-pointer hover:bg-gray-100 transition-colors">
+                            <span class="text-sm text-deep-navy"><strong>S</strong> — Stroke History (prior ischemic stroke or TIA)</span>
+                            <input type="checkbox" id="hasbled-stroke" class="w-4 h-4 accent-red-700">
+                            <span class="text-xs text-neutral-slate ml-2 w-4 text-right">1</span>
+                        </label>
+                        <label class="flex items-center justify-between p-2 bg-gray-50 rounded cursor-pointer hover:bg-gray-100 transition-colors">
+                            <span class="text-sm text-deep-navy"><strong>B</strong> — Bleeding History or Predisposition (prior major bleed, anemia)</span>
+                            <input type="checkbox" id="hasbled-bleeding" class="w-4 h-4 accent-red-700">
+                            <span class="text-xs text-neutral-slate ml-2 w-4 text-right">1</span>
+                        </label>
+                        <label class="flex items-center justify-between p-2 bg-gray-50 rounded cursor-pointer hover:bg-gray-100 transition-colors">
+                            <span class="text-sm text-deep-navy"><strong>L</strong> — Labile INR (TTR &lt;60% on warfarin)</span>
+                            <input type="checkbox" id="hasbled-labile" class="w-4 h-4 accent-red-700">
+                            <span class="text-xs text-neutral-slate ml-2 w-4 text-right">1</span>
+                        </label>
+                        <label class="flex items-center justify-between p-2 bg-gray-50 rounded cursor-pointer hover:bg-gray-100 transition-colors">
+                            <span class="text-sm text-deep-navy"><strong>E</strong> — Elderly (Age &gt;65 years)</span>
+                            <input type="checkbox" id="hasbled-elderly" class="w-4 h-4 accent-red-700">
+                            <span class="text-xs text-neutral-slate ml-2 w-4 text-right">1</span>
+                        </label>
+                        <label class="flex items-center justify-between p-2 bg-gray-50 rounded cursor-pointer hover:bg-gray-100 transition-colors">
+                            <span class="text-sm text-deep-navy"><strong>D</strong> — Drugs or Alcohol</span>
+                            <div class="flex items-center gap-3">
+                                <div class="flex items-center gap-1">
+                                    <input type="checkbox" id="hasbled-drugs" class="w-4 h-4 accent-red-700">
+                                    <span class="text-xs text-neutral-slate">Drugs</span>
+                                </div>
+                                <div class="flex items-center gap-1">
+                                    <input type="checkbox" id="hasbled-alcohol" class="w-4 h-4 accent-red-700">
+                                    <span class="text-xs text-neutral-slate">Alcohol</span>
+                                </div>
+                                <span class="text-xs text-neutral-slate w-4 text-right">2 max</span>
+                            </div>
+                        </label>
+                        <button id="calculate-hasbled" class="w-full bg-red-700 hover:bg-red-900 text-white py-3 px-4 rounded-lg font-semibold transition-colors mt-2">
+                            Calculate HAS-BLED Score
+                        </button>
+                        <div id="hasbled-result" class="hidden bg-gray-50 rounded-lg p-4">
+                            <div class="text-center">
+                                <div class="text-3xl font-bold mb-2" id="hasbled-score-value">--</div>
+                                <div class="text-sm text-neutral-slate mb-2">HAS-BLED Score</div>
+                                <div class="text-sm font-semibold" id="hasbled-risk-group"></div>
+                                <div class="text-xs text-neutral-slate mt-3 border-t pt-3" id="hasbled-recommendation"></div>
+                            </div>
+                        </div>
+                        <div class="mt-2 p-3 bg-red-50 rounded-lg">
+                            <p class="text-xs text-neutral-slate"><strong>Score 0–1:</strong> Low bleeding risk (1.13/100 pt-yrs) &nbsp;|&nbsp; <strong>2:</strong> Moderate (2.54) &nbsp;|&nbsp; <strong>3–6:</strong> High (4.60) &nbsp;|&nbsp; Score ≥3 warrants caution and regular review of modifiable factors. High score should NOT automatically exclude anticoagulation — instead identify and correct risk factors.</p>
                         </div>
                     </div>
                 </div>

@@ -392,6 +392,85 @@ class DiagnosticTools {
                 }
                 break;
                 
+            case 'left-bundle-branch-block':
+                for (let i = 0; i < totalSamples; i++) {
+                    const phase = (i % samplesPerRR) / samplesPerRR;
+                    let y = centerY;
+                    
+                    if (phase < 0.1) { // Normal P wave
+                        y = centerY - 20 * Math.sin(phase * Math.PI / 0.1);
+                    } else if (phase < 0.2) { // PR segment
+                        y = centerY;
+                    } else if (phase < 0.45) { // Wide, notched QRS — LBBB pattern
+                        if (phase < 0.22) y = centerY - 10; // Loss of septal Q
+                        else if (phase < 0.32) y = centerY + 75; // Slurred upstroke (R wave)
+                        else if (phase < 0.44) y = centerY + 15 + 10 * Math.sin((phase - 0.32) * Math.PI / 0.12); // Notching at peak
+                        else y = centerY;
+                    } else if (phase < 0.55) { // ST depression with discordance
+                        y = centerY + 8;
+                    } else if (phase < 0.9) { // Inverted/asymmetric T wave (discordant)
+                        y = centerY + 20 * Math.sin((phase - 0.55) * Math.PI / 0.35);
+                    } else {
+                        y = centerY;
+                    }
+                    
+                    path += ` L ${(i / totalSamples) * width} ${y}`;
+                }
+                break;
+
+            case 'right-bundle-branch-block':
+                for (let i = 0; i < totalSamples; i++) {
+                    const phase = (i % samplesPerRR) / samplesPerRR;
+                    let y = centerY;
+                    
+                    if (phase < 0.1) { // Normal P wave
+                        y = centerY - 20 * Math.sin(phase * Math.PI / 0.1);
+                    } else if (phase < 0.2) { // PR segment
+                        y = centerY;
+                    } else if (phase < 0.4) { // RSR' pattern — classic RBBB
+                        if (phase < 0.22) y = centerY - 15; // Normal Q wave
+                        else if (phase < 0.28) y = centerY + 70; // Initial R wave
+                        else if (phase < 0.32) y = centerY - 20; // S wave
+                        else if (phase < 0.4) y = centerY + 60; // Secondary R' wave (terminal notch)
+                    } else if (phase < 0.55) { // ST depression (discordant)
+                        y = centerY + 8;
+                    } else if (phase < 0.85) { // Inverted T wave in right precordial leads
+                        y = centerY + 18 * Math.sin((phase - 0.55) * Math.PI / 0.3);
+                    } else {
+                        y = centerY;
+                    }
+                    
+                    path += ` L ${(i / totalSamples) * width} ${y}`;
+                }
+                break;
+
+            case 'wpw-pattern':
+                for (let i = 0; i < totalSamples; i++) {
+                    const phase = (i % samplesPerRR) / samplesPerRR;
+                    let y = centerY;
+                    
+                    if (phase < 0.15) { // Very short P wave
+                        y = centerY - 12 * Math.sin(phase * Math.PI / 0.15);
+                    } else if (phase < 0.2) { // VERY short PR — delta wave begins
+                        // Delta wave (slurred upstroke from pre-excitation)
+                        y = centerY + 15 * ((phase - 0.15) / 0.05);
+                    } else if (phase < 0.35) { // Wide QRS starting with delta wave
+                        if (phase < 0.22) y = centerY + 15 + 55 * ((phase - 0.2) / 0.02); // Delta ramp to R
+                        else if (phase < 0.28) y = centerY + 80; // Tall R wave
+                        else if (phase < 0.33) y = centerY - 10; // S wave
+                        else y = centerY;
+                    } else if (phase < 0.55) { // ST segment with secondary changes
+                        y = centerY;
+                    } else if (phase < 0.85) { // T wave discordant (opposite to QRS)
+                        y = centerY + 22 * Math.sin((phase - 0.55) * Math.PI / 0.3);
+                    } else {
+                        y = centerY;
+                    }
+                    
+                    path += ` L ${(i / totalSamples) * width} ${y}`;
+                }
+                break;
+
             default:
                 // Generate normal sinus rhythm as default
                 for (let i = 0; i < totalSamples; i++) {
@@ -578,6 +657,42 @@ class DiagnosticTools {
                     'PR interval varies with no consistent relationship'
                 ],
                 clinical: 'Complete heart block requires immediate evaluation. Often needs permanent pacemaker. May present with syncope (Stokes-Adams attacks), hemodynamic instability, or heart failure. Treat underlying cause if reversible (e.g., drug toxicity, myocarditis).'
+            },
+            'left-bundle-branch-block': {
+                name: 'Left Bundle Branch Block (LBBB)',
+                rate: this.currentHeartRate,
+                characteristics: [
+                    'Wide QRS complex (≥0.12 seconds)',
+                    'Broad, notched or slurred R wave in lateral leads (I, aVL, V5-V6)',
+                    'Absent septal Q waves in lateral leads',
+                    'ST and T wave discordant to QRS (opposite direction)',
+                    'Prolonged R-wave peak time (>60ms in V5-V6)'
+                ],
+                clinical: 'May indicate underlying heart disease (MI, cardiomyopathy, HTN). New-onset LBBB with chest pain is treated as STEMI equivalent. May obscure MI diagnosis on ECG. Consider Sgarbossa criteria for ACS in LBBB.'
+            },
+            'right-bundle-branch-block': {
+                name: 'Right Bundle Branch Block (RBBB)',
+                rate: this.currentHeartRate,
+                characteristics: [
+                    'Wide QRS complex (≥0.12 seconds)',
+                    'RSR\' pattern in V1-V2 (rabbit ears)',
+                    'Wide, slurred S wave in leads I and V6',
+                    'ST and T wave discordant in right precordial leads',
+                    'Normal axis in isolated RBBB'
+                ],
+                clinical: 'May be normal variant or indicate RV strain (PE, cor pulmonale), congenital heart disease, or progressive conduction system disease. New RBBB with chest pain and syncope may indicate PE or extensive anterior MI.'
+            },
+            'wpw-pattern': {
+                name: 'Wolff-Parkinson-White (WPW) Pattern',
+                rate: this.currentHeartRate,
+                characteristics: [
+                    'Short PR interval (<0.12 seconds)',
+                    'Delta wave — slurred upstroke of QRS complex',
+                    'Wide QRS complex (≥0.12 seconds)',
+                    'Secondary ST-T wave changes (discordant to delta wave)',
+                    'May predispose to AVRT (supraventricular tachycardia via accessory pathway)'
+                ],
+                clinical: 'Pre-excitation syndrome with accessory pathway (Bundle of Kent). Risk of orthodromic and antidromic AVRT. Antidromic AVRT and AFib with WPW can degenerate to VF. AV nodal-blocking agents (adenosine, verapamil, beta-blockers) are CONTRAINDICATED in AFib with WPW. Definitive treatment: catheter ablation of accessory pathway.'
             }
         };
         
@@ -670,6 +785,14 @@ class DiagnosticTools {
                 this.calculateTIMI();
             });
         }
+
+        // HAS-BLED Score Calculator
+        const calculateHasbledBtn = document.getElementById('calculate-hasbled');
+        if (calculateHasbledBtn) {
+            calculateHasbledBtn.addEventListener('click', () => {
+                this.calculateHASBLED();
+            });
+        }
     }
 
     calculateTIMI() {
@@ -722,6 +845,59 @@ class DiagnosticTools {
         if (typeof anime !== 'undefined') {
             anime({
                 targets: '#timi-result',
+                opacity: [0, 1],
+                scale: [0.9, 1],
+                duration: 500,
+                easing: 'easeOutCubic'
+            });
+        }
+    }
+
+    calculateHASBLED() {
+        let score = 0;
+
+        if (document.getElementById('hasbled-htn').checked) score++; // H
+        if (document.getElementById('hasbled-renal').checked) score++; // A
+        if (document.getElementById('hasbled-liver').checked) score++; // A
+        if (document.getElementById('hasbled-stroke').checked) score++; // S
+        if (document.getElementById('hasbled-bleeding').checked) score++; // B
+        if (document.getElementById('hasbled-labile').checked) score++; // L
+        if (document.getElementById('hasbled-elderly').checked) score++; // E
+        if (document.getElementById('hasbled-drugs').checked) score++; // D - drugs
+        if (document.getElementById('hasbled-alcohol').checked) score++; // D - alcohol (max 2 for D)
+
+        const scoreEl = document.getElementById('hasbled-score-value');
+        scoreEl.textContent = score + ' / 9';
+
+        let riskGroup, recommendation, colorClass;
+        if (score === 0) {
+            riskGroup = 'Very Low Risk';
+            colorClass = 'text-success-green';
+            recommendation = 'Major bleeding risk ~0 (0/100 patient-years). Oral anticoagulation for AFib is very safe.';
+        } else if (score === 1) {
+            riskGroup = 'Low Risk';
+            colorClass = 'text-success-green';
+            recommendation = 'Major bleeding risk ~1.13% per 100 patient-years. Oral anticoagulation is appropriate for AFib patients at risk of stroke. Low HAS-BLED should not exclude anticoagulation — CHA₂DS₂-VASc determines benefit.';
+        } else if (score === 2) {
+            riskGroup = 'Moderate Risk';
+            colorClass = 'text-warning-amber';
+            recommendation = 'Major bleeding risk ~2.54% per 100 patient-years. Carefully balance stroke prevention vs. bleeding risk. Review and correct modifiable risk factors (e.g., labile INR, concurrent NSAIDs, alcohol excess). DOACs may have lower bleeding risk than warfarin.';
+        } else {
+            riskGroup = 'High Risk (Score ≥3)';
+            colorClass = 'text-alert-coral';
+            recommendation = 'Major bleeding risk ~4.6%+ per 100 patient-years. ⚠️ High score should NOT automatically preclude anticoagulation — benefits typically still outweigh risks. Identify and correct modifiable factors: uncontrolled HTN, labile INRs (consider DOAC instead of warfarin), review NSAID/antiplatelet use, reduce alcohol intake, treat anemia, monitor liver/renal function.';
+        }
+
+        scoreEl.className = 'text-3xl font-bold mb-2 ' + colorClass;
+
+        document.getElementById('hasbled-risk-group').textContent = riskGroup;
+        document.getElementById('hasbled-risk-group').className = 'text-sm font-semibold ' + colorClass;
+        document.getElementById('hasbled-recommendation').textContent = recommendation;
+        document.getElementById('hasbled-result').classList.remove('hidden');
+
+        if (typeof anime !== 'undefined') {
+            anime({
+                targets: '#hasbled-result',
                 opacity: [0, 1],
                 scale: [0.9, 1],
                 duration: 500,
@@ -2711,6 +2887,9 @@ class ECGQuiz {
             { key: 'third-degree-avb', name: 'Third-Degree (Complete) AV Block', difficulty: 'advanced' },
             { key: 'premature-ventricular', name: 'Premature Ventricular Contractions', difficulty: 'advanced' },
             { key: 'supraventricular-tachycardia', name: 'Supraventricular Tachycardia', difficulty: 'advanced' },
+            { key: 'left-bundle-branch-block', name: 'Left Bundle Branch Block', difficulty: 'advanced' },
+            { key: 'right-bundle-branch-block', name: 'Right Bundle Branch Block', difficulty: 'advanced' },
+            { key: 'wpw-pattern', name: 'Wolff-Parkinson-White (WPW)', difficulty: 'advanced' },
         ];
         this.allRhythms = allRhythms;
     }
@@ -2891,6 +3070,9 @@ class ECGQuiz {
             'third-degree-avb': 'Third-degree (complete) AV block: complete AV dissociation with independent atrial and ventricular rhythms. P waves march through QRS complexes at unrelated rates. Usually requires permanent pacing.',
             'premature-ventricular': 'Premature ventricular contractions (PVCs): wide, bizarre QRS without preceding P wave, followed by a compensatory pause. Frequent PVCs (>10-15%/24h) may warrant treatment.',
             'supraventricular-tachycardia': 'Supraventricular tachycardia: narrow QRS, very regular rhythm, rate typically 150–220 bpm. May have retrograde P waves buried in QRS. Vagal maneuvers or adenosine can terminate.',
+            'left-bundle-branch-block': 'Left Bundle Branch Block: wide QRS (≥0.12 s), broad notched/monophasic R in lateral leads, absent septal Q waves, discordant ST-T changes. New LBBB with chest pain = STEMI equivalent. Consider Sgarbossa criteria.',
+            'right-bundle-branch-block': 'Right Bundle Branch Block: wide QRS (≥0.12 s), RSR\' pattern in V1-V2 (rabbit ears), wide slurred S in I and V6. May be benign or indicate cor pulmonale, PE, or progressive conduction disease.',
+            'wpw-pattern': 'Wolff-Parkinson-White: short PR (<0.12 s), delta wave (slurred QRS upstroke), wide QRS. Risk of AVRT and sudden cardiac death if AFib via accessory pathway. AV nodal blockers contraindicated in AFib+WPW. Definitive tx: catheter ablation.',
         };
         return explanations[key] || '';
     }
