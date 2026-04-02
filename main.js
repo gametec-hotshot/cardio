@@ -473,6 +473,22 @@ class CardiologyResource {
                 color: 'cardiac-purple'
             },
             {
+                id: 'brugada-syndrome',
+                name: 'Brugada Syndrome',
+                category: 'Arrhythmia',
+                prevalence: 'Rare',
+                severity: 'High',
+                symptoms: ['syncope', 'palpitations', 'sudden-cardiac-death', 'seizures-during-sleep', 'nocturnal-agonal-respiration'],
+                riskFactors: ['genetic', 'scn5a-mutation', 'family-history', 'fever', 'male', 'asian-ancestry', 'sodium-channel-blockers'],
+                diagnostics: ['ecg', 'drug-challenge-test', 'holter-monitor', 'genetic-testing', 'electrophysiology-study', 'ajmaline-provocative-test'],
+                treatments: ['icd', 'quinidine', 'fever-management', 'medication-avoidance', 'catheter-ablation', 'isoproterenol'],
+                description: 'Inherited sodium channelopathy characterized by distinctive coved ST-segment elevation in right precordial leads (V1-V3) and increased risk of ventricular fibrillation. Leading cause of sudden unexplained death syndrome (SUDS) in young men. Three ECG pattern types with Type 1 being diagnostic. Risk of arrhythmic events is highest during rest or sleep.',
+                incidence: '1–5 per 10,000 (up to 12/10,000 in Southeast Asia)',
+                mortality: 'Untreated symptomatic patients: 10% annual risk of sudden cardiac death; ICD dramatically reduces risk',
+                image: 'resources/brugada.png',
+                color: 'cardiac-purple'
+            },
+            {
                 id: 'deep-vein-thrombosis',
                 name: 'Deep Vein Thrombosis',
                 category: 'Thrombotic Disease',

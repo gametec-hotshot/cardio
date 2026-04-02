@@ -114,6 +114,46 @@
             0%, 100% { opacity: 1; }
             50% { opacity: 0.7; }
         }
+
+        /* Dark Mode Styles */
+        .dark body { background: #0f172a; color: #e2e8f0; }
+        .dark .bg-white { background-color: #1e293b !important; }
+        .dark .bg-light-gray,
+        .dark .bg-gray-50 { background-color: #111827 !important; }
+        .dark .text-deep-navy { color: #f1f5f9 !important; }
+        .dark .text-neutral-slate { color: #94a3b8 !important; }
+        .dark .text-gray-300 { color: #94a3b8 !important; }
+        .dark .text-gray-400 { color: #6b7280 !important; }
+        .dark .text-gray-200 { color: #cbd5e1 !important; }
+        .dark .search-container { background: rgba(30, 41, 59, 0.96); border-color: rgba(37, 99, 235, 0.3); }
+        .dark .shadow-lg,
+        .dark .shadow-2xl { box-shadow: 0 4px 25px rgba(0,0,0,0.5); }
+        .dark .calculator-card,
+        .dark .bg-gray-50 { background: linear-gradient(135deg, #1e293b 0%, #172033 100%) !important; }
+        .dark .border,
+        .dark .border-gray-200,
+        .dark .border-gray-300 { border-color: #334155 !important; }
+        .dark .border-b { border-color: #334155 !important; }
+        .dark .bg-gradient-to-br,
+        .dark .gradient-bg { background-image: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%); }
+        .dark input,
+        .dark select,
+        .dark textarea { background: #1e293b !important; color: #e2e8f0 !important; border-color: #334155 !important; }
+        .dark .disorder-card { background-color: #1e293b; }
+        .dark .bg-gray-100 { background-color: #1f2937 !important; }
+        .dark .bg-blue-50 { background-color: rgba(37,99,235,0.15) !important; }
+        .dark .medication-tier { border-color: #334155; }
+        .dark .medication-tier.first-line { background: linear-gradient(135deg, rgba(5,150,105,0.15), rgba(5,150,105,0.08)); }
+        .dark .medication-tier.second-line { background: linear-gradient(135deg, rgba(217,119,6,0.15), rgba(217,119,6,0.08)); }
+        .dark .medication-tier.third-line { background: linear-gradient(135deg, rgba(220,38,38,0.15), rgba(220,38,38,0.08)); }
+        .dark .research-card { background-color: #1e293b !important; }
+        .dark .bg-yellow-50 { background: rgba(217,119,6,0.1) !important; }
+        .dark .border-yellow-200 { border-color: rgba(217,119,6,0.3) !important; }
+        .dark .protocol-card { background: #1e293b; }
+        .dark .bg-emerald-50 { background: rgba(5,150,105,0.1) !important; }
+        .dark .bg-gray-200 { background-color: #334155 !important; }
+        .dark .hero-text { -webkit-text-fill-color: transparent; }
+        .dark .ecg.container { background: #0a0a0a; }
     </style>
 </head>
 <body class="bg-light-gray font-inter">
@@ -480,6 +520,7 @@
     </footer>
 
     <!-- JavaScript -->
+    <script src="dark-mode.js"></script>
     <script src="main.js"></script>
 </body>
 </html>
