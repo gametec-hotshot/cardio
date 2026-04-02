@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patient Education | CardioReference</title>
+    <meta name="description" content="Heart health guides, disease prevention, lifestyle changes, and understanding your diagnosis — patient-friendly cardiology education.">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@400;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: { extend: {
+                colors: {
+                    'clinical-blue': '#2563EB', 'diagnostic-teal': '#0891B2', 'alert-coral': '#DC2626',
+                    'warning-amber': '#D97706', 'neutral-slate': '#475569', 'light-gray': '#F1F5F9',
+                    'success-green': '#059669', 'deep-navy': '#1E293B', 'ecg-chartreuse': '#84CC16',
+                    'cardiac-purple': '#7C3AED', 'imaging-orange': '#EA580C', 'biomarker-rose': '#E11D48'
+                },
+                fontFamily: {
+                    'inter': ['Inter', 'sans-serif'], 'playfair': ['Playfair Display', 'serif'],
+                    'mono': ['JetBrains Mono', 'monospace']
+                }
+            }}
+        }
+    </script>
+    <style>
+        .edu-card { transition: all 0.3s cubic-bezier(0.4,0,0.2,1); }
+        .edu-card:hover { transform: translateY(-6px); box-shadow: 0 20px 40px -8px rgba(0,0,0,0.15); }
+        .accordion-content { max-height:0; overflow:hidden; transition: max-height 0.4s ease; }
+        .accordion-content.open { max-height: 3000px; }
+        .medical-term { border-bottom: 1px dashed #2563EB; cursor: help; position: relative; }
+        .medical-term:hover::after {
+            content: attr(data-simple); position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%);
+            background: #1E293B; color: white; padding: 6px 12px; border-radius: 6px; font-size: 12px;
+            white-space: normal; width: 250px; z-index: 50; margin-bottom: 8px; line-height: 1.4;
+        }
+        @media (max-width: 640px) { .medical-term:hover::after { width: 200px; font-size: 11px; } }
+        .quiz-option { cursor: pointer; transition: all 0.2s; }
+        .quiz-option:hover { transform: scale(1.015); }
+        .dark body { background: #0f172a; color: #e2e8f0; }
+        .dark .bg-white { background-color: #1e293b !important; }
+        .dark .bg-light-gray { background-color: #111827 !important; }
+        .dark .bg-gray-50 { background-color: #1f2937 !important; }
+        .dark .bg-blue-50 { background-color: rgba(37,99,235,0.15) !important; }
+        .dark .bg-green-50 { background-color: rgba(5,150,105,0.1) !important; }
+        .dark .bg-red-50 { background-color: rgba(220,38,38,0.1) !important; }
+        .dark .bg-amber-50, .dark .bg-yellow-50 { background-color: rgba(217,119,6,0.1) !important; }
+        .dark .bg-purple-50 { background-color: rgba(124,58,237,0.1) !important; }
+        .dark .text-deep-navy { color: #f1f5f9 !important; }
+        .dark .text-neutral-slate { color: #94a3b8 !important; }
+        .dark .text-gray-300 { color: #d1d5db !important; }
+        .dark .text-gray-500 { color: #9ca3af !important; }
+        .dark .text-gray-700 { color: #d1d5db !important; }
+        .dark .border-gray-200, .dark .border-gray-300, .dark .border-gray-100,
+        .dark .border-yellow-200, .dark .border { border-color: #334155 !important; }
+        .dark .shadow-lg { box-shadow: 0 4px 25px rgba(0,0,0,0.5); }
+        .dark .edu-card { background-color: #1e293b; }
+        .dark .quiz-option { background: #1e293b; border-color: #334155; color: #e2e8f0; }
+        .dark .quiz-option:hover { border-color: #2563eb; }
+        .dark .accordion-header { background-color: #1e293b; border-color: #334155; }
+        .dark .bg-gray-100 { background-color: #1f2937 !important; }
+        .dark input, .dark select { background: #1e293b !important; color: #e2e8f0 !important; border-color: #334155 !important; }
+    </style>
+</head>
+<body class="bg-light-gray font-inter">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg border-b-2 border-clinical-blue sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16 flex-wrap gap-2">
+                <a href="index.html" class="flex items-center space-x-3">
+                    <svg class="h-8 w-8 text-clinical-blue" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                    </svg>
+                    <div>
+                        <h1 class="text-xl font-playfair font-bold text-deep-navy">CardioReference</h1>
+                        <p class="text-xs text-neutral-slate hidden sm:block">Patient Education</p>
+                    </div>
+                </a>
+                <div class="hidden md:flex items-center space-x-6">
+                    <a href="index.html" class="text-neutral-slate hover:text-clinical-blue transition-colors font-medium text-sm">Home</a>
+                    <a href="diagnostic-tools.html" class="text-neutral-slate hover:text-clinical-blue transition-colors font-medium text-sm">Diagnostic Tools</a>
+                    <a href="treatment-protocols.html" class="text-neutral-slate hover:text-clinical-blue transition-colors font-medium text-sm">Treatment Protocols</a>
+                    <a href="research.html" class="text-neutral-slate hover:text-clinical-blue transition-colors font-medium text-sm">Research</a>
+                </div>
+                <label class="text-sm text-neutral-slate flex items-center gap-2 cursor-pointer select-none bg-blue-50 px-3 py-1.5 rounded-lg">
+                    <input type="checkbox" id="simple-mode-toggle" class="w-4 h-4 accent-clinical-blue">
+                    <span class="font-medium">Simple Mode</span>
+                </label>
+            </div>
+            <div id="simple-banner" class="hidden bg-green-50 border-t border-green-200 py-2 text-center">
+                <p class="text-sm text-success-green font-medium">📖 Simple Mode — Hover underlined terms for plain-English explanations. Jargon automatically simplified.</p>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="bg-gradient-to-br from-clinical-blue via-diagnostic-teal to-clinical-blue py-12 md:py-20 text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h1 class="text-4xl md:text-5xl lg:text-6xl font-playfair font-bold mb-4">🫀 Patient Education</h1>
+            <p class="text-lg md:text-2xl mb-6 max-w-4xl mx-auto leading-relaxed opacity-95">
+                Understanding your heart health — explained in plain language with practical guidance you can use today.
+            </p>
+            <div class="flex flex-wrap justify-center gap-3 text-sm opacity-90">
+                <span class="bg-white/20 px-4 py-2 rounded-full">✅ Evidence-Based</span>
+                <span class="bg-white/20 px-4 py-2 rounded-full">🗣️ Plain Language</span>
+                <span class="bg-white/20 px-4 py-2 rounded-full">📚 Comprehensive</span>
+                <span class="bg-white/20 px-4 py-2 rounded-full">🔄 Interactive</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quick Guide Cards -->
+    <section class="py-12 md:py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl md:text-4xl font-playfair font-bold text-deep-navy mb-2 text-center">Know Your Heart</h2>
+            <p class="text-lg text-neutral-slate mb-10 text-center">Essential topics every patient should understand.</p>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+                <div class="edu-card bg-light-gray rounded-2xl p-6 cursor-pointer" onclick="scrollToSection('anatomy')">
+                    <div class="w-12 h-12 bg-clinical-blue/10 rounded-xl flex items-center justify-center mb-3">
+                        <svg class="w-7 h-7 text-clinical-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
+                    </div>
+                    <h3 class="font-semibold text-deep-navy mb-1">How Your Heart Works</h3>
+                    <p class="text-sm text-neutral-slate">4 chambers, 4 valves, the basics.</p>
+                </div>
+                <div class="edu-card bg-light-gray rounded-2xl p-6 cursor-pointer" onclick="scrollToSection('prevention')">
+                    <div class="w-12 h-12 bg-success-green/10 rounded-xl flex items-center justify-center mb-3">
+                        <svg class="w-7 h-7 text-success-green" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+                    </div>
+                    <h3 class="font-semibold text-deep-navy mb-1">Prevention Guide</h3>
+                    <p class="text-sm text-neutral-slate">80% of heart disease is preventable.</p>
+                </div>
+                <div class="edu-card bg-light-gray rounded-2xl p-6 cursor-pointer" onclick="scrollToSection('tests')">
+                    <div class="w-12 h-12 bg-diagnostic-teal/10 rounded-xl flex items-center justify-center mb-3">
+                        <svg class="w-7 h-7 text-diagnostic-teal" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+                    </div>
+                    <h3 class="font-semibold text-deep-navy mb-1">Understanding Tests</h3>
+                    <p class="text-sm text-neutral-slate">ECG, echo, angiogram explained.</p>
+                </div>
+                <div class="edu-card bg-light-gray rounded-2xl p-6 cursor-pointer" onclick="scrollToSection('medications')">
+                    <div class="w-12 h-12 bg-cardiac-purple/10 rounded-xl flex items-center justify-center mb-3">
+                        <svg class="w-7 h-7 text-cardiac-purple" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/></svg>
+                    </div>
+                    <h3 class="font-semibold text-deep-navy mb-1">Common Medications</h3>
+                    <p class="text-sm text-neutral-slate">What they do &amp; what to watch for.</p>
+                </div>
+                <div class="edu-card bg-light-gray rounded-2xl p-6 cursor-pointer" onclick="scrollToSection('lifestyle')">
+                    <div class="w-12 h-12 bg-imaging-orange/10 rounded-xl flex items-center justify-center mb-3">🛒</div>
+                    <h3 class="font-semibold text-deep-navy mb-1">Heart-Healthy Living</h3>
+                    <p class="text-sm text-neutral-slate">Diet, exercise, stress tips.</p>
+                </div>
+                <div class="edu-card bg-light-gray rounded-2xl p-6 cursor-pointer" onclick="scrollToSection('conditions')">
+                    <div class="w-12 h-12 bg-alert-coral/10 rounded-xl flex items-center justify-center mb-3">🫀</div>
+                    <h3 class="font-semibold text-deep-navy mb-1">Common Conditions</h3>
+                    <p class="text-sm text-neutral-slate">Heart attack, AFib, heart failure.</p>
+                </div>
+                <div class="edu-card bg-light-gray rounded-2xl p-6 cursor-pointer" onclick="scrollToSection('glossary')">
+                    <div class="w-12 h-12 bg-biomarker-rose/10 rounded-xl flex items-center justify-center mb-3">📖</div>
+                    <h3 class="font-semibold text-deep-navy mb-1">Medical Glossary</h3>
+                    <p class="text-sm text-neutral-slate">Cardiac terms decoded.</p>
+                </div>
+                <div class="edu-card bg-light-gray rounded-2xl p-6 cursor-pointer" onclick="scrollToSection('quiz')">
+                    <div class="w-12 h-12 bg-ecg-chartreuse/10 rounded-xl flex items-center justify-center mb-3">🧠</div>
+                    <h3 class="font-semibold text-deep-navy mb-1">Heart Health Quiz</h3>
+                    <p class="text-sm text-neutral-slate">Test your knowledge!</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section: How Your Heart Works -->
+    <section id="anatomy" class="py-12 md:py-16 bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl md:text-4xl font-playfair font-bold text-deep-navy mb-2 text-center">🫀 How Your Heart Works</h2>
+            <p class="text-lg text-neutral-slate mb-10 text-center max-w-3xl mx-auto">A muscular pump the size of your fist. Beats ~100,000 times a day.</p>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- Chambers -->
+                <div class="bg-white rounded-2xl p-6 md:p-8 shadow-lg">
+                    <h3 class="text-xl font-bold text-deep-navy mb-5">The 4 Chambers</h3>
+                    <div class="space-y-3">
+                        <div class="flex items-start gap-3 p-3 bg-blue-50 rounded-xl">
+                            <span class="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center text-white text-sm font-bold flex-shrink-0">①</span>
+                            <div><h4 class="font-semibold text-deep-navy text-sm"><span class="medical-term" data-simple="Top right chamber — receives 'used' blood from your body (blood that has given away its oxygen)">Right Atrium</span></h4><p class="text-xs text-neutral-slate">Receives deoxygenated blood from the body. It's the waiting room before blood gets sent to the lungs.</p></div>
+                        </div>
+                        <div class="flex items-start gap-3 p-3 bg-blue-50 rounded-xl">
+                            <span class="w-8 h-8 bg-blue-500 rounded-lg flex items-center justify-center text-white text-sm font-bold flex-shrink-0">②</span>
+                            <div><h4 class="font-semibold text-deep-navy text-sm"><span class="medical-term" data-simple="Bottom right chamber — pumps blood to your lungs to pick up fresh oxygen">Right Ventricle</span></h4><p class="text-xs text-neutral-slate">The "lighter" pump — sends blood to nearby lungs to pick up oxygen.</p></div>
+                        </div>
+                        <div class="flex items-start gap-3 p-3 bg-red-50 rounded-xl">
+                            <span class="w-8 h-8 bg-red-600 rounded-lg flex items-center justify-center text-white text-sm font-bold flex-shrink-0">③</span>
+                            <div><h4 class="font-semibold text-deep-navy text-sm"><span class="medical-term" data-simple="Top left chamber — receives fresh oxygen-rich blood from the lungs">Left Atrium</span></h4><p class="text-xs text-neutral-slate">Receives freshly oxygenated blood from the lungs — the "good stuff" your body needs.</p></div>
+                        </div>
+                        <div class="flex items-start gap-3 p-3 bg-red-50 rounded-xl">
+                            <span class="w-8 h-8 bg-red-500 rounded-lg flex items-center justify-center text-white text-sm font-bold flex-shrink-0">④</span>
+                            <div>
+                                <h4 class="font-semibold text-deep-navy text-sm"><span class="medical-term" data-simple="Bottom left — the powerhouse. Pumps blood to your entire body through the aorta. Has the thickest muscle wall.">Left Ventricle</span></h4>
+                                <p class="text-xs text-neutral-slate mb-2">The heart's muscle powerhouse — thickest wall, pumps to your entire body. <strong>Ejection Fraction (EF)</strong> measures how well it works.</p>
+                                <div class="bg-white rounded-lg px-3 py-2 text-xs font-semibold">💡 Normal EF: 55–70% (how much blood squeezed out each beat)</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Blood Flow -->
+                <div class="bg-white rounded-2xl p-6 md:p-8 shadow-lg">
+                    <h3 class="text-xl font-bold text-deep-navy mb-5">Your Blood's Journey</h3>
+                    <div class="space-y-4 relative">
+                        <div class="absolute left-5 top-0 bottom-0 w-0.5 bg-gradient-to-b from-blue-500 via-red-500 to-blue-500 hidden sm:block"></div>
+                        <div class="flex items-start gap-3 pl-0 sm:pl-12 relative">
+                            <span class="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-white text-xs font-bold flex-shrink-0 z-10">1</span>
+                            <div><h4 class="font-semibold text-deep-navy text-sm">Body → Right Heart</h4><p class="text-xs text-neutral-slate">Used blood returns to the right side.</p></div>
+                        </div>
+                        <div class="flex items-start gap-3 pl-0 sm:pl-12 relative">
+                            <span class="w-8 h-8 bg-blue-400 rounded-full flex items-center justify-center text-white text-xs font-bold flex-shrink-0 z-10">2</span>
+                            <div><h4 class="font-semibold text-deep-navy text-sm">Right Heart → Lungs</h4><p class="text-xs text-neutral-slate"><span class="medical-term" data-simple="Lungs = gas exchange. Blood drops off CO₂ waste, picks up fresh O₂ for your body to use.">Blood drops off CO₂, picks up fresh O₂.</span></p></div>
+                        </div>
+                        <div class="flex items-start gap-3 pl-0 sm:pl-12 relative">
+                            <span class="w-8 h-8 bg-red-400 rounded-full flex items-center justify-center text-white text-xs font-bold flex-shrink-0 z-10">3</span>
+                            <div><h4 class="font-semibold text-deep-navy text-sm">Lungs → Left Heart</h4><p class="text-xs text-neutral-slate">Oxygen-rich blood returns to the left side — red and ready.</p></div>
+                        </div>
+                        <div class="flex items-start gap-3 pl-0 sm:pl-12 relative">
+                            <span class="w-8 h-8 bg-red-500 rounded-full flex items-center justify-center text-white text-xs font-bold flex-shrink-0 z-10">4</span>
+                            <div><h4 class="font-semibold text-deep-navy text-sm">Left Heart → Body</h4><p class="text-xs text-neutral-slate">The mighty left ventricle squeezes blood through the aorta to <strong>every cell</strong> in your body.</p></div>
+                        </div>
+                        <div class="flex items-start gap-3 bg-green-50 rounded-xl p-4">
+                            <span class="text-xl">♻️</span>
+                            <div>
+                                <h4 class="font-semibold text-deep-navy text-sm">The Cycle Repeats</h4>
+                                <p class="text-xs text-neutral-slate">~20 seconds per cycle. <strong>100,000 beats/day.</strong> Over a lifetime, ~1 million barrels — enough to fill 200+ train cars.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Valves -->
+            <div class="mt-8 bg-white rounded-2xl p-6 md:p-8 shadow-lg">
+                <h3 class="text-xl font-bold text-deep-navy mb-5 text-center">🔒 The 4 Valves — One-Way Doors</h3>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <div class="text-center p-4 bg-blue-50 rounded-xl">
+                        <div class="text-3xl mb-2">🚪</div>
+                        <h4 class="font-semibold text-deep-navy text-sm"><span class="medical-term" data-simple="3-flap valve between right atrium and right ventricle">Tricuspid</span></h4>
+                        <p class="text-xs text-neutral-slate">3 flaps · Right side</p>
+                    </div>
+                    <div class="text-center p-4 bg-blue-50 rounded-xl">
+                        <div class="text-3xl mb-2">🚪</div>
+                        <h4 class="font-semibold text-deep-navy text-sm">Pulmonary</h4>
+                        <p class="text-xs text-neutral-slate">Right side → Lungs</p>
+                    </div>
+                    <div class="text-center p-4 bg-red-50 rounded-xl">
+                        <div class="text-3xl mb-2">🚪</div>
+                        <h4 class="font-semibold text-deep-navy text-sm"><span class="medical-term" data-simple="2-flap valve between left atrium and left ventricle. Most common valve that gets replaced.">Mitral</span></h4>
+                        <p class="text-xs text-neutral-slate">2 flaps · Most replaced</p>
+                    </div>
+                    <div class="text-center p-4 bg-red-50 rounded-xl">
+                        <div class="text-3xl mb-2">🚪</div>
+                        <h4 class="font-semibold text-deep-navy text-sm"><span class="medical-term" data-simple="The main exit door. Between left ventricle and aorta — blood goes through here to reach your entire body.">Aortic</span></h4>
+                        <p class="text-xs text-neutral-slate">Left side → Body</p>
+                    </div>
+                </div>
+                <div class="mt-4 bg-amber-50 rounded-xl p-3 text-center">
+                    <p class="text-xs text-amber-800"><strong>⚡ Valve problems:</strong> Leaky valve = blood flows backward (<span class="medical-term" data-simple="Like a door that won't stay shut — blood flows the wrong way">regurgitation</span>). Sticky valve = blood can't get through (<span class="medical-term" data-simple="Like a sticky door that won't open wide — blood gets stuck">stenosis</span>). Both make the heart work harder.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section: Prevention Guide -->
+    <section id="prevention" class="py-12 md:py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl md:text-4xl font-playfair font-bold text-deep-navy mb-2 text-center">🛡️ Prevention Guide</h2>
+            <p class="text-lg text-neutral-slate mb-8 text-center">The AHA's Life's Essential 8 — 80% of heart disease is preventable.</p>
+            <div class="bg-gradient-to-r from-green-50 to-emerald-50 rounded-2xl p-6 md:p-8">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                    <!-- 8 checklist items -->
+                    <div class="bg-white rounded-xl p-4 shadow-sm check-item cursor-pointer" onclick="toggleCheck(this)" data-check="diet">
+                        <div class="flex items-center gap-2 mb-2">
+                            <div class="w-7 h-7 rounded-full border-2 border-gray-300 flex items-center justify-center check-circle"><span class="check-icon text-green-600 text-sm hidden">✓</span></div>
+                            <span class="font-semibold text-deep-navy text-sm">🥗 Diet</span>
+                        </div>
+                        <ul class="text-xs text-neutral-slate space-y-1"><li>5+ fruit/veg daily</li><li>Fish 2×/week</li><li>Salt &lt;2,300mg/day</li><li>Whole grains</li><li>Limit added sugars</li></ul>
+                    </div>
+                    <div class="bg-white rounded-xl p-4 shadow-sm check-item cursor-pointer" onclick="toggleCheck(this)" data-check="exercise">
+                        <div class="flex items-center gap-2 mb-2">
+                            <div class="w-7 h-7 rounded-full border-2 border-gray-300 flex items-center justify-center check-circle"><span class="check-icon text-green-600 text-sm hidden">✓</span></div>
+                            <span class="font-semibold text-deep-navy text-sm">🏃 Exercise</span>
+                        </div>
+                        <ul class="text-xs text-neutral-slate space-y-1"><li>150 min/week moderate</li><li>OR 75 min vigorous</li><li>2×/week strength</li><li>Sit less, move more</li><li>10-min walks count!</li></ul>
+                    </div>
+                    <div class="bg-white rounded-xl p-4 shadow-sm check-item cursor-pointer" onclick="toggleCheck(this)" data-check="no-smoking">
+                        <div class="flex items-center gap-2 mb-2">
+                            <div class="w-7 h-7 rounded-full border-2 border-gray-300 flex items-center justify-center check-circle"><span class="check-icon text-green-600 text-sm hidden">✓</span></div>
+                            <span class="font-semibold text-deep-navy text-sm">🚭 No Smoking</span>
+                        </div>
+                        <ul class="text-xs text-neutral-slate space-y-1"><li>#1 preventable cause</li><li>Risk down 50% in 1 year</li><li>Vaping also unsafe</li><li>Ask for quit meds</li></ul>
+                    </div>
+                    <div class="bg-white rounded-xl p-4 shadow-sm check-item cursor-pointer" onclick="toggleCheck(this)" data-check="sleep">
+                        <div class="flex items-center gap-2 mb-2">
+                            <div class="w-7 h-7 rounded-full border-2 border-gray-300 flex items-center justify-center check-circle"><span class="check-icon text-green-600 text-sm hidden">✓</span></div>
+                            <span class="font-semibold text-deep-navy text-sm">😴 Sleep 7-9 hrs</span>
+                        </div>
+                        <ul class="text-xs text-neutral-slate space-y-1"><li>Consistent schedule</li><li>Screen for sleep apnea</li><li>Poor sleep = 48% higher risk</li></ul>
+                    </div>
+                    <div class="bg-white rounded-xl p-4 shadow-sm check-item cursor-pointer" onclick="toggleCheck(this)" data-check="weight">
+                        <div class="flex items-center gap-2 mb-2">
+                            <div class="w-7 h-7 rounded-full border-2 border-gray-300 flex items-center justify-center check-circle"><span class="check-icon text-green-600 text-sm hidden">✓</span></div>
+                            <span class="font-semibold text-deep-navy text-sm">⚖️ Healthy Weight</span>
+                        </div>
+                        <ul class="text-xs text-neutral-slate space-y-1"><li>BMI 18.5-24.9</li><li>Waist &lt;40" M, &lt;35" F</li><li>Lose 5-10% = big benefit</li></ul>
+                    </div>
+                    <div class="bg-white rounded-xl p-4 shadow-sm check-item cursor-pointer" onclick="toggleCheck(this)" data-check="cholesterol">
+                        <div class="flex items-center gap-2 mb-2">
+                            <div class="w-7 h-7 rounded-full border-2 border-gray-300 flex items-center justify-center check-circle"><span class="check-icon text-green-600 text-sm hidden">✓</span></div>
+                            <span class="font-semibold text-deep-navy text-sm">🩸 Cholesterol</span>
+                        </div>
+                        <ul class="text-xs text-neutral-slate space-y-1"><li>Total &lt;200 mg/dL</li><li>LDL &lt;100 mg/dL</li><li>HDL &gt;40 M, &gt;50 F</li><li>TG &lt;150 mg/dL</li></ul>
+                    </div>
+                    <div class="bg-white rounded-xl p-4 shadow-sm check-item cursor-pointer" onclick="toggleCheck(this)" data-check="sugar">
+                        <div class="flex items-center gap-2 mb-2">
+                            <div class="w-7 h-7 rounded-full border-2 border-gray-300 flex items-center justify-center check-circle"><span class="check-icon text-green-600 text-sm hidden">✓</span></div>
+                            <span class="font-semibold text-deep-navy text-sm">📊 Blood Sugar</span>
+                        </div>
+                        <ul class="text-xs text-neutral-slate space-y-1"><li>Fasting &lt;100 mg/dL</li><li>A1c &lt;5.7%</li><li>Diabetes = 2× MI risk</li><li>Prediabetes reversible</li></ul>
+                    </div>
+                    <div class="bg-white rounded-xl p-4 shadow-sm check-item cursor-pointer" onclick="toggleCheck(this)" data-check="bp">
+                        <div class="flex items-center gap-2 mb-2">
+                            <div class="w-7 h-7 rounded-full border-2 border-gray-300 flex items-center justify-center check-circle"><span class="check-icon text-green-600 text-sm hidden">✓</span></div>
+                            <span class="font-semibold text-deep-navy text-sm">💙 Blood Pressure</span>
+                        </div>
+                        <ul class="text-xs text-neutral-slate space-y-1"><li>Optimal: &lt;120/80</li><li>High: ≥130/80</li><li>Stage 2: ≥140/90</li><li>Often no symptoms!</li></ul>
+                    </div>
+                </div>
+                <div class="mt-6 text-center">
+                    <p class="text-lg">✅ Your score: <span id="checklist-score" class="font-bold text-clinical-blue text-2xl">0</span> / 8</p>
+                    <p id="checklist-msg" class="text-xs text-neutral-slate mt-1">Check off the areas you're doing well in!</p>
+                </div>
+            </div>
+
+            <!-- When to Seek Help -->
+            <div class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="bg-red-50 rounded-2xl p-6 border-l-4 border-alert-coral">
+                    <h3 class="font-bold text-alert-coral mb-3 text-lg">⚡ Call 911 if:</h3>
+                    <ul class="text-sm text-neutral-slate space-y-2">
+                        <li class="flex gap-2"><span class="text-alert-coral">🔴</span><span><strong>Chest pain/pressure</strong> lasting &gt;5 min, especially with sweating, nausea, or shortness of breath</span></li>
+                        <li class="flex gap-2"><span class="text-alert-coral">🔴</span><span><strong>Pain in jaw, neck, back, or left arm</strong></span></li>
+                        <li class="flex gap-2"><span class="text-alert-coral">🔴</span><span><strong>Severe shortness of breath</strong> at rest</span></li>
+                        <li class="flex gap-2"><span class="text-alert-coral">🔴</span><span><strong>Fainting</strong> or sudden confusion</span></li>
+                        <li class="flex gap-2"><span class="text-alert-coral">🔴</span><span><strong>Very fast/irregular heartbeat</strong> with dizziness</span></li>
+                    </ul>
+                </div>
+                <div class="bg-amber-50 rounded-2xl p-6 border-l-4 border-warning-amber">
+                    <h3 class="font-bold text-warning-amber mb-3 text-lg">📞 See a doctor soon if:</h3>
+                    <ul class="text-sm text-neutral-slate space-y-2">
+                        <li class="flex gap-2"><span class="text-warning-amber">🟡</span><span>Mild chest discomfort with activity</span></li>
+                        <li class="flex gap-2"><span class="text-warning-amber">🟡</span><span>Leg/ankle swelling that doesn't improve</span></li>
+                        <li class="flex gap-2"><span class="text-warning-amber">🟡</span><span>Getting tired much easier than usual</span></li>
+                        <li class="flex gap-2"><span class="text-warning-amber">🟡</span><span>Heart palpitations (fluttering, skipping)</span></li>
+                        <li class="flex gap-2"><span class="text-warning-amber">🟡</span><span><strong>Family history</strong> of heart disease — start screening by age 40</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section: Understanding Tests -->
+    <section id="tests" class="py-12 md:py-16 bg-light-gray">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl md:text-4xl font-playfair font-bold text-deep-navy mb-2 text-center">📋 Understanding Your Tests</h2>
+            <p class="text-lg text-neutral-slate mb-10 text-center max-w-3xl mx-auto">Your doctor ordered a heart test — what does it mean? Click any test to learn more.</p>
+            <div class="space-y-3 max-w-4xl mx-auto" id="tests-accordion">
+                <!-- ECG -->
+                <div class="bg-white rounded-xl shadow-sm overflow-hidden">
+                    <button class="w-full flex items-center justify-between p-4 sm:p-5 text-left border-b border-gray-100 hover:bg-gray-50 transition-colors" onclick="toggleAccordion(this)">
+                        <div class="flex items-center gap-3">
+                            <span class="text-2xl">⚡</span>
+                            <div><h3 class="font-semibold text-deep-navy">ECG / EKG (Electrocardiogram)</h3><p class="text-xs text-neutral-slate">Quick, painless — the most common test</p></div>
+                        </div>
+                        <svg class="w-5 h-5 text-neutral-slate flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                    </button>
+                    <div class="accordion-content">
+                        <div class="p-4 sm:p-5 space-y-3">
+                            <div class="bg-blue-50 rounded-lg p-3"><p class="text-sm text-neutral-slate"><span class="medical-term" data-simple="A quick test using sticky patches on your chest that read your heart's electrical signals and print them as squiggly lines">Sticky patches detect your heart's electrical signals</span> and print them as squiggly lines — your heart's "electrical fingerprint." Takes 5-10 minutes. Completely painless.</p></div>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                <div><h4 class="font-semibold text-deep-navy text-sm mb-1">🔍 Tells your doctor:</h4><ul class="text-xs text-neutral-slate space-y-1"><li>• Heart rhythm (regular? too fast/slow?)</li><li>• Signs of past or current heart attack</li><li>• Heart muscle thickening</li></ul></div>
+                                <div><h4 class="font-semibold text-deep-navy text-sm mb-1">💡 Good to know:</h4><ul class="text-xs text-neutral-slate space-y-1"><li>• Normal ECG doesn't rule out all problems</li><li>• May need other tests (stress test, echo)</li><li>• No prep needed — wear easy-to-remove top</li></ul></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Echocardiogram -->
+                <div class="bg-white rounded-xl shadow-sm overflow-hidden">
+                    <button class="w-full flex items-center justify-between p-4 sm:p-5 text-left border-b border-gray-100 hover:bg-gray-50 transition-colors" onclick="toggleAccordion(this)">
+                        <div class="flex items-center gap-3">
+                            <span class="text-2xl">🔊</span>
+                            <div><h3 class="font-semibold text-deep-navy"><span class="medical-term" data-simple="An ultrasound of your heart — like baby pictures, but for your heart. Uses sound waves to create live video of your heart beating.">Echocardiogram</span></h3><p class="text-xs text-neutral-slate">Ultrasound of your heart</p></div>
+                        </div>
+                        <svg class="w-5 h-5 text-neutral-slate flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                    </button>
+                    <div class="accordion-content">
+                        <div class="p-4 sm:p-5 space-y-3">
+                            <div class="bg-blue-50 rounded-lg p-3"><p class="text-sm text-neutral-slate">A wand with gel creates sound waves that bounce off your heart — creating a <strong>live video</strong> on a screen. Think baby ultrasound, but for your heart. 30-60 minutes. Painless.</p></div>
+                            <div><h4 class="font-semibold text-deep-navy text-sm mb-1">🔍 Tells your doctor: <span class="medical-term" data-simple="EF = how much blood your heart squeezes out each beat. Normal is 55-70%. Below 40% = heart failure (needs treatment).">Ejection Fraction (EF)</span></h4><ul class="text-xs text-neutral-slate space-y-1"><li>• How well the heart valves open/close</li><li>• Size &amp; shape of chambers</li><li>• Whether all parts squeeze equally</li><li>• Fluid around the heart</li></ul></div>
+                            <div class="bg-green-50 rounded-lg p-3"><p class="text-xs text-neutral-slate"><strong>💡 EF is the key number:</strong> Normal = 55-70%. Below 40% may mean <span class="medical-term" data-simple="Your heart can't pump enough blood to meet your body's needs. This doesn't mean your heart is stopping — it needs help. Treatment is very effective.">heart failure</span> (your heart needs help pumping). No radiation, no needles.</p></div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Stress Test -->
+                <div class="bg-white rounded-xl shadow-sm overflow-hidden">
+                    <button class="w-full flex items-center justify-between p-4 sm:p-5 text-left border-b border-gray-100 hover:bg-gray-50 transition-colors" onclick="toggleAccordion(this)">
+                        <div class="flex items-center gap-3">
+                            <span class="text-2xl">🏃</span>
+                            <div><h3 class="font-semibold text-deep-navy">Stress Test</h3><p class="text-xs text-neutral-slate">Your heart under exercise</p></div>
+                        </div>
+                        <svg class="w-5 h-5 text-neutral-slate flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                    </button>
+                    <div class="accordion-content">
+                        <div class="p-4 sm:p-5 space-y-3">
+                            <div class="bg-blue-50 rounded-lg p-3"><p class="text-sm text-neutral-slate"><span class="medical-term" data-simple="You walk on a treadmill while wearing ECG monitors. Speed and incline increase gradually. Doctors watch how your heart handles exercise stress.">Walk on a treadmill with ECG patches</span> as speed and incline increase. Sometimes medication simulates exercise instead. Monitored constantly. Takes about 1 hour total.</p></div>
+                            <div><h4 class="font-semibold text-deep-navy text-sm mb-1">📋 Prepare:</h4><ul class="text-xs text-neutral-slate space-y-1"><li>• Don't eat 2-3 hours before (water OK)</li><li>• Wear comfy clothes &amp; walking shoes</li><li>• May need to stop certain meds (ask doctor)</li></ul></div>
+                            <div class="bg-green-50 rounded-lg p-3"><p class="text-xs text-neutral-slate"><strong>💡 It's safe</strong> — serious complications ~1 in 2,500. Goal is to raise heart rate, not run a marathon. You can stop anytime.</p></div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Cardiac Catheterization -->
+                <div class="bg-white rounded-xl shadow-sm overflow-hidden">
+                    <button class="w-full flex items-center justify-between p-4 sm:p-5 text-left border-b border-gray-100 hover:bg-gray-50 transition-colors" onclick="toggleAccordion(this)">
+                        <div class="flex items-center gap-3">
+                            <span class="text-2xl">🔬</span>
+                            <div><h3 class="font-semibold text-deep-navy"><span class="medical-term" data-simple="A thin flexible tube guided through a blood vessel (wrist or groin) to your heart arteries. Dye is injected and X-rays show any blockages. Also called angiogram.">Cardiac Catheterization</span> / Angiogram</h3><p class="text-xs text-neutral-slate">Gold standard for blocked arteries</p></div>
+                        </div>
+                        <svg class="w-5 h-5 text-neutral-slate flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                    </button>
+                    <div class="accordion-content">
+                        <div class="p-4 sm:p-5 space-y-3">
+                            <div class="bg-blue-50 rounded-lg p-3"><p class="text-sm text-neutral-slate">A thin tube is inserted through your wrist or groin and guided to your heart arteries. Contrast dye is injected, X-rays show exactly where blockages are. If found, a <span class="medical-term" data-simple="A tiny wire mesh tube placed in a narrowed artery to hold it open — like putting a support ring in a squished garden hose">stent</span> (mesh tube) may be placed right then to open the blockage. 30-90 minutes. Usually stay a few hours after.</p></div>
+                            <div><h4 class="font-semibold text-deep-navy text-sm mb-1">⚠️ After the test:</h4><ul class="text-xs text-neutral-slate space-y-1"><li>• Mild bruising is normal</li><li>• Drink lots of fluids to flush the dye</li><li>• Call doctor if: bleeding won't stop, increasing pain, swelling at site</li></ul></div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Blood Tests -->
+                <div class="bg-white rounded-xl shadow-sm overflow-hidden">
+                    <button class="w-full flex items-center justify-between p-4 sm:p-5 text-left border-b border-gray-100 hover:bg-gray-50 transition-colors" onclick="toggleAccordion(this)">
+                        <div class="flex items-center gap-3">
+                            <span class="text-2xl">🩸</span>
+                            <div><h3 class="font-semibold text-deep-navy">Cardiac Blood Tests</h3><p class="text-xs text-neutral-slate">What your numbers mean</p></div>
+                        </div>
+                        <svg class="w-5 h-5 text-neutral-slate flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                    </button>
+                    <div class="accordion-content">
+                        <div class="p-4 sm:p-5">
+                            <div class="overflow-x-auto">
+                                <table class="w-full text-xs">
+                                    <thead><tr class="bg-gray-50"><th class="text-left p-2 font-semibold text-deep-navy">Test</th><th class="text-left p-2 font-semibold text-deep-navy">Normal Range</th></tr></thead>
+                                    <tbody class="divide-y divide-gray-100">
+                                        <tr><td class="p-2 font-medium">Troponin</td><td class="p-2 text-neutral-slate">&lt;0.04 ng/mL (heart attack if high)</td></tr>
+                                        <tr><td class="p-2 font-medium"><span class="medical-term" data-simple="A hormone your stressed heart releases. Higher = more heart stress. Used to diagnose heart failure.">BNP/NT-proBNP</span></td><td class="p-2 text-neutral-slate">BNP &lt;100 pg/mL</td></tr>
+                                        <tr><td class="p-2 font-medium"><span class="medical-term" data-simple="The 'bad' cholesterol — you want this LOW. High LDL = more clogged arteries.">LDL Cholesterol</span></td><td class="p-2 text-neutral-slate">&lt;100 mg/dL (lower is better)</td></tr>
+                                        <tr><td class="p-2 font-medium"><span class="medical-term" data-simple="The 'good' cholesterol — you want this HIGH. HDL cleans cholesterol from artery walls.">HDL Cholesterol</span></td><td class="p-2 text-neutral-slate">&gt;40 men, &gt;50 women</td></tr>
+                                        <tr><td class="p-2 font-medium"><span class="medical-term" data-simple="A type of blood fat. High levels increase heart risk.">Triglycerides</span></td><td class="p-2 text-neutral-slate">&lt;150 mg/dL</td></tr>
+                                        <tr><td class="p-2 font-medium"><span class="medical-term" data-simple="Shows your average blood sugar over 2-3 months. Diabetes = 2× heart disease risk.">Hemoglobin A1c</span></td><td class="p-2 text-neutral-slate">&lt;5.7%</td></tr>
+                                        <tr><td class="p-2 font-medium">hs-CRP</td><td class="p-2 text-neutral-slate">&lt;1.0 mg/L (inflammation marker)</td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="bg-green-50 rounded-lg p-3 mt-3"><p class="text-xs text-neutral-slate"><strong>💡 Tip:</strong> One abnormal number doesn't mean disease — your doctor looks at everything together. Always ask them to explain your results.</p></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section: Common Medications -->
+    <section id="medications" class="py-12 md:py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl md:text-4xl font-playfair font-bold text-deep-navy mb-2 text-center">💊 Common Heart Medications</h2>
+            <p class="text-lg text-neutral-slate mb-4 text-center max-w-3xl mx-auto">What each one does, why it's prescribed, and what to watch for.</p>
+            <p class="text-center text-xs text-neutral-slate mb-8 max-w-2xl mx-auto">⚠️ Educational only. Never stop or change medication without talking to your doctor.</p>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+                <div class="edu-card bg-light-gray rounded-xl p-5">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="w-11 h-11 bg-clinical-blue rounded-lg flex items-center justify-center text-white font-bold text-xs flex-shrink-0">ACE-I</div>
+                        <div><h3 class="font-semibold text-deep-navy text-sm"><span class="medical-term" data-simple="Drugs ending in '-pril'. They relax (dilate) your blood vessels so blood flows more easily and your heart doesn't have to work as hard.">ACE Inhibitors</span></h3><p class="text-xs text-neutral-slate">Lisinopril, Ramipril, Enalapril</p></div>
+                    </div>
+                    <div class="space-y-1 text-xs text-neutral-slate">
+                        <p><strong>What:</strong> Relax blood vessels, lower BP, protect the heart.</p>
+                        <p><strong>Why:</strong> High BP, heart failure, post-heart attack, diabetes.</p>
+                        <p><strong>Watch for:</strong> Dry cough (common), rarely facial swelling (emergency — call 911).</p>
+                        <p class="text-success-green"><strong>💡 Take at same time daily. Don't add potassium.</strong></p>
+                    </div>
+                </div>
+                <div class="edu-card bg-light-gray rounded-xl p-5">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="w-11 h-11 bg-cardiac-purple rounded-lg flex items-center justify-center text-white font-bold text-xs flex-shrink-0">ARB</div>
+                        <div><h3 class="font-semibold text-deep-navy text-sm"><span class="medical-term" data-simple="Drugs ending in '-sartan'. Similar to ACE inhibitors but less likely to cause that annoying dry cough.">ARBs</span></h3><p class="text-xs text-neutral-slate">Losartan, Valsartan</p></div>
+                    </div>
+                    <div class="space-y-1 text-xs text-neutral-slate">
+                        <p><strong>What:</strong> Same benefits as ACE inhibitors, different mechanism.</p>
+                        <p><strong>Why:</strong> High BP, heart failure, kidney protection.</p>
+                        <p><strong>Watch for:</strong> Elevated potassium. Usually less cough than ACE inhibitors.</p>
+                    </div>
+                </div>
+                <div class="edu-card bg-light-gray rounded-xl p-5">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="w-11 h-11 bg-diagnostic-teal rounded-lg flex items-center justify-center text-white font-bold text-xs flex-shrink-0">BB</div>
+                        <div><h3 class="font-semibold text-deep-navy text-sm"><span class="medical-term" data-simple="Drugs ending in '-olol'. They put the brakes on your heart — fewer beats per minute, each beat more gentle.">Beta-Blockers</span></h3><p class="text-xs text-neutral-slate">Metoprolol, Bisoprolol, Carvedilol</p></div>
+                    </div>
+                    <div class="space-y-1 text-xs text-neutral-slate">
+                        <p><strong>What:</strong> Slow heart rate, reduce strain.</p>
+                        <p><strong>Why:</strong> High BP, heart failure, post-heart attack, irregular rhythms.</p>
+                        <p><strong>Watch for:</strong> Fatigue, cold hands, vivid dreams, slow pulse.</p>
+                        <p class="text-alert-coral font-semibold">⚠️ NEVER stop suddenly — must taper.</p>
+                    </div>
+                </div>
+                <div class="edu-card bg-light-gray rounded-xl p-5">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="w-11 h-11 bg-success-green rounded-lg flex items-center justify-center text-white font-bold text-xs flex-shrink-0">Statin</div>
+                        <div><h3 class="font-semibold text-deep-navy text-sm"><span class="medical-term" data-simple="Drugs ending in '-statin'. They lower cholesterol production in your liver AND reduce inflammation in artery walls. They stabilize plaque so it's less likely to rupture and cause a heart attack.">Statins</span></h3><p class="text-xs text-neutral-slate">Atorvastatin, Rosuvastatin</p></div>
+                    </div>
+                    <div class="space-y-1 text-xs text-neutral-slate">
+                        <p><strong>What:</strong> Lower cholesterol AND stabilize artery plaque to prevent heart attacks.</p>
+                        <p><strong>Why:</strong> High cholesterol, heart attack prevention, post-stent.</p>
+                        <p><strong>Watch for:</strong> Muscle aches (tell your doctor — they may switch).</p>
+                        <p class="text-success-green">💡 Take in evening (liver makes more cholesterol at night).</p>
+                    </div>
+                </div>
+                <div class="edu-card bg-light-gray rounded-xl p-5">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="w-11 h-11 bg-warning-amber rounded-lg flex items-center justify-center text-white font-bold text-xs flex-shrink-0">💉</div>
+                        <div><h3 class="font-semibold text-deep-navy text-sm"><span class="medical-term" data-simple="Blood thinners — they prevent blood clots from forming. They don't actually 'thin' your blood, they just make it less 'sticky' so clots can't easily form.">Blood Thinners</span></h3><p class="text-xs text-neutral-slate">Warfarin, Apixaban, Rivaroxaban</p></div>
+                    </div>
+                    <div class="space-y-1 text-xs text-neutral-slate">
+                        <p><strong>What:</strong> Prevent blood clots. Don't dissolve existing ones.</p>
+                        <p><strong>Why:</strong> AFib (stroke prevention), DVT/PE, mechanical valves.</p>
+                        <p><strong>Watch for:</strong> Increased bleeding — nosebleeds, bruising, blood in stool/urine.</p>
+                        <p><strong>💡 Same time daily. Warfarin needs INR tests. Keep green veggies intake consistent.</strong></p>
+                    </div>
+                </div>
+                div class="edu-card bg-light-gray rounded-xl p-5">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="w-11 h-11 bg-biomarker-rose rounded-lg flex items-center justify-center text-white font-bold text-xs flex-shrink-0">CCB</div>
+                        <div><h3 class="font-semibold text-deep-navy text-sm">Calcium Channel Blockers</h3><p class="text-xs text-neutral-slate">Amlodipine, Diltiazem, Verapamil</p></div>
+                    </div>
+                    <div class="space-y-1 text-xs text-neutral-slate">
+                        <p><strong>What:</strong> Relax blood vessel walls, lower BP.</p>
+                        <p><strong>Why:</strong> High BP, angina, some irregular rhythms.</p>
+                        <p><strong>Watch for:</strong> Swollen ankles with amlodipine, headache, flushing. Non-DHP types (diltiazem/verapamil) also slow heart rate.</p>
+                        <p class="text-alert-coral font-semibold">⚠️ Tell your doctor about ALL drugs — many interactions.</p>
+                    </div>
+                </div>
+                <div class="edu-card bg-light-gray rounded-xl p-5">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="w-11 h-11 bg-imaging-orange rounded-lg flex items-center justify-center text-white font-bold text-xs flex-shrink-0">SGLT2</div>
+                        <div><h3 class="font-semibold text-deep-navy text-sm">SGLT2 Inhibitors</h3><p class="text-xs text-neutral-slate">Dapagliflozin, Empagliflozin</p></div>
+                    </div>
+                    <div class="space-y-1 text-xs text-neutral-slate">
+                        <p><strong>What:</strong> Originally diabetes drugs — now breakthrough heart failure treatments.</p>
+                        <p><strong>Why:</strong> Heart failure (works with AND without diabetes), kidney protection.</p>
+                        <p><strong>Watch for:</strong> Genital yeast infections (common), increased urination.</p>
+                        <p class="text-success-green font-semibold">💡 Breakthrough — reduces HF hospitalizations by 30%.</p>
+                    </div>
+                </div>
+                <div class="edu-card bg-light-gray rounded-xl p-5">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="w-11 h-11 bg-ecg-chartreuse rounded-lg flex items-center justify-center text-white font-bold text-xs flex-shrink-0">AP</div>
+                        <div><h3 class="font-semibold text-deep-navy text-sm">Antiplatelets</h3><p class="text-xs text-neutral-slate">Aspirin, Clopidogrel (Plavix)</p></div>
+                    </div>
+                    <div class="space-y-1 text-xs text-neutral-slate">
+                        <p><strong>What:</strong> Make platelets less sticky — prevent artery clots.</p>
+                        <p><strong>Why:</strong> Post-heart attack, post-stent, stroke prevention.</p>
+                        <p><strong>Watch for:</strong> Easy bruising, nosebleeds, stomach upset.</p>
+                        <p class="text-alert-coral font-semibold">⚠️ Don't stop clopidogrel without your doctor.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
