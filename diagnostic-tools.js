@@ -317,20 +317,30 @@ class DiagnosticTools {
             case 'third-degree-avb':
                 for (let i = 0; i < totalSamples; i++) {
                     const phase = (i % samplesPerRR) / samplesPerRR;
+                    // Atrial rate (independent P waves at ~70 bpm)
+                    const atrialPhase = ((i * 1.07) % samplesPerRR) / samplesPerRR;
+                    // Ventricular escape rate (slow, ~35 bpm)
+                    const ventPhase = ((i * 0.47) % samplesPerRR) / samplesPerRR;
                     let y = centerY;
-                    
-                    if (phase < 0.2) { // P wave independent
-                        y = centerY - 15 * Math.sin(phase * Math.PI / 0.2);
-                    } else if (phase < 0.4) { // Independent P waves
-                        y = centerY;
-                    } else if (phase < 0.6) { // Escape rhythm QRS
-                        if (phase < 0.45) y = centerY + 50;
-                        else if (phase < 0.55) y = centerY - 25;
-                        else y = centerY;
-                    } else {
-                        y = centerY;
+
+                    // P waves (independent, regular atrial activity)
+                    if (atrialPhase < 0.08) {
+                        y = centerY - 18 * Math.sin(atrialPhase * Math.PI / 0.08);
                     }
-                    
+
+                    // QRS complex (slow ventricular escape rhythm)
+                    if (ventPhase < 0.32) {
+                        if (ventPhase < 0.06) y = centerY - 10;
+                        else if (ventPhase < 0.15) y = centerY + 65;
+                        else if (ventPhase < 0.26) y = centerY - 35;
+                        else y = centerY;
+                    }
+
+                    // T wave for ventricular escape beats
+                    if (ventPhase > 0.45 && ventPhase < 0.75) {
+                        y = centerY - 30 * Math.sin((ventPhase - 0.45) * Math.PI / 0.3);
+                    }
+
                     path += ` L ${(i / totalSamples) * width} ${y}`;
                 }
                 break;
@@ -555,6 +565,18 @@ class DiagnosticTools {
                     'Fusion beats may occur'
                 ],
                 clinical: 'Medical emergency requiring immediate intervention and possible cardioversion.'
+            },
+            'third-degree-avb': {
+                name: 'Third-Degree (Complete) AV Block',
+                rate: this.currentHeartRate,
+                characteristics: [
+                    'Complete AV dissociation — P waves and QRS complexes are independent',
+                    'Atrial rate faster than ventricular rate',
+                    'Regular P-P intervals and regular R-R intervals (but unrelated)',
+                    'Ventricular escape rhythm (idioventricular or junctional)',
+                    'PR interval varies with no consistent relationship'
+                ],
+                clinical: 'Complete heart block requires immediate evaluation. Often needs permanent pacemaker. May present with syncope (Stokes-Adams attacks), hemodynamic instability, or heart failure. Treat underlying cause if reversible (e.g., drug toxicity, myocarditis).'
             }
         };
         
