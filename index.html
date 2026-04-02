@@ -238,30 +238,37 @@
                     </h1>
                     <p class="text-xl lg:text-2xl mb-8 text-gray-200 leading-relaxed">
                         Complete cardiovascular resource covering all cardiac disorders, diagnostic tools, 
-                        treatment protocols, and latest research with interactive ECG simulation and clinical decision support.
+                        treatment protocols, patient education, and latest research with interactive ECG simulation and clinical decision support.
                     </p>
                     <div class="flex flex-col sm:flex-row gap-4 mb-12">
-                        <button class="bg-clinical-blue hover:bg-blue-700 text-white px-8 py-4 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105">
-                            Explore Disorders
-                        </button>
-                        <button class="border-2 border-white text-white hover:bg-white hover:text-clinical-blue px-8 py-4 rounded-lg font-semibold transition-all duration-300">
-                            Diagnostic Tools
-                        </button>
+                        <a href="#disorders" class="bg-clinical-blue hover:bg-blue-700 text-white px-8 py-4 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 text-center">
+                            🫀 Explore Disorders
+                        </a>
+                        <a href="diagnostic-tools.html" class="border-2 border-white text-white hover:bg-white hover:text-clinical-blue px-8 py-4 rounded-lg font-semibold transition-all duration-300 text-center">
+                            🔬 Diagnostic Tools
+                        </a>
+                        <a href="patient-education.html" class="border-2 border-white/60 text-white hover:bg-white/20 px-8 py-4 rounded-lg font-semibold transition-all duration-300 text-center">
+                            📖 Patient Education
+                        </a>
                     </div>
                     
                     <!-- Stats -->
-                    <div class="grid grid-cols-3 gap-8">
+                    <div class="grid grid-cols-4 gap-6">
                         <div class="text-center">
-                            <div class="stats-counter text-3xl font-bold text-ecg-chartrose mb-2" data-target="50">0</div>
+                            <div class="stats-counter text-3xl font-bold text-ecg-chartreuse mb-2" data-target="50">0</div>
                             <p class="text-sm text-gray-300">Cardiac Disorders</p>
                         </div>
                         <div class="text-center">
-                            <div class="stats-counter text-3xl font-bold text-ecg-chartrose mb-2" data-target="75">0</div>
+                            <div class="stats-counter text-3xl font-bold text-ecg-chartreuse mb-2" data-target="75">0</div>
                             <p class="text-sm text-gray-300">Diagnostic Tools</p>
                         </div>
                         <div class="text-center">
-                            <div class="stats-counter text-3xl font-bold text-ecg-chartrose mb-2" data-target="200">0</div>
+                            <div class="stats-counter text-3xl font-bold text-ecg-chartreuse mb-2" data-target="200">0</div>
                             <p class="text-sm text-gray-300">Treatment Protocols</p>
+                        </div>
+                        <div class="text-center">
+                            <div class="stats-counter text-3xl font-bold text-ecg-chartreuse mb-2" data-target="1000">0</div>
+                            <p class="text-sm text-gray-300">Patient Resources</p>
                         </div>
                     </div>
                 </div>
@@ -380,7 +387,26 @@
                 </p>
             </div>
             
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <!-- Added 4th card for Patient Education -->
+            
+            <div class="max-w-3xl mx-auto mt-8">
+                <div class="bg-gradient-to-br from-green-50 to-amber-50 rounded-2xl p-8 shadow-lg flex items-start gap-6 hover:shadow-xl transition-all cursor-pointer" onclick="window.location.href='patient-education.html'">
+                    <div class="w-16 h-16 bg-success-green rounded-xl flex items-center justify-center flex-shrink-0">
+                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+                        </svg>
+                    </div>
+                    <div class="text-left">
+                        <h3 class="text-xl font-playfair font-bold text-deep-navy mb-2">📖 Patient Education Center</h3>
+                        <p class="text-neutral-slate mb-4">
+                            Plain-language guides to heart anatomy, common conditions, medications, lifestyle tips, and a "Questions to Ask Your Doctor" checklist you can print and bring to appointments.
+                        </p>
+                        <span class="text-success-green font-semibold">Learn About Your Heart →</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mt-8">
                 <div class="bg-light-gray rounded-2xl p-8 text-center hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
                     <div class="w-16 h-16 bg-clinical-blue rounded-full flex items-center justify-center mx-auto mb-6">
                         <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
