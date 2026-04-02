@@ -419,33 +419,31 @@
                     </div>
                     
                     <div class="space-y-4">
-                        <div class="grid grid-cols-2 gap-4">
-                            <div>
-                                <label class="block text-sm font-medium text-deep-navy mb-1">Age</label>
-                                <input type="number" id="chads-age" class="w-full p-2 border border-gray-300 rounded text-sm" placeholder="Years">
-                            </div>
-                            <div>
-                                <label class="block text-sm font-medium text-deep-navy mb-1">Gender</label>
-                                <select id="chads-gender" class="w-full p-2 border border-gray-300 rounded text-sm">
-                                    <option value="">Select</option>
-                                    <option value="male">Male</option>
-                                    <option value="female">Female</option>
-                                </select>
-                            </div>
+                        <div>
+                            <label class="block text-sm font-medium text-deep-navy mb-1">Gender</label>
+                            <select id="chads-gender" class="w-full p-2 border border-gray-300 rounded text-sm">
+                                <option value="">Select</option>
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
+                            </select>
+                            <p class="text-xs text-neutral-slate mt-1">Female sex category = 1 point</p>
                         </div>
                         
-                        <div class="space-y-2">
-                            <label class="flex items-center">
-                                <input type="checkbox" id="chads-chf" class="mr-2">
-                                <span class="text-sm">Congestive Heart Failure</span>
+                        <div class="space-y-2 border-t pt-3">
+                            <label class="flex items-center justify-between p-2 bg-gray-50 rounded cursor-pointer hover:bg-gray-100 transition-colors">
+                                <span class="text-sm"><strong>C</strong> — Congestive Heart Failure / LV Dysfunction</span>
+                                <input type="checkbox" id="chads-chf" class="w-4 h-4 accent-warning-amber">
+                                <span class="text-xs text-neutral-slate w-4 text-right">1</span>
                             </label>
-                            <label class="flex items-center">
-                                <input type="checkbox" id="chads-hypertension" class="mr-2">
-                                <span class="text-sm">Hypertension</span>
+                            <label class="flex items-center justify-between p-2 bg-gray-50 rounded cursor-pointer hover:bg-gray-100 transition-colors">
+                                <span class="text-sm"><strong>H</strong> — Hypertension</span>
+                                <input type="checkbox" id="chads-hypertension" class="w-4 h-4 accent-warning-amber">
+                                <span class="text-xs text-neutral-slate w-4 text-right">1</span>
                             </label>
-                            <label class="flex items-center">
-                                <input type="checkbox" id="chads-age-65-74" class="mr-2">
-                                <span class="text-sm">Age 65-74 years</span>
+                            <label class="flex items-center justify-between p-2 bg-gray-50 rounded cursor-pointer hover:bg-gray-100 transition-colors">
+                                <span class="text-sm"><strong>A₂</strong> — Age 65–74 years</span>
+                                <input type="checkbox" id="chads-age-65-74" class="w-4 h-4 accent-warning-amber">
+                                <span class="text-xs text-neutral-slate w-4 text-right">1</span>
                             </label>
                             <label class="flex items-center">
                                 <input type="checkbox" id="chads-diabetes" class="mr-2">
