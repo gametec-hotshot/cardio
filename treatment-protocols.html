@@ -268,6 +268,9 @@
                             <button class="protocol-nav-btn w-full text-left p-3 rounded-lg text-neutral-slate hover:bg-gray-100 transition-colors" data-protocol="aortic-dissection">
                                 Aortic Dissection
                             </button>
+                            <button class="protocol-nav-btn w-full text-left p-3 rounded-lg text-neutral-slate hover:bg-gray-100 transition-colors" data-protocol="hypertensive-emergency">
+                                Hypertensive Emergency
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -2305,6 +2308,445 @@
         </div>
     </section>
 
+                        <!-- HYPERTENSIVE EMERGENCY PROTOCOL -->
+                        <div id="hypertensive-emergency-protocol" class="protocol-content hidden">
+                            <div class="bg-white rounded-2xl p-8 shadow-lg mb-8">
+                                <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-8">
+                                    <div>
+                                        <h2 class="text-3xl font-playfair font-bold text-deep-navy">Hypertensive Emergency Management Protocol</h2>
+                                        <p class="text-neutral-slate mt-2">Evidence-based approach to diagnosis, risk stratification, parenteral agent selection, and BP reduction targets in hypertensive crisis states</p>
+                                    </div>
+                                    <div class="mt-4 md:mt-0">
+                                        <span class="inline-block bg-alert-coral text-white px-4 py-2 rounded-full text-sm font-semibold">TIME-CRITICAL EMERGENCY</span>
+                                    </div>
+                                </div>
+
+                                <!-- Key Metrics -->
+                                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+                                    <div class="bg-red-50 border-2 border-red-200 rounded-xl p-5 text-center">
+                                        <div class="text-3xl font-bold text-alert-coral mb-1">&gt;180/120</div>
+                                        <p class="text-sm text-deep-navy font-semibold">BP Threshold (mmHg)</p>
+                                        <p class="text-xs text-neutral-slate mt-1">With end-organ damage</p>
+                                    </div>
+                                    <div class="bg-amber-50 border-2 border-amber-200 rounded-xl p-5 text-center">
+                                        <div class="text-3xl font-bold text-warning-amber mb-1">&#8804;25%</div>
+                                        <p class="text-sm text-deep-navy font-semibold">First Hour MAP Reduction</p>
+                                        <p class="text-xs text-neutral-slate mt-1">Avoid overcorrection</p>
+                                    </div>
+                                    <div class="bg-blue-50 border-2 border-blue-200 rounded-xl p-5 text-center">
+                                        <div class="text-3xl font-bold text-clinical-blue mb-1">160/100</div>
+                                        <p class="text-sm text-deep-navy font-semibold">Target at 2&#8211;6 h</p>
+                                        <p class="text-xs text-neutral-slate mt-1">AHA/ACC guideline</p>
+                                    </div>
+                                    <div class="bg-emerald-50 border-2 border-green-200 rounded-xl p-5 text-center">
+                                        <div class="text-3xl font-bold text-success-green mb-1">24&#8211;48h</div>
+                                        <p class="text-sm text-deep-navy font-semibold">Normalize Cautiously</p>
+                                        <p class="text-xs text-neutral-slate mt-1">Transition to oral therapy</p>
+                                    </div>
+                                </div>
+
+                                <!-- Definition -->
+                                <div class="mb-8">
+                                    <h3 class="text-2xl font-playfair font-bold text-deep-navy mb-6">Definition &amp; Classification</h3>
+                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                        <div class="bg-red-50 border-2 border-red-200 rounded-xl p-6">
+                                            <div class="flex items-center mb-3">
+                                                <span class="bg-alert-coral text-white px-3 py-1 rounded-full text-sm font-bold mr-3">EMERGENCY</span>
+                                                <h4 class="font-bold text-deep-navy text-xl">Hypertensive Emergency</h4>
+                                            </div>
+                                            <ul class="text-sm text-neutral-slate space-y-1.5">
+                                                <li>&bull; BP usually &gt;180/120 mmHg</li>
+                                                <li>&bull; <strong>With progressive target-organ damage</strong></li>
+                                                <li>&bull; Requires immediate BP reduction with IV agents</li>
+                                                <li>&bull; Manage in ICU with arterial line monitoring</li>
+                                            </ul>
+                                            <div class="mt-3 p-3 bg-white rounded-lg">
+                                                <p class="text-xs font-semibold text-deep-navy mb-1">Target-organ manifestations:</p>
+                                                <div class="grid grid-cols-2 gap-2 text-xs text-neutral-slate">
+                                                    <span>&bull; Encephalopathy</span>
+                                                    <span>&bull; Intracranial hemorrhage</span>
+                                                    <span>&bull; Acute pulmonary edema</span>
+                                                    <span>&bull; Aortic dissection</span>
+                                                    <span>&bull; ACS / unstable angina</span>
+                                                    <span>&bull; Acute kidney injury</span>
+                                                    <span>&bull; Preeclampsia / eclampsia</span>
+                                                    <span>&bull; MAHA</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="bg-amber-50 border-2 border-amber-200 rounded-xl p-6">
+                                            <div class="flex items-center mb-3">
+                                                <span class="bg-warning-amber text-white px-3 py-1 rounded-full text-sm font-bold mr-3">URGENCY</span>
+                                                <h4 class="font-bold text-deep-navy text-xl">Hypertensive Urgency</h4>
+                                            </div>
+                                            <ul class="text-sm text-neutral-slate space-y-1.5">
+                                                <li>&bull; BP &gt;180/120 mmHg <strong>without</strong> acute end-organ damage</li>
+                                                <li>&bull; <strong>NO</strong> IV therapy required</li>
+                                                <li>&bull; Adjust or restart oral antihypertensives</li>
+                                                <li>&bull; Outpatient management or observation unit</li>
+                                                <li>&bull; Gradual reduction over 24&#8211;48 hours</li>
+                                            </ul>
+                                            <div class="mt-3 p-3 bg-white rounded-lg">
+                                                <p class="text-xs font-semibold text-deep-navy mb-1">Key distinction:</p>
+                                                <p class="text-xs text-neutral-slate">Presence of <strong>end-organ damage</strong> defines emergency vs urgency, <strong>NOT</strong> the absolute BP number. A patient at 160/100 with acute pulmonary edema IS a hypertensive emergency. A patient at 240/140 with no organ damage is hypertensive urgency.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Initial Evaluation -->
+                                <div class="mb-8">
+                                    <h3 class="text-2xl font-playfair font-bold text-deep-navy mb-6">Initial Evaluation (First 15 Minutes)</h3>
+                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                        <div class="bg-gray-50 rounded-xl p-5">
+                                            <h4 class="font-bold text-deep-navy mb-3">Diagnostic Tests</h4>
+                                            <ul class="text-sm text-neutral-slate space-y-1.5">
+                                                <li>&#9744; 12-lead ECG &mdash; ischemia, LVH, strain pattern</li>
+                                                <li>&#9744; Troponin (hs-cTn) &mdash; myocardial injury</li>
+                                                <li>&#9744; BNP / NT-proBNP &mdash; heart failure</li>
+                                                <li>&#9744; CMP &mdash; creatinine, Na+, K+, BUN</li>
+                                                <li>&#9744; Urinalysis &mdash; hematuria, proteinuria</li>
+                                                <li>&#9744; CBC &mdash; MAHA (schistocytes, thrombocytopenia)</li>
+                                                <li>&#9744; CT head non-contrast &mdash; ICH or PRES</li>
+                                                <li>&#9744; Bedside echo &mdash; LV function, wall motion, effusion</li>
+                                                <li>&#9744; Fundoscopy &mdash; papilledema, hemorrhages, exudates</li>
+                                            </ul>
+                                        </div>
+                                        <div class="bg-gray-50 rounded-xl p-5">
+                                            <h4 class="font-bold text-deep-navy mb-3">Initial Stabilization</h4>
+                                            <ul class="text-sm text-neutral-slate space-y-1.5">
+                                                <li>&#9744; <strong>ICU admission</strong> &mdash; continuous cardiac &amp; hemodynamic monitoring</li>
+                                                <li>&#9744; <strong>Arterial line</strong> &mdash; beat-to-beat BP monitoring for IV titration</li>
+                                                <li>&#9744; <strong>Confirm true BP</strong> &mdash; repeat on opposite arm, correct cuff size</li>
+                                                <li>&#9744; <strong>Two large-bore IVs</strong> &mdash; central line for continuous infusion</li>
+                                                <li>&#9744; <strong>Reversible causes</strong> &mdash; nonadherence, sympathomimetics, MAOI+tyramine, acute pain</li>
+                                                <li>&#9744; <strong>Foley catheter</strong> &mdash; serial urine output (target &ge;0.5 mL/kg/hr)</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- BP Reduction Targets -->
+                                <div class="mb-8">
+                                    <h3 class="text-2xl font-playfair font-bold text-deep-navy mb-6">BP Reduction Targets by Clinical Scenario</h3>
+                                    <div class="overflow-x-auto rounded-xl border border-gray-200">
+                                        <table class="w-full text-sm">
+                                            <thead>
+                                                <tr class="bg-deep-navy text-white">
+                                                    <th class="p-4 text-left">Scenario</th>
+                                                    <th class="p-4 text-left">First Hour</th>
+                                                    <th class="p-4 text-left">2&#8211;6 h</th>
+                                                    <th class="p-4 text-left">Next Phase</th>
+                                                    <th class="p-4 text-left">Key Caution</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody class="divide-y divide-gray-200">
+                                                <tr class="bg-green-50">
+                                                    <td class="p-4 font-semibold text-success-green">Most emergencies</td>
+                                                    <td class="p-4">&darr;MAP &le;25%</td>
+                                                    <td class="p-4">160/100 mmHg</td>
+                                                    <td class="p-4">Normalize over 24&#8211;48 h</td>
+                                                    <td class="p-4 text-xs text-neutral-slate">Avoid &gt;25% reduction in 1st hour &#8594; hypoperfusion risk</td>
+                                                </tr>
+                                                <tr class="bg-red-50">
+                                                    <td class="p-4 font-semibold text-alert-coral">Aortic dissection</td>
+                                                    <td class="p-4">SBP 100&#8211;120, HR&lt;60</td>
+                                                    <td class="p-4">Maintain SBP 100&#8211;120</td>
+                                                    <td class="p-4">Immediate surgery (Type A)</td>
+                                                    <td class="p-4 text-xs text-neutral-slate">Beta-blockade FIRST, then vasodilator. Most aggressive target.</td>
+                                                </tr>
+                                                <tr class="bg-amber-50">
+                                                    <td class="p-4 font-semibold text-warning-amber">Acute ischemic stroke</td>
+                                                    <td class="p-4">&le;15% reduction</td>
+                                                    <td class="p-4">Target &le;185/110</td>
+                                                    <td class="p-4">Reassess per stroke protocol</td>
+                                                    <td class="p-4 text-xs text-neutral-slate">&darr;Perfusion &#8594; &darr;infarct size. If tPA candidate, BP must be &lt;185/110.</td>
+                                                </tr>
+                                                <tr class="bg-red-50">
+                                                    <td class="p-4 font-semibold text-alert-coral">Intracerebral hemorrhage</td>
+                                                    <td class="p-4">SBP 140 mmHg</td>
+                                                    <td class="p-4">Maintain 140&#8211;160</td>
+                                                    <td class="p-4">Transition to oral agents</td>
+                                                    <td class="p-4 text-xs text-neutral-slate">INTERACT-2: SBP &lt;140 safe, reduces hematoma expansion</td>
+                                                </tr>
+                                                <tr class="bg-purple-50">
+                                                    <td class="p-4 font-semibold text-cardiac-purple">ACS / pulmonary edema</td>
+                                                    <td class="p-4">Gradual per symptoms</td>
+                                                    <td class="p-4">Treat underlying cause</td>
+                                                    <td class="p-4">Transition to GDMT</td>
+                                                    <td class="p-4 text-xs text-neutral-slate">Nitroglycerin preferred: &darr;preload + &darr;afterload + coronary dilation</td>
+                                                </tr>
+                                                <tr class="bg-pink-50">
+                                                    <td class="p-4 font-semibold text-biomarker-rose">Eclampsia / preeclampsia</td>
+                                                    <td class="p-4">SBP &lt;160, DBP &lt;110</td>
+                                                    <td class="p-4">Maintain &lt;160/110</td>
+                                                    <td class="p-4">Delivery of fetus (definitive)</td>
+                                                    <td class="p-4 text-xs text-neutral-slate">Labetalol, hydralazine, PO nifedipine. MgSO&#8324; for seizures. Avoid ACEi.</td>
+                                                </tr>
+                                                <tr class="bg-blue-50">
+                                                    <td class="p-4 font-semibold text-clinical-blue">Encephalopathy / PRES</td>
+                                                    <td class="p-4">&darr;MAP 20&#8211;25%</td>
+                                                    <td class="p-4">Gradual further reduction</td>
+                                                    <td class="p-4">Normalize over 24&#8211;48 h</td>
+                                                    <td class="p-4 text-xs text-neutral-slate">Nicardipine or labetalol preferred. Neuro symptoms usually resolve with BP control.</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="mt-4 p-4 bg-red-50 border border-red-200 rounded-xl">
+                                        <p class="text-sm text-neutral-slate"><strong class="text-alert-coral">&#9888; Universal Warning:</strong> Overly aggressive BP reduction can precipitate watershed infarction, myocardial ischemia, or acute kidney injury. The 25% first-hour rule protects auto-regulated organ perfusion. <strong>Exception:</strong> Aortic dissection (needs the most aggressive reduction).</p>
+                                    </div>
+                                </div>
+
+                                <!-- Parenteral Agents -->
+                                <div class="mb-8">
+                                    <h3 class="text-2xl font-playfair font-bold text-deep-navy mb-6">First-Line Parenteral Antihypertensive Agents</h3>
+                                    <div class="overflow-x-auto rounded-xl border border-gray-200 mb-6">
+                                        <table class="w-full text-sm">
+                                            <thead>
+                                                <tr class="bg-deep-navy text-white">
+                                                    <th class="p-4 text-left">Agent</th>
+                                                    <th class="p-4 text-left">Class</th>
+                                                    <th class="p-4 text-left">Dosing</th>
+                                                    <th class="p-4 text-left">Onset / Duration</th>
+                                                    <th class="p-4 text-left">Best For</th>
+                                                    <th class="p-4 text-left">Key Considerations</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody class="divide-y divide-gray-200">
+                                                <tr class="bg-green-50">
+                                                    <td class="p-4 font-bold text-success-green">Nicardipine</td>
+                                                    <td class="p-4">DHP CCB</td>
+                                                    <td class="p-4">Start 5 mg/hr IV &rarr; &uarr;2.5 mg/hr q15min &rarr; max 15 mg/hr</td>
+                                                    <td class="p-4">5&#8211;15 min / 2&#8211;4 h</td>
+                                                    <td class="p-4 text-xs">Encephalopathy, ICH, ischemic stroke, general emergencies</td>
+                                                    <td class="p-4 text-xs text-neutral-slate"><strong class="text-success-green">&check;</strong> Most commonly used; smooth titration; renal/hepatic safe<br><strong class="text-warning-amber">&#9888;</strong> Reflex tachycardia, headache, phlebitis with prolonged peripheral infusion</td>
+                                                </tr>
+                                                <tr class="bg-blue-50">
+                                                    <td class="p-4 font-bold text-clinical-blue">Clevidipine</td>
+                                                    <td class="p-4">DHP CCB (lipid emulsion)</td>
+                                                    <td class="p-4">Start 1&#8211;2 mg/hr &rarr; double q90s to 16 mg/hr &rarr; &uarr;50% q15min &rarr; max 21 mg/hr</td>
+                                                    <td class="p-4">1&#8211;2 min / ~1 min</td>
+                                                    <td class="p-4 text-xs">Peri-operative HTN, post-cardiac surgery</td>
+                                                    <td class="p-4 text-xs text-neutral-slate"><strong class="text-success-green">&check;</strong> Ultra-short half-life (1 min) &#8211; stops in 5&#8211;10 min<br><strong class="text-alert-coral">❌</strong> Soy/peanut/egg allergy; severe lipid metabolism disorder</td>
+                                                </tr>
+                                                <tr class="bg-teal-50">
+                                                    <td class="p-4 font-bold text-diagnostic-teal">Labetalol</td>
+                                                    <td class="p-4">Non-selective &#945;₁ + &#946;-blocker</td>
+                                                    <td class="p-4">Bolus: 20 mg IV &rarr; 40 mg q10min &rarr; 80 mg q10min (max 300 mg) OR infusion 0.5&#8211;2 mg/min</td>
+                                                    <td class="p-4">5 min / 2&#8211;6 h</td>
+                                                    <td class="p-4 text-xs">Aortic dissection, encephalopathy, pregnancy, post-op</td>
+                                                    <td class="p-4 text-xs text-neutral-slate"><strong class="text-success-green">&check;</strong> &#945;+&#946; blockade &#8594; &darr;HR and &darr;BP; safe in pregnancy<br><strong class="text-alert-coral">❌</strong> Asthma, acute HF, heart block, shock<br><strong class="text-warning-amber">&#9888;</strong> &#945;:&#946; ratio 1:7 (IV)</td>
+                                                </tr>
+                                                <tr class="bg-purple-50">
+                                                    <td class="p-4 font-bold text-cardiac-purple">Esmolol</td>
+                                                    <td class="p-4">&#946;₁ cardioselective</td>
+                                                    <td class="p-4">Bolus 500 mcg/kg &times;1 min &rarr; infusion 50&#8211;300 mcg/kg/min</td>
+                                                    <td class="p-4">1&#8211;2 min / ~9 min</td>
+                                                    <td class="p-4 text-xs">Aortic dissection (first-line), post-op HTN</td>
+                                                    <td class="p-4 text-xs text-neutral-slate"><strong class="text-success-green">&check;</strong> Ultra-short acting &#8211; stop if overcorrection; &#946;₁ selective<br><strong class="text-warning-amber">&#9888;</strong> Costly; weight-based dosing required</td>
+                                                </tr>
+                                                <tr class="bg-amber-50">
+                                                    <td class="p-4 font-bold text-warning-amber">Nitroprusside</td>
+                                                    <td class="p-4">Direct arterial + venous vasodilator</td>
+                                                    <td class="p-4">Start 0.3 mcg/kg/min &rarr; &uarr;0.5 mcg/kg/min q5&#8211;15min &rarr; max 10 mcg/kg/min</td>
+                                                    <td class="p-4">Immediate / ~2 min</td>
+                                                    <td class="p-4 text-xs">Refractory HTN, perioperative emergencies</td>
+                                                    <td class="p-4 text-xs text-neutral-slate"><strong class="text-success-green">&check;</strong> Most potent rapid agent<br><strong class="text-alert-coral">❌</strong> Cyanide toxicity (&gt;24h use, renal failure); &darr;ICP contraindicated; MUST use with &#946;B (reflex tachy); light-sensitive</td>
+                                                </tr>
+                                                <tr class="bg-rose-50">
+                                                    <td class="p-4 font-bold text-biomarker-rose">Nitroglycerin</td>
+                                                    <td class="p-4">Venodilator (arteriolar at high dose)</td>
+                                                    <td class="p-4">Start 5 mcg/min &rarr; &uarr;5 mcg/min q3&#8211;5min &rarr; 10&#8211;200 mcg/min</td>
+                                                    <td class="p-4">2&#8211;5 min / 3&#8211;5 min</td>
+                                                    <td class="p-4 text-xs">Pulmonary edema, ACS, aortic dissection (adjunct)</td>
+                                                    <td class="p-4 text-xs text-neutral-slate"><strong class="text-success-green">&check;</strong> &darr;preload + &darr;afterload; coronary vasodilation<br><strong class="text-alert-coral">❌</strong> PDE-5 inhibitors (sildenafil/tadalafil); tachyphylaxis &gt;24&#8211;48h</td>
+                                                </tr>
+                                                <tr class="bg-orange-50">
+                                                    <td class="p-4 font-bold text-imaging-orange">Fenoldopam</td>
+                                                    <td class="p-4">Dopamine D₁ agonist</td>
+                                                    <td class="p-4">0.1 mcg/kg/min &rarr; up to 1.6 mcg/kg/min</td>
+                                                    <td class="p-4">5 min / ~5 min</td>
+                                                    <td class="p-4 text-xs">HTN emergency with AKI</td>
+                                                    <td class="p-4 text-xs text-neutral-slate"><strong class="text-success-green">&check;</strong> &#8593;Renal perfusion &amp; GFR; induces natriuresis<br><strong class="text-alert-coral">&#9888;</strong> &#8593;IOP (avoid glaucoma); reflex tachycardia</td>
+                                                </tr>
+                                                <tr class="bg-gray-50">
+                                                    <td class="p-4 font-bold text-neutral-slate">Enalaprilat</td>
+                                                    <td class="p-4">ACE inhibitor (IV)</td>
+                                                    <td class="p-4">1.25 mg IV q6h &rarr; max 5 mg/dose</td>
+                                                    <td class="p-4">15 min / 6&#8211;12 h</td>
+                                                    <td class="p-4 text-xs">HF-predominant emergencies</td>
+                                                    <td class="p-4 text-xs text-neutral-slate"><strong class="text-success-green">&check;</strong> Avoids catecholamine surges<br><strong class="text-alert-coral">❌</strong> Not titratable; unpredictable in renal failure; pregnancy contraindicated; bilateral RAS</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+                                    <!-- Agent Selection Algorithm -->
+                                    <div class="bg-blue-50 border border-blue-200 rounded-xl p-6">
+                                        <h4 class="font-bold text-clinical-blue mb-4">Agent Selection Algorithm</h4>
+                                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm text-neutral-slate">
+                                            <div class="bg-white rounded-lg p-4">
+                                                <h5 class="font-semibold text-deep-navy mb-2">Neurological Emergencies</h5>
+                                                <ul class="space-y-1">
+                                                    <li>&bull; <strong>Encephalopathy/PRES:</strong> Nicardipine or labetalol</li>
+                                                    <li>&bull; <strong>Acute ischemic stroke:</strong> Nicardipine, labetalol (permissive HTN)</li>
+                                                    <li>&bull; <strong>ICH:</strong> Nicardipine or labetalol (target SBP 140)</li>
+                                                    <li><span class="text-alert-coral">&#9888;</span> Avoid nitroprusside (&darr;ICP)</li>
+                                                </ul>
+                                            </div>
+                                            <div class="bg-white rounded-lg p-4">
+                                                <h5 class="font-semibold text-deep-navy mb-2">Cardiac Emergencies</h5>
+                                                <ul class="space-y-1">
+                                                    <li>&bull; <strong>Pulmonary edema:</strong> Nitroglycerin &plusmn; nicardipine</li>
+                                                    <li>&bull; <strong>ACS:</strong> Nitroglycerin (preload+afterload+coronary)</li>
+                                                    <li>&bull; <strong>Aortic dissection:</strong> Esmolol/labetalol FIRST &rarr; then nitroprusside/nicardipine</li>
+                                                    <li><span class="text-alert-coral">&#9888;</span> Avoid hydralazine (worsens shear stress)</li>
+                                                </ul>
+                                            </div>
+                                            <div class="bg-white rounded-lg p-4">
+                                                <h5 class="font-semibold text-deep-navy mb-2">Renal &amp; Other</h5>
+                                                <ul class="space-y-1">
+                                                    <li>&bull; <strong>AKI:</strong> Fenoldopam (renal vasodilation)</li>
+                                                    <li>&bull; <strong>Preeclampsia:</strong> Labetalol, hydralazine, PO nifedipine</li>
+                                                    <li>&bull; <strong>Cocaine:</strong> Benzodiazepines first &rarr; phentolamine or nicardipine</li>
+                                                    <li><span class="text-warning-amber">&#9888;</span> Avoid &#946;-blocker alone in cocaine toxicity</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Cautions & Pitfalls -->
+                                <div class="mb-8 p-6 bg-red-50 rounded-xl border-l-4 border-alert-coral">
+                                    <h4 class="font-bold text-alert-coral mb-4 flex items-center gap-2">&#9888; Critical Pitfalls to Avoid</h4>
+                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-neutral-slate">
+                                        <div class="p-3 bg-white rounded-lg">
+                                            <ul class="space-y-2">
+                                                <li><strong class="text-alert-coral">&#9888; Short-acting oral nifedipine</strong> (sublingual/capsule-piercing) &#8594;&#8594; unpredictable drops, stroke, MI, death (FDA black box warning)</li>
+                                                <li><strong class="text-alert-coral">&#9888; &gt;25% BP drop in first hour</strong> &#8594; watershed infarcts, MI, AKI</li>
+                                                <li><strong class="text-alert-coral">&#9888; Nitroprusside without &#946;-blockade</strong> &#8594; reflex tachycardia; worsens shear stress in dissection</li>
+                                                <li><strong class="text-alert-coral">&#9888; Standalone &#946;-blocker in cocaine toxicity</strong> &#8594; unopposed &#945;-vasoconstriction; use BDZs first</li>
+                                            </ul>
+                                        </div>
+                                        <div class="p-3 bg-white rounded-lg">
+                                            <ul class="space-y-2">
+                                                <li><strong class="text-alert-coral">&#9888; Nitroprusside in elevated ICP/ICH</strong> &#8594; cerebral vasodilation worsens ICP</li>
+                                                <li><strong class="text-alert-coral">&#9888; Enalaprilat in pregnancy or bilateral RAS</strong> &#8594; teratogenic; renal failure</li>
+                                                <li><strong class="text-alert-coral">&#9888; Hydralazine in aortic dissection</strong> &#8594; reflex tachycardia worsens propagation</li>
+                                                <li><strong class="text-alert-coral">&#9888; Nitroglycerin with PDE-5 inhibitors</strong> &#8594; profound refractory hypotension wait 24h (sildenafil) or 48h (tadalafil)</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Transition to Oral -->
+                                <div class="mb-8">
+                                    <h3 class="text-2xl font-playfair font-bold text-deep-navy mb-6">Transition to Oral Therapy</h3>
+                                    <div class="bg-blue-50 border border-blue-200 rounded-xl p-6">
+                                        <h4 class="font-bold text-deep-navy mb-3">Principles</h4>
+                                        <ul class="text-sm text-neutral-slate space-y-1.5 mb-4">
+                                            <li>&bull; <strong>Start oral agents while IV infusion is running</strong> &#8594; overlap for 1&#8211;2 hours after oral dose, then taper IV off</li>
+                                            <li>&bull; Use <strong>long-acting agents</strong>: amlodipine, carvedilol/metoprolol succinate, ACEi/ARB, chlorthalidone</li>
+                                            <li>&bull; Avoid abrupt IV discontinuation &#8594; rebound hypertension</li>
+                                            <li>&bull; Monitor BP closely during transition (q15&#8211;30min for first 2 hours)</li>
+                                            <li>&bull; <strong>Adherence check:</strong> Most hypertensive emergencies are caused by <strong>medication nonadherence</strong>. Identify barriers (cost, side effects, health literacy), simplify regimen, arrange follow-up within <strong>48&#8211;72 hours</strong>.</li>
+                                        </ul>
+                                        <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-sm text-neutral-slate">
+                                            <div class="bg-white p-3 rounded-lg">
+                                                <p class="font-semibold text-success-green mb-1">CCB</p>
+                                                <p>Amlodipine 5&#8211;10 mg daily<br>Long-acting nifedipine 30&#8211;60 mg daily</p>
+                                            </div>
+                                            <div class="bg-white p-3 rounded-lg">
+                                                <p class="font-semibold text-clinical-blue mb-1">ACEi / ARB</p>
+                                                <p>Lisinopril 10&#8211;40 mg daily<br>Valsartan 80&#8211;320 mg daily</p>
+                                            </div>
+                                            <div class="bg-white p-3 rounded-lg">
+                                                <p class="font-semibold text-warning-amber mb-1">Diuretic</p>
+                                                <p>Chlorthalidone 12.5&#8211;25 mg daily<br>Furosemide 20&#8211;40 mg (if volume overloaded)</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Special Scenarios -->
+                                <div class="mb-8">
+                                    <h3 class="text-2xl font-playfair font-bold text-deep-navy mb-6">Special Scenarios</h3>
+                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                        <div class="bg-red-50 border border-red-200 rounded-xl p-5">
+                                            <h4 class="font-bold text-alert-coral mb-3">Sympathomimetic Toxicity (Cocaine/Amphetamines)</h4>
+                                            <ul class="text-sm text-neutral-slate space-y-1.5">
+                                                <li>&bull; <strong>First-line:</strong> Benzodiazepines &#8594; diazepam 5&#8211;10 mg IV or lorazepam 2&#8211;4 mg IV. Most respond to sedation alone.</li>
+                                                <li>&bull; <strong>If BP persists:</strong> Phentolamine 5 mg IV bolus or nicardipine infusion</li>
+                                                <li>&bull; <strong>Avoid standalone &#946;-blocker</strong> unopposed &#945;-vasoconstriction risk</li>
+                                                <li>&bull; <strong>If &#946;-blocker unavoidable</strong> (concurrent MI): use labetalol (has &#945;-blocking property)</li>
+                                                <li>&bull; <strong>Hypotension:</strong> Norepinephrine (NOT dopamine &#8594; worsens arrhythmias)</li>
+                                            </ul>
+                                        </div>
+                                        <div class="bg-pink-50 border border-pink-200 rounded-xl p-5">
+                                            <h4 class="font-bold text-biomarker-rose mb-3">Severe Preeclampsia / Eclampsia</h4>
+                                            <ul class="text-sm text-neutral-slate space-y-1.5">
+                                                <li>&bull; <strong>First-line:</strong> IV labetalol 20&#8211;40 mg q10min (max 300 mg), IV hydralazine 5&#8211;10 mg q20min, or PO nifedipine 10&#8211;20 mg</li>
+                                                <li>&bull; <strong>MgSO&#8324;:</strong> 4&#8211;6 g IV loading &rarr; 1&#8211;2 g/hr for seizure prophylaxis</li>
+                                                <li>&bull; <strong>Target:</strong> SBP &lt;160 mmHg, DBP &lt;110 mmHg</li>
+                                                <li>&bull; <strong>Avoid:</strong> ACEi, ARBs, direct renin inhibitors (teratogenic)</li>
+                                                <li>&bull; <strong>Definitive:</strong> Delivery of fetus and placenta (postpartum risk persists &ge;72h)</li>
+                                            </ul>
+                                        </div>
+                                        <div class="bg-amber-50 border border-amber-200 rounded-xl p-5">
+                                            <h4 class="font-bold text-warning-amber mb-3">MAOI + Tyramine Reaction</h4>
+                                            <ul class="text-sm text-neutral-slate space-y-1.5">
+                                                <li>&bull; <strong>Mechanism:</strong> MAOI + tyramine-rich food &rarr; massive catecholamine release</li>
+                                                <li>&bull; <strong>Antidote:</strong> Phentolamine 5 mg IV bolus (&#945;-blocker; repeat q5min if needed)</li>
+                                                <li>&bull; <strong>Alternative:</strong> Nicardipine infusion</li>
+                                                <li>&bull; <strong>Prevention:</strong> Avoid aged cheese, cured meats, soy sauce, draft beer while on MAOI</li>
+                                            </ul>
+                                        </div>
+                                        <div class="bg-purple-50 border border-purple-200 rounded-xl p-5">
+                                            <h4 class="font-bold text-cardiac-purple mb-3">Malignant Hypertension</h4>
+                                            <ul class="text-sm text-neutral-slate space-y-1.5">
+                                                <li>&bull; <strong>Definition:</strong> Severe HTN with Grade III&#8211;IV retinopathy (&plusmn; papilledema)</li>
+                                                <li>&bull; <strong>MAHA:</strong> Check schistocytes, thrombocytopenia, &#8593;LDH &rarr; differentiate from TTP/HUS</li>
+                                                <li>&bull; <strong>Treat:</strong> Nicardipine or labetalol per standard emergency protocol</li>
+                                                <li>&bull; <strong>Follow-up:</strong> Nephrology referral &mdash; CKD is common outcome</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Discharge Checklist -->
+                                <div class="mb-8">
+                                    <h3 class="text-2xl font-playfair font-bold text-deep-navy mb-6">Discharge Readiness Checklist</h3>
+                                    <div class="bg-white border border-gray-200 rounded-xl p-6">
+                                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-neutral-slate">
+                                            <div class="flex items-start gap-3 p-3 bg-green-50 rounded-lg">&#9745; <div><strong>Blood Pressure Stable</strong> &mdash; on oral regimen for &ge;6&#8211;12 hours; target &lt;160/100</div></div>
+                                            <div class="flex items-start gap-3 p-3 bg-green-50 rounded-lg">&#9745; <div><strong>IV Infusion Discontinued</strong> &mdash; no rebound HTN after &ge;2 hours off IV</div></div>
+                                            <div class="flex items-start gap-3 p-3 bg-green-50 rounded-lg">&#9745; <div><strong>Organ Function Stable</strong> &mdash; creatinine, troponin, LFTs non-worsening</div></div>
+                                            <div class="flex items-start gap-3 p-3 bg-green-50 rounded-lg">&#9745; <div><strong>Medication Reconciled</strong> &mdash; &ge;2 agents prescribed with clear dosing schedule</div></div>
+                                            <div class="flex items-start gap-3 p-3 bg-green-50 rounded-lg">&#9745; <div><strong>Follow-up Arranged</strong> &mdash; PCP or cardiology within 48&#8211;72 hours</div></div>
+                                            <div class="flex items-start gap-3 p-3 bg-green-50 rounded-lg">&#9745; <div><strong>Patient Educated</strong> &mdash; adherence importance, home BP monitoring, return precautions</div></div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- References -->
+                                <div class="p-6 bg-gray-50 rounded-xl">
+                                    <h4 class="font-semibold text-deep-navy mb-3">&#128218; Key References &amp; Guidelines</h4>
+                                    <ul class="text-sm text-neutral-slate space-y-1.5">
+                                        <li>1. Whelton PK et al. 2017 ACC/AHA Hypertension Guideline. <em>J Am Coll Cardiol.</em> 2018;71(19):e127&#8211;e248.</li>
+                                        <li>2. Williams B et al. 2018 ESC/ESH Guidelines for Hypertension. <em>Eur Heart J.</em> 2018;39(33):3021&#8211;3104.</li>
+                                        <li>3. Unger T et al. 2020 ISH Global Guidelines for Hypertension. <em>J Hypertens.</em> 2020;38(6):982&#8211;1004.</li>
+                                        <li>4. Peacock WF et al. Emergency management of severe hypertension. <em>Acad Emerg Med.</em> 2011;18(2):S28&#8211;S39.</li>
+                                        <li>5. Rhoney DH, Peacock WF. Intravenous therapy for hypertensive emergencies. <em>Am J Health Syst Pharm.</em> 2009;66(15):1343&#8211;1352.</li>
+                                        <li>6. Anderson CS et al. INTERACT-2: Intensive BP lowering in acute ICH. <em>N Engl J Med.</em> 2013;368(25):2355&#8211;2365.</li>
+                                    </ul>
+                                </div>
+
+                                <div class="mt-6 bg-yellow-50 border border-yellow-200 rounded-xl p-4">
+                                    <p class="text-sm text-deep-navy"><strong>&#9888; Disclaimer:</strong> This protocol is an educational reference based on published AHA/ACC/ESC/ISH guidelines and peer-reviewed literature. All drug dosing and clinical decisions must be individualized by qualified physicians following institutional protocols. Drug names, doses, and recommendations may vary by jurisdiction. In case of medical emergency, contact emergency services immediately.</p>
+                                </div>
+                            </div>
+                        </div>
     <!-- Dosing Calculator -->
     <section class="py-16 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
