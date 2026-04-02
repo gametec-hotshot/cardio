@@ -786,6 +786,14 @@ class DiagnosticTools {
             });
         }
 
+        // GRACE Risk Score Calculator
+        const calculateGraceBtn = document.getElementById('calculate-grace');
+        if (calculateGraceBtn) {
+            calculateGraceBtn.addEventListener('click', () => {
+                this.calculateGRACE();
+            });
+        }
+
         // HAS-BLED Score Calculator
         const calculateHasbledBtn = document.getElementById('calculate-hasbled');
         if (calculateHasbledBtn) {
@@ -845,6 +853,222 @@ class DiagnosticTools {
         if (typeof anime !== 'undefined') {
             anime({
                 targets: '#timi-result',
+                opacity: [0, 1],
+                scale: [0.9, 1],
+                duration: 500,
+                easing: 'easeOutCubic'
+            });
+        }
+    }
+
+    calculateGRACE() {
+        const age = parseInt(document.getElementById('grace-age').value);
+        const hr = parseInt(document.getElementById('grace-hr').value);
+        const sbp = parseInt(document.getElementById('grace-sbp').value);
+        const cr = parseFloat(document.getElementById('grace-cr').value);
+        const killip = document.getElementById('grace-killip').value;
+        const arrest = document.getElementById('grace-arrest').value === 'yes';
+        const st = document.getElementById('grace-st').value === 'yes';
+        const trop = document.getElementById('grace-trop').value === 'yes';
+
+        if (!age || !hr || !sbp || !cr || !killip) {
+            alert('Please fill in all required fields for the GRACE score.');
+            return;
+        }
+
+        // GRACE Risk Score (GRACE 1.0 — derived from the ACS risk model)
+        // Each variable contributes points using the standard scoring algorithm
+        let points = 0;
+
+        // Age (years) — scored per the standard GRACE table
+        // <30 = 0, 30–34 = 8, 35–39 = 12, 40–44 = 16, 45–49 = 20, 50–54 = 32,
+        // 55–59 = 36, 60–64 = 40, 65–69 = 48, 70–74 = 56, 75–79 = 68, 80–84 = 76,
+        // 85–89 = 84, >=90 = 91
+        let agePts;
+        if (age < 30) agePts = 0;
+        else if (age <= 34) agePts = 8;
+        else if (age <= 39) agePts = 12;
+        else if (age <= 44) agePts = 16;
+        else if (age <= 49) agePts = 20;
+        else if (age <= 54) agePts = 32;
+        else if (age <= 59) agePts = 36;
+        else if (age <= 64) agePts = 40;
+        else if (age <= 69) agePts = 48;
+        else if (age <= 74) agePts = 56;
+        else if (age <= 79) agePts = 68;
+        else if (age <= 84) agePts = 76;
+        else if (age <= 89) agePts = 84;
+        else agePts = 91;
+        points += agePts;
+
+        // Heart Rate (bpm)
+        if (hr < 50) points += 0;
+        else if (hr <= 69) points += 3;
+        else if (hr <= 89) points += 9;
+        else if (hr <= 109) points += 15;
+        else if (hr <= 129) points += 24;
+        else if (hr <= 149) points += 38;
+        else if (hr <= 179) points += 52;
+        else points += 58;
+
+        // Systolic BP
+        if (sbp >= 200) points += 0;
+        else if (sbp >= 160) points += 1;
+        else if (sbp >= 140) points += 17;
+        else if (sbp >= 120) points += 34;
+        else if (sbp >= 100) points += 47;
+        else if (sbp >= 80) points += 63;
+        else points += 89;
+
+        // Creatinine (mg/dL)
+        if (cr <= 0.4) points += 1;
+        else if (cr <= 0.8) points += 4;
+        else if (cr < 1.2) points += 7;
+        else if (cr < 1.6) points += 12;
+        else if (cr < 2.0) points += 24;
+        else if (cr < 4.0) points += 42;
+        else points += 58;
+
+        // Killip class
+        const killipPts = { '1': 0, '2': 20, '3': 39, '4': 89 };
+        points += killipPts[killip] || 0;
+
+        // Cardiac arrest on admission
+        if (arrest) points += 44;
+
+        // ST-segment deviation
+        if (st) points += 29;
+
+        // Positive cardiac markers (troponin)
+        if (trop) points += 15;
+
+        // Calculate mortality estimates using the GRACE 2.0 (GRIMS) regression model
+        // Based on the Fox et al., Eur Heart J 2006; corrected in GRACE 2.0
+        const score = Math.round(points);
+
+        // In-hospital mortality (from GRACE risk calculator published model)
+        let inHospMort, month6Mort, year1Mort;
+
+        if (score <= 60) {
+            inHospMort = 0.0;
+            month6Mort = 0.1;
+            year1Mort = 0.2;
+        } else if (score <= 70) {
+            inHospMort = 0.1;
+            month6Mort = 0.5;
+            year1Mort = 1.0;
+        } else if (score <= 80) {
+            inHospMort = 0.2;
+            month6Mort = 0.7;
+            year1Mort = 1.6;
+        } else if (score <= 90) {
+            inHospMort = 0.3;
+            month6Mort = 1.1;
+            year1Mort = 2.4;
+        } else if (score <= 100) {
+            inHospMort = 0.5;
+            month6Mort = 1.7;
+            year1Mort = 3.8;
+        } else if (score <= 110) {
+            inHospMort = 0.8;
+            month6Mort = 2.5;
+            year1Mort = 5.6;
+        } else if (score <= 120) {
+            inHospMort = 1.1;
+            month6Mort = 3.8;
+            year1Mort = 8.2;
+        } else if (score <= 130) {
+            inHospMort = 1.7;
+            month6Mort = 4.9;
+            year1Mort = 10.6;
+        } else if (score <= 140) {
+            inHospMort = 2.4;
+            month6Mort = 6.0;
+            year1Mort = 12.9;
+        } else if (score <= 150) {
+            inHospMort = 3.4;
+            month6Mort = 7.4;
+            year1Mort = 15.5;
+        } else if (score <= 160) {
+            inHospMort = 4.8;
+            month6Mort = 9.2;
+            year1Mort = 18.6;
+        } else if (score <= 170) {
+            inHospMort = 6.4;
+            month6Mort = 11.6;
+            year1Mort = 22.2;
+        } else if (score <= 180) {
+            inHospMort = 8.0;
+            month6Mort = 13.7;
+            year1Mort = 26.1;
+        } else if (score <= 190) {
+            inHospMort = 10.4;
+            month6Mort = 16.6;
+            year1Mort = 30.5;
+        } else if (score <= 200) {
+            inHospMort = 13.0;
+            month6Mort = 19.8;
+            year1Mort = 35.7;
+        } else if (score <= 210) {
+            inHospMort = 15.8;
+            month6Mort = 23.2;
+            year1Mort = 40.9;
+        } else if (score <= 220) {
+            inHospMort = 19.2;
+            month6Mort = 27.6;
+            year1Mort = 46.2;
+        } else if (score <= 230) {
+            inHospMort = 22.7;
+            month6Mort = 31.9;
+            year1Mort = 51.6;
+        } else if (score <= 240) {
+            inHospMort = 26.4;
+            month6Mort = 36.5;
+            year1Mort = 57.5;
+        } else {
+            inHospMort = score > 260 ? 35.9 : (score > 250 ? 30.6 : 30.6);
+            month6Mort = score > 260 ? 47.8 : (score > 250 ? 41.6 : 41.6);
+            year1Mort = score > 260 ? 64.1 : (score > 250 ? 56.0 : 56.0);
+        }
+
+        // Risk group classification
+        let riskGroup, colorClass, recommendation;
+        if (score <= 108) {
+            riskGroup = 'Low Risk';
+            colorClass = 'text-success-green';
+            recommendation = 'Low risk ACS. May consider early discharge with outpatient follow-up. No urgent invasive strategy required. Optimize secondary prevention and risk factor modification. Follow up within 1 week.';
+        } else if (score <= 139) {
+            riskGroup = 'Intermediate Risk';
+            colorClass = 'text-warning-amber';
+            recommendation = 'Intermediate risk ACS. Consider coronary angiography during index hospitalization or within 24h depending on clinical features. Initiate/optimize medical therapy. Cardiology consultation recommended.';
+        } else if (score <= 200) {
+            riskGroup = 'High Risk';
+            colorClass = 'text-imaging-orange';
+            recommendation = 'High risk ACS — early invasive strategy (coronary angiography within 24 hours) strongly recommended per ESC/ACC guidelines. Intensify medical therapy. Consider ICU/CCU admission for hemodynamic monitoring.';
+        } else {
+            riskGroup = 'Very High Risk';
+            colorClass = 'text-alert-coral';
+            recommendation = 'Very high risk ACS — urgent invasive strategy required. Admit to CCU. Immediate cardiology consultation. Consider mechanical circulatory support. Aggressive secondary prevention and risk factor management after stabilization.';
+        }
+
+        // Display results
+        document.getElementById('grace-score-value').textContent = score;
+        document.getElementById('grace-in-hospital').textContent = inHospMort + '%';
+        document.getElementById('grace-6month').textContent = month6Mort + '%';
+        document.getElementById('grace-1year').textContent = year1Mort + '%';
+        document.getElementById('grace-risk-group').textContent = riskGroup;
+        document.getElementById('grace-risk-group').className = 'font-bold ' + colorClass;
+        document.getElementById('grace-recommendation').textContent = recommendation;
+
+        const scoreEl = document.getElementById('grace-score-value');
+        scoreEl.className = 'text-3xl font-bold mb-2 ' + colorClass;
+
+        const resultDiv = document.getElementById('grace-result');
+        resultDiv.classList.remove('hidden');
+
+        if (typeof anime !== 'undefined') {
+            anime({
+                targets: '#grace-result',
                 opacity: [0, 1],
                 scale: [0.9, 1],
                 duration: 500,
