@@ -259,6 +259,9 @@
                             <button class="protocol-nav-btn w-full text-left p-3 rounded-lg text-neutral-slate hover:bg-gray-100 transition-colors" data-protocol="acute-coronary-syndrome">
                                 Acute Coronary Syndrome
                             </button>
+                            <button class="protocol-nav-btn w-full text-left p-3 rounded-lg text-neutral-slate hover:bg-gray-100 transition-colors" data-protocol="vte">
+                                Venous Thromboembolism
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -819,6 +822,345 @@
                             </div>
                         </div>
                         
+                        <!-- Venous Thromboembolism Protocol -->
+                        <div id="vte-protocol" class="protocol-content hidden">
+                            <div class="bg-white rounded-2xl p-8 shadow-lg mb-8">
+                                <div class="flex items-center justify-between mb-6">
+                                    <h2 class="text-3xl font-playfair font-bold text-deep-navy">Venous Thromboembolism (VTE) Treatment</h2>
+                                    <span class="evidence-badge">CHEST 2021 / ACCP Guidelines</span>
+                                </div>
+
+                                <!-- Clinical Diagnosis Pathway -->
+                                <div class="mb-8">
+                                    <h3 class="text-2xl font-playfair font-bold text-deep-navy mb-6">Clinical Diagnosis &amp; Risk Stratification Algorithm</h3>
+
+                                    <div class="space-y-6">
+                                        <!-- Step 1: Clinical Suspicion -->
+                                        <div class="medication-tier first-line p-6">
+                                            <div class="flex items-center mb-4">
+                                                <div class="w-8 h-8 bg-success-green rounded-full flex items-center justify-center text-white font-bold mr-3">1</div>
+                                                <h4 class="text-xl font-semibold text-deep-navy">Step 1 — Assess Clinical Probability</h4>
+                                                <span class="ml-auto text-sm bg-success-green text-white px-2 py-1 rounded">Class I</span>
+                                            </div>
+
+                                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                                <div class="bg-white p-4 rounded-lg">
+                                                    <h5 class="font-semibold text-deep-navy mb-2">Wells Score for DVT</h5>
+                                                    <ul class="text-sm text-neutral-slate space-y-1">
+                                                        <li>• Active cancer: +1</li>
+                                                        <li>• Bedridden ≥3 days or major surgery ≤12 wk: +1</li>
+                                                        <li>• Calf swelling ≥3 cm: +1</li>
+                                                        <li>• Collateral superficial veins: +1</li>
+                                                        <li>• Entire leg swelling: +1</li>
+                                                        <li>• Localized tenderness: +1</li>
+                                                        <li>• Pitting edema (affected leg): +1</li>
+                                                        <li>• Paralysis/paresis/casting: +1</li>
+                                                        <li>• Alternative dx ≥ as likely: −2</li>
+                                                    </ul>
+                                                    <div class="mt-2 text-xs bg-blue-50 p-2 rounded">
+                                                        <strong>Score ≥2:</strong> DVT likely → ultrasound<br>
+                                                        <strong>Score &lt;2:</strong> DVT unlikely → D-dimer first
+                                                    </div>
+                                                </div>
+
+                                                <div class="bg-white p-4 rounded-lg">
+                                                    <h5 class="font-semibold text-deep-navy mb-2">Wells Score for PE</h5>
+                                                    <ul class="text-sm text-neutral-slate space-y-1">
+                                                        <li>• Clinical signs/symptoms of DVT: +3</li>
+                                                        <li>• PE is #1 dx (or equally likely): +3</li>
+                                                        <li>• HR &gt;100 bpm: +1.5</li>
+                                                        <li>• Immobilization/surgery ≤4 wk: +1.5</li>
+                                                        <li>• Prior DVT or PE: +1.5</li>
+                                                        <li>• Hemoptysis: +1</li>
+                                                        <li>• Malignancy: +1</li>
+                                                    </ul>
+                                                    <div class="mt-2 text-xs bg-blue-50 p-2 rounded">
+                                                        <strong>&gt;6:</strong> High risk (CTPA immediately)<br>
+                                                        <strong>2–6:</strong> Intermediate (D-dimer → CTPA)<br>
+                                                        <strong>&lt;2:</strong> Low risk (PERC rule → D-dimer)
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Step 2: Confirm Diagnosis -->
+                                        <div class="medication-tier second-line p-6">
+                                            <div class="flex items-center mb-4">
+                                                <div class="w-8 h-8 bg-warning-amber rounded-full flex items-center justify-center text-white font-bold mr-3">2</div>
+                                                <h4 class="text-xl font-semibold text-deep-navy">Step 2 — Confirm Diagnosis</h4>
+                                                <span class="ml-auto text-sm bg-warning-amber text-white px-2 py-1 rounded">Class I</span>
+                                            </div>
+
+                                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                                <div class="bg-white p-4 rounded-lg">
+                                                    <h5 class="font-semibold text-deep-navy mb-2">Diagnostic Tests (DVT)</h5>
+                                                    <div class="space-y-2 text-sm text-neutral-slate">
+                                                        <div class="p-2 bg-green-50 rounded border border-green-200">
+                                                            <strong class="text-success-green">Compression Ultrasound (CUS)</strong><br>
+                                                            First-line for all suspected proximal DVT. Sensitivity &gt;95%.
+                                                        </div>
+                                                        <div class="p-2 bg-gray-50 rounded border border-gray-200">
+                                                            <strong>D-dimer</strong><br>
+                                                            Only useful in low-probability (Wells &lt;2). High negative predictive value (&gt;99%).
+                                                        </div>
+                                                        <div class="p-2 bg-gray-50 rounded border border-gray-200">
+                                                            <strong>Venography</strong><br>
+                                                            Rarely used; gold standard historically. Reserved for inconclusive cases.
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="bg-white p-4 rounded-lg">
+                                                    <h5 class="font-semibold text-deep-navy mb-2">Diagnostic Tests (PE)</h5>
+                                                    <div class="space-y-2 text-sm text-neutral-slate">
+                                                        <div class="p-2 bg-green-50 rounded border border-green-200">
+                                                            <strong class="text-success-green">CT Pulmonary Angiography (CTPA)</strong><br>
+                                                            First-line for most patients with suspected PE. Sensitivity/specificity &gt;90%.
+                                                        </div>
+                                                        <div class="p-2 bg-gray-50 rounded border border-gray-200">
+                                                            <strong>V/Q Scan</strong><br>
+                                                            Preferred when CTPA contraindicated (renal failure, contrast allergy, pregnancy).
+                                                        </div>
+                                                        <div class="p-2 bg-red-50 rounded border border-red-200">
+                                                            <strong class="text-alert-coral">⚠️ PERC Rule (0/8 required)</strong>
+                                                            <ul class="mt-1 ml-3 list-disc">Age &lt;50, HR &lt;100, O₂ sat ≥95%, no hemoptysis, no estrogen, no prior VTE, no surgery/trauma, no unilateral leg swelling.</ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- PE Severity Stratification -->
+                            <div class="bg-white rounded-2xl p-8 shadow-lg mb-8">
+                                <div class="flex items-center justify-between mb-6">
+                                    <h2 class="text-3xl font-playfair font-bold text-deep-navy">PE Severity Stratification</h2>
+                                    <span class="evidence-badge">ESC 2019 Guidelines</span>
+                                </div>
+
+                                <div class="overflow-x-auto rounded-xl border border-gray-200">
+                                    <table class="w-full text-sm">
+                                        <thead>
+                                            <tr class="bg-deep-navy text-white">
+                                                <th class="p-4 text-left">Category</th>
+                                                <th class="p-4 text-left">sPESI Score</th>
+                                                <th class="p-4 text-left">RV Dysfunction</th>
+                                                <th class="p-4 text-left">Biomarkers</th>
+                                                <th class="p-4 text-left">30-Day Mortality</th>
+                                                <th class="p-4 text-left">Management</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="divide-y divide-gray-200">
+                                            <tr class="bg-green-50">
+                                                <td class="p-4 font-semibold text-success-green">Low Risk</td>
+                                                <td class="p-4">0</td>
+                                                <td class="p-4">Absent</td>
+                                                <td class="p-4">Normal</td>
+                                                <td class="p-4">~1%</td>
+                                                <td class="p-4">Anticoagulation. Outpatient possible.</td>
+                                            </tr>
+                                            <tr class="bg-yellow-50">
+                                                <td class="p-4 font-semibold text-warning-amber">Intermediate-Low</td>
+                                                <td class="p-4">≥1</td>
+                                                <td class="p-4">Absent</td>
+                                                <td class="p-4">One ↑ or both ↑</td>
+                                                <td class="p-4">2-3%</td>
+                                                <td class="p-4">Anticoagulation. Hospital monitoring.</td>
+                                            </tr>
+                                            <tr class="bg-amber-100">
+                                                <td class="p-4 font-semibold text-warning-amber">Intermediate-High</td>
+                                                <td class="p-4">≥1</td>
+                                                <td class="p-4">Present</td>
+                                                <td class="p-4">Both elevated</td>
+                                                <td class="p-4">~6%</td>
+                                                <td class="p-4">Anticoagulation. Close monitoring. Rescue thrombolysis if decompensation.</td>
+                                            </tr>
+                                            <tr class="bg-red-100">
+                                                <td class="p-4 font-semibold text-alert-coral">High Risk (Massive)</td>
+                                                <td class="p-4">—</td>
+                                                <td class="p-4">—</td>
+                                                <td class="p-4">—</td>
+                                                <td class="p-4">&gt;15%</td>
+                                                <td class="p-4">Systemic thrombolysis (alteplase). Embolectomy if thrombolysis fails.</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <div class="mt-4 p-4 bg-yellow-50 rounded-lg border border-yellow-200">
+                                    <h5 class="font-semibold text-warning-amber mb-2">sPESI Score Components (simplified Pulmonary Embolism Severity Index)</h5>
+                                    <div class="grid grid-cols-2 sm:grid-cols-3 gap-2 text-sm text-neutral-slate">
+                                        <span>Age &gt;80 years (+1)</span>
+                                        <span>History of cancer (+1)</span>
+                                        <span>Chronic cardiopulmonary disease (+1)</span>
+                                        <span>HR ≥110 bpm (+1)</span>
+                                        <span>SBP &lt;100 mmHg (+1)</span>
+                                        <span>O₂ sat &lt;90% (+1)</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Anticoagulation Treatment -->
+                            <div class="bg-white rounded-2xl p-8 shadow-lg mb-8">
+                                <div class="flex items-center justify-between mb-6">
+                                    <h2 class="text-3xl font-playfair font-bold text-deep-navy">Anticoagulation Management</h2>
+                                    <span class="evidence-badge">CHEST 2016 / 2021 Updates</span>
+                                </div>
+
+                                <div class="space-y-6">
+                                    <!-- Initial/DVT treatment -->
+                                    <div class="medication-tier first-line p-6">
+                                        <div class="flex items-center mb-4">
+                                            <div class="w-8 h-8 bg-success-green rounded-full flex items-center justify-center text-white font-bold mr-3">1</div>
+                                            <h4 class="text-xl font-semibold text-deep-navy">DVT Treatment</h4>
+                                            <span class="ml-auto text-sm bg-success-green text-white px-2 py-1 rounded">Class I</span>
+                                        </div>
+
+                                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                            <div class="bg-white p-4 rounded-lg">
+                                                <h5 class="font-semibold text-deep-navy mb-2">DOAC (Preferred)</h5>
+                                                <ul class="text-sm text-neutral-slate space-y-1">
+                                                    <li>• Rivaroxaban: 15mg BID×21d, then 20mg daily</li>
+                                                    <li>• Apixaban: 10mg BID×7d, then 5mg BID</li>
+                                                    <li>• No parenteral lead-in required</li>
+                                                    <li>• Preferred over VKA (CHEST 2016)</li>
+                                                </ul>
+                                            </div>
+
+                                            <div class="bg-white p-4 rounded-lg">
+                                                <h5 class="font-semibold text-deep-navy mb-2">LMWH + VKA</h5>
+                                                <ul class="text-sm text-neutral-slate space-y-1">
+                                                    <li>• Enoxaparin: 1mg/kg SC BID (or 1.5mg/kg daily)</li>
+                                                    <li>• Overlap with warfarin ≥5 days</li>
+                                                    <li>• Target INR 2.0-3.0</li>
+                                                    <li>• Preferred if DOAC contraindicated</li>
+                                                </ul>
+                                            </div>
+
+                                            <div class="bg-white p-4 rounded-lg">
+                                                <h5 class="font-semibold text-deep-navy mb-2">Duration of Therapy</h5>
+                                                <ul class="text-sm text-neutral-slate space-y-1">
+                                                    <li>• Provoked (transient factor): <strong>3 months</strong></li>
+                                                    <li>• Unprovoked: <strong>≥3 months, consider extended</strong></li>
+                                                    <li>• Recurrent VTE: <strong>Extended/indefinite</strong></li>
+                                                    <li>• Cancer-associated: <strong>≥6 months</strong></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- PE treatment -->
+                                    <div class="medication-tier second-line p-6">
+                                        <div class="flex items-center mb-4">
+                                            <div class="w-8 h-8 bg-warning-amber rounded-full flex items-center justify-center text-white font-bold mr-3">2</div>
+                                            <h4 class="text-xl font-semibold text-deep-navy">PE Treatment</h4>
+                                            <span class="ml-auto text-sm bg-warning-amber text-white px-2 py-1 rounded">Class I</span>
+                                        </div>
+
+                                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                            <div class="bg-white p-4 rounded-lg">
+                                                <h5 class="font-semibold text-deep-navy mb-2">Anticoagulation (Hemodynamically Stable)</h5>
+                                                <ul class="text-sm text-neutral-slate space-y-1">
+                                                    <li>• Same DOAC regimens as DVT</li>
+                                                    <li>• Apixaban: 10mg BID×7d, then 5mg BID</li>
+                                                    <li>• Rivaroxaban: 15mg BID×21d, then 20mg daily</li>
+                                                    <li>• Duration same as DVT (see above)</li>
+                                                </ul>
+                                            </div>
+
+                                            <div class="bg-white p-4 rounded-lg">
+                                                <h5 class="font-semibold text-deep-navy mb-2">Thrombolysis (Hemodynamically Unstable)</h5>
+                                                <ul class="text-sm text-neutral-slate space-y-1">
+                                                    <li>• Alteplase (rtPA): <strong>100mg IV over 2 hours</strong></li>
+                                                    <li>• Absolute contraindications: active bleeding, recent stroke, recent surgery</li>
+                                                    <li>• Half-dose (50mg) considered for select patients</li>
+                                                    <li>• Rescue catheter-directed thrombolysis if systemic lytics unsuccessful</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+
+                                        <div class="mt-4 p-4 bg-red-50 rounded-lg border border-red-200">
+                                            <h5 class="font-semibold text-alert-coral mb-2">⚠️ High-Risk (Massive) PE — Emergency</h5>
+                                            <p class="text-sm text-neutral-slate mb-2">SBP &lt;90 mmHg for ≥15 min, or requiring vasopressors, or cardiac arrest.</p>
+                                            <ul class="text-sm text-neutral-slate space-y-1">
+                                                <li>• Systemic thrombolysis: alteplase 100mg IV over 2h, then heparin infusion</li>
+                                                <li>• If thrombolysis contraindicated or failed → surgical embolectomy or catheter-directed therapy</li>
+                                                <li>• ICU admission, vasopressor support as needed</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Special Populations -->
+                            <div class="bg-white rounded-2xl p-8 shadow-lg">
+                                <div class="flex items-center justify-between mb-6">
+                                    <h2 class="text-3xl font-playfair font-bold text-deep-navy">Special Populations</h2>
+                                    <span class="evidence-badge">CHEST / ESC</span>
+                                </div>
+
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                    <div class="bg-gray-50 p-5 rounded-xl">
+                                        <h4 class="font-semibold text-deep-navy mb-3 flex items-center">
+                                            <span class="w-3 h-3 bg-diagnostic-teal rounded-full mr-2"></span>
+                                            Cancer-Associated VTE
+                                        </h4>
+                                        <ul class="text-sm text-neutral-slate space-y-2">
+                                            <li>• <strong>Preferred:</strong> Apixaban or rivaroxaban (or LMWH if GI/GU risk)</li>
+                                            <li>• DOAC preferred over LMWH if no high bleeding-risk GI or GU primary tumor</li>
+                                            <li>• Minimum duration: 6 months; extend if active cancer</li>
+                                            <li>• IVC filter only if contraindication to anticoagulation</li>
+                                            <li><br><em class="text-xs">Reference: Key et al., <strong>CHEST 2018</strong>, 154(5):1034–1052 (ASCO 2019 update)</em></li>
+                                        </ul>
+                                    </div>
+
+                                    <div class="bg-gray-50 p-5 rounded-xl">
+                                        <h4 class="font-semibold text-deep-navy mb-3 flex items-center">
+                                            <span class="w-3 h-3 bg-cardiac-purple rounded-full mr-2"></span>
+                                            Pregnancy-Associated VTE
+                                        </h4>
+                                        <ul class="text-sm text-neutral-slate space-y-2">
+                                            <li>• <strong>Preferred:</strong> LMWH (not DOACs) throughout pregnancy</li>
+                                            <li>• Switch to UFH close to expected delivery</li>
+                                            <li>• Continue postpartum anticoagulation for ≥6 weeks (minimum 3 months total)</li>
+                                            <li>• Warfarin contraindicated in 1st trimester (teratogenic)</li>
+                                            <li><br><em class="text-xs">Reference: Bates et al., <strong>CHEST 2018</strong>, 154(5):1126–1183 (ACCP Guidelines)</em></li>
+                                        </ul>
+                                    </div>
+
+                                    <div class="bg-gray-50 p-5 rounded-xl">
+                                        <h4 class="font-semibold text-deep-navy mb-3 flex items-center">
+                                            <span class="w-3 h-3 bg-biomarker-rose rounded-full mr-2"></span>
+                                            Renal Impairment
+                                        </h4>
+                                        <ul class="text-sm text-neutral-slate space-y-2">
+                                            <li>• CrCl &lt;30 mL/min: Avoid DOACs (limited data); use LMWH or UFH</li>
+                                            <li>• CrCl 15-29 mL/min: LMWH with dose adjustment (anti-Xa monitoring)</li>
+                                            <li>• On hemodialysis: consider UFH; apixaban may be used (limited data)</li>
+                                            <li>• Consider dose-reduced apixaban or rivaroxaban if CrCl 15-29 (off-label)</li>
+                                            <li><br><em class="text-xs">Reference: Stevens et al., <strong>CHEST 2018</strong>, 154(5):1159–1174</em></li>
+                                        </ul>
+                                    </div>
+
+                                    <div class="bg-gray-50 p-5 rounded-xl">
+                                        <h4 class="font-semibold text-deep-navy mb-3 flex items-center">
+                                            <span class="w-3 h-3 bg-imaging-orange rounded-full mr-2"></span>
+                                            IVC Filter Indications
+                                        </h4>
+                                        <ul class="text-sm text-neutral-slate space-y-2">
+                                            <li>• Contraindication to anticoagulation (acute bleeding)</li>
+                                            <li>• Recurrent VTE despite adequate anticoagulation</li>
+                                            <li>• Retrieve filter as soon as anticoagulation is safe</li>
+                                            <li>• NOT recommended as primary treatment over anticoagulation</li>
+                                            <li><br><em class="text-xs">Reference: Kearon et al., <strong>CHEST 2016</strong>, 149(1):31–50 (CHEST 2021 Update)</em></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                         <!-- Additional protocols would be loaded here dynamically -->
                     </div>
                 </div>
