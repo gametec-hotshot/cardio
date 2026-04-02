@@ -189,6 +189,24 @@ class CardiologyResource {
                 color: 'alert-coral'
             },
             
+            // Pericardial Disease
+            {
+                id: 'pericarditis',
+                name: 'Pericarditis',
+                category: 'Pericardial Disease',
+                prevalence: 'Uncommon',
+                severity: 'Low-Moderate',
+                symptoms: ['chest-pain', 'dyspnea', 'fever', 'fatigue', 'pericardial-rub'],
+                riskFactors: ['viral-infection', 'bacterial-infection', 'autoimmune', 'malignancy', 'uremia', 'recent-mi'],
+                diagnostics: ['ecg', 'echocardiogram', 'chest-xray', 'ct-chest', 'troponin', 'esr', 'crp'],
+                treatments: ['nsaids', 'colchicine', 'corticosteroids', 'pericardiocentesis', 'surgical-pericardectomy'],
+                description: 'Inflammation of the pericardium, the sac surrounding the heart. Can be acute or chronic, infectious or noninfectious. Most common cause is viral infection. Classic symptom is sharp, pleuritic chest pain that improves when leaning forward.',
+                incidence: '0.1-0.2% of hospitalized patients',
+                mortality: 'Low, but can lead to cardiac tamponade',
+                image: 'resources/pericarditis.png',
+                color: 'warning-amber'
+            },
+
             // Valvular Heart Disease
             {
                 id: 'mitral-stenosis',
