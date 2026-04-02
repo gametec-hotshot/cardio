@@ -16,6 +16,7 @@ class DiagnosticTools {
         this.initializeNavigation();
         this.initializeECGSimulator();
         this.initializeRiskCalculators();
+        this.initializeBMICalculator();
         this.initializeFlowcharts();
         this.initializeBiomarkerInterpreter();
     }
@@ -1406,6 +1407,135 @@ class DiagnosticTools {
         const resultDiv = document.getElementById('frs-result');
         resultDiv.classList.remove('hidden');
         resultDiv.classList.add('bg-emerald-50');
+
+        if (typeof anime !== 'undefined') {
+            anime({
+                targets: resultDiv,
+                scale: [0.9, 1],
+                duration: 500,
+                easing: 'easeOutCubic'
+            });
+        }
+    }
+
+    // BMI & Cardiovascular Body Metrics Calculator
+    initializeBMICalculator() {
+        const calculateBtn = document.getElementById('calculate-bmi');
+        if (!calculateBtn) return;
+
+        calculateBtn.addEventListener('click', () => {
+            this.calculateBMI();
+        });
+    }
+
+    calculateBMI() {
+        const weight = parseFloat(document.getElementById('bmi-weight').value);
+        const height = parseFloat(document.getElementById('bmi-height').value);
+        const waist = parseFloat(document.getElementById('bmi-waist').value);
+        const hip = parseFloat(document.getElementById('bmi-hip').value);
+
+        if (!weight || !height || weight <= 0 || height <= 0) {
+            this.showNotification('Please enter valid weight and height values.', 'error');
+            return;
+        }
+
+        const heightM = height / 100;
+        const bmi = weight / (heightM * heightM);
+
+        // BMI category and color
+        let category, colorClass, barPercent, barColor;
+        if (bmi < 18.5) {
+            category = 'Underweight';
+            colorClass = 'text-blue-600';
+            barPercent = Math.min((bmi / 18.5) * 25, 25);
+            barColor = 'bg-blue-500';
+        } else if (bmi < 25) {
+            category = 'Normal Weight';
+            colorClass = 'text-green-600';
+            barPercent = 25 + ((bmi - 18.5) / 6.5) * 25;
+            barColor = 'bg-green-500';
+        } else if (bmi < 30) {
+            category = 'Overweight';
+            colorClass = 'text-amber-600';
+            barPercent = 50 + ((bmi - 25) / 5) * 25;
+            barColor = 'bg-amber-500';
+        } else if (bmi < 35) {
+            category = 'Obese Class I';
+            colorClass = 'text-orange-600';
+            barPercent = 75 + ((bmi - 30) / 5) * 12.5;
+            barColor = 'bg-orange-500';
+        } else if (bmi < 40) {
+            category = 'Obese Class II';
+            colorClass = 'text-red-600';
+            barPercent = 87.5 + ((bmi - 35) / 5) * 6.25;
+            barColor = 'bg-red-500';
+        } else {
+            category = 'Obese Class III (Morbid)';
+            colorClass = 'text-red-700';
+            barPercent = 100;
+            barColor = 'bg-red-700';
+        }
+
+        document.getElementById('bmi-value').textContent = bmi.toFixed(1);
+        document.getElementById('bmi-category').textContent = category;
+        document.getElementById('bmi-category').className = 'text-sm font-semibold mb-3 ' + colorClass;
+
+        const bar = document.getElementById('bmi-bar');
+        bar.style.width = barPercent + '%';
+        bar.className = 'h-3 rounded-full transition-all duration-500 ' + barColor;
+
+        // Ideal weight range
+        const idealLow = 18.5 * heightM * heightM;
+        const idealHigh = 24.9 * heightM * heightM;
+        document.getElementById('ideal-weight-range').textContent =
+            idealLow.toFixed(1) + ' – ' + idealHigh.toFixed(1) + ' kg';
+
+        // Waist-to-hip ratio
+        const whrDiv = document.getElementById('bmi-waist-result');
+        if (waist > 0 && hip > 0) {
+            const whr = waist / hip;
+            document.getElementById('whr-value').textContent = whr.toFixed(3);
+
+            let whrCategory, whrColorClass, whrBg;
+            if (whr < 0.85) {
+                whrCategory = 'Low Risk';
+                whrColorClass = 'text-green-700';
+                whrBg = 'bg-green-100';
+            } else if (whr < 0.90) {
+                whrCategory = 'Moderate Risk';
+                whrColorClass = 'text-amber-700';
+                whrBg = 'bg-amber-100';
+            } else {
+                whrCategory = 'High Risk';
+                whrColorClass = 'text-red-700';
+                whrBg = 'bg-red-100';
+            }
+
+            document.getElementById('whr-category').textContent = whrCategory;
+            document.getElementById('whr-category').className = 'text-sm font-semibold px-2 py-1 rounded ' + whrColorClass + ' ' + whrBg;
+            document.getElementById('whr-risk').textContent =
+                'Waist-to-hip ratio ≥0.90 is associated with increased cardiovascular risk, including hypertension, type 2 diabetes, and coronary artery disease.';
+            whrDiv.classList.remove('hidden');
+        } else {
+            whrDiv.classList.add('hidden');
+        }
+
+        // Cardiovascular note
+        let cvdNote;
+        if (bmi < 18.5) {
+            cvdNote = '⚠ Low BMI may indicate malnutrition or underlying disease. Associated with increased all-cause mortality and can complicate heart failure prognosis.';
+        } else if (bmi < 25) {
+            cvdNote = '✓ Normal BMI is associated with lowest cardiovascular risk. Maintain through balanced diet and regular physical activity (150 min/week moderate exercise).';
+        } else if (bmi < 30) {
+            cvdNote = '⚠ Overweight BMI increases risk of hypertension (2×), type 2 diabetes (3×), and dyslipidemia. Weight reduction of 5-10% significantly improves cardiovascular outcomes.';
+        } else {
+            cvdNote = '⚠ Obesity is an independent cardiovascular risk factor. Associated with 2-3× risk of heart failure, increased atrial fibrillation, and accelerated atherosclerosis. Consider structured weight management program and metabolic screening.';
+        }
+        document.getElementById('bmi-cardiovascular-note').textContent = cvdNote;
+
+        // Show result
+        const resultDiv = document.getElementById('bmi-result');
+        resultDiv.classList.remove('hidden');
 
         if (typeof anime !== 'undefined') {
             anime({
