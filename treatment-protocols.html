@@ -2879,6 +2879,524 @@
         </div>
     </section>
 
+    <!-- Echocardiography Interpretation Guide -->
+    <section id="echocardiography" class="tool-section py-16 bg-light-gray hidden">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-playfair font-bold text-deep-navy mb-4">🫀 Echocardiography Interpretation Guide</h2>
+                <p class="text-xl text-neutral-slate max-w-3xl mx-auto">
+                    Comprehensive echo measurements, severity grading tables, and clinical interpretation framework based on ASE/EACVI guidelines.
+                </p>
+            </div>
+
+            <!-- Chamber Dimensions -->
+            <div class="bg-white rounded-2xl p-6 shadow-lg mb-6">
+                <div class="flex items-center mb-6">
+                    <div class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center mr-3">
+                        <span class="text-xl">📐</span>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-playfair font-bold text-deep-navy">Left Ventricular Dimensions</h3>
+                        <p class="text-sm text-neutral-slate">Linear measurements (2D-guided M-mode or 2D), ASE 2015 chamber quantification guidelines</p>
+                    </div>
+                </div>
+
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm">
+                        <thead class="bg-deep-navy text-white">
+                            <tr>
+                                <th class="p-3 text-left rounded-tl-lg">Parameter</th>
+                                <th class="p-3 text-center">Men — Normal</th>
+                                <th class="p-3 text-center">Men — Abnormal</th>
+                                <th class="p-3 text-center">Women — Normal</th>
+                                <th class="p-3 text-center rounded-tr-lg">Women — Abnormal</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-neutral-slate">
+                            <tr class="border-b border-gray-100">
+                                <td class="p-3 font-medium">LVIDd (cm)</td>
+                                <td class="p-3 text-center">3.9–5.3</td>
+                                <td class="p-3 text-center">&gt;5.3 (dilated)</td>
+                                <td class="p-3 text-center">3.5–4.7</td>
+                                <td class="p-3 text-center">&gt;4.7 (dilated)</td>
+                            </tr>
+                            <tr class="border-b border-gray-100">
+                                <td class="p-3 font-medium">LVIDs (cm)</td>
+                                <td class="p-3 text-center">2.3–3.6</td>
+                                <td class="p-3 text-center">&gt;3.6</td>
+                                <td class="p-3 text-center">2.0–3.1</td>
+                                <td class="p-3 text-center">&gt;3.1</td>
+                            </tr>
+                            <tr class="border-b border-gray-100">
+                                <td class="p-3 font-medium">IVSd (cm)</td>
+                                <td class="p-3 text-center">0.6–1.0</td>
+                                <td class="p-3 text-center">&gt;1.0 (hypertrophy)</td>
+                                <td class="p-3 text-center">0.6–0.9</td>
+                                <td class="p-3 text-center">&gt;0.9 (hypertrophy)</td>
+                            </tr>
+                            <tr class="border-b border-gray-100">
+                                <td class="p-3 font-medium">LVPWd (cm)</td>
+                                <td class="p-3 text-center">0.6–1.0</td>
+                                <td class="p-3 text-center">&gt;1.0 (hypertrophy)</td>
+                                <td class="p-3 text-center">0.6–0.9</td>
+                                <td class="p-3 text-center">&gt;0.9 (hypertrophy)</td>
+                            </tr>
+                            <tr class="border-b border-gray-100">
+                                <td class="p-3 font-medium">LV Mass Index (g/m²)</td>
+                                <td class="p-3 text-center text-center">49–115</td>
+                                <td class="p-3 text-center">&gt;115 (LVH)</td>
+                                <td class="p-3 text-center">43–95</td>
+                                <td class="p-3 text-center">&gt;95 (LVH)</td>
+                            </tr>
+                            <tr class="border-b border-gray-100">
+                                <td class="p-3 font-medium">Relative Wall Thickness</td>
+                                <td class="p-3 text-center" colspan="2">&lt;0.42 (normal) → &gt;0.42 = concentric remodeling/hypertrophy</td>
+                                <td class="p-3 text-center" colspan="2">Formula: (IVSd + LVPWd) ÷ LVIDd</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- LV Systolic Function -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                <div class="bg-white rounded-2xl p-6 shadow-lg">
+                    <h3 class="text-xl font-playfair font-bold text-deep-navy mb-4">LV Systolic Function Grading</h3>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-sm">
+                            <thead class="bg-deep-navy text-white">
+                                <tr>
+                                    <th class="p-3 text-left rounded-tl-lg">Grade</th>
+                                    <th class="p-3 text-center">LVEF</th>
+                                    <th class="p-3 text-center rounded-tr-lg">Global Longitudinal Strain</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-neutral-slate">
+                                <tr class="border-b border-gray-100">
+                                    <td class="p-3 font-medium text-green-700">Normal</td>
+                                    <td class="p-3 text-center">≥55%</td>
+                                    <td class="p-3 text-center">&gt;−18%</td>
+                                </tr>
+                                <tr class="border-b border-gray-100">
+                                    <td class="p-3 font-medium text-amber-700">Mildly Reduced</td>
+                                    <td class="p-3 text-center">45–54%</td>
+                                    <td class="p-3 text-center">−16% to −18%</td>
+                                </tr>
+                                <tr class="border-b border-gray-100">
+                                    <td class="p-3 font-medium text-orange-700">Moderately Reduced</td>
+                                    <td class="p-3 text-center">35–44%</td>
+                                    <td class="p-3 text-center">−12% to −16%</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-3 font-medium text-red-700">Severely Reduced</td>
+                                    <td class="p-3 text-center">&lt;35%</td>
+                                    <td class="p-3 text-center">≥−12% (less negative)</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="mt-4 bg-blue-50 rounded-lg p-3 text-xs text-neutral-slate">
+                        <strong>Note:</strong> EF ≤35% = ICD primary prevention criteria (after ≥3 months GDMT). EF ≤30% = consider primary prevention ICD even in non-ischemic cardiomyopathy (DANISH trial nuance: age &lt;70 benefit most).
+                    </div>
+                </div>
+
+                <!-- LV Diastolic Function -->
+                <div class="bg-white rounded-2xl p-6 shadow-lg">
+                    <h3 class="text-xl font-playfair font-bold text-deep-navy mb-4">LV Diastolic Function (ASE 2016)</h3>
+                    <p class="text-sm text-neutral-slate mb-3">Diastolic dysfunction requires ≥2 of 4 abnormal parameters:</p>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-sm">
+                            <thead class="bg-deep-navy text-white">
+                                <tr>
+                                    <th class="p-3 text-left rounded-tl-lg">Parameter</th>
+                                    <th class="p-3 text-center">Cut-off</th>
+                                    <th class="p-3 text-center rounded-tr-lg">Abnormal</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-neutral-slate">
+                                <tr class="border-b border-gray-100">
+                                    <td class="p-3 font-medium">e' (septal)</td>
+                                    <td class="p-3 text-center">&lt;7 cm/s</td>
+                                    <td class="p-3 text-center">✅ Yes</td>
+                                </tr>
+                                <tr class="border-b border-gray-100">
+                                    <td class="p-3 font-medium">e' (lateral)</td>
+                                    <td class="p-3 text-center">&lt;10 cm/s</td>
+                                    <td class="p-3 text-center">✅ Yes</td>
+                                </tr>
+                                <tr class="border-b border-gray-100">
+                                    <td class="p-3 font-medium">E/e' ratio (average)</td>
+                                    <td class="p-3 text-center">&gt;14</td>
+                                    <td class="p-3 text-center">✅ Elevated filling pressure</td>
+                                </tr>
+                                <tr class="border-b border-gray-100">
+                                    <td class="p-3 font-medium">LA max volume index</td>
+                                    <td class="p-3 text-center">&gt;34 mL/m²</td>
+                                    <td class="p-3 text-center">✅ Enlarged</td>
+                                </tr>
+                                <tr class="border-b border-gray-100">
+                                    <td class="p-3 font-medium">TR velocity</td>
+                                    <td class="p-3 text-center">&gt;2.8 m/s</td>
+                                    <td class="p-3 text-center">✅ Elevated PA pressure</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-3 font-medium">E/A ratio</td>
+                                    <td class="p-3 text-center">See grading below</td>
+                                    <td class="p-3 text-center">—</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="mt-4 bg-amber-50 rounded-lg p-3 text-xs text-neutral-slate">
+                        <strong>Diastolic Grading:</strong><br>
+                        <strong>Grade I (impaired relaxation):</strong> E/A &lt;0.8, E/e' &lt;14, deceleration time &gt;200ms<br>
+                        <strong>Grade II (pseudonormal):</strong> E/A 0.8–2.0 with ≥2 other abnormal parameters<br>
+                        <strong>Grade III (restrictive, reversible):</strong> E/A &gt;2.0, E/e' &gt;14, DT &lt;160ms<br>
+                        <strong>Grade IV (restrictive, irreversible):</strong> No change with Valsalva
+                    </div>
+                </div>
+            </div>
+
+            <!-- Valvular Stenosis -->
+            <div class="bg-white rounded-2xl p-6 shadow-lg mb-6">
+                <h3 class="text-2xl font-playfair font-bold text-deep-navy mb-4">🔧 Valvular Stenosis Severity</h3>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm">
+                        <thead class="bg-deep-navy text-white">
+                            <tr>
+                                <th class="p-3 text-left rounded-tl-lg">Valve</th>
+                                <th class="p-3 text-center">Mild</th>
+                                <th class="p-3 text-center">Moderate</th>
+                                <th class="p-3 text-center">Severe</th>
+                                <th class="p-3 text-center rounded-tr-lg">Very Severe</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-neutral-slate">
+                            <tr class="border-b border-gray-100">
+                                <td class="p-3 font-medium">Aortic Stenosis</td>
+                                <td class="p-3 text-center">Vmax 2.0–2.9 m/s<br>MG &lt;20 mmHg<br>AVA &gt;1.5 cm²</td>
+                                <td class="p-3 text-center">Vmax 3.0–3.9 m/s<br>MG 20–39 mmHg<br>AVA 1.0–1.5 cm²</td>
+                                <td class="p-3 text-center font-semibold text-red-700">Vmax ≥4.0 m/s<br>MG ≥40 mmHg<br>AVA ≤1.0 cm²<br>AVAi ≤0.6 cm²/m²</td>
+                                <td class="p-3 text-center">Vmax ≥5.0 m/s<br>MG ≥60 mmHg</td>
+                            </tr>
+                            <tr class="border-b border-gray-100">
+                                <td class="p-3 font-medium">Mitral Stenosis</td>
+                                <td class="p-3 text-center">MVA &gt;1.5 cm²<br>MG &lt;5 mmHg</td>
+                                <td class="p-3 text-center">MVA 1.0–1.5 cm²<br>MG 5–9 mmHg</td>
+                                <td class="p-3 text-center font-semibold text-red-700">MVA ≤1.0 cm²<br>MG ≥10 mmHg<br>PASP &gt;50 mmHg</td>
+                                <td class="p-3 text-center">—</td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 font-medium">Pulmonic Stenosis</td>
+                                <td class="p-3 text-center">Vmax &lt;3.0 m/s<br>PG &lt;36 mmHg</td>
+                                <td class="p-3 text-center">Vmax 3.0–4.0 m/s<br>PG 36–64 mmHg</td>
+                                <td class="p-3 text-center font-semibold text-red-700">Vmax &gt;4.0 m/s<br>PG &gt;64 mmHg</td>
+                                <td class="p-3 text-center">—</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="mt-4 bg-amber-50 rounded-lg p-3 text-xs text-neutral-slate">
+                    <strong>Aortic Stenosis — Symptom-Driven Management:</strong> Symptomatic severe AS → AVR (SAVR or TAVI based on age/risk). Asymptomatic severe AS with EF &lt;50% → early AVR. Very severe AS with low surgical risk, or BNP &gt;3× ULN, or abnormal exercise test → consider early intervention. Watch for paradoxical low-flow, low-gradient AS (small LV cavity, normal EF) — needs dobutamine stress echo or CT calcium scoring.
+                </div>
+            </div>
+
+            <!-- Valvular Regurgitation -->
+            <div class="bg-white rounded-2xl p-6 shadow-lg mb-6">
+                <h3 class="text-2xl font-playfair font-bold text-deep-navy mb-4">💧 Valvular Regurgitation Severity</h3>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm">
+                        <thead class="bg-deep-navy text-white">
+                            <tr>
+                                <th class="p-3 text-left rounded-tl-lg">Valve</th>
+                                <th class="p-3 text-center">Mild</th>
+                                <th class="p-3 text-center">Moderate</th>
+                                <th class="p-3 text-center rounded-tr-lg">Severe</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-neutral-slate">
+                            <tr class="border-b border-gray-100">
+                                <td class="p-3 font-medium">Aortic Regurgitation</td>
+                                <td class="p-3 text-center">Jet width &lt;25% LVOT<br>Vena contracta &lt;0.3 cm<br>PHT &gt;500 ms</td>
+                                <td class="p-3 text-center">Intermediate parameters</td>
+                                <td class="p-3 text-center font-semibold text-red-700">Jet width ≥65% LVOT<br>Vena contracta &gt;0.6 cm<br>PHT &lt;200 ms<br>EROA ≥0.30 cm²<br>RVol ≥60 mL</td>
+                            </tr>
+                            <tr class="border-b border-gray-100">
+                                <td class="p-3 font-medium">Mitral Regurgitation</td>
+                                <td class="p-3 text-center">Jet area &lt;20% LA<br>Vena contracta &lt;0.3 cm<br>EROA &lt;0.20 cm²</td>
+                                <td class="p-3 text-center">Intermediate parameters</td>
+                                <td class="p-3 text-center font-semibold text-red-700">Vena contracta ≥0.7 cm<br>EROA ≥0.40 cm² (primary)<br>EROA ≥0.40 cm² (secondary)<br>RVol ≥60 mL<br>Regurg fraction ≥50%</td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 font-medium">Tricuspid Regurgitation</td>
+                                <td class="p-3 text-center">Small jet area<br>Vena contracta &lt;0.7 cm</td>
+                                <td class="p-3 text-center">Intermediate parameters</td>
+                                <td class="p-3 text-center font-semibold text-red-700">Vena contracta ≥0.7 cm<br>EROA ≥0.40 cm²<br>RVol ≥45 mL<br>Hepatic vein systolic flow reversal</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="mt-4 bg-blue-50 rounded-lg p-3 text-xs text-neutral-slate">
+                    <strong>MR Intervention Thresholds:</strong> Severe primary MR, symptomatic → surgical repair if feasible. Asymptomatic severe primary MR with EF 30–60% and/or LVESD ≥40mm → surgery. If high surgical risk → MitraClip (COAPT/EVEREST II). Severe secondary MR → optimize GDMT first; if persistent symptoms → consider TEER (MitraClip) per COAPT trial criteria. Secondary MR with EROA ≥0.40 cm² indicates poor prognosis.
+                </div>
+            </div>
+
+            <!-- RV Function -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                <div class="bg-white rounded-2xl p-6 shadow-lg">
+                    <h3 class="text-xl font-playfair font-bold text-deep-navy mb-4">Right Ventricular Function</h3>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-sm">
+                            <thead class="bg-deep-navy text-white">
+                                <tr>
+                                    <th class="p-3 text-left rounded-tl-lg">Parameter</th>
+                                    <th class="p-3 text-center">Normal</th>
+                                    <th class="p-3 text-center rounded-tr-lg">Abnormal</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-neutral-slate">
+                                <tr class="border-b border-gray-100">
+                                    <td class="p-3 font-medium">TAPSE</td>
+                                    <td class="p-3 text-center">≥17 mm</td>
+                                    <td class="p-3 text-center">&lt;17 mm (RV systolic dysfunction)</td>
+                                </tr>
+                                <tr class="border-b border-gray-100">
+                                    <td class="p-3 font-medium">RV S' (tissue Doppler)</td>
+                                    <td class="p-3 text-center">≥9.5 cm/s</td>
+                                    <td class="p-3 text-center">&lt;9.5 cm/s</td>
+                                </tr>
+                                <tr class="border-b border-gray-100">
+                                    <td class="p-3 font-medium">RV FAC</td>
+                                    <td class="p-3 text-center">≥35%</td>
+                                    <td class="p-3 text-center">&lt;35%</td>
+                                </tr>
+                                <tr class="border-b border-gray-100">
+                                    <td class="p-3 font-medium">RV FWS (strain)</td>
+                                    <td class="p-3 text-center">≤−20% (more negative)</td>
+                                    <td class="p-3 text-center">&gt;−20% (less negative)</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-3 font-medium">RV Basal Diameter</td>
+                                    <td class="p-3 text-center">≤41 mm</td>
+                                    <td class="p-3 text-center">&gt;41 mm (dilated)</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="mt-3 bg-red-50 rounded-lg p-3 text-xs text-neutral-slate">
+                        <strong>TAPSE &lt;17 mm</strong> is a strong prognostic marker in pulmonary hypertension. In acute PE, RV dysfunction on echo is a major criterion for intermediate-risk PE — may warrant thrombolysis.
+                    </div>
+                </div>
+
+                <!-- Pulmonary Hypertension -->
+                <div class="bg-white rounded-2xl p-6 shadow-lg">
+                    <h3 class="text-xl font-playfair font-bold text-deep-navy mb-4">Pulmonary Hypertension Assessment</h3>
+                    <div class="space-y-3">
+                        <div class="bg-gray-50 rounded-lg p-3">
+                            <p class="text-sm font-semibold text-deep-navy">TR Velocity-Based Estimate</p>
+                            <p class="text-xs text-neutral-slate mt-1">SPAP = 4 × (TR Vmax)² + RAP (estimated from IVC)</p>
+                        </div>
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-sm">
+                                <thead class="bg-deep-navy text-white">
+                                    <tr>
+                                        <th class="p-3 text-left rounded-tl-lg">Category</th>
+                                        <th class="p-3 text-center">TR Vmax</th>
+                                        <th class="p-3 text-center rounded-tr-lg">SPAP Estimate</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="text-neutral-slate">
+                                    <tr class="border-b border-gray-100">
+                                        <td class="p-3 font-medium">Unlikely PH</td>
+                                        <td class="p-3 text-center">≤2.8 m/s or not detectable</td>
+                                        <td class="p-3 text-center">&lt;36 mmHg (+RAP)</td>
+                                    </tr>
+                                    <tr class="border-b border-gray-100">
+                                        <td class="p-3 font-medium">Possible PH</td>
+                                        <td class="p-3 text-center">2.9–3.4 m/s</td>
+                                        <td class="p-3 text-center">37–50 mmHg (+RAP)</td>
+                                    </tr>
+                                    <tr class="border-b border-gray-100">
+                                        <td class="p-3 font-medium">High probability PH</td>
+                                        <td class="p-3 text-center">&gt;3.4 m/s</td>
+                                        <td class="p-3 text-center">&gt;50 mmHg (+RAP)</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="bg-amber-50 rounded-lg p-3 text-xs text-neutral-slate">
+                            <strong>Definition (2022 ESC/ERS):</strong> PH = mean PAP &gt;20 mmHg on right heart catheterization. Echo estimates SPAP but cannot diagnose PH definitively — RHC is required. Echo findings supporting PH: RV dilation/dysfunction, TR velocity &gt;3.4 m/s, PA dilation, flat interventricular septum.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pericardial Effusion -->
+            <div class="bg-white rounded-2xl p-6 shadow-lg mb-6">
+                <div class="flex items-center mb-4">
+                    <div class="w-10 h-10 rounded-full bg-rose-100 flex items-center justify-center mr-3">
+                        <span class="text-xl">🔴</span>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-playfair font-bold text-deep-navy">Pericardial Effusion Grading</h3>
+                        <p class="text-sm text-neutral-slate">Measured in diastole, posterior to the LV</p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <div class="bg-green-50 rounded-xl p-4 text-center border-2 border-green-200">
+                        <p class="text-sm font-semibold text-green-800 mb-1">Trivial</p>
+                        <p class="text-2xl font-bold text-green-700">&lt;5 mm</p>
+                        <p class="text-xs text-neutral-slate mt-2">Usually physiological, no hemodynamic impact</p>
+                    </div>
+                    <div class="bg-yellow-50 rounded-xl p-4 text-center border-2 border-yellow-200">
+                        <p class="text-sm font-semibold text-yellow-800 mb-1">Small</p>
+                        <p class="text-2xl font-bold text-yellow-700">5–10 mm</p>
+                        <p class="text-xs text-neutral-slate mt-2">Posterior only, monitor for enlargement</p>
+                    </div>
+                    <div class="bg-orange-50 rounded-xl p-4 text-center border-2 border-orange-200">
+                        <p class="text-sm font-semibold text-orange-800 mb-1">Moderate</p>
+                        <p class="text-2xl font-bold text-orange-700">10–20 mm</p>
+                        <p class="text-xs text-neutral-slate mt-2">Circumferential, assess for tamponade signs</p>
+                    </div>
+                    <div class="bg-red-50 rounded-xl p-4 text-center border-2 border-red-200">
+                        <p class="text-sm font-semibold text-red-800 mb-1">Large</p>
+                        <p class="text-2xl font-bold text-red-700">&gt;20 mm</p>
+                        <p class="text-xs text-neutral-slate mt-2">High risk of tamponade — consider drainage</p>
+                    </div>
+                </div>
+
+                <div class="mt-4 bg-red-50 border-l-4 border-red-500 p-3 rounded text-sm">
+                    <strong>🚨 Tamponade Echocardiographic Signs:</strong>
+                    <ul class="text-neutral-slate mt-2 space-y-1">
+                        <li>• RA systolic collapse (&gt;1/3 of cardiac cycle) — earliest sign</li>
+                        <li>• RV diastolic collapse — more specific than RA collapse</li>
+                        <li>• IVC plethora (&gt;21 mm with &lt;50% inspiratory collapse)</li>
+                        <li>• Mitral E wave variation &gt;25% (respiratory variation in flows)</li>
+                        <li>• Tricuspid E wave variation &gt;40%</li>
+                        <li>• Clinical: pulsus paradoxus &gt;10 mmHg, hypotension, Beck triad</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Cardiac Tamponade Quick Reference -->
+            <div class="bg-white rounded-2xl p-6 shadow-lg mb-6">
+                <h3 class="text-2xl font-playfair font-bold text-deep-navy mb-4">📊 Aortic Root & Ascending Aorta Measurements</h3>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm">
+                        <thead class="bg-deep-navy text-white">
+                            <tr>
+                                <th class="p-3 text-left rounded-tl-lg">Level</th>
+                                <th class="p-3 text-center">Normal (Men)</th>
+                                <th class="p-3 text-center">Normal (Women)</th>
+                                <th class="p-3 text-center rounded-tr-lg">Dilated</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-neutral-slate">
+                            <tr class="border-b border-gray-100">
+                                <td class="p-3 font-medium">Aortic Annulus</td>
+                                <td class="p-3 text-center">20–31 mm</td>
+                                <td class="p-3 text-center">18–29 mm</td>
+                                <td class="p-3 text-center">&gt;Upper limit</td>
+                            </tr>
+                            <tr class="border-b border-gray-100">
+                                <td class="p-3 font-medium">Sinuses of Valsalva</td>
+                                <td class="p-3 text-center">21–35 mm</td>
+                                <td class="p-3 text-center">19–33 mm</td>
+                                <td class="p-3 text-center">&gt;Upper limit</td>
+                            </tr>
+                            <tr class="border-b border-gray-100">
+                                <td class="p-3 font-medium">Sinotubular Junction</td>
+                                <td class="p-3 text-center">20–33 mm</td>
+                                <td class="p-3 text-center">18–30 mm</td>
+                                <td class="p-3 text-center">&gt;Upper limit</td>
+                            </tr>
+                            <tr class="border-b border-gray-100">
+                                <td class="p-3 font-medium">Ascending Aorta</td>
+                                <td class="p-3 text-center">21–34 mm</td>
+                                <td class="p-3 text-center">19–32 mm</td>
+                                <td class="p-3 text-center">&gt;Upper limit</td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 font-medium">Aortic Root</td>
+                                <td class="p-3 text-center" colspan="2">Index to BSA: normal &lt;21 mm/m² (men), &lt;22 mm/m² (women)</td>
+                                <td class="p-3 text-center">≥40 mm = aortic root dilation → annual echo surveillance; ≥55 mm (or ≥50 mm in Marfan/Loeys-Dietz) = surgical referral</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Wall Motion Score Index -->
+            <div class="bg-white rounded-2xl p-6 shadow-lg mb-6">
+                <h3 class="text-2xl font-playfair font-bold text-deep-navy mb-4">🎯 Wall Motion Assessment</h3>
+                <p class="text-sm text-neutral-slate mb-4">16-segment model (ASE). Each segment scored: 1 = normal, 2 = hypokinetic, 3 = akinetic, 4 = dyskinetic, 5 = aneurysmal.</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <h4 class="font-semibold text-deep-navy mb-2">Wall Motion Score Index (WMSI)</h4>
+                        <ul class="text-sm text-neutral-slate space-y-1">
+                            <li><strong>WMSI =</strong> Sum of segment scores ÷ Number of segments scored</li>
+                            <li><strong>Normal:</strong> WMSI = 1.0 (all segments normal)</li>
+                            <li><strong>Mild dysfunction:</strong> WMSI 1.1–1.5</li>
+                            <li><strong>Moderate dysfunction:</strong> WMSI 1.5–2.0</li>
+                            <li><strong>Severe dysfunction:</strong> WMSI &gt;2.0</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold text-deep-navy mb-2">Vascular Territories</h4>
+                        <ul class="text-sm text-neutral-slate space-y-1">
+                            <li><strong>LAD:</strong> Basal, mid, apical anterior septum, anterior wall, apical cap</li>
+                            <li><strong>LCx:</strong> Basal & mid inferolateral, apical lateral</li>
+                            <li><strong>RCA:</strong> Basal & mid inferior, inferoseptum, inferolateral</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stress Echo Indications -->
+            <div class="bg-white rounded-2xl p-6 shadow-lg">
+                <h3 class="text-2xl font-playfair font-bold text-deep-navy mb-4">💪 Stress Echocardiography Quick Reference</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <h4 class="font-semibold text-deep-navy mb-2">Exercise Stress Echo</h4>
+                        <ul class="text-sm text-neutral-slate space-y-1">
+                            <li><strong>Protocol:</strong> Bruce or modified Bruce. Rest → peak exercise → recovery images</li>
+                            <li><strong>Positive:</strong> New or worsening wall motion abnormality at peak stress</li>
+                            <li><strong>Sensitivity:</strong> 80–85% for detecting significant CAD</li>
+                            <li><strong>Specificity:</strong> 84–90%</li>
+                        </ul>
+                        <h4 class="font-semibold text-deep-navy mt-4 mb-2">Dobutamine Stress Echo (DSE)</h4>
+                        <ul class="text-sm text-neutral-slate space-y-1">
+                            <li><strong>Protocol:</strong> 5, 10, 20, 30, 40 mcg/kg/min (3 min stages)</li>
+                            <li><strong>Target HR:</strong> 85% predicted maximum (220 − age)</li>
+                            <li><strong>Endpoint:</strong> Target HR achieved, or ischemia, or maximal dose</li>
+                            <li><strong>Viability:</strong> Biphasic response → viable; No response → scar</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold text-deep-navy mb-2">Indications</h4>
+                        <ul class="text-sm text-neutral-slate space-y-1">
+                            <li>• Chest pain with uninterpretable ECG (LBBB, LVH, digoxin, paced)</li>
+                            <li>• Post-revascularization assessment of symptom recurrence</li>
+                            <li>• Viability assessment before revascularization</li>
+                            <li>• Risk stratification post-STEMI (pre-discharge)</li>
+                            <li>• Valvular assessment (low-gradient AS — dobutamine)</li>
+                            <li>• Heart transplant: rejection monitoring (speckle-tracking strain)</li>
+                        </ul>
+                        <h4 class="font-semibold text-deep-navy mt-4 mb-2">Stopping Criteria</h4>
+                        <ul class="text-sm text-neutral-slate space-y-1">
+                            <li>• Target HR achieved</li>
+                            <li>• New or worsening wall motion abnormalities (≥2 segments)</li>
+                            <li>• Arrhythmias (VT, AFib with RVR)</li>
+                            <li>• SBP drop &gt;20 mmHg or failure to rise</li>
+                            <li>• Severe symptoms: angina, dyspnea, dizziness</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Footer -->
     <footer class="bg-deep-navy text-white py-12">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

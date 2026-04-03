@@ -118,6 +118,7 @@
                 <button class="tab-btn whitespace-nowrap px-4 py-2 rounded-lg font-semibold text-sm border text-neutral-slate bg-gray-100 transition-colors flex-shrink-0" data-tab="anticoag">🩸 Anticoagulation</button>
                 <button class="tab-btn whitespace-nowrap px-4 py-2 rounded-lg font-semibold text-sm border text-neutral-slate bg-gray-100 transition-colors flex-shrink-0" data-tab="checklists">✅ Checklists</button>
                 <button class="tab-btn whitespace-nowrap px-4 py-2 rounded-lg font-semibold text-sm border text-neutral-slate bg-gray-100 transition-colors flex-shrink-0" data-tab="ecg-lab">🔬 ECG &amp; Lab</button>
+                <button class="tab-btn whitespace-nowrap px-4 py-2 rounded-lg font-semibold text-sm border text-neutral-slate bg-gray-100 transition-colors flex-shrink-0" data-tab="echo-guide">🫀 Echo Guide</button>
             </div>
         </div>
     </section>
@@ -369,6 +370,71 @@
                                 </tr>
                             </tbody>
                         </table>
+                    </div>
+                </div>
+
+                <!-- Cardioversion Energy Levels -->
+                <div class="ref-card drug bg-white rounded-xl p-5 md:p-6 shadow-lg mb-6">
+                    <h3 class="text-lg md:text-xl font-playfair font-bold text-deep-navy mb-4 flex items-center gap-2">
+                        <span class="text-2xl">⚡</span> Cardioversion Energy Levels by Rhythm
+                    </h3>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-sm min-w-[600px]">
+                            <thead><tr class="border-b-2 border-blue-100 bg-blue-50">
+                                <th class="text-left py-3 px-3 font-semibold text-deep-navy">Rhythm</th>
+                                <th class="text-left py-3 px-3 font-semibold text-deep-navy">Initial Energy (Monophasic)</th>
+                                <th class="text-left py-3 px-3 font-semibold text-deep-navy">Initial Energy (Biphasic)</th>
+                                <th class="text-left py-3 px-3 font-semibold text-deep-navy">Subsequent Shocks</th>
+                                <th class="text-left py-3 px-3 font-semibold text-deep-navy">Special Considerations</th>
+                            </tr></thead>
+                            <tbody class="text-neutral-slate">
+                                <tr class="border-b border-gray-100">
+                                    <td class="py-2.5 px-3 font-semibold text-deep-navy">Atrial Fibrillation</td>
+                                    <td class="py-2.5 px-3">200 J</td>
+                                    <td class="py-2.5 px-3">120–150 J</td>
+                                    <td class="py-2.5 px-3">Increase by 50–100 J</td>
+                                    <td class="py-2.5 px-3">Anticoagulate if duration >48h or unknown</td>
+                                </tr>
+                                <tr class="border-b border-gray-100">
+                                    <td class="py-2.5 px-3 font-semibold text-deep-navy">Atrial Flutter</td>
+                                    <td class="py-2.5 px-3">100 J</td>
+                                    <td class="py-2.5 px-3">50–100 J</td>
+                                    <td class="py-2.5 px-3">Increase to 200 J</td>
+                                    <td class="py-2.5 px-3">Lower energy than AF; check for atrial thrombus</td>
+                                </tr>
+                                <tr class="border-b border-gray-100">
+                                    <td class="py-2.5 px-3 font-semibold text-deep-navy">SVT (AVNRT/AVRT)</td>
+                                    <td class="py-2.5 px-3">100 J</td>
+                                    <td class="py-2.5 px-3">50–100 J</td>
+                                    <td class="py-2.5 px-3">Increase to 200 J</td>
+                                    <td class="py-2.5 px-3">Synchronized; avoid in WPW if irregular</td>
+                                </tr>
+                                <tr class="border-b border-gray-100">
+                                    <td class="py-2.5 px-3 font-semibold text-deep-navy">Ventricular Tachycardia (Monomorphic)</td>
+                                    <td class="py-2.5 px-3">200 J</td>
+                                    <td class="py-2.5 px-3">120–150 J</td>
+                                    <td class="py-2.5 px-3">Increase to 300 J</td>
+                                    <td class="py-2.5 px-3">Synchronized if stable; unsynchronized if pulseless</td>
+                                </tr>
+                                <tr class="border-b border-gray-100">
+                                    <td class="py-2.5 px-3 font-semibold text-deep-navy">Ventricular Fibrillation / Pulseless VT</td>
+                                    <td class="py-2.5 px-3">200 J</td>
+                                    <td class="py-2.5 px-3">120–200 J</td>
+                                    <td class="py-2.5 px-3">300 J → 360 J</td>
+                                    <td class="py-2.5 px-3">Unsynchronized; part of ACLS algorithm</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-2.5 px-3 font-semibold text-deep-navy">Pediatric (< 25 kg)</td>
+                                    <td class="py-2.5 px-3">2 J/kg</td>
+                                    <td class="py-2.5 px-3">2 J/kg</td>
+                                    <td class="py-2.5 px-3">4 J/kg</td>
+                                    <td class="py-2.5 px-3">Weight-based dosing; max 200 J</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="mt-4 text-sm text-neutral-slate">
+                        <p><strong>Note:</strong> Biphasic defibrillators are preferred (more effective at lower energy). All energies are for adult patients unless specified. Always confirm rhythm and synchronize for stable VT/AF/AFL/SVT.</p>
                     </div>
                 </div>
 
@@ -1000,6 +1066,48 @@
                     </div>
                 </div>
 
+                <!-- Electrolyte Management in Cardiac Patients -->
+                <div class="ref-card bg-white rounded-xl p-5 md:p-6 shadow-lg mb-6">
+                    <h3 class="text-lg md:text-xl font-playfair font-bold text-deep-navy mb-4 flex items-center gap-2">
+                        <span class="text-2xl">⚗️</span> Electrolyte Management in Cardiac Patients
+                    </h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <h4 class="font-bold text-deep-navy mb-2">Potassium (K⁺) Management</h4>
+                            <div class="space-y-2 text-sm text-neutral-slate bg-gray-50 rounded-lg p-4">
+                                <p><strong>Goal range:</strong> 4.0–5.0 mEq/L (higher if on digoxin)</p>
+                                <p><strong>Hypokalemia (&lt;3.5):</strong> IV KCl 20 mEq in 100 mL D5W over 1 h; oral KCl 40–80 mEq/day</p>
+                                <p><strong>Hyperkalemia (&gt;5.5):</strong> CaCl₂ 1g IV (stabilizes myocardium); insulin/glucose (10U + 50g dextrose); albuterol neb; kayexalate 15–30g PO/PR</p>
+                                <p><strong>ECG changes:</strong> &lt;3.5: U waves, flat T; &gt;6.0: peaked T, wide QRS, sine wave</p>
+                                <p class="text-xs mt-2">Replace K⁺ & Mg²⁺ together; avoid rapid IV push in renal failure</p>
+                            </div>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-deep-navy mb-2">Magnesium (Mg²⁺) Management</h4>
+                            <div class="space-y-2 text-sm text-neutral-slate bg-gray-50 rounded-lg p-4">
+                                <p><strong>Goal range:</strong> 2.0–2.5 mg/dL (ionized Mg²⁺ 1.0–1.2)</p>
+                                <p><strong>Hypomagnesemia (&lt;1.7):</strong> MgSO₄ 2g IV over 10 min, then 1g/hr drip; oral Mg oxide 400–800 mg/day</p>
+                                <p><strong>Hyperphosphatemia:</strong> Rare in cardiac patients; treat with phosphate binders if needed</p>
+                                <p><strong>Clinical pearls:</strong> Mg²⁺ essential for torsades; replace in all K⁺-depleted states; avoid in renal failure</p>
+                                <p class="text-xs mt-2">Mg²⁺ prolongs QTc but prevents torsades; monitor for bradycardia</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-4">
+                        <h4 class="font-bold text-deep-navy mb-2">Calcium & Phosphate in Cardiac Care</h4>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="bg-blue-50 rounded-lg p-3 text-sm text-neutral-slate">
+                                <p><strong>Calcium (ionized 1.0–1.2 mmol/L):</strong> CaCl₂ 1g IV for hyperkalemia; avoid in digoxin toxicity</p>
+                                <p><strong>Phosphate (2.5–4.5 mg/dL):</strong> Replace if &lt;2.0; K-Phos 15 mmol IV over 2 h</p>
+                            </div>
+                            <div class="bg-amber-50 rounded-lg p-3 text-sm text-neutral-slate">
+                                <p><strong>Monitoring:</strong> Daily BMP in ICU; adjust for renal function</p>
+                                <p><strong>Drug interactions:</strong> Loop diuretics cause K⁺/Mg²⁺ loss; ACE/ARB preserve K⁺</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- QT-Corrected Formula Reference -->
                 <div class="ref-card bg-white rounded-xl p-5 md:p-6 shadow-lg mb-6">
                     <h3 class="text-lg md:text-xl font-playfair font-bold text-deep-navy mb-4 flex items-center gap-2">
@@ -1031,6 +1139,254 @@
 
                 <div class="bg-amber-50 border border-amber-200 rounded-xl p-4 md:p-6">
                     <p class="text-sm text-deep-navy"><strong>⚠️ Disclaimer:</strong> Lab reference ranges may vary by assay and institution. Always verify with your local laboratory values and clinical context. ECG interpretation requires clinical correlation with patient presentation.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ═══════════════════ TAB 6: ECHO GUIDE ═══════════════════ -->
+        <div id="tab-echo-guide" class="tab-content py-8 md:py-10">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="mb-8">
+                    <h2 class="text-2xl md:text-3xl font-playfair font-bold text-deep-navy mb-1">Echocardiography Interpretation Guide</h2>
+                    <p class="text-neutral-slate">POCUS cardiac views, normal measurements, and key findings for acute cardiac conditions. Based on ASE guidelines.</p>
+                </div>
+
+                <!-- POCUS Views -->
+                <div class="ref-card ecg bg-white rounded-xl p-5 md:p-6 shadow-lg mb-8">
+                    <h3 class="text-lg md:text-xl font-playfair font-bold text-deep-navy mb-4 flex items-center gap-2">
+                        <span class="text-2xl">🔍</span> POCUS Cardiac Views &amp; Landmarks
+                    </h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                        <div class="bg-teal-50 rounded-lg p-4">
+                            <h4 class="font-bold text-teal-700 mb-2">Parasternal Long Axis (PLAX)</h4>
+                            <ul class="text-sm text-neutral-slate space-y-1">
+                                <li>• Probe: PS mid-clavicular, marker to left</li>
+                                <li>• Structures: LV, LA, AV, MV, AoV</li>
+                                <li>• Key: LV size/function, AV stenosis/regurg</li>
+                            </ul>
+                        </div>
+                        <div class="bg-teal-50 rounded-lg p-4">
+                            <h4 class="font-bold text-teal-700 mb-2">Parasternal Short Axis (PSAX)</h4>
+                            <ul class="text-sm text-neutral-slate space-y-1">
+                                <li>• Probe: Rotate 90° from PLAX</li>
+                                <li>• Levels: Aortic valve, MV, Papillary muscles</li>
+                                <li>• Key: RV size, septal motion, tamponade</li>
+                            </ul>
+                        </div>
+                        <div class="bg-teal-50 rounded-lg p-4">
+                            <h4 class="font-bold text-teal-700 mb-2">Apical 4-Chamber (A4C)</h4>
+                            <ul class="text-sm text-neutral-slate space-y-1">
+                                <li>• Probe: Apex, marker to left axilla</li>
+                                <li>• Structures: LV, RV, LA, RA, MV, TV</li>
+                                <li>• Key: EF, RV/LV ratio, tamponade, clots</li>
+                            </ul>
+                        </div>
+                        <div class="bg-teal-50 rounded-lg p-4">
+                            <h4 class="font-bold text-teal-700 mb-2">Apical 2-Chamber (A2C)</h4>
+                            <ul class="text-sm text-neutral-slate space-y-1">
+                                <li>• Probe: From A4C, rotate laterally</li>
+                                <li>• Structures: LV apex/anterior, LA appendage</li>
+                                <li>• Key: LV wall motion, thrombus</li>
+                            </ul>
+                        </div>
+                        <div class="bg-teal-50 rounded-lg p-4">
+                            <h4 class="font-bold text-teal-700 mb-2">Apical 3-Chamber (A3C)</h4>
+                            <ul class="text-sm text-neutral-slate space-y-1">
+                                <li>• Probe: From A4C, rotate medially</li>
+                                <li>• Structures: LVOT, AV, LA, posterior wall</li>
+                                <li>• Key: LVOT obstruction, AR severity</li>
+                            </ul>
+                        </div>
+                        <div class="bg-teal-50 rounded-lg p-4">
+                            <h4 class="font-bold text-teal-700 mb-2">Subcostal 4-Chamber</h4>
+                            <ul class="text-sm text-neutral-slate space-y-1">
+                                <li>• Probe: Below xiphoid, marker to left</li>
+                                <li>• Structures: Similar to A4C, IVC</li>
+                                <li>• Key: IVC collapse (preload), tamponade</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Normal Measurements -->
+                <div class="ref-card checklist bg-white rounded-xl p-5 md:p-6 shadow-lg mb-6">
+                    <h3 class="text-lg md:text-xl font-playfair font-bold text-deep-navy mb-4 flex items-center gap-2">
+                        <span class="text-2xl">📏</span> Normal Echo Measurements (Adults)
+                    </h3>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-sm min-w-[600px]">
+                            <thead><tr class="border-b-2 border-teal-100 bg-teal-50">
+                                <th class="text-left py-2.5 px-3 font-semibold text-deep-navy">Parameter</th>
+                                <th class="text-left py-2.5 px-3 font-semibold text-deep-navy">Normal Range</th>
+                                <th class="text-left py-2.5 px-3 font-semibold text-deep-navy">Clinical Significance</th>
+                                <th class="text-left py-2.5 px-3 font-semibold text-deep-navy">View</th>
+                            </tr></thead>
+                            <tbody class="text-neutral-slate">
+                                <tr class="border-b border-gray-100">
+                                    <td class="py-2.5 px-3 font-semibold text-deep-navy">LV Ejection Fraction (EF)</td>
+                                    <td class="py-2.5 px-3">55–70%</td>
+                                    <td class="py-2.5 px-3">EF &lt;40% = HFrEF; EF 40–49% = HFmrEF</td>
+                                    <td class="py-2.5 px-3">A4C, PLAX</td>
+                                </tr>
+                                <tr class="border-b border-gray-100">
+                                    <td class="py-2.5 px-3 font-semibold text-deep-navy">LV End-Diastolic Diameter</td>
+                                    <td class="py-2.5 px-3">4.2–5.9 cm (men), 3.9–5.3 cm (women)</td>
+                                    <td class="py-2.5 px-3">&gt;6.2 cm = severe dilation</td>
+                                    <td class="py-2.5 px-3">PLAX</td>
+                                </tr>
+                                <tr class="border-b border-gray-100">
+                                    <td class="py-2.5 px-3 font-semibold text-deep-navy">IVS Thickness (diastolic)</td>
+                                    <td class="py-2.5 px-3">0.6–1.1 cm</td>
+                                    <td class="py-2.5 px-3">&gt;1.5 cm = LVH; &gt;1.1 cm in athletes</td>
+                                    <td class="py-2.5 px-3">PLAX</td>
+                                </tr>
+                                <tr class="border-b border-gray-100">
+                                    <td class="py-2.5 px-3 font-semibold text-deep-navy">LA Diameter</td>
+                                    <td class="py-2.5 px-3">&lt;4.0 cm (A-P), &lt;5.2 cm (area)</td>
+                                    <td class="py-2.5 px-3">&gt;4.0 cm = LA enlargement (AFib risk)</td>
+                                    <td class="py-2.5 px-3">PLAX</td>
+                                </tr>
+                                <tr class="border-b border-gray-100">
+                                    <td class="py-2.5 px-3 font-semibold text-deep-navy">RV Diameter</td>
+                                    <td class="py-2.5 px-3">&lt;4.2 cm (basal), &lt;3.0 cm (mid)</td>
+                                    <td class="py-2.5 px-3">RV &gt; LV in A4C = RV strain (PE)</td>
+                                    <td class="py-2.5 px-3">A4C</td>
+                                </tr>
+                                <tr class="border-b border-gray-100">
+                                    <td class="py-2.5 px-3 font-semibold text-deep-navy">Aortic Root Diameter</td>
+                                    <td class="py-2.5 px-3">2.0–3.7 cm (annulus), 2.5–4.1 cm (sinuses)</td>
+                                    <td class="py-2.5 px-3">&gt;4.5 cm = aortic root aneurysm</td>
+                                    <td class="py-2.5 px-3">PLAX</td>
+                                </tr>
+                                <tr class="border-b border-gray-100">
+                                    <td class="py-2.5 px-3 font-semibold text-deep-navy">TAPSE (RV function)</td>
+                                    <td class="py-2.5 px-3">&gt;1.7 cm</td>
+                                    <td class="py-2.5 px-3">&lt;1.7 cm = RV dysfunction</td>
+                                    <td class="py-2.5 px-3">A4C</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-2.5 px-3 font-semibold text-deep-navy">IVC Diameter (exp/insp)</td>
+                                    <td class="py-2.5 px-3">&lt;2.1 cm, &gt;50% collapse</td>
+                                    <td class="py-2.5 px-3">&gt;2.1 cm + &lt;50% collapse = elevated RA pressure</td>
+                                    <td class="py-2.5 px-3">Subcostal</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Acute Cardiac Findings -->
+                <div class="ref-card emergency bg-white rounded-xl p-5 md:p-6 shadow-lg mb-6">
+                    <h3 class="text-lg md:text-xl font-playfair font-bold text-deep-navy mb-4 flex items-center gap-2">
+                        <span class="text-2xl">🚨</span> Key Findings in Acute Cardiac Conditions
+                    </h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="bg-red-50 rounded-lg p-4">
+                            <h4 class="font-bold text-red-700 mb-3">Cardiac Tamponade</h4>
+                            <ul class="text-sm text-neutral-slate space-y-1.5">
+                                <li>☐ RV diastolic collapse (PLAX/PSAX)</li>
+                                <li>☐ RA systolic collapse (A4C)</li>
+                                <li>☐ IVC dilated, no respiratory variation</li>
+                                <li>☐ Pericardial effusion + RA/RV compression</li>
+                                <li>☐ Pulsus paradoxus on exam</li>
+                                <li><strong>Action:</strong> Pericardiocentesis (subcostal approach)</li>
+                            </ul>
+                        </div>
+                        <div class="bg-red-50 rounded-lg p-4">
+                            <h4 class="font-bold text-red-700 mb-3">Acute Severe MR</h4>
+                            <ul class="text-sm text-neutral-slate space-y-1.5">
+                                <li>☐ Flail leaflet or ruptured chordae</li>
+                                <li>☐ Eccentric jet toward LA wall</li>
+                                <li>☐ LA/LV enlargement</li>
+                                <li>☐ Low EF, pulmonary hypertension signs</li>
+                                <li><strong>Action:</strong> Afterload reduction, consider surgery</li>
+                            </ul>
+                        </div>
+                        <div class="bg-red-50 rounded-lg p-4">
+                            <h4 class="font-bold text-red-700 mb-3">Acute LV Failure</h4>
+                            <ul class="text-sm text-neutral-slate space-y-1.5">
+                                <li>☐ LV EF &lt;40%, global hypokinesis</li>
+                                <li>☐ LV dilation, spherical shape</li>
+                                <li>☐ Mitral regurgitation (functional)</li>
+                                <li>☐ B-lines on lung ultrasound</li>
+                                <li><strong>Action:</strong> NTG, inotropes, consider MCS</li>
+                            </ul>
+                        </div>
+                        <div class="bg-red-50 rounded-lg p-4">
+                            <h4 class="font-bold text-red-700 mb-3">RV Strain (PE)</h4>
+                            <ul class="text-sm text-neutral-slate space-y-1.5">
+                                <li>☐ RV:LV ratio &gt;1.0 in A4C</li>
+                                <li>☐ RV free wall hypokinesis</li>
+                                <li>☐ Septal bowing toward LV</li>
+                                <li>☐ TAPSE &lt;1.7 cm</li>
+                                <li>☐ IVC dilated, no collapse</li>
+                                <li><strong>Action:</strong> Anticoagulation, consider thrombolysis</li>
+                            </ul>
+                        </div>
+                        <div class="bg-red-50 rounded-lg p-4">
+                            <h4 class="font-bold text-red-700 mb-3">Cardiomyopathies</h4>
+                            <ul class="text-sm text-neutral-slate space-y-1.5">
+                                <li><strong>HCM:</strong> Asymmetric septal hypertrophy, SAM, LVOT obstruction</li>
+                                <li><strong>DCM:</strong> Dilated LV/RV, EF &lt;40%, global hypokinesis</li>
+                                <li><strong>RCM:</strong> Small ventricles, thick walls, biatrial enlargement</li>
+                                <li><strong>ARVC:</strong> RV dilation, fatty infiltration, arrhythmias</li>
+                            </ul>
+                        </div>
+                        <div class="bg-red-50 rounded-lg p-4">
+                            <h4 class="font-bold text-red-700 mb-3">Valvular Emergencies</h4>
+                            <ul class="text-sm text-neutral-slate space-y-1.5">
+                                <li><strong>AS:</strong> Thickened calcified AV, LVH, low gradient if low EF</li>
+                                <li><strong>IE:</strong> Vegetation on valve, abscess, new regurgitation</li>
+                                <li><strong>Aortic dissection:</strong> Intimal flap in aorta, pericardial effusion</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Doppler Basics -->
+                <div class="ref-card bg-white rounded-xl p-5 md:p-6 shadow-lg mb-6">
+                    <h3 class="text-lg md:text-xl font-playfair font-bold text-deep-navy mb-4 flex items-center gap-2">
+                        <span class="text-2xl">🌊</span> Doppler Assessment Quick Guide
+                    </h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <h4 class="font-bold text-deep-navy mb-2">Valvular Regurgitation Grading</h4>
+                            <div class="space-y-2 text-sm text-neutral-slate bg-gray-50 rounded-lg p-4">
+                                <p><strong>Mild:</strong> Narrow jet &lt;25% LA area, vena contracta &lt;3 mm</p>
+                                <p><strong>Moderate:</strong> Jet 25–65% LA area, vena contracta 3–7 mm</p>
+                                <p><strong>Severe:</strong> Jet &gt;65% LA area, vena contracta &gt;7 mm, PISA radius &gt;9 mm</p>
+                                <p class="text-xs mt-2">Also assess: LA size, pulmonary vein flow, LV function</p>
+                            </div>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-deep-navy mb-2">Valvular Stenosis Grading</h4>
+                            <div class="space-y-2 text-sm text-neutral-slate bg-gray-50 rounded-lg p-4">
+                                <p><strong>AS:</strong> Mild &lt;2.0 cm², Moderate 1.0–1.5 cm², Severe &lt;1.0 cm²</p>
+                                <p><strong>MS:</strong> Mild &gt;1.5 cm², Moderate 1.0–1.5 cm², Severe &lt;1.0 cm²</p>
+                                <p><strong>Mean gradient:</strong> AS &gt;40 mmHg = severe</p>
+                                <p class="text-xs mt-2">Continuity equation for AS area; pressure half-time for MS</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-4">
+                        <h4 class="font-bold text-deep-navy mb-2">Diastolic Function Assessment</h4>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="bg-blue-50 rounded-lg p-3 text-sm text-neutral-slate">
+                                <p><strong>Normal:</strong> E/A &gt;1, DT 160–200 ms, IVRT &lt;70 ms</p>
+                                <p><strong>Grade I (Impaired relaxation):</strong> E/A &lt;1, DT &gt;200 ms</p>
+                                <p><strong>Grade II (Pseudonormal):</strong> E/A 1–2, variable with Valsalva</p>
+                            </div>
+                            <div class="bg-amber-50 rounded-lg p-3 text-sm text-neutral-slate">
+                                <p><strong>Grade III (Restrictive):</strong> E/A &gt;2, DT &lt;160 ms</p>
+                                <p><strong>E/e' ratio:</strong> &lt;8 = normal, 9–12 = indeterminate, &gt;13 = elevated LVFP</p>
+                                <p class="text-xs mt-2">Always correlate with BNP and clinical picture</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-amber-50 border border-amber-200 rounded-xl p-4 md:p-6">
+                    <p class="text-sm text-deep-navy"><strong>⚠️ Disclaimer:</strong> Echo interpretation requires formal training and clinical correlation. POCUS is limited compared to comprehensive echocardiography. Always consult cardiology for definitive diagnosis. Measurements may vary with body size and age.</p>
                 </div>
             </div>
         </div>

@@ -231,6 +231,12 @@
                 <button class="tool-nav-btn text-neutral-slate hover:text-clinical-blue transition-colors pb-2" data-target="ecg-interval-calculator">
                     📏 ECG Interval Calculator
                 </button>
+                <button class="tool-nav-btn text-neutral-slate hover:text-clinical-blue transition-colors pb-2" data-target="echo-interpretation-guide">
+                    🫀 Echo Interpretation Guide
+                </button>
+                <button class="tool-nav-btn text-neutral-slate hover:text-clinical-blue transition-colors pb-2" data-target="drug-dosing-charts">
+                    💊 Drug Dosing Charts
+                </button>
             </div>
         </div>
     </section>
@@ -2041,6 +2047,314 @@
                 </div>
                 <div class="mt-4 bg-red-50 border-l-4 border-red-500 p-3 rounded text-sm">
                     <strong>CredibleMeds:</strong> For comprehensive drug-induced QT prolongation risk assessment, check <a href="https://crediblemeds.org" target="_blank" rel="noopener" class="text-clinical-blue underline">crediblemeds.org</a>. Always check for drug-drug interactions before starting medications in patients with baseline QTc &gt;450 ms (M) or &gt;470 ms (F). Risk increases with hypokalemia, hypomagnesemia, and bradycardia.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Echo Interpretation Guide -->
+    <section id="echo-interpretation-guide" class="tool-section py-16 bg-light-gray hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-playfair font-bold text-deep-navy mb-4">🫀 Echocardiography Interpretation Guide</h2>
+                <p class="text-xl text-neutral-slate max-w-3xl mx-auto">
+                    Systematic approach to echo interpretation with key measurements, normal values, and diagnostic algorithms for common cardiac pathologies.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
+                <!-- Basic Measurements -->
+                <div class="bg-white rounded-2xl p-6 shadow-lg">
+                    <div class="flex items-center mb-6">
+                        <div class="w-12 h-12 bg-success-green rounded-lg flex items-center justify-center mr-4">
+                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-playfair font-bold text-deep-navy">Basic Measurements</h3>
+                    </div>
+
+                    <div class="space-y-4">
+                        <div class="border-l-4 border-success-green pl-4">
+                            <h4 class="font-semibold text-deep-navy mb-2">Left Ventricular Function</h4>
+                            <ul class="text-sm text-neutral-slate space-y-1">
+                                <li><strong>LVEF:</strong> ≥55% normal, 45-54% mildly reduced, 35-44% moderately reduced, &lt;35% severely reduced</li>
+                                <li><strong>LVEDD:</strong> 4.2-5.9 cm (male), 3.9-5.3 cm (female)</li>
+                                <li><strong>LVESD:</strong> 2.7-4.0 cm (male), 2.5-3.8 cm (female)</li>
+                                <li><strong>IVSd:</strong> 0.6-1.1 cm (septal thickness)</li>
+                                <li><strong>PWd:</strong> 0.6-1.1 cm (posterior wall thickness)</li>
+                            </ul>
+                        </div>
+
+                        <div class="border-l-4 border-clinical-blue pl-4">
+                            <h4 class="font-semibold text-deep-navy mb-2">Right Ventricular Function</h4>
+                            <ul class="text-sm text-neutral-slate space-y-1">
+                                <li><strong>RV FAC:</strong> ≥35% normal</li>
+                                <li><strong>TR velocity:</strong> &lt;2.8 m/s normal (estimate PASP)</li>
+                                <li><strong>RVSP:</strong> = 4×(TR Vmax)² + RAP</li>
+                                <li><strong>RAP estimate:</strong> IVC &lt;2.1 cm and &gt;50% collapse = 3 mmHg</li>
+                            </ul>
+                        </div>
+
+                        <div class="border-l-4 border-cardiac-purple pl-4">
+                            <h4 class="font-semibold text-deep-navy mb-2">Valvular Assessment</h4>
+                            <ul class="text-sm text-neutral-slate space-y-1">
+                                <li><strong>Aortic Valve:</strong> Vmax &lt;2 m/s normal, &gt;4 m/s severe AS</li>
+                                <li><strong>Mitral Valve:</strong> E/A ratio, deceleration time</li>
+                                <li><strong>AVA:</strong> ≥1.0 cm² normal, &lt;1.0 cm² mild AS</li>
+                                <li><strong>MR severity:</strong> PISA method, vena contracta</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Diastolic Function -->
+                <div class="bg-white rounded-2xl p-6 shadow-lg">
+                    <div class="flex items-center mb-6">
+                        <div class="w-12 h-12 bg-diagnostic-teal rounded-lg flex items-center justify-center mr-4">
+                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-playfair font-bold text-deep-navy">Diastolic Function Assessment</h3>
+                    </div>
+
+                    <div class="space-y-4">
+                        <div class="bg-teal-50 rounded-lg p-4">
+                            <h4 class="font-semibold text-deep-navy mb-2">Grade I (Impaired Relaxation)</h4>
+                            <ul class="text-sm text-neutral-slate space-y-1">
+                                <li>E/A &lt; 0.8</li>
+                                <li>DT &gt; 200 ms</li>
+                                <li>E' septal &lt; 7 cm/s, lateral &lt; 10 cm/s</li>
+                                <li>E/E' &lt; 8</li>
+                            </ul>
+                        </div>
+
+                        <div class="bg-yellow-50 rounded-lg p-4">
+                            <h4 class="font-semibold text-deep-navy mb-2">Grade II (Pseudonormal)</h4>
+                            <ul class="text-sm text-neutral-slate space-y-1">
+                                <li>E/A 0.8-1.5</li>
+                                <li>DT 160-200 ms</li>
+                                <li>E/E' 9-12</li>
+                                <li>Use Valsalva or exercise to unmask</li>
+                            </ul>
+                        </div>
+
+                        <div class="bg-orange-50 rounded-lg p-4">
+                            <h4 class="font-semibold text-deep-navy mb-2">Grade III (Restrictive)</h4>
+                            <ul class="text-sm text-neutral-slate space-y-1">
+                                <li>E/A &gt; 2</li>
+                                <li>DT &lt; 160 ms</li>
+                                <li>E/E' &gt; 13</li>
+                                <li>IVRT &lt; 60 ms</li>
+                            </ul>
+                        </div>
+
+                        <div class="bg-blue-50 rounded-lg p-4">
+                            <h4 class="font-semibold text-deep-navy mb-2">Key Algorithm</h4>
+                            <ol class="text-sm text-neutral-slate space-y-1 list-decimal list-inside">
+                                <li>Check E/A ratio and E' velocities</li>
+                                <li>Calculate E/E' (elevated = increased LA pressure)</li>
+                                <li>Assess TR velocity and IVC for RA pressure</li>
+                                <li>Integrate with clinical picture</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pericardial Disease -->
+                <div class="bg-white rounded-2xl p-6 shadow-lg">
+                    <div class="flex items-center mb-6">
+                        <div class="w-12 h-12 bg-warning-amber rounded-lg flex items-center justify-center mr-4">
+                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-playfair font-bold text-deep-navy">Pericardial Disease</h3>
+                    </div>
+
+                    <div class="space-y-4">
+                        <div class="border-l-4 border-amber-500 pl-4">
+                            <h4 class="font-semibold text-deep-navy mb-2">Pericardial Effusion</h4>
+                            <ul class="text-sm text-neutral-slate space-y-1">
+                                <li><strong>Small:</strong> &lt;10 mm echo-free space</li>
+                                <li><strong>Moderate:</strong> 10-20 mm</li>
+                                <li><strong>Large:</strong> &gt;20 mm or tamponade physiology</li>
+                                <li><strong>Loculated:</strong> Consider malignancy or infection</li>
+                            </ul>
+                        </div>
+
+                        <div class="border-l-4 border-red-500 pl-4">
+                            <h4 class="font-semibold text-deep-navy mb-2">Tamponade Signs</h4>
+                            <ul class="text-sm text-neutral-slate space-y-1">
+                                <li>• RA/RV diastolic collapse</li>
+                                <li>• IVC plethora (&gt;2.1 cm, &lt;50% collapse)</li>
+                                <li>• Respiratory variation in MV inflow (&gt;25%)</li>
+                                <li>• Pulsus paradoxus clinically</li>
+                            </ul>
+                        </div>
+
+                        <div class="border-l-4 border-blue-500 pl-4">
+                            <h4 class="font-semibold text-deep-navy mb-2">Constrictive Pericarditis</h4>
+                            <ul class="text-sm text-neutral-slate space-y-1">
+                                <li>• Septal bounce (respiratory shift)</li>
+                                <li>• Mitral E' &gt; 8 cm/s with annulus reversus</li>
+                                <li>• Hepatic vein expiratory diastolic flow reversal</li>
+                                <li>• Thickened pericardium (&gt;4 mm)</li>
+                            </ul>
+                        </div>
+
+                        <div class="bg-gray-50 rounded-lg p-3 text-xs text-neutral-slate">
+                            <strong>Tip:</strong> Always assess for tamponade physiology regardless of effusion size. Small effusions can tamponade if loculated.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Systematic Interpretation Algorithm -->
+            <div class="bg-white rounded-2xl p-8 shadow-lg mb-8">
+                <h3 class="text-2xl font-playfair font-bold text-deep-navy mb-6 text-center">Systematic Echo Interpretation Algorithm</h3>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div>
+                        <h4 class="text-lg font-semibold text-deep-navy mb-4">Step-by-Step Approach</h4>
+                        <ol class="space-y-3">
+                            <li class="flex items-start gap-3">
+                                <div class="w-8 h-8 bg-clinical-blue rounded-full flex items-center justify-center text-white font-bold text-sm flex-shrink-0">1</div>
+                                <div>
+                                    <strong class="text-deep-navy">Overall Impression</strong>
+                                    <p class="text-sm text-neutral-slate">Assess global LV/RV function, chamber sizes, and pericardium</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <div class="w-8 h-8 bg-clinical-blue rounded-full flex items-center justify-center text-white font-bold text-sm flex-shrink-0">2</div>
+                                <div>
+                                    <strong class="text-deep-navy">LV Function & Dimensions</strong>
+                                    <p class="text-sm text-neutral-slate">Measure LVEF, wall thickness, cavity size, regional wall motion</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <div class="w-8 h-8 bg-clinical-blue rounded-full flex items-center justify-center text-white font-bold text-sm flex-shrink-0">3</div>
+                                <div>
+                                    <strong class="text-deep-navy">RV Assessment</strong>
+                                    <p class="text-sm text-neutral-slate">RV size/function, TR jet for PASP, IVC for RA pressure</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <div class="w-8 h-8 bg-clinical-blue rounded-full flex items-center justify-center text-white font-bold text-sm flex-shrink-0">4</div>
+                                <div>
+                                    <strong class="text-deep-navy">Valvular Evaluation</strong>
+                                    <p class="text-sm text-neutral-slate">Stenosis/regurgitation severity, gradients, valve morphology</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <div class="w-8 h-8 bg-clinical-blue rounded-full flex items-center justify-center text-white font-bold text-sm flex-shrink-0">5</div>
+                                <div>
+                                    <strong class="text-deep-navy">Diastolic Function</strong>
+                                    <p class="text-sm text-neutral-slate">Mitral inflow, tissue Doppler, LA pressure estimate</p>
+                                </div>
+                            </li>
+                        </ol>
+                    </div>
+
+                    <div>
+                        <h4 class="text-lg font-semibold text-deep-navy mb-4">Common Pathologic Patterns</h4>
+                        <div class="space-y-4">
+                            <div class="bg-red-50 rounded-lg p-4">
+                                <h5 class="font-semibold text-red-700 mb-2">Dilated Cardiomyopathy</h5>
+                                <ul class="text-sm text-neutral-slate space-y-1">
+                                    <li>• LVEDD &gt;5.9 cm (male), &gt;5.3 cm (female)</li>
+                                    <li>• LVEF &lt;40%</li>
+                                    <li>• Secondary MR common</li>
+                                    <li>• Assess for thrombus (apical)</li>
+                                </ul>
+                            </div>
+
+                            <div class="bg-blue-50 rounded-lg p-4">
+                                <h5 class="font-semibold text-blue-700 mb-2">Hypertrophic Cardiomyopathy</h5>
+                                <ul class="text-sm text-neutral-slate space-y-1">
+                                    <li>• Asymmetric septal hypertrophy</li>
+                                    <li>• SAM of mitral valve</li>
+                                    <li>• LVOT gradient assessment</li>
+                                    <li>• Diastolic dysfunction</li>
+                                </ul>
+                            </div>
+
+                            <div class="bg-green-50 rounded-lg p-4">
+                                <h5 class="font-semibold text-green-700 mb-2">Heart Failure with Preserved EF</h5>
+                                <ul class="text-sm text-neutral-slate space-y-1">
+                                    <li>• LVEF ≥50%</li>
+                                    <li>• Diastolic dysfunction (Grade II/III)</li>
+                                    <li>• LA enlargement</li>
+                                    <li>• Elevated E/E' ratio</li>
+                                </ul>
+                            </div>
+
+                            <div class="bg-purple-50 rounded-lg p-4">
+                                <h5 class="font-semibold text-purple-700 mb-2">Aortic Stenosis</h5>
+                                <ul class="text-sm text-neutral-slate space-y-1">
+                                    <li>• AV Vmax &gt;4 m/s (severe)</li>
+                                    <li>• AVA &lt;1.0 cm² (severe)</li>
+                                    <li>• Assess LV hypertrophy/function</li>
+                                    <li>• Check for aortic regurgitation</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- POCUS Cardiac Views Reference -->
+            <div class="bg-white rounded-2xl p-8 shadow-lg">
+                <h3 class="text-2xl font-playfair font-bold text-deep-navy mb-6 text-center">POCUS Cardiac Views Reference</h3>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div class="text-center">
+                        <div class="bg-gray-100 rounded-lg p-4 mb-4">
+                            <h4 class="font-semibold text-deep-navy mb-2">Parasternal Long Axis (PLAX)</h4>
+                            <img src="resources/plax-view.png" alt="PLAX View" class="w-full h-24 object-cover rounded mb-2" onerror="this.style.display='none'">
+                            <p class="text-xs text-neutral-slate">Probe: 3rd-4th ICS, L sternal border. Foot toward L shoulder.</p>
+                            <p class="text-xs text-neutral-slate"><strong>Key structures:</strong> LV, LA, AV, MV, aortic root</p>
+                        </div>
+                    </div>
+
+                    <div class="text-center">
+                        <div class="bg-gray-100 rounded-lg p-4 mb-4">
+                            <h4 class="font-semibold text-deep-navy mb-2">Parasternal Short Axis (PSAX)</h4>
+                            <img src="resources/psax-view.png" alt="PSAX View" class="w-full h-24 object-cover rounded mb-2" onerror="this.style.display='none'">
+                            <p class="text-xs text-neutral-slate">Rotate 90° from PLAX. Clockwise rotation shows valves.</p>
+                            <p class="text-xs text-neutral-slate"><strong>Key structures:</strong> RV, LV (circular), valves, papillary muscles</p>
+                        </div>
+                    </div>
+
+                    <div class="text-center">
+                        <div class="bg-gray-100 rounded-lg p-4 mb-4">
+                            <h4 class="font-semibold text-deep-navy mb-2">Apical 4-Chamber (A4C)</h4>
+                            <img src="resources/a4c-view.png" alt="A4C View" class="w-full h-24 object-cover rounded mb-2" onerror="this.style.display='none'">
+                            <p class="text-xs text-neutral-slate">Probe: 5th ICS, L mid-clavicular line. Apex toward screen.</p>
+                            <p class="text-xs text-neutral-slate"><strong>Key structures:</strong> All 4 chambers, MV, TV, septum</p>
+                        </div>
+                    </div>
+
+                    <div class="text-center">
+                        <div class="bg-gray-100 rounded-lg p-4 mb-4">
+                            <h4 class="font-semibold text-deep-navy mb-2">Subxiphoid (Subcostal)</h4>
+                            <img src="resources/subcostal-view.png" alt="Subcostal View" class="w-full h-24 object-cover rounded mb-2" onerror="this.style.display='none'">
+                            <p class="text-xs text-neutral-slate">Probe: Below xiphoid, angled cephalad. Good for tamponade.</p>
+                            <p class="text-xs text-neutral-slate"><strong>Key structures:</strong> IVC, liver, pericardial space, RV/LV</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-6 bg-blue-50 rounded-lg p-4">
+                    <h4 class="font-semibold text-deep-navy mb-2">POCUS Protocol for Shock</h4>
+                    <ol class="text-sm text-neutral-slate space-y-1 list-decimal list-inside">
+                        <li><strong>PLAX:</strong> Assess LV function, pericardial effusion</li>
+                        <li><strong>PSAX:</strong> LV/RV size comparison, septal motion</li>
+                        <li><strong>A4C:</strong> Overall function, chamber sizes</li>
+                        <li><strong>Subcostal:</strong> IVC size/collapse, tamponade</li>
+                        <li><strong>Integrate:</strong> Hyperdynamic LV + flat IVC = hypovolemia; D-sign = RV strain</li>
+                    </ol>
                 </div>
             </div>
         </div>
