@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Heart Anatomy | CardioReference</title>
+    <meta name="description" content="Interactive SVG-based heart anatomy with clickable regions showing detailed information about cardiac structures, functions, and clinical relevance.">
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@400;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+    <!-- Core Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'clinical-blue': '#2563EB',
+                        'diagnostic-teal': '#0891B2',
+                        'alert-coral': '#DC2626',
+                        'warning-amber': '#D97706',
+                        'neutral-slate': '#475569',
+                        'light-gray': '#F1F5F9',
+                        'success-green': '#059669',
+                        'deep-navy': '#1E293B',
+                        'ecg-chartreuse': '#84CC16',
+                        'cardiac-purple': '#7C3AED',
+                        'imaging-orange': '#EA580C',
+                        'biomarker-rose': '#E11D48'
+                    },
+                    fontFamily: {
+                        'inter': ['Inter', 'sans-serif'],
+                        'playfair': ['Playfair Display', 'serif'],
+                        'mono': ['JetBrains Mono', 'monospace']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Smooth transitions */
+        *, *::before, *::after {
+            transition: background-color 0.35s cubic-bezier(.4,0,.2,1),
+                        color 0.35s cubic-bezier(.4,0,.2,1),
+                        border-color 0.35s cubic-bezier(.4,0,.2,1),
+                        box-shadow 0.35s cubic-bezier(.4,0,.2,1);
+        }
+        img, svg, video, canvas {
+            transition: none !important;
+        }
+
+        /* Dark mode */
+        .dark body { background: #0b0f1a !important; color: #e2e8f0; }
+        .dark .bg-white { background: linear-gradient(135deg, #1e293b 0%, #141c2e 100%) !important; }
+        .dark nav { background: #111827 !important; border-color: rgba(37,99,235,0.4) !important; }
+        .dark nav a.text-neutral-slate { color: #94a3b8 !important; }
+        .dark nav a.text-neutral-slate:hover { color: #60a5fa !important; }
+        .dark .text-deep-navy { color: #f1f5f9 !important; }
+        .dark .text-neutral-slate { color: #94a3b8 !important; }
+        .dark .bg-light-gray { background: #0f172a !important; }
+
+        /* Heart regions hover */
+        .heart-region {
+            cursor: pointer;
+            transition: fill 0.3s ease;
+        }
+        .heart-region:hover {
+            fill: #60a5fa !important;
+        }
+        .heart-region.active {
+            fill: #2563eb !important;
+        }
+
+        /* Info panel */
+        .info-panel {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(37, 99, 235, 0.2);
+        }
+        .dark .info-panel {
+            background: rgba(30, 41, 59, 0.97) !important;
+            border-color: rgba(96,165,250,0.35) !important;
+        }
+    </style>
+</head>
+<body class="bg-light-gray font-inter">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg border-b-2 border-clinical-blue sticky top-0 z-50" role="navigation" aria-label="Main navigation">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <a href="index.html" class="flex items-center space-x-4">
+                    <div class="flex-shrink-0">
+                        <svg class="h-8 w-8 text-clinical-blue" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <h1 class="text-xl font-playfair font-bold text-deep-navy">CardioReference</h1>
+                        <p class="text-xs text-neutral-slate">Professional Cardiology Resource</p>
+                    </div>
+                </a>
+
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="index.html#disorders" class="text-neutral-slate hover:text-clinical-blue transition-colors font-medium">Disorders</a>
+                    <a href="diagnostic-tools.html" class="text-neutral-slate hover:text-clinical-blue transition-colors font-medium">Diagnostic Tools</a>
+                    <a href="treatment-protocols.html" class="text-neutral-slate hover:text-clinical-blue transition-colors font-medium">Treatment Protocols</a>
+                    <a href="quick-reference.html" class="text-neutral-slate hover:text-clinical-blue transition-colors font-medium">Quick Reference</a>
+                    <a href="patient-education.html" class="text-neutral-slate hover:text-clinical-blue transition-colors font-medium">Patient Education</a>
+                    <a href="research.html" class="text-neutral-slate hover:text-clinical-blue transition-colors font-medium">Latest Research</a>
+                    <a href="heart-anatomy.html" class="text-clinical-blue font-semibold">Heart Anatomy</a>
+                </div>
+
+                <div class="flex items-center space-x-4">
+                    <button class="p-2 text-neutral-slate hover:text-clinical-blue transition-colors">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="bg-gradient-to-br from-clinical-blue to-diagnostic-teal min-h-screen flex items-center relative overflow-hidden">
+        <div class="absolute inset-0 bg-black bg-opacity-10"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center text-white">
+                <h1 class="text-5xl lg:text-7xl font-playfair font-bold mb-6 leading-tight">
+                    Interactive Heart Anatomy
+                </h1>
+                <p class="text-xl lg:text-2xl mb-8 text-gray-200 max-w-4xl mx-auto">
+                    Explore the heart's structures with interactive SVG diagrams. Click on any region to learn about its anatomy, function, and clinical significance.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Heart Section -->
+    <section class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+                <!-- SVG Heart Diagram -->
+                <div class="flex justify-center">
+                    <div class="relative">
+                        <svg id="heart-svg" viewBox="0 0 400 400" class="w-full max-w-lg">
+                            <!-- Background -->
+                            <rect width="400" height="400" fill="#f8fafc" rx="10"/>
+
+                            <!-- Heart Outline -->
+                            <path d="M200 350 Q150 300 150 250 Q150 200 200 150 Q250 200 250 250 Q250 300 200 350 Z" fill="#ef4444" stroke="#dc2626" stroke-width="2"/>
+
+                            <!-- Right Atrium -->
+                            <path id="right-atrium" class="heart-region" d="M200 150 Q175 165 160 190 Q155 220 165 235 Q175 245 185 240 Q195 235 200 220 Q205 200 200 180 Z" fill="#fca5a5" stroke="#dc2626" stroke-width="1"/>
+                            <text x="180" y="205" font-size="10" text-anchor="middle" fill="#7f1d1d">Right Atrium</text>
+
+                            <!-- Right Ventricle -->
+                            <path id="right-ventricle" class="heart-region" d="M200 220 Q195 235 185 245 Q175 255 165 250 Q155 245 150 235 Q150 250 165 270 Q175 290 200 310 Q210 300 200 280 Z" fill="#fca5a5" stroke="#dc2626" stroke-width="1"/>
+                            <text x="175" y="270" font-size="10" text-anchor="middle" fill="#7f1d1d">Right Ventricle</text>
+
+                            <!-- Left Atrium -->
+                            <path id="left-atrium" class="heart-region" d="M200 150 Q225 165 240 190 Q245 220 235 235 Q225 245 215 240 Q205 235 200 220 Q195 200 200 180 Z" fill="#86efac" stroke="#16a34a" stroke-width="1"/>
+                            <text x="220" y="205" font-size="10" text-anchor="middle" fill="#166534">Left Atrium</text>
+
+                            <!-- Left Ventricle -->
+                            <path id="left-ventricle" class="heart-region" d="M200 220 Q205 235 215 245 Q225 255 235 250 Q245 245 250 235 Q250 250 235 270 Q225 290 200 310 Q190 300 200 280 Z" fill="#86efac" stroke="#16a34a" stroke-width="1"/>
+                            <text x="225" y="270" font-size="10" text-anchor="middle" fill="#166534">Left Ventricle</text>
+
+                            <!-- Tricuspid Valve -->
+                            <circle id="tricuspid-valve" class="heart-region" cx="185" cy="235" r="8" fill="#fbbf24" stroke="#d97706" stroke-width="1"/>
+                            <text x="185" y="240" font-size="8" text-anchor="middle" fill="#92400e">TV</text>
+
+                            <!-- Pulmonary Valve -->
+                            <circle id="pulmonary-valve" class="heart-region" cx="200" cy="280" r="8" fill="#fbbf24" stroke="#d97706" stroke-width="1"/>
+                            <text x="200" y="285" font-size="8" text-anchor="middle" fill="#92400e">PV</text>
+
+                            <!-- Mitral Valve -->
+                            <circle id="mitral-valve" class="heart-region" cx="215" cy="235" r="8" fill="#fbbf24" stroke="#d97706" stroke-width="1"/>
+                            <text x="215" y="240" font-size="8" text-anchor="middle" fill="#92400e">MV</text>
+
+                            <!-- Aortic Valve -->
+                            <circle id="aortic-valve" class="heart-region" cx="200" cy="280" r="8" fill="#fbbf24" stroke="#d97706" stroke-width="1"/>
+                            <text x="200" y="285" font-size="8" text-anchor="middle" fill="#92400e">AV</text>
+
+                            <!-- Pulmonary Artery -->
+                            <path id="pulmonary-artery" class="heart-region" d="M200 280 Q190 260 175 250 Q160 240 140 245" fill="#93c5fd" stroke="#3b82f6" stroke-width="2"/>
+                            <text x="160" y="240" font-size="9" text-anchor="middle" fill="#1e40af">Pulmonary Artery</text>
+
+                            <!-- Aorta -->
+                            <path id="aorta" class="heart-region" d="M200 280 Q210 260 225 250 Q240 240 260 245" fill="#93c5fd" stroke="#3b82f6" stroke-width="2"/>
+                            <text x="240" y="240" font-size="9" text-anchor="middle" fill="#1e40af">Aorta</text>
+
+                            <!-- Superior Vena Cava -->
+                            <path id="superior-vena-cava" class="heart-region" d="M200 150 Q185 140 170 135 Q155 130 150 140" fill="#93c5fd" stroke="#3b82f6" stroke-width="2"/>
+                            <text x="170" y="130" font-size="8" text-anchor="middle" fill="#1e40af">SVC</text>
+
+                            <!-- Inferior Vena Cava -->
+                            <path id="inferior-vena-cava" class="heart-region" d="M200 310 Q185 320 170 325 Q155 330 150 320" fill="#93c5fd" stroke="#3b82f6" stroke-width="2"/>
+                            <text x="170" y="335" font-size="8" text-anchor="middle" fill="#1e40af">IVC</text>
+
+                            <!-- Pulmonary Veins -->
+                            <path id="pulmonary-veins" class="heart-region" d="M200 150 Q215 140 230 135 Q245 130 250 140" fill="#86efac" stroke="#16a34a" stroke-width="2"/>
+                            <text x="230" y="130" font-size="8" text-anchor="middle" fill="#166534">Pulmonary Veins</text>
+                        </svg>
+
+                        <!-- Legend -->
+                        <div class="mt-6 text-center">
+                            <div class="inline-flex items-center space-x-4 text-sm">
+                                <div class="flex items-center space-x-2">
+                                    <div class="w-4 h-4 bg-red-300 rounded"></div>
+                                    <span>Right Heart</span>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <div class="w-4 h-4 bg-green-300 rounded"></div>
+                                    <span>Left Heart</span>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <div class="w-4 h-4 bg-yellow-400 rounded"></div>
+                                    <span>Valves</span>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <div class="w-4 h-4 bg-blue-300 rounded"></div>
+                                    <span>Vessels</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Information Panel -->
+                <div class="info-panel rounded-2xl p-8 shadow-lg">
+                    <h3 class="text-2xl font-playfair font-bold text-deep-navy mb-6" id="region-title">Click on a Heart Region</h3>
+                    <div id="region-info" class="space-y-4">
+                        <p class="text-neutral-slate">
+                            Select any part of the heart diagram above to learn detailed information about its anatomy, function, and clinical significance.
+                        </p>
+                        <div class="bg-light-gray rounded-lg p-4">
+                            <h4 class="font-semibold text-deep-navy mb-2">Navigation Tips:</h4>
+                            <ul class="text-sm text-neutral-slate space-y-1">
+                                <li>• Hover over regions to preview</li>
+                                <li>• Click to lock selection and view details</li>
+                                <li>• Click again to deselect</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-deep-navy text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <div class="flex items-center justify-center space-x-4 mb-6">
+                    <svg class="h-8 w-8 text-clinical-blue" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                    </svg>
+                    <h3 class="text-2xl font-playfair font-bold">CardioReference</h3>
+                </div>
+                <p class="text-gray-300 mb-6 max-w-2xl mx-auto">
+                    Professional cardiology resource providing comprehensive coverage of cardiovascular disorders,
+                    diagnostic tools, and evidence-based treatment protocols for healthcare professionals.
+                </p>
+                <div class="border-t border-gray-600 pt-6">
+                    <p class="text-sm text-gray-400 mb-3">
+                        © 2024 CardioReference. Professional medical education resource.
+                        <span class="text-clinical-blue">Evidence-based content updated regularly.</span>
+                    </p>
+                    <p class="text-sm text-gray-400 mb-3">
+                        Designed & Developed by <span class="text-clinical-blue font-semibold">Ritik Dhage</span>
+                    </p>
+                    <p class="text-xs text-gray-500 italic max-w-2xl mx-auto">
+                        ⚠️ <strong>Medical Disclaimer:</strong> This resource is for educational purposes only. The information provided is not a substitute for professional medical advice, diagnosis, or treatment. Always consult with qualified healthcare professionals and follow your institution's protocols before making any clinical decisions. In case of medical emergency, contact emergency services immediately.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="dark-mode.js"></script>
+    <script>
+        // Heart region data
+        const regionData = {
+            'right-atrium': {
+                title: 'Right Atrium',
+                info: `
+                    <p><strong>Anatomy:</strong> Thin-walled chamber receiving deoxygenated blood from the superior and inferior vena cavae.</p>
+                    <p><strong>Function:</strong> Acts as a reservoir for venous return, contracts to push blood into the right ventricle.</p>
+                    <p><strong>Clinical Significance:</strong> Involved in conditions like atrial fibrillation, tricuspid regurgitation, and pulmonary hypertension.</p>
+                    <p><strong>Capacity:</strong> ~150-200 mL</p>
+                    <p><strong>Pressure:</strong> 2-6 mmHg</p>
+                `
+            },
+            'right-ventricle': {
+                title: 'Right Ventricle',
+                info: `
+                    <p><strong>Anatomy:</strong> Triangular chamber with thinner walls than the left ventricle, crescent-shaped in cross-section.</p>
+                    <p><strong>Function:</strong> Pumps deoxygenated blood to the lungs via the pulmonary artery. Works against low pulmonary vascular resistance.</p>
+                    <p><strong>Clinical Significance:</strong> Affects right heart failure, pulmonary embolism, and congenital defects like Tetralogy of Fallot.</p>
+                    <p><strong>Pressure:</strong> Systolic 15-25 mmHg, Diastolic 0-8 mmHg</p>
+                    <p><strong>Wall Thickness:</strong> 4-5 mm</p>
+                `
+            },
+            'left-atrium': {
+                title: 'Left Atrium',
+                info: `
+                    <p><strong>Anatomy:</strong> Receives oxygenated blood from four pulmonary veins. Forms the base of the heart.</p>
+                    <p><strong>Function:</strong> Acts as a conduit and reservoir for pulmonary venous return, contributes to left ventricular filling.</p>
+                    <p><strong>Clinical Significance:</strong> Involved in mitral valve disease, atrial fibrillation, and diastolic dysfunction.</p>
+                    <p><strong>Capacity:</strong> ~120-150 mL</p>
+                    <p><strong>Pressure:</strong> 4-12 mmHg</p>
+                `
+            },
+            'left-ventricle': {
+                title: 'Left Ventricle',
+                info: `
+                    <p><strong>Anatomy:</strong> Thick-walled, conical chamber forming the apex of the heart. Most muscular cardiac chamber.</p>
+                    <p><strong>Function:</strong> Primary pump of the systemic circulation. Generates high pressure to perfuse entire body.</p>
+                    <p><strong>Clinical Significance:</strong> Site of most myocardial infarctions, heart failure with reduced ejection fraction, hypertrophic cardiomyopathy.</p>
+                    <p><strong>Pressure:</strong> Systolic 90-140 mmHg, Diastolic 4-12 mmHg</p>
+                    <p><strong>Wall Thickness:</strong> 8-12 mm (normal)</p>
+                `
+            },
+            'tricuspid-valve': {
+                title: 'Tricuspid Valve',
+                info: `
+                    <p><strong>Anatomy:</strong> Three cusps (anterior, posterior, septal) with chordae tendineae and papillary muscles.</p>
+                    <p><strong>Function:</strong> Prevents backflow from right ventricle to right atrium during systole.</p>
+                    <p><strong>Clinical Significance:</strong> Tricuspid regurgitation common in pulmonary hypertension and right heart failure.</p>
+                    <p><strong>Normal Area:</strong> 7-9 cm²</p>
+                    <p><strong>Pathologies:</strong> Regurgitation, stenosis, endocarditis</p>
+                `
+            },
+            'pulmonary-valve': {
+                title: 'Pulmonary Valve',
+                info: `
+                    <p><strong>Anatomy:</strong> Three semilunar cusps at the base of the pulmonary artery.</p>
+                    <p><strong>Function:</strong> Prevents backflow from pulmonary artery to right ventricle during diastole.</p>
+                    <p><strong>Clinical Significance:</strong> Pulmonary stenosis can cause right ventricular hypertrophy.</p>
+                    <p><strong>Normal Gradient:</strong> <5 mmHg</p>
+                    <p><strong>Pathologies:</strong> Stenosis, regurgitation, tetralogy of Fallot</p>
+                `
+            },
+            'mitral-valve': {
+                title: 'Mitral Valve',
+                info: `
+                    <p><strong>Anatomy:</strong> Two cusps (anterior, posterior) with complex subvalvular apparatus.</p>
+                    <p><strong>Function:</strong> Prevents backflow from left ventricle to left atrium during systole.</p>
+                    <p><strong>Clinical Significance:</strong> Most common valve disease requiring surgery. Involved in rheumatic heart disease.</p>
+                    <p><strong>Normal Area:</strong> 4-6 cm²</p>
+                    <p><strong>Pathologies:</strong> Regurgitation, stenosis, prolapse</p>
+                `
+            },
+            'aortic-valve': {
+                title: 'Aortic Valve',
+                info: `
+                    <p><strong>Anatomy:</strong> Three semilunar cusps (right, left, posterior) at the base of the ascending aorta.</p>
+                    <p><strong>Function:</strong> Prevents backflow from aorta to left ventricle during diastole.</p>
+                    <p><strong>Clinical Significance:</strong> Aortic stenosis and regurgitation are common. Site of bicuspid valve disease.</p>
+                    <p><strong>Normal Area:</strong> 3-4 cm²</p>
+                    <p><strong>Pathologies:</strong> Stenosis, regurgitation, endocarditis</p>
+                `
+            },
+            'pulmonary-artery': {
+                title: 'Pulmonary Artery',
+                info: `
+                    <p><strong>Anatomy:</strong> Carries deoxygenated blood from right ventricle to lungs. Branches into right and left pulmonary arteries.</p>
+                    <p><strong>Function:</strong> Low-resistance conduit to pulmonary circulation.</p>
+                    <p><strong>Clinical Significance:</strong> Pulmonary hypertension, pulmonary embolism, Eisenmenger syndrome.</p>
+                    <p><strong>Normal Pressure:</strong> Systolic 15-25 mmHg, Mean 10-20 mmHg</p>
+                    <p><strong>Diameter:</strong> 2.5-3 cm</p>
+                `
+            },
+            'aorta': {
+                title: 'Aorta',
+                info: `
+                    <p><strong>Anatomy:</strong> Largest artery in the body. Begins at aortic valve, arches over pulmonary artery, descends through thorax and abdomen.</p>
+                    <p><strong>Function:</strong> Distributes oxygenated blood to systemic circulation.</p>
+                    <p><strong>Clinical Significance:</strong> Aortic dissection, aneurysm, atherosclerosis, coarctation.</p>
+                    <p><strong>Normal Pressure:</strong> Systolic 90-140 mmHg, Mean 70-105 mmHg</p>
+                    <p><strong>Diameter:</strong> 2-3 cm (ascending)</p>
+                `
+            },
+            'superior-vena-cava': {
+                title: 'Superior Vena Cava',
+                info: `
+                    <p><strong>Anatomy:</strong> Large vein returning deoxygenated blood from upper body (head, neck, arms) to right atrium.</p>
+                    <p><strong>Function:</strong> Major venous return pathway.</p>
+                    <p><strong>Clinical Significance:</strong> SVC syndrome from obstruction (malignancy, thrombosis). Site of central venous catheter placement.</p>
+                    <p><strong>Diameter:</strong> 1.5-2 cm</p>
+                    <p><strong>Pathologies:</strong> Thrombosis, stenosis, extrinsic compression</p>
+                `
+            },
+            'inferior-vena-cava': {
+                title: 'Inferior Vena Cava',
+                info: `
+                    <p><strong>Anatomy:</strong> Large vein returning deoxygenated blood from lower body (abdomen, pelvis, legs) to right atrium.</p>
+                    <p><strong>Function:</strong> Major venous return pathway.</p>
+                    <p><strong>Clinical Significance:</strong> Deep vein thrombosis, IVC filter placement, Budd-Chiari syndrome.</p>
+                    <p><strong>Diameter:</strong> 2-3 cm</p>
+                    <p><strong>Pathologies:</strong> Thrombosis, congenital anomalies, compression</p>
+                `
+            },
+            'pulmonary-veins': {
+                title: 'Pulmonary Veins',
+                info: `
+                    <p><strong>Anatomy:</strong> Four veins (two from each lung) carrying oxygenated blood from lungs to left atrium.</p>
+                    <p><strong>Function:</strong> Complete the pulmonary circulation.</p>
+                    <p><strong>Clinical Significance:</strong> Pulmonary vein isolation for atrial fibrillation. Involved in anomalous pulmonary venous return.</p>
+                    <p><strong>Diameter:</strong> 1-1.5 cm each</p>
+                    <p><strong>Pathologies:</strong> Stenosis, anomalous drainage, thrombosis</p>
+                `
+            }
+        };
+
+        let activeRegion = null;
+
+        // Add click handlers to heart regions
+        document.querySelectorAll('.heart-region').forEach(region => {
+            region.addEventListener('click', function() {
+                const regionId = this.id;
+                const data = regionData[regionId];
+
+                if (activeRegion === regionId) {
+                    // Deselect
+                    this.classList.remove('active');
+                    activeRegion = null;
+                    document.getElementById('region-title').textContent = 'Click on a Heart Region';
+                    document.getElementById('region-info').innerHTML = `
+                        <p class="text-neutral-slate">
+                            Select any part of the heart diagram above to learn detailed information about its anatomy, function, and clinical significance.
+                        </p>
+                        <div class="bg-light-gray rounded-lg p-4">
+                            <h4 class="font-semibold text-deep-navy mb-2">Navigation Tips:</h4>
+                            <ul class="text-sm text-neutral-slate space-y-1">
+                                <li>• Hover over regions to preview</li>
+                                <li>• Click to lock selection and view details</li>
+                                <li>• Click again to deselect</li>
+                            </ul>
+                        </div>
+                    `;
+                } else {
+                    // Select new region
+                    document.querySelectorAll('.heart-region').forEach(r => r.classList.remove('active'));
+                    this.classList.add('active');
+                    activeRegion = regionId;
+
+                    document.getElementById('region-title').textContent = data.title;
+                    document.getElementById('region-info').innerHTML = data.info;
+                }
+            });
+        });
+    </script>
+</body>
+</html>
