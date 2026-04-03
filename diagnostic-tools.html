@@ -13,6 +13,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.19.0/matter.min.js"></script>
+
+    <!-- Drug Dosing Dependencies -->
+    <script src="https://cdn.jsdelivr.net/npm/luxon@3.4.4/build/global/luxon.min.js"></script>
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -1818,6 +1821,227 @@
                 <button id="quiz-restart-btn" class="bg-clinical-blue hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-semibold transition-colors">
                     🔄 Try Again
                 </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ECG Interval Calculator -->
+    <section id="ecg-interval-calculator" class="tool-section py-16 bg-light-gray hidden">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-playfair font-bold text-deep-navy mb-4">📏 ECG Interval Calculator</h2>
+                <p class="text-xl text-neutral-slate max-w-3xl mx-auto">
+                    Calculate corrected QT interval (QTc) using multiple formulas, determine mean electrical axis, and assess ECG intervals.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- QTc Calculator -->
+                <div class="bg-white rounded-2xl p-6 shadow-lg">
+                    <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center mr-3">
+                            <span class="text-xl">💙</span>
+                        </div>
+                        <h3 class="text-xl font-playfair font-bold text-deep-navy">Corrected QT (QTc)</h3>
+                    </div>
+
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-semibold text-deep-navy mb-1">RR Interval (ms)</label>
+                            <input type="number" id="qtc-rr" class="w-full p-3 border border-gray-300 rounded-lg" placeholder="e.g. 800" min="200" max="2000">
+                            <p class="text-xs text-neutral-slate mt-1">Or enter heart rate below — either works</p>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-deep-navy mb-1">Heart Rate (bpm)</label>
+                            <input type="number" id="qtc-hr" class="w-full p-3 border border-gray-300 rounded-lg" placeholder="e.g. 75" min="20" max="250">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-deep-navy mb-1">QT Interval (ms)</label>
+                            <input type="number" id="qtc-qt" class="w-full p-3 border border-gray-300 rounded-lg" placeholder="e.g. 400" min="100" max="800">
+                        </div>
+
+                        <button id="calculate-qtc" class="w-full bg-clinical-blue hover:bg-blue-700 text-white py-3 px-4 rounded-lg font-semibold transition-colors">
+                            Calculate QTc
+                        </button>
+
+                        <div id="qtc-result" class="hidden space-y-3">
+                            <div class="grid grid-cols-2 gap-2 text-sm">
+                                <div class="bg-gray-50 rounded-lg p-3 text-center">
+                                    <div class="text-xs text-neutral-slate">Bazett</div>
+                                    <div class="text-xl font-bold text-clinical-blue" id="qtc-bazett">--</div>
+                                    <div class="text-xs text-neutral-slate">QTc = QT/√RR</div>
+                                </div>
+                                <div class="bg-gray-50 rounded-lg p-3 text-center">
+                                    <div class="text-xs text-neutral-slate">Fridericia</div>
+                                    <div class="text-xl font-bold text-clinical-blue" id="qtc-fridericia">--</div>
+                                    <div class="text-xs text-neutral-slate">QTc = QT/∛RR</div>
+                                </div>
+                                <div class="bg-gray-50 rounded-lg p-3 text-center">
+                                    <div class="text-xs text-neutral-slate">Framingham</div>
+                                    <div class="text-xl font-bold text-clinical-blue" id="qtc-framingham">--</div>
+                                    <div class="text-xs text-neutral-slate">QTc = QT + 0.154(1-RR)</div>
+                                </div>
+                                <div class="bg-gray-50 rounded-lg p-3 text-center">
+                                    <div class="text-xs text-neutral-slate">Hodges</div>
+                                    <div class="text-xl font-bold text-clinical-blue" id="qtc-hodges">--</div>
+                                    <div class="text-xs text-neutral-slate">QTc = QT + 1.75(HR-60)</div>
+                                </div>
+                            </div>
+                            <div id="qtc-interpretation" class="border-l-4 p-3 rounded-lg text-sm"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mean Electrical Axis Calculator -->
+                <div class="bg-white rounded-2xl p-6 shadow-lg">
+                    <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 rounded-full bg-purple-100 flex items-center justify-center mr-3">
+                            <span class="text-xl">📐</span>
+                        </div>
+                        <h3 class="text-xl font-playfair font-bold text-deep-navy">Mean Electrical Axis</h3>
+                    </div>
+
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-semibold text-deep-navy mb-1">QRS Amplitude in Lead I (mV)</label>
+                            <input type="number" id="axis-lead1" class="w-full p-3 border border-gray-300 rounded-lg" placeholder="e.g. 0.8" step="0.1">
+                            <p class="text-xs text-neutral-slate mt-1">Net deflection: R wave height − S wave depth (positive = upward)</p>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-deep-navy mb-1">QRS Amplitude in Lead aVF (mV)</label>
+                            <input type="number" id="axis-avf" class="w-full p-3 border border-gray-300 rounded-lg" placeholder="e.g. 0.5" step="0.1">
+                            <p class="text-xs text-neutral-slate mt-1">Net deflection: R wave height − S wave depth</p>
+                        </div>
+
+                        <button id="calculate-axis" class="w-full bg-cardiac-purple hover:bg-purple-700 text-white py-3 px-4 rounded-lg font-semibold transition-colors">
+                            Calculate Axis
+                        </button>
+
+                        <div id="axis-result" class="hidden space-y-3">
+                            <div class="bg-gray-50 rounded-lg p-4 text-center">
+                                <div class="text-xs text-neutral-slate">Mean QRS Axis</div>
+                                <div class="text-3xl font-bold text-cardiac-purple" id="axis-value">--</div>
+                                <div class="text-sm font-semibold mt-1" id="axis-category"></div>
+                            </div>
+                            <div id="axis-interpretation" class="border-l-4 p-3 rounded-lg text-sm"></div>
+
+                            <!-- Axis visual -->
+                            <div class="bg-gray-50 rounded-lg p-4 text-center">
+                                <canvas id="axis-canvas" width="250" height="250" style="max-width:250px;width:100%;"></canvas>
+                            </div>
+
+                            <div class="bg-blue-50 rounded-lg p-3 text-xs text-neutral-slate">
+                                <strong>Reference Ranges:</strong><br>
+                                Normal: −30° to +90° &nbsp;|&nbsp; LAD: −30° to −90°<br>
+                                RAD: +90° to +180° &nbsp;|&nbsp; Extreme: −90° to ±180°<br>
+                                <em>Tip: Lead I + and aVF + = normal axis. Lead I + and aVF − = check Lead II for LAD.</em>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Reference -->
+            <div class="mt-8 bg-white rounded-2xl p-6 shadow-lg">
+                <h3 class="text-2xl font-playfair font-bold text-deep-navy mb-4">📖 Normal ECG Interval Values</h3>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm">
+                        <thead class="bg-deep-navy text-white">
+                            <tr>
+                                <th class="p-3 text-left rounded-tl-lg">Interval</th>
+                                <th class="p-3 text-left">Normal Range</th>
+                                <th class="p-3 text-left">Abnormal</th>
+                                <th class="p-3 text-left rounded-tr-lg">Clinical Significance</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-neutral-slate">
+                            <tr class="border-b border-gray-100">
+                                <td class="p-3 font-medium">PR Interval</td>
+                                <td class="p-3">120–200 ms</td>
+                                <td class="p-3">&gt;200 ms (1° AVB), &lt;120 ms (WPW)</td>
+                                <td class="p-3">AV conduction delay or pre-excitation</td>
+                            </tr>
+                            <tr class="border-b border-gray-100">
+                                <td class="p-3 font-medium">QRS Duration</td>
+                                <td class="p-3">80–120 ms</td>
+                                <td class="p-3">&gt;120 ms (bundle branch block)</td>
+                                <td class="p-3">Intraventricular conduction delay</td>
+                            </tr>
+                            <tr class="border-b border-gray-100">
+                                <td class="p-3 font-medium">QTc (Males)</td>
+                                <td class="p-3">350–440 ms</td>
+                                <td class="p-3">&gt;440 ms (prolonged), &gt;500 ms (high TdP risk)</td>
+                                <td class="p-3">Long QT → Torsades de Pointes risk</td>
+                            </tr>
+                            <tr class="border-b border-gray-100">
+                                <td class="p-3 font-medium">QTc (Females)</td>
+                                <td class="p-3">350–460 ms</td>
+                                <td class="p-3">&gt;460 ms (prolonged), &gt;500 ms (high TdP risk)</td>
+                                <td class="p-3">Drug-induced, congenital, electrolyte</td>
+                            </tr>
+                            <tr class="border-b border-gray-100">
+                                <td class="p-3 font-medium">JT Interval</td>
+                                <td class="p-3">≤ 360 ms (M), ≤ 370 ms (F)</td>
+                                <td class="p-3">&gt;360 ms (M), &gt;370 ms (F)</td>
+                                <td class="p-3">Use when QRS &gt;120 ms (QTc unreliable in BBB)</td>
+                            </tr>
+                            <tr class="border-b border-gray-100">
+                                <td class="p-3 font-medium">Heart Rate</td>
+                                <td class="p-3">60–100 bpm</td>
+                                <td class="p-3">&lt;60 (bradycardia), &gt;100 (tachycardia)</td>
+                                <td class="p-3">Sinus node or conduction system pathology</td>
+                            </tr>
+                            <tr class="border-b border-gray-100">
+                                <td class="p-3 font-medium">QRS Axis</td>
+                                <td class="p-3">−30° to +90°</td>
+                                <td class="p-3">LAD &lt; −30°, RAD &gt; +90°</td>
+                                <td class="p-3">LVH, RVH, fascicular block, MI location</td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 font-medium">QT Dispersion</td>
+                                <td class="p-3">&lt;50 ms</td>
+                                <td class="p-3">&gt;50 ms (increased arrhythmic risk)</td>
+                                <td class="p-3">Spatial heterogeneity of repolarization</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Drug-induced Long QT Reference -->
+            <div class="mt-6 bg-white rounded-2xl p-6 shadow-lg">
+                <h3 class="text-2xl font-playfair font-bold text-deep-navy mb-4">⚠️ Common Drugs That Prolong QTc</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <h4 class="font-semibold text-deep-navy mb-2 text-red-700">High Risk</h4>
+                        <ul class="text-sm text-neutral-slate space-y-1">
+                            <li>• Amiodarone (Class III antiarrhythmic)</li>
+                            <li>• Sotalol (Class III antiarrhythmic)</li>
+                            <li>• Dofetilide (Class III antiarrhythmic)</li>
+                            <li>• Ibutilide (Class III antiarrhythmic)</li>
+                            <li>• Quinidine (Class IA antiarrhythmic)</li>
+                            <li>• Haloperidol IV (high dose)</li>
+                            <li>• Methadone (≥100 mg/day)</li>
+                            <li>• Ondansetron IV (≥32 mg single dose)</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold text-deep-navy mb-2 text-amber-700">Moderate Risk</h4>
+                        <ul class="text-sm text-neutral-slate space-y-1">
+                            <li>• Fluoroquinolones (moxifloxacin, levofloxacin)</li>
+                            <li>• Macrolides (azithromycin, clarithromycin)</li>
+                            <li>• Azole antifungals (fluconazole, voriconazole)</li>
+                            <li>• TCAs (amitriptyline, imipramine)</li>
+                            <li>• SSRIs (citalopram &gt;40 mg, escitalopram)</li>
+                            <li>• Domperidone</li>
+                            <li>• Chlorpromazine / Quetiapine</li>
+                            <li>• Donepezil</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="mt-4 bg-red-50 border-l-4 border-red-500 p-3 rounded text-sm">
+                    <strong>CredibleMeds:</strong> For comprehensive drug-induced QT prolongation risk assessment, check <a href="https://crediblemeds.org" target="_blank" rel="noopener" class="text-clinical-blue underline">crediblemeds.org</a>. Always check for drug-drug interactions before starting medications in patients with baseline QTc &gt;450 ms (M) or &gt;470 ms (F). Risk increases with hypokalemia, hypomagnesemia, and bradycardia.
+                </div>
             </div>
         </div>
     </section>

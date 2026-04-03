@@ -19,6 +19,7 @@ class DiagnosticTools {
         this.initializeBMICalculator();
         this.initializeFlowcharts();
         this.initializeBiomarkerInterpreter();
+        this.initializeECGIntervalCalculator();
     }
 
     initializeNavigation() {
@@ -4049,4 +4050,241 @@ document.addEventListener('DOMContentLoaded', () => {
     window.diagnosticTools = new DiagnosticTools();
     window.drugChecker = new DrugInteractionChecker();
     window.ecgQuiz = new ECGQuiz();
+    window.ecgCalc = new ECGIntervalCalculator();
 });
+
+class ECGIntervalCalculator {
+    constructor() {
+        this.initQTC();
+        this.initAxis();
+    }
+
+    initQTC() {
+        const btn = document.getElementById('calculate-qtc');
+        if (!btn) return;
+        btn.addEventListener('click', () => this.calculateQTC());
+    }
+
+    initAxis() {
+        const btn = document.getElementById('calculate-axis');
+        if (!btn) return;
+        btn.addEventListener('click', () => this.calculateAxis());
+    }
+
+    calculateQTC() {
+        let rr = parseFloat(document.getElementById('qtc-rr').value);
+        const hr = parseFloat(document.getElementById('qtc-hr').value);
+        const qt = parseFloat(document.getElementById('qtc-qt').value);
+
+        if (!hr && rr) {
+            // If RR given, fine
+        } else if (hr && !rr) {
+            rr = 60000 / hr;
+        } else if (hr && rr) {
+            // user gave both, trust HR
+            rr = 60000 / hr;
+        }
+
+        if (!rr || !qt || rr <= 0 || qt <= 0) {
+            alert('Please enter valid QT interval and either Heart Rate or RR interval.');
+            return;
+        }
+
+        const rrSec = rr / 1000;
+
+        // Bazett: QTc = QT / sqrt(RR)
+        const bazett = qt / Math.sqrt(rrSec);
+
+        // Fridericia: QTc = QT / cbrt(RR)
+        const fridericia = qt / Math.cbrt(rrSec);
+
+        // Framingham: QTc = QT + 0.154 * (1 - RR)
+        const framingham = qt + 0.154 * (1 - rrSec);
+
+        // Hodges: QTc = QT + 1.75 * (HR - 60)
+        const currentHr = hr || (60000 / rr);
+        const hodges = qt + 1.75 * (currentHr - 60);
+
+        document.getElementById('qtc-bazett').textContent = Math.round(bazett) + ' ms';
+        document.getElementById('qtc-fridericia').textContent = Math.round(fridericia) + ' ms';
+        document.getElementById('qtc-framingham').textContent = Math.round(framingham) + ' ms';
+        document.getElementById('qtc-hodges').textContent = Math.round(hodges) + ' ms';
+
+        // Interpretation (use Bazett primarily)
+        const interpretEl = document.getElementById('qtc-interpretation');
+        let color, bgColor, text;
+        if (bazett <= 440) {
+            color = '#059669';
+            bgColor = 'bg-green-50';
+            text = `<div style="color:${color}" class="font-semibold">✅ Normal QTc (${Math.round(bazett)} ms)</div><p class="text-xs text-neutral-slate mt-1">QTc is within normal limits. Bazett formula is most commonly used but overcorrects at high HR; Fridericia more reliable at extremes.</p>`;
+        } else if (bazett <= 500) {
+            color = '#D97706';
+            bgColor = 'bg-amber-50';
+            text = `<div style="color:${color}" class="font-semibold">⚠️ Borderline/Prolonged QTc (${Math.round(bazett)} ms)</div><p class="text-xs text-neutral-slate mt-1">QTc is mildly prolonged. Review medications, check electrolytes (K⁺, Mg²⁺, Ca²⁺), consider switching to Fridericia formula if HR >100 or <60. Monitor for drug-induced prolongation.</p>`;
+        } else {
+            color = '#DC2626';
+            bgColor = 'bg-red-50';
+            text = `<div style="color:${color}" class="font-semibold">🚨 Significantly Prolonged QTc (${Math.round(bazett)} ms)</div><p class="text-xs text-neutral-slate mt-1"><strong>High risk for Torsades de Pointes!</strong> Immediately review and discontinue QT-prolonging drugs. Correct hypokalemia (maintain K⁺ >4.0), hypomagnesemia (Mg²⁺ >2.0). Place on continuous telemetry. If QTc >500 ms, consider IC consultation and possible ICU admission.</p>`;
+        }
+        interpretEl.className = `border-l-4 p-3 rounded-lg text-sm ${bgColor}`;
+        interpretEl.innerHTML = text;
+
+        document.getElementById('qtc-result').classList.remove('hidden');
+    }
+
+    calculateAxis() {
+        const lead1 = parseFloat(document.getElementById('axis-lead1').value);
+        const avf = parseFloat(document.getElementById('axis-avf').value);
+
+        if (isNaN(lead1) || isNaN(avf)) {
+            alert('Please enter both Lead I and aVF values.');
+            return;
+        }
+
+        if (lead1 === 0 && avf === 0) {
+            alert('Both values cannot be zero — that would mean a flatline ECG!');
+            return;
+        }
+
+        // Calculate axis angle in degrees
+        let angleDeg = Math.atan2(avf, lead1) * (180 / Math.PI);
+
+        // Normalize to 0-180 / -180 to 0 range
+        // Lead I positive = right hemisphere (0-180 or 0 to -180)
+        // Standard: 0° = lead I positive, +90° = aVF positive
+
+        let category;
+        if (angleDeg >= -30 && angleDeg <= 90) {
+            category = 'Normal Axis';
+        } else if (angleDeg >= -90 && angleDeg < -30) {
+            category = 'Left Axis Deviation (LAD)';
+        } else if (angleDeg > 90 && angleDeg <= 180) {
+            category = 'Right Axis Deviation (RAD)';
+        } else if (angleDeg > -180 && angleDeg < -90) {
+            category = 'Extreme Axis Deviation';
+        }
+
+        document.getElementById('axis-value').textContent = Math.round(angleDeg) + '°';
+        document.getElementById('axis-category').textContent = category;
+
+        // Interpretation
+        const interpEl = document.getElementById('axis-interpretation');
+        let interpText;
+        if (category === 'Normal Axis') {
+            interpText = `<div class="text-green-700 font-semibold">✅ Normal QRS Axis</div><p class="text-xs text-neutral-slate mt-1">Normal electrical activation pattern. No axis-related pathology.</p>`;
+        } else if (category === 'Left Axis Deviation (LAD)') {
+            interpText = `<div class="text-amber-700 font-semibold">⚠️ Left Axis Deviation</div><p class="text-xs text-neutral-slate mt-1">Common causes: Left anterior fascicular block (most common), left ventricular hypertrophy, inferior MI, left bundle branch block. If Lead I positive and Lead II negative → confirmed LAD. Check for LAFB: LAD + qR in I/aVL + rS in II/III/aVF.</p>`;
+        } else if (category === 'Right Axis Deviation (RAD)') {
+            interpText = `<div class="text-amber-700 font-semibold">⚠️ Right Axis Deviation</div><p class="text-xs text-neutral-slate mt-1">Common causes: Right ventricular hypertrophy (pulmonary hypertension, COPD, PE), left posterior fascicular block, lateral MI, chronic lung disease. In neonates/children, RAD is normal. Tall, thin individuals may have vertical heart position (rightward shift).</p>`;
+        } else {
+            interpText = `<div class="text-red-700 font-semibold">🚨 Extreme Axis Deviation</div><p class="text-xs text-neutral-slate mt-1">"Northwest axis" — both Lead I and aVF are predominantly negative. Causes: ventricular tachycardia, severe RVH, hyperkalemia, lead reversal. Uncommon — double-check lead placement. Can be seen in emphysema or extensive infarction.</p>`;
+        }
+        interpEl.innerHTML = interpText;
+
+        document.getElementById('axis-result').classList.remove('hidden');
+
+        // Draw hexaxial reference diagram
+        this.renderAxisHexaxial(lead1, avf, angleDeg);
+    }
+
+    renderAxisHexaxial(lead1, avf, angle) {
+        const canvas = document.getElementById('axis-canvas');
+        if (!canvas) return;
+        const ctx = canvas.getContext('2d');
+        const w = canvas.width;
+        const h = canvas.height;
+        const cx = w / 2;
+        const cy = h / 2;
+        const r = 100;
+
+        ctx.clearRect(0, 0, w, h);
+
+        // Background
+        ctx.fillStyle = '#f8fafc';
+        ctx.fillRect(0, 0, w, h);
+
+        // Draw hexaxial lines
+        ctx.strokeStyle = '#cbd5e1';
+        ctx.lineWidth = 1;
+
+        const leads = [
+            { angle: 0, label: 'I' },
+            { angle: -30, label: 'aVL' },
+            { angle: 60, label: 'II' },
+            { angle: 90, label: 'aVF' },
+            { angle: 120, label: 'III' },
+            { angle: -150, label: 'aVR' },
+        ];
+
+        leads.forEach(lead => {
+            const rad = lead.angle * Math.PI / 180;
+            // Standard ECG convention: 0° is left (lead I positive)
+            // In canvas, y increases downward, so we flip
+            const x1 = cx + r * Math.cos(rad);
+            const y1 = cy - r * Math.sin(rad);
+            const x2 = cx - r * Math.cos(rad);
+            const y2 = cy + r * Math.sin(rad);
+
+            ctx.beginPath();
+            ctx.moveTo(x1, y1);
+            ctx.lineTo(x2, y2);
+            ctx.stroke();
+
+            // Label
+            ctx.fillStyle = '#475569';
+            ctx.font = '12px Inter, sans-serif';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            const lx = cx + (r + 14) * Math.cos(rad);
+            const ly = cy - (r + 14) * Math.sin(rad);
+            ctx.fillText(lead.label, lx, ly);
+        });
+
+        // Draw circles (radius markers)
+        ctx.strokeStyle = '#e2e8f0';
+        ctx.lineWidth = 0.5;
+        [0.3, 0.6, 1.0].forEach(scale => {
+            ctx.beginPath();
+            ctx.arc(cx, cy, r * scale, 0, Math.PI * 2);
+            ctx.stroke();
+        });
+
+        // Axis vector
+        const rad = angle * Math.PI / 180;
+        const ex = cx + r * 0.85 * Math.cos(rad);
+        const ey = cy - r * 0.85 * Math.sin(rad);
+
+        // Vector line
+        ctx.strokeStyle = angle >= -30 && angle <= 90 ? '#2563EB' : (angle > -90 && angle < -30 ? '#D97706' : '#DC2626');
+        ctx.lineWidth = 3;
+        ctx.beginPath();
+        ctx.moveTo(cx, cy);
+        ctx.lineTo(ex, ey);
+        ctx.stroke();
+
+        // Arrowhead
+        const arrowSize = 10;
+        const arrowAngle = 0.5;
+        const baseAngleX = Math.cos(rad);
+        const baseAngleY = Math.sin(rad);
+
+        ctx.beginPath();
+        ctx.moveTo(ex, ey);
+        ctx.lineTo(ex - arrowSize * Math.cos(rad - arrowAngle), ey + arrowSize * Math.sin(rad - arrowAngle));
+        ctx.moveTo(ex, ey);
+        ctx.lineTo(ex - arrowSize * Math.cos(rad + arrowAngle), ey + arrowSize * Math.sin(rad + arrowAngle));
+        ctx.stroke();
+
+        // Center dot
+        ctx.fillStyle = '#1E293B';
+        ctx.beginPath();
+        ctx.arc(cx, cy, 3, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Angle label
+        ctx.fillStyle = '#1E293B';
+        ctx.font = 'bold 14px Inter, sans-serif';
+        ctx.textAlign = 'center';
+        ctx.fillText(Math.round(angle) + '°', cx, cy + 20);
+    }
+}
