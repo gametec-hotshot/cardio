@@ -119,6 +119,10 @@
                 <button class="tab-btn whitespace-nowrap px-4 py-2 rounded-lg font-semibold text-sm border text-neutral-slate bg-gray-100 transition-colors flex-shrink-0" data-tab="checklists">✅ Checklists</button>
                 <button class="tab-btn whitespace-nowrap px-4 py-2 rounded-lg font-semibold text-sm border text-neutral-slate bg-gray-100 transition-colors flex-shrink-0" data-tab="ecg-lab">🔬 ECG &amp; Lab</button>
                 <button class="tab-btn whitespace-nowrap px-4 py-2 rounded-lg font-semibold text-sm border text-neutral-slate bg-gray-100 transition-colors flex-shrink-0" data-tab="echo-guide">🫀 Echo Guide</button>
+                <button class="tab-btn whitespace-nowrap px-4 py-2 rounded-lg font-semibold text-sm border text-neutral-slate bg-gray-100 transition-colors flex-shrink-0" data-tab="perioperative">⚕️ Perioperative</button>
+                <button class="tab-btn whitespace-nowrap px-4 py-2 rounded-lg font-semibold text-sm border text-neutral-slate bg-gray-100 transition-colors flex-shrink-0" data-tab="pm-icd">🫀 Pacemaker/ICD</button>
+                <button class="tab-btn whitespace-nowrap px-4 py-2 rounded-lg font-semibold text-sm border text-neutral-slate bg-gray-100 transition-colors flex-shrink-0" data-tab="pediatric">👶 Pediatric Cardio</button>
+                <button class="tab-btn whitespace-nowrap px-4 py-2 rounded-lg font-semibold text-sm border text-neutral-slate bg-gray-100 transition-colors flex-shrink-0" data-tab="electrolytes">🧪 Electrolytes</button>
             </div>
         </div>
     </section>
@@ -1387,6 +1391,594 @@
 
                 <div class="bg-amber-50 border border-amber-200 rounded-xl p-4 md:p-6">
                     <p class="text-sm text-deep-navy"><strong>⚠️ Disclaimer:</strong> Echo interpretation requires formal training and clinical correlation. POCUS is limited compared to comprehensive echocardiography. Always consult cardiology for definitive diagnosis. Measurements may vary with body size and age.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ═══════════════════ TAB 7: PACEMAKER/ICD ═══════════════════ -->
+        <div id="tab-pm-icd" class="tab-content py-8 md:py-10">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="mb-8">
+                    <h2 class="text-2xl md:text-3xl font-playfair font-bold text-deep-navy mb-1">Pacemaker &amp; ICD Programming Guide</h2>
+                    <p class="text-neutral-slate">Device types, programming parameters, troubleshooting, and indications. Based on ACC/AHA/HRS 2023 guidelines.</p>
+                </div>
+
+                <!-- Device Types & Indications -->
+                <div class="ref-card ecg bg-white rounded-xl p-5 md:p-6 shadow-lg mb-8">
+                    <h3 class="text-lg md:text-xl font-playfair font-bold text-deep-navy mb-4 flex items-center gap-2">
+                        <span class="text-2xl">🫀</span> Device Types &amp; Indications
+                    </h3>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-sm min-w-[700px]">
+                            <thead><tr class="border-b-2 border-teal-100 bg-teal-50">
+                                <th class="text-left py-3 px-3 font-semibold text-deep-navy">Device Type</th>
+                                <th class="text-left py-3 px-3 font-semibold text-deep-navy">Code</th>
+                                <th class="text-left py-3 px-3 font-semibold text-deep-navy">Primary Indications</th>
+                                <th class="text-left py-3 px-3 font-semibold text-deep-navy">Key Features</th>
+                            </tr></thead>
+                            <tbody class="text-neutral-slate">
+                                <tr class="border-b border-gray-100">
+                                    <td class="py-3 px-3 font-semibold text-deep-navy">Single Chamber Pacemaker</td>
+                                    <td class="py-3 px-3">VVI / AAI</td>
+                                    <td class="py-3 px-3">AFib with slow ventricular response, sinus node disease</td>
+                                    <td class="py-3 px-3">One lead (RV or RA), rate response, basic pacing</td>
+                                </tr>
+                                <tr class="border-b border-gray-100">
+                                    <td class="py-3 px-3 font-semibold text-deep-navy">Dual Chamber Pacemaker</td>
+                                    <td class="py-3 px-3">DDD</td>
+                                    <td class="py-3 px-3">AV block, sinus node disease with intact AV conduction</td>
+                                    <td class="py-3 px-3">RA + RV leads, AV synchrony, rate response</td>
+                                </tr>
+                                <tr class="border-b border-gray-100">
+                                    <td class="py-3 px-3 font-semibold text-deep-navy">Biventricular Pacemaker</td>
+                                    <td class="py-3 px-3">CRT-P</td>
+                                    <td class="py-3 px-3">HFrEF with LBBB, NYHA II-IV despite optimal meds</td>
+                                    <td class="py-3 px-3">LV lead + RA/RV, resynchronizes ventricles</td>
+                                </tr>
+                                <tr class="border-b border-gray-100">
+                                    <td class="py-3 px-3 font-semibold text-deep-navy">Single Chamber ICD</td>
+                                    <td class="py-3 px-3">VVI-ICD</td>
+                                    <td class="py-3 px-3">VT/VF prevention, no pacing indication</td>
+                                    <td class="py-3 px-3">RV lead only, defibrillation + pacing backup</td>
+                                </tr>
+                                <tr class="border-b border-gray-100">
+                                    <td class="py-3 px-3 font-semibold text-deep-navy">Dual Chamber ICD</td>
+                                    <td class="py-3 px-3">DDD-ICD</td>
+                                    <td class="py-3 px-3">VT/VF prevention with pacing needs</td>
+                                    <td class="py-3 px-3">RA + RV leads, dual-chamber pacing + defibrillation</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-3 px-3 font-semibold text-deep-navy">CRT-D</td>
+                                    <td class="py-3 px-3">CRT-D</td>
+                                    <td class="py-3 px-3">HFrEF + LBBB + high SCD risk</td>
+                                    <td class="py-3 px-3">LV + RA/RV leads, resynchronization + defibrillation</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="mt-4 text-sm text-neutral-slate">
+                        <p><strong>NBG Code:</strong> Position 1 = Chamber paced, Position 2 = Chamber sensed, Position 3 = Response to sensing, Position 4 = Programmability/Rate modulation, Position 5 = Multisite pacing</p>
+                    </div>
+                </div>
+
+                <!-- Programming Parameters -->
+                <div class="ref-card checklist bg-white rounded-xl p-5 md:p-6 shadow-lg mb-6">
+                    <h3 class="text-lg md:text-xl font-playfair font-bold text-deep-navy mb-4 flex items-center gap-2">
+                        <span class="text-2xl">⚙️</span> Key Programming Parameters
+                    </h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="bg-blue-50 rounded-lg p-4">
+                            <h4 class="font-bold text-clinical-blue mb-3">Pacemaker Parameters</h4>
+                            <div class="space-y-3 text-sm text-neutral-slate">
+                                <div>
+                                    <p class="font-semibold">Base Rate:</p>
+                                    <p>Typically 60 bpm; can be lower (50–55) in young patients</p>
+                                </div>
+                                <div>
+                                    <p class="font-semibold">AV Delay:</p>
+                                    <p>DDD: 120–200 ms (longer if PR normal); optimize for diastolic filling</p>
+                                </div>
+                                <div>
+                                    <p class="font-semibold">Pacing Threshold:</p>
+                                    <p>RA: 0.4–1.0 V, RV: 0.4–1.2 V; test at implant and follow-up</p>
+                                </div>
+                                <div>
+                                    <p class="font-semibold">Sensitivity:</p>
+                                    <p>RA: 0.2–0.4 mV, RV: 2.0–5.0 mV; avoid oversensing</p>
+                                </div>
+                                <div>
+                                    <p class="font-semibold">Rate Response:</p>
+                                    <p>Enable for chronotropic incompetence; AV delay shortens with exercise</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-red-50 rounded-lg p-4">
+                            <h4 class="font-bold text-red-700 mb-3">ICD Parameters</h4>
+                            <div class="space-y-3 text-sm text-neutral-slate">
+                                <div>
+                                    <p class="font-semibold">VF Zone:</p>
+                                    <p>≥220 bpm; first shock 25–35 J, subsequent higher</p>
+                                </div>
+                                <div>
+                                    <p class="font-semibold">VT Zone:</p>
+                                    <p>170–200 bpm; ATP preferred, then shock if fails</p>
+                                </div>
+                                <div>
+                                    <p class="font-semibold">SVT Discrimination:</p>
+                                    <p>Onset, stability, AV association algorithms to avoid inappropriate shocks</p>
+                                </div>
+                                <div>
+                                    <p class="font-semibold">ATP (Antitachycardia Pacing):</p>
+                                    <p>Burst or ramp pacing to terminate VT; effective in 80–90% of cases</p>
+                                </div>
+                                <div>
+                                    <p class="font-semibold">Detection Delay:</p>
+                                    <p>2.5–30 s for VT; 5–10 s for VF; balances speed vs false positives</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CRT Optimization -->
+                <div class="ref-card anti bg-white rounded-xl p-5 md:p-6 shadow-lg mb-6">
+                    <h3 class="text-lg md:text-xl font-playfair font-bold text-deep-navy mb-4 flex items-center gap-2">
+                        <span class="text-2xl">🔄</span> CRT Optimization &amp; Troubleshooting
+                    </h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="bg-purple-50 rounded-lg p-4">
+                            <h4 class="font-bold text-purple-700 mb-3">AV Delay Optimization</h4>
+                            <div class="space-y-2 text-sm text-neutral-slate">
+                                <p><strong>Echo-guided:</strong> Maximize LVOT VTI or mitral inflow velocity</p>
+                                <p><strong>Ritter method:</strong> AV delay = 120 ms + (QRS duration - 120 ms) ÷ 2</p>
+                                <p><strong>SmartDelay™:</strong> Device algorithm adjusts AV delay automatically</p>
+                                <p><strong>Goal:</strong> AV delay allowing full ventricular filling without truncation</p>
+                            </div>
+                        </div>
+                        <div class="bg-gray-50 rounded-lg p-4">
+                            <h4 class="font-bold text-deep-navy mb-3">VV Delay Optimization</h4>
+                            <div class="space-y-2 text-sm text-neutral-slate">
+                                <p><strong>Standard:</strong> Start at 0 ms (simultaneous); adjust by 20 ms increments</p>
+                                <p><strong>Echo-guided:</strong> Maximize aortic VTI or minimize MR jet</p>
+                                <p><strong>LV first:</strong> 20–40 ms in LBBB; RV first rare</p>
+                                <p><strong>Goal:</strong> Improve septal motion and LV function</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-4 bg-amber-50 rounded-lg p-4">
+                        <h4 class="font-bold text-amber-700 mb-2">CRT Non-Responders (30% of patients)</h4>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-neutral-slate">
+                            <div>
+                                <p><strong>Technical issues:</strong> Poor lead position, high threshold, diaphragmatic stimulation</p>
+                                <p><strong>Patient factors:</strong> AFib, narrow QRS, ischemic cardiomyopathy</p>
+                            </div>
+                            <div>
+                                <p><strong>Solutions:</strong> LV lead repositioning, AV/VV optimization, upgrade to CRT-D</p>
+                                <p><strong>Response criteria:</strong> >5% increase in EF, >10% decrease in LVESD</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Common Issues & Troubleshooting -->
+                <div class="ref-card emergency bg-white rounded-xl p-5 md:p-6 shadow-lg mb-6">
+                    <h3 class="text-lg md:text-xl font-playfair font-bold text-deep-navy mb-4 flex items-center gap-2">
+                        <span class="text-2xl">🔧</span> Common Issues &amp; Troubleshooting
+                    </h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="bg-red-50 rounded-lg p-4">
+                            <h4 class="font-bold text-red-700 mb-3">Pacemaker Problems</h4>
+                            <div class="space-y-3 text-sm text-neutral-slate">
+                                <div>
+                                    <p class="font-semibold">Failure to Capture:</p>
+                                    <p>Rhythm strip shows pacing spike without QRS; ↑ output to 5V, check lead impedance</p>
+                                </div>
+                                <div>
+                                    <p class="font-semibold">Failure to Sense:</p>
+                                    <p>Pacing on T-wave or R-wave; ↓ sensitivity, check lead position</p>
+                                </div>
+                                <div>
+                                    <p class="font-semibold">Diaphragmatic Pacing:</p>
+                                    <p>Patient hiccups with pacing; reposition lead, ↑ threshold acceptance</p>
+                                </div>
+                                <div>
+                                    <p class="font-semibold">Pacemaker Syndrome:</p>
+                                    <p>Fatigue, hypotension with VVI pacing; upgrade to DDD</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-red-50 rounded-lg p-4">
+                            <h4 class="font-bold text-red-700 mb-3">ICD Problems</h4>
+                            <div class="space-y-3 text-sm text-neutral-slate">
+                                <div>
+                                    <p class="font-semibold">Inappropriate Shocks:</p>
+                                    <p>Check for AFib, SVT, lead fracture, T-wave oversensing; reprogram zones</p>
+                                </div>
+                                <div>
+                                    <p class="font-semibold">Failure to Deliver Shock:</p>
+                                    <p>High DFT; reposition lead, add SVC coil, consider subcutaneous ICD</p>
+                                </div>
+                                <div>
+                                    <p class="font-semibold">Multiple Therapies:</p>
+                                    <p>Short detection delay or redetection after ATP; ↑ delay, disable redetection</p>
+                                </div>
+                                <div>
+                                    <p class="font-semibold">Post-Shock Bradycardia:</p>
+                                    <p>Common after VF storm; ensure backup pacing is enabled</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Follow-Up & Remote Monitoring -->
+                <div class="ref-card bg-white rounded-xl p-5 md:p-6 shadow-lg mb-6">
+                    <h3 class="text-lg md:text-xl font-playfair font-bold text-deep-navy mb-4 flex items-center gap-2">
+                        <span class="text-2xl">📊</span> Follow-Up &amp; Remote Monitoring
+                    </h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="bg-green-50 rounded-lg p-4">
+                            <h4 class="font-bold text-green-700 mb-3">Routine Follow-Up Schedule</h4>
+                            <div class="space-y-2 text-sm text-neutral-slate">
+                                <p><strong>Post-implant:</strong> 1–2 weeks (wound check, parameters)</p>
+                                <p><strong>Early:</strong> 3 months (optimize settings, check thresholds)</p>
+                                <p><strong>Routine:</strong> Every 3–6 months (battery, leads, function)</p>
+                                <p><strong>Annual:</strong> Comprehensive eval with echo if CRT</p>
+                            </div>
+                        </div>
+                        <div class="bg-blue-50 rounded-lg p-4">
+                            <h4 class="font-bold text-clinical-blue mb-3">Remote Monitoring</h4>
+                            <div class="space-y-2 text-sm text-neutral-slate">
+                                <p><strong>Benefits:</strong> Early detection of issues, reduced clinic visits</p>
+                                <p><strong>Data transmitted:</strong> Arrhythmias, impedance, battery status</p>
+                                <p><strong>Alerts:</strong> Lead issues, low battery, shocks, AFib burden</p>
+                                <p><strong>Frequency:</strong> Daily/weekly depending on device and patient risk</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-amber-50 border border-amber-200 rounded-xl p-4 md:p-6">
+                    <p class="text-sm text-deep-navy"><strong>⚠️ Disclaimer:</strong> Device programming requires specialized training and equipment. Always consult with electrophysiology/cardiology before making changes. Parameters may vary by manufacturer and patient-specific factors. Based on 2023 ACC/AHA/HRS guidelines.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ═══════════════════ TAB 8: PEDIATRIC CARDIO ═══════════════════ -->
+        <div id="tab-pediatric" class="tab-content py-8 md:py-10">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="mb-8">
+                    <h2 class="text-2xl md:text-3xl font-playfair font-bold text-deep-navy mb-1">Pediatric Cardiology Reference</h2>
+                    <p class="text-neutral-slate">Congenital heart disease overview, pediatric-specific algorithms, and age-adjusted dosing. Based on ACC/AHA 2022 CHD guidelines.</p>
+                </div>
+
+                <!-- Congenital Heart Disease Classification -->
+                <div class="ref-card ecg bg-white rounded-xl p-5 md:p-6 shadow-lg mb-8">
+                    <h3 class="text-lg md:text-xl font-playfair font-bold text-deep-navy mb-4 flex items-center gap-2">
+                        <span class="text-2xl">🫀</span> Common Congenital Heart Diseases
+                    </h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                        <div class="bg-blue-50 rounded-lg p-4">
+                            <h4 class="font-bold text-clinical-blue mb-2">Left-to-Right Shunts</h4>
+                            <ul class="text-sm text-neutral-slate space-y-1">
+                                <li><strong>VSD:</strong> Most common CHD (30–40%); small close spontaneously</li>
+                                <li><strong>ASD:</strong> Secundum type (80%); PFO common in infants</li>
+                                <li><strong>PDA:</strong> Common in preterm; closes with indomethacin</li>
+                                <li><strong>AV Canal:</strong> Associated with Down syndrome</li>
+                            </ul>
+                        </div>
+                        <div class="bg-red-50 rounded-lg p-4">
+                            <h4 class="font-bold text-red-700 mb-2">Right-to-Left Shunts (Cyanotic)</h4>
+                            <ul class="text-sm text-neutral-slate space-y-1">
+                                <li><strong>Tetralogy of Fallot:</strong> Boot-shaped heart, RVOT obstruction</li>
+                                <li><strong>Transposition of Great Arteries:</strong> Parallel circulations; duct-dependent</li>
+                                <li><strong>Tricuspid Atresia:</strong> Hypoplastic RV, ASD required</li>
+                                <li><strong>Total Anomalous Pulmonary Venous Return:</strong> All pulmonary veins drain anomalously</li>
+                            </ul>
+                        </div>
+                        <div class="bg-purple-50 rounded-lg p-4">
+                            <h4 class="font-bold text-purple-700 mb-2">Obstructive Lesions</h4>
+                            <ul class="text-sm text-neutral-slate space-y-1">
+                                <li><strong>Coarctation of Aorta:</strong> Hypertension in upper extremities</li>
+                                <li><strong>Aortic Stenosis:</strong> Bicuspid valve common; may progress</li>
+                                <li><strong>Pulmonary Stenosis:</strong> Often mild; balloon valvuloplasty if severe</li>
+                                <li><strong>Hypertrophic Cardiomyopathy:</strong> Genetic; beta-blockers first-line</li>
+                            </ul>
+                        </div>
+                        <div class="bg-green-50 rounded-lg p-4">
+                            <h4 class="font-bold text-green-700 mb-2">Other Common Defects</h4>
+                            <ul class="text-sm text-neutral-slate space-y-1">
+                                <li><strong>Patent Foramen Ovale:</strong> Probe-patent; usually closes by 1 year</li>
+                                <li><strong>Ventricular Septal Defect:</strong> Muscular vs membranous; Eisenmenger if untreated</li>
+                                <li><strong>Atrioventricular Septal Defect:</strong> Complete vs partial; Rastelli classification</li>
+                                <li><strong>Double Outlet Right Ventricle:</strong> Both great arteries from RV</li>
+                            </ul>
+                        </div>
+                        <div class="bg-orange-50 rounded-lg p-4">
+                            <h4 class="font-bold text-orange-700 mb-2">Single Ventricle Physiology</h4>
+                            <ul class="text-sm text-neutral-slate space-y-1">
+                                <li><strong>Hypoplastic Left Heart Syndrome:</strong> Norwood procedure</li>
+                                <li><strong>Tricuspid Atresia:</strong> Fontan palliation</li>
+                                <li><strong>Double Inlet Left Ventricle:</strong> Variable presentation</li>
+                                <li><strong>Fontan Circulation:</strong> Passive pulmonary blood flow</li>
+                            </ul>
+                        </div>
+                        <div class="bg-teal-50 rounded-lg p-4">
+                            <h4 class="font-bold text-teal-700 mb-2">Associated Syndromes</h4>
+                            <ul class="text-sm text-neutral-slate space-y-1">
+                                <li><strong>Down Syndrome:</strong> AVSD, ASD, VSD common</li>
+                                <li><strong>Turner Syndrome:</strong> Coarctation, bicuspid aortic valve</li>
+                                <li><strong>Williams Syndrome:</strong> Supravalvar AS, peripheral PS</li>
+                                <li><strong>22q11 Deletion:</strong> TOF, interrupted aortic arch</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pediatric Vital Signs -->
+                <div class="ref-card checklist bg-white rounded-xl p-5 md:p-6 shadow-lg mb-6">
+                    <h3 class="text-lg md:text-xl font-playfair font-bold text-deep-navy mb-4 flex items-center gap-2">
+                        <span class="text-2xl">📊</span> Age-Adjusted Vital Signs &amp; Normal Values
+                    </h3>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-sm min-w-[600px]">
+                            <thead><tr class="border-b-2 border-green-100 bg-green-50">
+                                <th class="text-left py-2.5 px-3 font-semibold text-deep-navy">Age</th>
+                                <th class="text-left py-2.5 px-3 font-semibold text-deep-navy">Heart Rate (bpm)</th>
+                                <th class="text-left py-2.5 px-3 font-semibold text-deep-navy">Respiratory Rate</th>
+                                <th class="text-left py-2.5 px-3 font-semibold text-deep-navy">Blood Pressure (mmHg)</th>
+                                <th class="text-left py-2.5 px-3 font-semibold text-deep-navy">Key Notes</th>
+                            </tr></thead>
+                            <tbody class="text-neutral-slate">
+                                <tr class="border-b border-gray-100">
+                                    <td class="py-2.5 px-3 font-semibold text-deep-navy">Newborn (0–1 mo)</td>
+                                    <td class="py-2.5 px-3">120–160</td>
+                                    <td class="py-2.5 px-3">30–60</td>
+                                    <td class="py-2.5 px-3">60–90 / 30–50</td>
+                                    <td class="py-2.5 px-3">Patent ductus common; transitional circulation</td>
+                                </tr>
+                                <tr class="border-b border-gray-100">
+                                    <td class="py-2.5 px-3 font-semibold text-deep-navy">Infant (1–12 mo)</td>
+                                    <td class="py-2.5 px-3">100–140</td>
+                                    <td class="py-2.5 px-3">25–40</td>
+                                    <td class="py-2.5 px-3">80–110 / 50–70</td>
+                                    <td class="py-2.5 px-3">Foramen ovale closes; rapid growth phase</td>
+                                </tr>
+                                <tr class="border-b border-gray-100">
+                                    <td class="py-2.5 px-3 font-semibold text-deep-navy">Toddler (1–3 y)</td>
+                                    <td class="py-2.5 px-3">90–120</td>
+                                    <td class="py-2.5 px-3">20–30</td>
+                                    <td class="py-2.5 px-3">85–115 / 55–75</td>
+                                    <td class="py-2.5 px-3">VSDs may close; ASD evaluation</td>
+                                </tr>
+                                <tr class="border-b border-gray-100">
+                                    <td class="py-2.5 px-3 font-semibold text-deep-navy">Preschool (3–6 y)</td>
+                                    <td class="py-2.5 px-3">80–110</td>
+                                    <td class="py-2.5 px-3">18–25</td>
+                                    <td class="py-2.5 px-3">90–120 / 55–80</td>
+                                    <td class="py-2.5 px-3">School age screening; murmur evaluation</td>
+                                </tr>
+                                <tr class="border-b border-gray-100">
+                                    <td class="py-2.5 px-3 font-semibold text-deep-navy">School Age (6–12 y)</td>
+                                    <td class="py-2.5 px-3">70–100</td>
+                                    <td class="py-2.5 px-3">16–22</td>
+                                    <td class="py-2.5 px-3">95–125 / 60–85</td>
+                                    <td class="py-2.5 px-3">Similar to adults; congenital defect follow-up</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-2.5 px-3 font-semibold text-deep-navy">Adolescent (12–18 y)</td>
+                                    <td class="py-2.5 px-3">60–90</td>
+                                    <td class="py-2.5 px-3">14–20</td>
+                                    <td class="py-2.5 px-3">105–135 / 65–90</td>
+                                    <td class="py-2.5 px-3">Transition to adult care; pregnancy considerations</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Pediatric Medications -->
+                <div class="ref-card drug bg-white rounded-xl p-5 md:p-6 shadow-lg mb-6">
+                    <h3 class="text-lg md:text-xl font-playfair font-bold text-deep-navy mb-4 flex items-center gap-2">
+                        <span class="text-2xl">💊</span> Pediatric Cardiac Medications
+                    </h3>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-sm min-w-[600px]">
+                            <thead><tr class="border-b-2 border-blue-100 bg-blue-50">
+                                <th class="text-left py-3 px-3 font-semibold text-deep-navy">Medication</th>
+                                <th class="text-left py-3 px-3 font-semibold text-deep-navy">Indication</th>
+                                <th class="text-left py-3 px-3 font-semibold text-deep-navy">Dose</th>
+                                <th class="text-left py-3 px-3 font-semibold text-deep-navy">Monitoring</th>
+                            </tr></thead>
+                            <tbody class="text-neutral-slate">
+                                <tr class="border-b border-gray-100">
+                                    <td class="py-3 px-3 font-semibold text-deep-navy">Digoxin</td>
+                                    <td class="py-3 px-3">Heart failure, SVT</td>
+                                    <td class="py-3 px-3">Loading: 30–50 mcg/kg PO/IV; Maintenance: 10–15 mcg/kg/day divided BID</td>
+                                    <td class="py-3 px-3">Levels 0.8–2.0 ng/mL; ECG for toxicity</td>
+                                </tr>
+                                <tr class="border-b border-gray-100">
+                                    <td class="py-3 px-3 font-semibold text-deep-navy">Furosemide</td>
+                                    <td class="py-3 px-3">Congestive heart failure</td>
+                                    <td class="py-3 px-3">1–3 mg/kg/dose IV/PO q8–12h</td>
+                                    <td class="py-3 px-3">Electrolytes, renal function, growth</td>
+                                </tr>
+                                <tr class="border-b border-gray-100">
+                                    <td class="py-3 px-3 font-semibold text-deep-navy">Propranolol</td>
+                                    <td class="py-3 px-3">SVT, HCM, hypertension</td>
+                                    <td class="py-3 px-3">0.5–1 mg/kg/day divided TID; max 4 mg/kg/day</td>
+                                    <td class="py-3 px-3">Heart rate, blood pressure, hypoglycemia</td>
+                                </tr>
+                                <tr class="border-b border-gray-100">
+                                    <td class="py-3 px-3 font-semibold text-deep-navy">Enalapril</td>
+                                    <td class="py-3 px-3">Heart failure, hypertension</td>
+                                    <td class="py-3 px-3">0.1–0.5 mg/kg/day divided BID; max 0.5 mg/kg/day</td>
+                                    <td class="py-3 px-3">Renal function, potassium, blood pressure</td>
+                                </tr>
+                                <tr class="border-b border-gray-100">
+                                    <td class="py-3 px-3 font-semibold text-deep-navy">Spironolactone</td>
+                                    <td class="py-3 px-3">Heart failure (adjunct)</td>
+                                    <td class="py-3 px-3">1–3 mg/kg/day divided BID</td>
+                                    <td class="py-3 px-3">Potassium, renal function</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-3 px-3 font-semibold text-deep-navy">Aspirin</td>
+                                    <td class="py-3 px-3">Post-Kawasaki, post-intervention</td>
+                                    <td class="py-3 px-3">3–5 mg/kg/day once daily</td>
+                                    <td class="py-3 px-3">Bleeding risk, Reye syndrome warning</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Pediatric PALS Key Differences -->
+                <div class="ref-card emergency bg-white rounded-xl p-5 md:p-6 shadow-lg mb-6">
+                    <h3 class="text-lg md:text-xl font-playfair font-bold text-deep-navy mb-4 flex items-center gap-2">
+                        <span class="text-2xl">🚨</span> Pediatric Advanced Life Support (PALS)
+                    </h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="bg-red-50 rounded-lg p-4">
+                            <h4 class="font-bold text-red-700 mb-3">Cardiac Arrest Algorithm</h4>
+                            <div class="space-y-2 text-sm text-neutral-slate">
+                                <p><strong>CPR:</strong> 15:2 ratio (infant/child); 30:2 (adolescent)</p>
+                                <p><strong>Compression depth:</strong> 1/3 AP diameter (~4 cm infant, 5 cm child)</p>
+                                <p><strong>Epinephrine:</strong> 0.01 mg/kg IV/IO q3–5 min (1:10,000)</p>
+                                <p><strong>Defibrillation:</strong> 2 J/kg initial, then 4 J/kg</p>
+                                <p><strong>Airway:</strong> BVM preferred initially; advanced airway when skilled</p>
+                            </div>
+                        </div>
+                        <div class="bg-blue-50 rounded-lg p-4">
+                            <h4 class="font-bold text-clinical-blue mb-3">Bradycardia Algorithm</h4>
+                            <div class="space-y-2 text-sm text-neutral-slate">
+                                <p><strong>Assess:</strong> HR &lt;60 bpm with poor perfusion</p>
+                                <p><strong>Support ABCs:</strong> Oxygen, ventilation, chest compressions</p>
+                                <p><strong>Epinephrine:</strong> 0.01 mg/kg IV/IO q3–5 min</p>
+                                <p><strong>Atropine:</strong> 0.02 mg/kg IV (min 0.1 mg, max 0.5 mg)</p>
+                                <p><strong>Pacing:</strong> Consider if unresponsive to drugs</p>
+                            </div>
+                        </div>
+                        <div class="bg-purple-50 rounded-lg p-4">
+                            <h4 class="font-bold text-purple-700 mb-3">Tachycardia Algorithm</h4>
+                            <div class="space-y-2 text-sm text-neutral-slate">
+                                <p><strong>Stable SVT:</strong> Vagal maneuvers → adenosine 0.1 mg/kg IV (max 6 mg)</p>
+                                <p><strong>Unstable SVT:</strong> Synchronized cardioversion 0.5–1 J/kg</p>
+                                <p><strong>Stable VT:</strong> Amiodarone 5 mg/kg IV over 20–60 min</p>
+                                <p><strong>Unstable VT:</strong> Defibrillate 2 J/kg</p>
+                                <p><strong>Consider toxins:</strong> TCA overdose, digoxin toxicity</p>
+                            </div>
+                        </div>
+                        <div class="bg-green-50 rounded-lg p-4">
+                            <h4 class="font-bold text-green-700 mb-3">Post-Resuscitation Care</h4>
+                            <div class="space-y-2 text-sm text-neutral-slate">
+                                <p><strong>Therapeutic hypothermia:</strong> Consider 32–34°C × 24–48 h</p>
+                                <p><strong>Targeted glucose:</strong> 80–110 mg/dL</p>
+                                <p><strong>Neurologic monitoring:</strong> EEG if indicated</p>
+                                <p><strong>Echo:</strong> Assess cardiac function post-arrest</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Common Pediatric Cardiac Emergencies -->
+                <div class="ref-card checklist bg-white rounded-xl p-5 md:p-6 shadow-lg mb-6">
+                    <h3 class="text-lg md:text-xl font-playfair font-bold text-deep-navy mb-4 flex items-center gap-2">
+                        <span class="text-2xl">⚠️</span> Common Pediatric Cardiac Emergencies
+                    </h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="bg-red-50 rounded-lg p-4">
+                            <h4 class="font-bold text-red-700 mb-3">Duct-Dependent Lesions</h4>
+                            <div class="space-y-3 text-sm text-neutral-slate">
+                                <div>
+                                    <p class="font-semibold">Prostaglandin E1 (PGE1):</p>
+                                    <p>Dose: 0.05–0.1 mcg/kg/min IV; maintains PDA patency</p>
+                                    <p>Indications: HLHS, critical AS/PS, TGA with intact septum</p>
+                                    <p>Side effects: Apnea, fever, hypotension</p>
+                                </div>
+                                <div>
+                                    <p class="font-semibold">Balloon Atrial Septostomy:</p>
+                                    <p>Emergency procedure for TGA; creates ASD for mixing</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-orange-50 rounded-lg p-4">
+                            <h4 class="font-bold text-orange-700 mb-3">Kawasaki Disease</h4>
+                            <div class="space-y-3 text-sm text-neutral-slate">
+                                <div>
+                                    <p class="font-semibold">Criteria (≥4 of 5):</p>
+                                    <p>Fever ≥5 days, conjunctivitis, rash, cervical LAD, extremity changes</p>
+                                </div>
+                                <div>
+                                    <p class="font-semibold">Treatment:</p>
+                                    <p>IVIG 2 g/kg + aspirin 80–100 mg/kg/day divided QID</p>
+                                    <p>Echo at diagnosis and 2 weeks; consider steroids if refractory</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-blue-50 rounded-lg p-4">
+                            <h4 class="font-bold text-clinical-blue mb-3">Myocarditis</h4>
+                            <div class="space-y-2 text-sm text-neutral-slate">
+                                <p><strong>Presentation:</strong> Fever, chest pain, fatigue, arrhythmias</p>
+                                <p><strong>Workup:</strong> Troponin, BNP, echo, viral studies</p>
+                                <p><strong>Management:</strong> Supportive care, antiarrhythmics if needed</p>
+                                <p><strong>Prognosis:</strong> Most recover; consider transplant if severe</p>
+                            </div>
+                        </div>
+                        <div class="bg-purple-50 rounded-lg p-4">
+                            <h4 class="font-bold text-purple-700 mb-3">Cardiac Transplant</h4>
+                            <div class="space-y-2 text-sm text-neutral-slate">
+                                <p><strong>Immunosuppression:</strong> Tacrolimus/cyclosporine + mycophenolate + steroids</p>
+                                <p><strong>Rejection monitoring:</strong> Echo, BNP, endomyocardial biopsy</p>
+                                <p><strong>Infections:</strong> CMV prophylaxis; monitor for PTLD</p>
+                                <p><strong>Long-term:</strong> Coronary vasculopathy screening</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Fontan Physiology -->
+                <div class="ref-card bg-white rounded-xl p-5 md:p-6 shadow-lg mb-6">
+                    <h3 class="text-lg md:text-xl font-playfair font-bold text-deep-navy mb-4 flex items-center gap-2">
+                        <span class="text-2xl">🔄</span> Fontan Physiology &amp; Complications
+                    </h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="bg-teal-50 rounded-lg p-4">
+                            <h4 class="font-bold text-teal-700 mb-3">Physiology</h4>
+                            <div class="space-y-2 text-sm text-neutral-slate">
+                                <p><strong>Circuit:</strong> SVC/IVC → pulmonary arteries → lungs → LA → LV</p>
+                                <p><strong>Driving pressure:</strong> Mean venous pressure (normal 10–15 mmHg)</p>
+                                <p><strong>Cardiac output:</strong> Dependent on preload; no subpulmonary ventricle</p>
+                                <p><strong>Oxygenation:</strong> Usually normal at rest; desaturates with exertion</p>
+                            </div>
+                        </div>
+                        <div class="bg-amber-50 rounded-lg p-4">
+                            <h4 class="font-bold text-amber-700 mb-3">Complications</h4>
+                            <div class="space-y-2 text-sm text-neutral-slate">
+                                <p><strong>Plastic bronchitis:</strong> Cast formation in airways; sirolimus treatment</p>
+                                <p><strong>Protein-losing enteropathy:</strong> Hypoproteinemia; treat with diuretics/budenoside</p>
+                                <p><strong>Fontan-associated liver disease:</strong> Cirrhosis; monitor LFTs</p>
+                                <p><strong>Thromboembolism:</strong> Anticoagulation with warfarin or DOAC</p>
+                                <p><strong>Arrhythmias:</strong> Atrial flutter common; ablation or antiarrhythmics</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-4 bg-gray-50 rounded-lg p-4">
+                        <h4 class="font-bold text-deep-navy mb-2">Fontan Failure</h4>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-neutral-slate">
+                            <div>
+                                <p><strong>Signs:</strong> Exercise intolerance, edema, ascites, pleural effusions</p>
+                                <p><strong>Workup:</strong> Echo, cath, BNP, liver imaging</p>
+                            </div>
+                            <div>
+                                <p><strong>Management:</strong> Diuretics, anticoagulation, rate control</p>
+                                <p><strong>Advanced:</strong> Heart transplant or mechanical support</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-amber-50 border border-amber-200 rounded-xl p-4 md:p-6">
+                    <p class="text-sm text-deep-navy"><strong>⚠️ Disclaimer:</strong> Pediatric cardiology requires specialized training. Always consult pediatric cardiologist for complex cases. Doses are general guidelines; adjust for age, weight, and renal function. Based on 2022 ACC/AHA CHD guidelines and PALS 2020.</p>
                 </div>
             </div>
         </div>
