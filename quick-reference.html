@@ -124,6 +124,8 @@
                 <button class="tab-btn whitespace-nowrap px-4 py-2 rounded-lg font-semibold text-sm border text-neutral-slate bg-gray-100 transition-colors flex-shrink-0" data-tab="pediatric">👶 Pediatric Cardio</button>
                 <button class="tab-btn whitespace-nowrap px-4 py-2 rounded-lg font-semibold text-sm border text-neutral-slate bg-gray-100 transition-colors flex-shrink-0" data-tab="electrolytes">🧪 Electrolytes</button>
                 <button class="tab-btn whitespace-nowrap px-4 py-2 rounded-lg font-semibold text-sm border text-neutral-slate bg-gray-100 transition-colors flex-shrink-0" data-tab="cardiac-surgery">🫀 Cardiac Surgery</button>
+                <button class="tab-btn whitespace-nowrap px-4 py-2 rounded-lg font-semibold text-sm border text-neutral-slate bg-gray-100 transition-colors flex-shrink-0" data-tab="med-side-effects">⚠️ Med Side Effects</button>
+                <button class="tab-btn whitespace-nowrap px-4 py-2 rounded-lg font-semibold text-sm border text-neutral-slate bg-gray-100 transition-colors flex-shrink-0" data-tab="cardioversion">⚡ Cardioversion</button>
             </div>
         </div>
     </section>
@@ -445,6 +447,256 @@
 
                 <div class="bg-amber-50 border border-amber-200 rounded-xl p-4 md:p-6">
                     <p class="text-sm text-deep-navy"><strong>⚠️ Disclaimer:</strong> Doses listed are adult reference values from AHA ACC/AHA/ESC guidelines. Always verify with your institution's formulary and pharmacy. Pediatric dosing requires weight-based calculation. Adjust for renal/hepatic impairment.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ═══════════════════ TAB 13: MED SIDE EFFECTS ═══════════════════ -->
+        <div id="tab-med-side-effects" class="tab-content py-8 md:py-10">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="mb-8">
+                    <h2 class="text-2xl md:text-3xl font-playfair font-bold text-deep-navy mb-1">Medication Side Effect Comparison Tables</h2>
+                    <p class="text-neutral-slate">Comparative side effect profiles for common cardiac medications. Helps guide selection based on patient-specific factors. Based on manufacturer data and major clinical trials.</p>
+                </div>
+
+                <!-- Beta-Blockers Comparison -->
+                <div class="ref-card drug bg-white rounded-xl p-5 md:p-6 shadow-lg mb-8">
+                    <h3 class="text-lg md:text-xl font-playfair font-bold text-deep-navy mb-4 flex items-center gap-2">
+                        <span class="text-2xl">💊</span> Beta-Blockers Side Effect Comparison
+                    </h3>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-sm min-w-[800px]">
+                            <thead><tr class="border-b-2 border-blue-100 bg-blue-50">
+                                <th class="text-left py-3 px-3 font-semibold text-deep-navy">Beta-Blocker</th>
+                                <th class="text-left py-3 px-3 font-semibold text-deep-navy">Selectivity</th>
+                                <th class="text-left py-3 px-3 font-semibold text-deep-navy">Common Side Effects</th>
+                                <th class="text-left py-3 px-3 font-semibold text-deep-navy">Unique Features</th>
+                                <th class="text-left py-3 px-3 font-semibold text-deep-navy">Contraindications</th>
+                            </tr></thead>
+                            <tbody class="text-neutral-slate">
+                                <tr class="border-b border-gray-100">
+                                    <td class="py-3 px-3 font-semibold text-deep-navy">Metoprolol</td>
+                                    <td class="py-3 px-3">β1-selective</td>
+                                    <td class="py-3 px-3">Fatigue, bradycardia, dizziness, cold extremities, nightmares</td>
+                                    <td class="py-3 px-3">Once-daily dosing (metoprolol succinate); IV form available</td>
+                                    <td class="py-3 px-3">Sinus bradycardia, heart block, cardiogenic shock</td>
+                                </tr>
+                                <tr class="border-b border-gray-100">
+                                    <td class="py-3 px-3 font-semibold text-deep-navy">Carvedilol</td>
+                                    <td class="py-3 px-3">Non-selective (β1/β2/α1)</td>
+                                    <td class="py-3 px-3">Fatigue, dizziness, hypotension, bradycardia, hyperglycemia</td>
+                                    <td class="py-3 px-3">Antioxidant properties; improves survival in HF; vasodilation</td>
+                                    <td class="py-3 px-3">Bronchospastic disease, decompensated HF, liver failure</td>
+                                </tr>
+                                <tr class="border-b border-gray-100">
+                                    <td class="py-3 px-3 font-semibold text-deep-navy">Bisoprolol</td>
+                                    <td class="py-3 px-3">β1-selective</td>
+                                    <td class="py-3 px-3">Fatigue, headache, bradycardia, insomnia, erectile dysfunction</td>
+                                    <td class="py-3 px-3">High β1-selectivity; once-daily; proven in HF trials</td>
+                                    <td class="py-3 px-3">Sinus bradycardia, heart block, anaphylaxis history</td>
+                                </tr>
+                                <tr class="border-b border-gray-100">
+                                    <td class="py-3 px-3 font-semibold text-deep-navy">Atenolol</td>
+                                    <td class="py-3 px-3">β1-selective</td>
+                                    <td class="py-3 px-3">Fatigue, cold extremities, bradycardia, depression, impotence</td>
+                                    <td class="py-3 px-3">Renal elimination; longer half-life; inexpensive</td>
+                                    <td class="py-3 px-3">Same as above; avoid in renal failure</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-3 px-3 font-semibold text-deep-navy">Propranolol</td>
+                                    <td class="py-3 px-3">Non-selective</td>
+                                    <td class="py-3 px-3">Fatigue, bradycardia, bronchospasm, nightmares, depression</td>
+                                    <td class="py-3 px-3">Membrane stabilizing; reduces tremor; migraine prophylaxis</td>
+                                    <td class="py-3 px-3">Asthma/COPD, peripheral vascular disease, depression</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="mt-4 text-sm text-neutral-slate">
+                        <p><strong>Clinical Pearls:</strong> β1-selective agents preferred in COPD/asthma. Carvedilol has lowest risk of erectile dysfunction. Fatigue most common limiting factor for adherence.</p>
+                    </div>
+                </div>
+
+                <!-- ACEi vs ARBs -->
+                <div class="ref-card anti bg-white rounded-xl p-5 md:p-6 shadow-lg mb-6">
+                    <h3 class="text-lg md:text-xl font-playfair font-bold text-deep-navy mb-4 flex items-center gap-2">
+                        <span class="text-2xl">🩸</span> ACE Inhibitors vs ARBs Side Effect Comparison
+                    </h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="bg-green-50 rounded-lg p-4">
+                            <h4 class="font-bold text-green-700 mb-3">ACE Inhibitors</h4>
+                            <div class="space-y-3 text-sm text-neutral-slate">
+                                <div>
+                                    <p class="font-semibold">Mechanism-specific side effects:</p>
+                                    <p>• Cough (10–20%): Dry, persistent; bradykinin-mediated</p>
+                                    <p>• Angioedema (0.1–0.7%): Can be life-threatening</p>
+                                    <p>• Hyperkalemia: Due to aldosterone suppression</p>
+                                </div>
+                                <div>
+                                    <p class="font-semibold">Common side effects:</p>
+                                    <p>• Hypotension (first-dose effect)</p>
+                                    <p>• Renal dysfunction (in high-renin states)</p>
+                                    <p>• Headache, dizziness, fatigue</p>
+                                </div>
+                                <div>
+                                    <p class="font-semibold">Advantages:</p>
+                                    <p>• Proven mortality benefit in HF</p>
+                                    <p>• Inexpensive generics available</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-blue-50 rounded-lg p-4">
+                            <h4 class="font-bold text-clinical-blue mb-3">ARBs (Angiotensin II Receptor Blockers)</h4>
+                            <div class="space-y-3 text-sm text-neutral-slate">
+                                <div>
+                                    <p class="font-semibold">Mechanism-specific side effects:</p>
+                                    <p>• Cough: Much less common (&lt;5%)</p>
+                                    <p>• Angioedema: Rare but possible</p>
+                                    <p>• Hyperkalemia: Similar risk</p>
+                                </div>
+                                <div>
+                                    <p class="font-semibold">Common side effects:</p>
+                                    <p>• Hypotension (less first-dose effect)</p>
+                                    <p>• Renal dysfunction</p>
+                                    <p>• Headache, dizziness, fatigue</p>
+                                </div>
+                                <div>
+                                    <p class="font-semibold">Advantages:</p>
+                                    <p>• Better tolerated in cough-prone patients</p>
+                                    <p>• Once-daily dosing for most</p>
+                                    <p>• No bradykinin accumulation</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Antiarrhythmic Drugs -->
+                <div class="ref-card ecg bg-white rounded-xl p-5 md:p-6 shadow-lg mb-6">
+                    <h3 class="text-lg md:text-xl font-playfair font-bold text-deep-navy mb-4 flex items-center gap-2">
+                        <span class="text-2xl">⚡</span> Antiarrhythmic Drugs Side Effect Comparison
+                    </h3>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-sm min-w-[900px]">
+                            <thead><tr class="border-b-2 border-teal-100 bg-teal-50">
+                                <th class="text-left py-3 px-3 font-semibold text-deep-navy">Drug</th>
+                                <th class="text-left py-3 px-3 font-semibold text-deep-navy">Class</th>
+                                <th class="text-left py-3 px-3 font-semibold text-deep-navy">Common Side Effects</th>
+                                <th class="text-left py-3 px-3 font-semibold text-deep-navy">Serious Adverse Effects</th>
+                                <th class="text-left py-3 px-3 font-semibold text-deep-navy">Monitoring</th>
+                                <th class="text-left py-3 px-3 font-semibold text-deep-navy">Drug Interactions</th>
+                            </tr></thead>
+                            <tbody class="text-neutral-slate">
+                                <tr class="border-b border-gray-100">
+                                    <td class="py-3 px-3 font-semibold text-deep-navy">Amiodarone</td>
+                                    <td class="py-3 px-3">III</td>
+                                    <td class="py-3 px-3">Nausea, fatigue, photosensitivity, blue-gray skin discoloration</td>
+                                    <td class="py-3 px-3">Pulmonary toxicity (1–2%), hepatotoxicity, thyroid dysfunction (hypo/hyper), QT prolongation, bradycardia</td>
+                                    <td class="py-3 px-3">LFTs, TFTs, CXR, ECG q6–12 mo; PFTs if symptoms</td>
+                                    <td class="py-3 px-3">Warfarin (↑INR), digoxin (↑levels), statins (↑rhabdo risk)</td>
+                                </tr>
+                                <tr class="border-b border-gray-100">
+                                    <td class="py-3 px-3 font-semibold text-deep-navy">Sotalol</td>
+                                    <td class="py-3 px-3">III</td>
+                                    <td class="py-3 px-3">Fatigue, dizziness, bradycardia, insomnia</td>
+                                    <td class="py-3 px-3">QT prolongation → torsades, bradycardia, proarrhythmia (especially in HF)</td>
+                                    <td class="py-3 px-3">ECG at baseline, after dose changes; CrCl, K⁺, Mg²⁺</td>
+                                    <td class="py-3 px-3">QT-prolonging drugs, antiarrhythmics, beta-blockers</td>
+                                </tr>
+                                <tr class="border-b border-gray-100">
+                                    <td class="py-3 px-3 font-semibold text-deep-navy">Flecainide</td>
+                                    <td class="py-3 px-3">Ic</td>
+                                    <td class="py-3 px-3">Dizziness, headache, blurred vision, nausea</td>
+                                    <td class="py-3 px-3">Proarrhythmia in structural heart disease, atrial flutter with 1:1 conduction, negative inotropy</td>
+                                    <td class="py-3 px-3">ECG for QRS widening; avoid if QRS &gt;120 ms</td>
+                                    <td class="py-3 px-3">Amiodarone (↑levels), beta-blockers (bradycardia)</td>
+                                </tr>
+                                <tr class="border-b border-gray-100">
+                                    <td class="py-3 px-3 font-semibold text-deep-navy">Propafenone</td>
+                                    <td class="py-3 px-3">Ic</td>
+                                    <td class="py-3 px-3">Dizziness, headache, metallic taste, constipation</td>
+                                    <td class="py-3 px-3">Proarrhythmia, negative inotropy, lupus-like syndrome (rare)</td>
+                                    <td class="py-3 px-3">ECG monitoring; avoid in severe LV dysfunction</td>
+                                    <td class="py-3 px-3">Warfarin (↑INR), beta-blockers, CYP2D6 inhibitors</td>
+                                </tr>
+                                <tr class="border-b border-gray-100">
+                                    <td class="py-3 px-3 font-semibold text-deep-navy">Dofetilide</td>
+                                    <td class="py-3 px-3">III</td>
+                                    <td class="py-3 px-3">Headache, dizziness, nausea</td>
+                                    <td class="py-3 px-3">QT prolongation → torsades (hospital initiation required)</td>
+                                    <td class="py-3 px-3">Inpatient initiation with ECG monitoring × 3 days</td>
+                                    <td class="py-3 px-3">QT-prolonging drugs, CYP3A4 inhibitors</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-3 px-3 font-semibold text-deep-navy">Dronedarone</td>
+                                    <td class="py-3 px-3">III</td>
+                                    <td class="py-3 px-3">Diarrhea, nausea, weakness, skin rash</td>
+                                    <td class="py-3 px-3">Hepatotoxicity, HF exacerbation, QT prolongation</td>
+                                    <td class="py-3 px-3">LFTs at baseline and periodically; ECG</td>
+                                    <td class="py-3 px-3">Strong CYP3A4 inhibitors, QT-prolonging drugs</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="mt-4 text-sm text-neutral-slate">
+                        <p><strong>Clinical Pearls:</strong> Vaughan-Williams classification guides side effect profiles. Class III agents carry highest risk of torsades. Always check QTc and renal function before starting. Proarrhythmic risk highest in first few days/weeks.</p>
+                    </div>
+                </div>
+
+                <!-- Calcium Channel Blockers -->
+                <div class="ref-card checklist bg-white rounded-xl p-5 md:p-6 shadow-lg mb-6">
+                    <h3 class="text-lg md:text-xl font-playfair font-bold text-deep-navy mb-4 flex items-center gap-2">
+                        <span class="text-2xl">🫀</span> Calcium Channel Blockers Side Effect Comparison
+                    </h3>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-sm min-w-[700px]">
+                            <thead><tr class="border-b-2 border-green-100 bg-green-50">
+                                <th class="text-left py-3 px-3 font-semibold text-deep-navy">Drug</th>
+                                <td class="py-3 px-3">Non-DHP (verapamil, diltiazem)</td>
+                                <td class="py-3 px-3">DHP (amlodipine, nifedipine)</td>
+                                <th class="text-left py-3 px-3 font-semibold text-deep-navy">Common Side Effects</th>
+                                <th class="text-left py-3 px-3 font-semibold text-deep-navy">Cardiac Effects</th>
+                                <th class="text-left py-3 px-3 font-semibold text-deep-navy">Contraindications</th>
+                            </tr></thead>
+                            <tbody class="text-neutral-slate">
+                                <tr class="border-b border-gray-100">
+                                    <td class="py-3 px-3 font-semibold text-deep-navy">Verapamil</td>
+                                    <td class="py-3 px-3">Non-DHP</td>
+                                    <td class="py-3 px-3">Constipation, dizziness, headache, edema</td>
+                                    <td class="py-3 px-3">Negative chronotropy/inotropy; AV block risk</td>
+                                    <td class="py-3 px-3">Sick sinus syndrome, heart block, WPW, HF with EF &lt;40%</td>
+                                </tr>
+                                <tr class="border-b border-gray-100">
+                                    <td class="py-3 px-3 font-semibold text-deep-navy">Diltiazem</td>
+                                    <td class="py-3 px-3">Non-DHP</td>
+                                    <td class="py-3 px-3">Headache, dizziness, constipation, edema</td>
+                                    <td class="py-3 px-3">Mild negative inotropy; some AV node effect</td>
+                                    <td class="py-3 px-3">Heart block, WPW, HF with EF &lt;40%</td>
+                                </tr>
+                                <tr class="border-b border-gray-100">
+                                    <td class="py-3 px-3 font-semibold text-deep-navy">Amlodipine</td>
+                                    <td class="py-3 px-3">DHP</td>
+                                    <td class="py-3 px-3">Edema, headache, flushing, dizziness</td>
+                                    <td class="py-3 px-3">Reflex tachycardia; minimal inotropy effect</td>
+                                    <td class="py-3 px-3">None absolute; use cautiously in severe aortic stenosis</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-3 px-3 font-semibold text-deep-navy">Nifedipine</td>
+                                    <td class="py-3 px-3">DHP</td>
+                                    <td class="py-3 px-3">Headache, flushing, edema, tachycardia</td>
+                                    <td class="py-3 px-3">Pronounced reflex tachycardia; short-acting forms risky</td>
+                                    <td class="py-3 px-3">Unstable angina (short-acting); avoid immediate-release</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="mt-4 text-sm text-neutral-slate">
+                        <p><strong>Clinical Pearls:</strong> Non-DHP preferred for rate control in AFib. DHP better for isolated systolic HTN. Edema most common side effect across all. Constipation prominent with verapamil.</p>
+                    </div>
+                </div>
+
+                <div class="bg-amber-50 border border-amber-200 rounded-xl p-4 md:p-6">
+                    <p class="text-sm text-deep-navy"><strong>⚠️ Disclaimer:</strong> Side effect profiles based on clinical trial data and FDA labeling. Individual patient responses vary. Always consider comorbidities and drug interactions. Report adverse effects to improve patient care.</p>
                 </div>
             </div>
         </div>
@@ -1288,6 +1540,594 @@
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div class="bg-red-50 rounded-lg p-4">
                             <h4 class="font-bold text-red-700 mb-3">Cardiac Tamponade</h4>
+                            <ul class="text-sm text-neutral-slate space-y-1">
+                                <li>☐ RV diastolic collapse (PLAX/PSAX)</li>
+                                <li>☐ RA systolic collapse (A4C)</li>
+                                <li>☐ IVC dilated, no respiratory variation</li>
+                                <li>☐ Pericardial effusion + RA/RV compression</li>
+                                <li>☐ Pulsus paradoxus on exam</li>
+                                <li><strong>Action:</strong> Pericardiocentesis (subcostal approach)</li>
+                            </ul>
+                        </div>
+                        <div class="bg-red-50 rounded-lg p-4">
+                            <h4 class="font-bold text-red-700 mb-3">Acute Severe MR</h4>
+                            <ul class="text-sm text-neutral-slate space-y-1">
+                                <li>☐ Flail leaflet or ruptured chordae</li>
+                                <li>☐ Eccentric jet toward LA wall</li>
+                                <li>☐ LA/LV enlargement</li>
+                                <li>☐ Low EF, pulmonary hypertension signs</li>
+                                <li><strong>Action:</strong> Afterload reduction, consider surgery</li>
+                            </ul>
+                        </div>
+                        <div class="bg-red-50 rounded-lg p-4">
+                            <h4 class="font-bold text-red-700 mb-3">Acute LV Failure</h4>
+                            <ul class="text-sm text-neutral-slate space-y-1">
+                                <li>☐ LV EF &lt;40%, global hypokinesis</li>
+                                <li>☐ LV dilation, spherical shape</li>
+                                <li>☐ Mitral regurgitation (functional)</li>
+                                <li>☐ B-lines on lung ultrasound</li>
+                                <li><strong>Action:</strong> NTG, inotropes, consider MCS</li>
+                            </ul>
+                        </div>
+                        <div class="bg-red-50 rounded-lg p-4">
+                            <h4 class="font-bold text-red-700 mb-3">RV Strain (PE)</h4>
+                            <ul class="text-sm text-neutral-slate space-y-1">
+                                <li>☐ RV:LV ratio &gt;1.0 in A4C</li>
+                                <li>☐ RV free wall hypokinesis</li>
+                                <li>☐ Septal bowing toward LV</li>
+                                <li>☐ TAPSE &lt;1.7 cm</li>
+                                <li>☐ IVC dilated, no collapse</li>
+                                <li><strong>Action:</strong> Anticoagulation, consider thrombolysis</li>
+                            </ul>
+                        </div>
+                        <div class="bg-red-50 rounded-lg p-4">
+                            <h4 class="font-bold text-red-700 mb-3">Cardiomyopathies</h4>
+                            <ul class="text-sm text-neutral-slate space-y-1">
+                                <li><strong>HCM:</strong> Asymmetric septal hypertrophy, SAM, LVOT obstruction</li>
+                                <li><strong>DCM:</strong> Dilated LV/RV, EF &lt;40%, global hypokinesis</li>
+                                <li><strong>RCM:</strong> Small ventricles, thick walls, biatrial enlargement</li>
+                                <li><strong>ARVC:</strong> RV dilation, fatty infiltration, arrhythmias</li>
+                            </ul>
+                        </div>
+                        <div class="bg-red-50 rounded-lg p-4">
+                            <h4 class="font-bold text-red-700 mb-3">Valvular Emergencies</h4>
+                            <ul class="text-sm text-neutral-slate space-y-1">
+                                <li><strong>AS:</strong> Thickened calcified AV, LVH, low gradient if low EF</li>
+                                <li><strong>IE:</strong> Vegetation on valve, abscess, new regurgitation</li>
+                                <li><strong>Aortic dissection:</strong> Intimal flap in aorta, pericardial effusion</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Doppler Basics -->
+                <div class="ref-card bg-white rounded-xl p-5 md:p-6 shadow-lg mb-6">
+                    <h3 class="text-lg md:text-xl font-playfair font-bold text-deep-navy mb-4 flex items-center gap-2">
+                        <span class="text-2xl">🌊</span> Doppler Assessment Quick Guide
+                    </h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <h4 class="font-bold text-deep-navy mb-2">Valvular Regurgitation Grading</h4>
+                            <div class="space-y-2 text-sm text-neutral-slate bg-gray-50 rounded-lg p-4">
+                                <p><strong>Mild:</strong> Narrow jet &lt;25% LA area, vena contracta &lt;3 mm</p>
+                                <p><strong>Moderate:</strong> Jet 25–65% LA area, vena contracta 3–7 mm</p>
+                                <p><strong>Severe:</strong> Jet &gt;65% LA area, vena contracta &gt;7 mm, PISA radius &gt;9 mm</p>
+                                <p class="text-xs mt-2">Also assess: LA size, pulmonary vein flow, LV function</p>
+                            </div>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-deep-navy mb-2">Valvular Stenosis Grading</h4>
+                            <div class="space-y-2 text-sm text-neutral-slate bg-gray-50 rounded-lg p-4">
+                                <p><strong>AS:</strong> Mild &lt;2.0 cm², Moderate 1.0–1.5 cm², Severe &lt;1.0 cm²</p>
+                                <p><strong>MS:</strong> Mild &gt;1.5 cm², Moderate 1.0–1.5 cm², Severe &lt;1.0 cm²</p>
+                                <p><strong>Mean gradient:</strong> AS &gt;40 mmHg = severe</p>
+                                <p class="text-xs mt-2">Continuity equation for AS area; pressure half-time for MS</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-4">
+                        <h4 class="font-bold text-deep-navy mb-2">Diastolic Function Assessment</h4>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="bg-blue-50 rounded-lg p-3 text-sm text-neutral-slate">
+                                <p><strong>Normal:</strong> E/A &gt;1, DT 160–200 ms, IVRT &lt;70 ms</p>
+                                <p><strong>Grade I (Impaired relaxation):</strong> E/A &lt;1, DT &gt;200 ms</p>
+                                <p><strong>Grade II (Pseudonormal):</strong> E/A 1–2, variable with Valsalva</p>
+                            </div>
+                            <div class="bg-amber-50 rounded-lg p-3 text-sm text-neutral-slate">
+                                <p><strong>Grade III (Restrictive):</strong> E/A &gt;2, DT &lt;160 ms</p>
+                                <p><strong>E/e' ratio:</strong> &lt;8 = normal, 9–12 = indeterminate, &gt;13 = elevated LVFP</p>
+                                <p class="text-xs mt-2">Always correlate with BNP and clinical picture</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-amber-50 border border-amber-200 rounded-xl p-4 md:p-6">
+                    <p class="text-sm text-deep-navy"><strong>⚠️ Disclaimer:</strong> Echo interpretation requires formal training and clinical correlation. POCUS is limited compared to comprehensive echocardiography. Always consult cardiology for definitive diagnosis. Measurements may vary with body size and age.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ═══════════════════ TAB 7: PERIOPERATIVE ═══════════════════ -->
+        <div id="tab-perioperative" class="tab-content py-8 md:py-10">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="mb-8">
+                    <h2 class="text-2xl md:text-3xl font-playfair font-bold text-deep-navy mb-1">Perioperative Anticoagulation &amp; Antiplatelet Management</h2>
+                    <p class="text-neutral-slate">Bridging strategies, procedural interruption guidelines, and risk assessment for surgical patients on anticoagulation. Based on 2023 ACC/AHA/ESC guidelines.</p>
+                </div>
+
+                <!-- Risk Stratification -->
+                <div class="ref-card checklist bg-white rounded-xl p-5 md:p-6 shadow-lg mb-8">
+                    <h3 class="text-lg md:text-xl font-playfair font-bold text-deep-navy mb-4 flex items-center gap-2">
+                        <span class="text-2xl">⚖️</span> Risk Stratification for Perioperative Management
+                    </h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="bg-red-50 rounded-lg p-4">
+                            <h4 class="font-bold text-red-700 mb-3">Thrombotic Risk Assessment</h4>
+                            <div class="space-y-3 text-sm text-neutral-slate">
+                                <div>
+                                    <p class="font-semibold">High Risk (Bridging Recommended):</p>
+                                    <p>• Mechanical mitral valve</p>
+                                    <p>• AFib with CHA₂DS₂-VASc ≥4</p>
+                                    <p>• Recent (≤3 months) VTE or stroke</p>
+                                    <p>• Thrombophilia with prior thrombosis</p>
+                                </div>
+                                <div>
+                                    <p class="font-semibold">Intermediate Risk (Bridging Considered):</p>
+                                    <p>• Mechanical aortic valve</p>
+                                    <p>• AFib with CHA₂DS₂-VASc 2–3</p>
+                                    <p>• VTE within 3–12 months</p>
+                                    <p>• Bioprosthetic valve + AFib</p>
+                                </div>
+                                <div>
+                                    <p class="font-semibold">Low Risk (No Bridging):</p>
+                                    <p>• Bioprosthetic valve without AFib</p>
+                                    <p>• AFib with CHA₂DS₂-VASc 0–1</p>
+                                    <p>• VTE &gt;12 months ago</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-blue-50 rounded-lg p-4">
+                            <h4 class="font-bold text-clinical-blue mb-3">Bleeding Risk Assessment</h4>
+                            <div class="space-y-3 text-sm text-neutral-slate">
+                                <div>
+                                    <p class="font-semibold">High Bleeding Risk Procedures:</p>
+                                    <p>• Neurosurgery, spinal surgery</p>
+                                    <p>• Cardiac surgery, major vascular</p>
+                                    <p>• Urologic procedures (prostate, bladder)</p>
+                                    <p>• GI procedures with high bleed risk</p>
+                                </div>
+                                <div>
+                                    <p class="font-semibold">Low Bleeding Risk Procedures:</p>
+                                    <p>• Dental procedures</p>
+                                    <p>• Cataract surgery</p>
+                                    <p>• Dermatologic procedures</p>
+                                    <p>• Most endoscopic procedures</p>
+                                </div>
+                                <div>
+                                    <p class="font-semibold">Considerations:</p>
+                                    <p>• Patient age &gt;75 years</p>
+                                    <p>• Concomitant antiplatelets</p>
+                                    <p>• Recent bleeding history</p>
+                                    <p>• Renal/hepatic dysfunction</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- DOAC Management -->
+                <div class="ref-card anti bg-white rounded-xl p-5 md:p-6 shadow-lg mb-6">
+                    <h3 class="text-lg md:text-xl font-playfair font-bold text-deep-navy mb-4 flex items-center gap-2">
+                        <span class="text-2xl">💧</span> Direct Oral Anticoagulant (DOAC) Perioperative Management
+                    </h3>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-sm min-w-[700px]">
+                            <thead><tr class="border-b-2 border-purple-100 bg-purple-50">
+                                <th class="text-left py-3 px-3 font-semibold text-deep-navy">DOAC</th>
+                                <th class="text-left py-3 px-3 font-semibold text-deep-navy">Half-Life</th>
+                                <th class="text-left py-3 px-3 font-semibold text-deep-navy">Stop Before Surgery</th>
+                                <th class="text-left py-3 px-3 font-semibold text-deep-navy">Restart After Surgery</th>
+                                <th class="text-left py-3 px-3 font-semibold text-deep-navy">Special Considerations</th>
+                            </tr></thead>
+                            <tbody class="text-neutral-slate">
+                                <tr class="border-b border-gray-100">
+                                    <td class="py-3 px-3 font-semibold text-deep-navy">Apixaban (Eliquis)</td>
+                                    <td class="py-3 px-3">8–15 hours</td>
+                                    <td class="py-3 px-3">24–48 hours (low risk); 48–72 hours (high risk)</td>
+                                    <td class="py-3 px-3">24 hours post-op (adequate hemostasis)</td>
+                                    <td class="py-3 px-3">No routine bridging; consider renal function</td>
+                                </tr>
+                                <tr class="border-b border-gray-100">
+                                    <td class="py-3 px-3 font-semibold text-deep-navy">Rivaroxaban (Xarelto)</td>
+                                    <td class="py-3 px-3">5–9 hours (young); 11–13 hours (elderly)</td>
+                                    <td class="py-3 px-3">24–48 hours (low risk); 48–72 hours (high risk)</td>
+                                    <td class="py-3 px-3">24 hours post-op</td>
+                                    <td class="py-3 px-3">Take with food; no routine bridging</td>
+                                </tr>
+                                <tr class="border-b border-gray-100">
+                                    <td class="py-3 px-3 font-semibold text-deep-navy">Dabigatran (Pradaxa)</td>
+                                    <td class="py-3 px-3">12–17 hours</td>
+                                    <td class="py-3 px-3">CrCl ≥50: 24–36 hours; CrCl 30–50: 36–48 hours; CrCl &lt;30: 48–96 hours</td>
+                                    <td class="py-3 px-3">24–72 hours post-op</td>
+                                    <td class="py-3 px-3">Renal adjustment critical; no routine bridging</td>
+                                </tr>
+                                <tr class="border-b border-gray-100">
+                                    <td class="py-3 px-3 font-semibold text-deep-navy">Edoxaban (Savaysa)</td>
+                                    <td class="py-3 px-3">10–14 hours</td>
+                                    <td class="py-3 px-3">24–48 hours (low risk); 48–72 hours (high risk)</td>
+                                    <td class="py-3 px-3">24–72 hours post-op</td>
+                                    <td class="py-3 px-3">Limited data; similar to other DOACs</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-3 px-3 font-semibold text-deep-navy">Betrixaban (Bevyxxa)</td>
+                                    <td class="py-3 px-3">19–27 hours</td>
+                                    <td class="py-3 px-3">72 hours before high-bleed procedures</td>
+                                    <td class="py-3 px-3">24–72 hours post-op</td>
+                                    <td class="py-3 px-3">Mainly for VTE prophylaxis; limited perioperative data</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="mt-4 bg-purple-50 rounded-lg p-4">
+                        <h4 class="font-bold text-purple-700 mb-2">DOAC Reversal (If Needed)</h4>
+                        <ul class="text-sm text-neutral-slate space-y-1">
+                            <li>• <strong>Dabigatran:</strong> Idarucizumab (Praxbind) 5g IV</li>
+                            <li>• <strong>Factor Xa inhibitors:</strong> Andexanet alfa (Andexxa) 400–800 mg IV bolus ± infusion</li>
+                            <li>• <strong>Alternative:</strong> 4-factor PCC 25–50 U/kg (limited data for DOACs)</li>
+                            <li>• <strong>Monitoring:</strong> Anti-Xa levels if available; thromboelastography</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Warfarin Management -->
+                <div class="ref-card bg-white rounded-xl p-5 md:p-6 shadow-lg mb-6">
+                    <h3 class="text-lg md:text-xl font-playfair font-bold text-deep-navy mb-4 flex items-center gap-2">
+                        <span class="text-2xl">⚗️</span> Warfarin Perioperative Management
+                    </h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="bg-green-50 rounded-lg p-4">
+                            <h4 class="font-bold text-green-700 mb-3">Bridging Strategy</h4>
+                            <div class="space-y-3 text-sm text-neutral-slate">
+                                <div>
+                                    <p class="font-semibold">Stop Warfarin:</p>
+                                    <p>• 5 days pre-op for most procedures</p>
+                                    <p>• Confirm INR &lt;1.5 on day of surgery</p>
+                                </div>
+                                <div>
+                                    <p class="font-semibold">Bridging Options:</p>
+                                    <p>• Low molecular weight heparin (enoxaparin 1 mg/kg BID)</p>
+                                    <p>• Unfractionated heparin (aPTT 1.5–2.5× control)</p>
+                                    <p>• Start 24–48 hours after stopping warfarin</p>
+                                </div>
+                                <div>
+                                    <p class="font-semibold">Restart Warfarin:</p>
+                                    <p>• Evening of surgery day or POD 1</p>
+                                    <p>• Resume bridging until INR therapeutic</p>
+                                    <p>• Overlap 4–5 days with heparin</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-amber-50 rounded-lg p-4">
+                            <h4 class="font-bold text-amber-700 mb-3">Warfarin Reversal</h4>
+                            <div class="space-y-3 text-sm text-neutral-slate">
+                                <div>
+                                    <p class="font-semibold">Urgent Reversal:</p>
+                                    <p>• Vitamin K 5–10 mg IV + 4-factor PCC 25–50 U/kg</p>
+                                    <p>• Check INR 30 minutes after PCC</p>
+                                </div>
+                                <div>
+                                    <p class="font-semibold">Non-Urgent:</p>
+                                    <p>• Vitamin K 2.5–5 mg PO</p>
+                                    <p>• Recheck INR in 24 hours</p>
+                                </div>
+                                <div>
+                                    <p class="font-semibold">Special Cases:</p>
+                                    <p>• Mechanical valves: Always bridge unless high bleed risk</p>
+                                    <p>• AFib: Bridge if CHA₂DS₂-VASc ≥4</p>
+                                    <p>• Consider holding if INR ≤1.5 and low thrombotic risk</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Antiplatelet Management -->
+                <div class="ref-card drug bg-white rounded-xl p-5 md:p-6 shadow-lg mb-6">
+                    <h3 class="text-lg md:text-xl font-playfair font-bold text-deep-navy mb-4 flex items-center gap-2">
+                        <span class="text-2xl">💊</span> Antiplatelet Perioperative Management
+                    </h3>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-sm min-w-[600px]">
+                            <thead><tr class="border-b-2 border-blue-100 bg-blue-50">
+                                <th class="text-left py-3 px-3 font-semibold text-deep-navy">Antiplatelet</th>
+                                <th class="text-left py-3 px-3 font-semibold text-deep-navy">Mechanism</th>
+                                <th class="text-left py-3 px-3 font-semibold text-deep-navy">Stop Before Surgery</th>
+                                <th class="text-left py-3 px-3 font-semibold text-deep-navy">Restart After Surgery</th>
+                                <th class="text-left py-3 px-3 font-semibold text-deep-navy">Special Considerations</th>
+                            </tr></thead>
+                            <tbody class="text-neutral-slate">
+                                <tr class="border-b border-gray-100">
+                                    <td class="py-3 px-3 font-semibold text-deep-navy">Aspirin</td>
+                                    <td class="py-3 px-3">Irreversible COX-1 inhibition</td>
+                                    <td class="py-3 px-3">7 days (low risk); continue if high cardiac risk</td>
+                                    <td class="py-3 px-3">24 hours post-op (adequate hemostasis)</td>
+                                    <td class="py-3 px-3">Continue in ACS, recent PCI; consider bridging with heparin if high risk</td>
+                                </tr>
+                                <tr class="border-b border-gray-100">
+                                    <td class="py-3 px-3 font-semibold text-deep-navy">Clopidogrel (Plavix)</td>
+                                    <td class="py-3 px-3">Irreversible P2Y12 inhibition</td>
+                                    <td class="py-3 px-3">5–7 days</td>
+                                    <td class="py-3 px-3">24 hours post-op</td>
+                                    <td class="py-3 px-3">Loading dose 300–600 mg post-op if indicated</td>
+                                </tr>
+                                <tr class="border-b border-gray-100">
+                                    <td class="py-3 px-3 font-semibold text-deep-navy">Ticagrelor (Brilinta)</td>
+                                    <td class="py-3 px-3">Reversible P2Y12 inhibition</td>
+                                    <td class="py-3 px-3">3–5 days</td>
+                                    <td class="py-3 px-3">24 hours post-op</td>
+                                    <td class="py-3 px-3">Shorter half-life; faster offset than clopidogrel</td>
+                                </tr>
+                                <tr class="border-b border-gray-100">
+                                    <td class="py-3 px-3 font-semibold text-deep-navy">Prasugrel (Effient)</td>
+                                    <td class="py-3 px-3">Irreversible P2Y12 inhibition</td>
+                                    <td class="py-3 px-3">7 days</td>
+                                    <td class="py-3 px-3">24 hours post-op</td>
+                                    <td class="py-3 px-3">Avoid in patients ≥75 years or &lt;60 kg</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-3 px-3 font-semibold text-deep-navy">Cilostazol (Pletal)</td>
+                                    <td class="py-3 px-3">PDE3 inhibition</td>
+                                    <td class="py-3 px-3">48 hours</td>
+                                    <td class="py-3 px-3">24 hours post-op</td>
+                                    <td class="py-3 px-3">Used for PAD; shorter discontinuation than aspirin</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="mt-4 bg-blue-50 rounded-lg p-4">
+                        <h4 class="font-bold text-clinical-blue mb-2">Dual Antiplatelet Therapy (DAPT)</h4>
+                        <ul class="text-sm text-neutral-slate space-y-1">
+                            <li>• <strong>Recent PCI (&lt;1 month):</strong> Continue both aspirin + P2Y12 inhibitor</li>
+                            <li>• <strong>1–3 months post-PCI:</strong> Consider holding P2Y12 for elective surgery</li>
+                            <li>• <strong>3–6 months post-PCI:</strong> Hold P2Y12 inhibitor; continue aspirin</li>
+                            <li>• <strong>&gt;6 months post-PCI:</strong> Hold P2Y12 if low thrombosis risk</li>
+                            <li>• <strong>Bridging for surgery:</strong> Consider short-acting GP IIb/IIIa inhibitors or heparin</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Special Populations -->
+                <div class="ref-card emergency bg-white rounded-xl p-5 md:p-6 shadow-lg mb-6">
+                    <h3 class="text-lg md:text-xl font-playfair font-bold text-deep-navy mb-4 flex items-center gap-2">
+                        <span class="text-2xl">🎯</span> Special Populations &amp; Considerations
+                    </h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="bg-red-50 rounded-lg p-4">
+                            <h4 class="font-bold text-red-700 mb-3">Cardiac Surgery</h4>
+                            <div class="space-y-2 text-sm text-neutral-slate">
+                                <p><strong>CABG:</strong> Continue aspirin; hold P2Y12 5–7 days pre-op</p>
+                                <p><strong>Valve Surgery:</strong> Stop all anticoagulants 48–72 hours pre-op</p>
+                                <p><strong>TAVR:</strong> Stop DOACs 24–48 hours; restart 24 hours post-op</p>
+                                <p><strong>Bridging:</strong> UFH or LMWH for high-risk patients</p>
+                                <p><strong>Post-op:</strong> Resume anticoagulation POD 1–2</p>
+                            </div>
+                        </div>
+                        <div class="bg-purple-50 rounded-lg p-4">
+                            <h4 class="font-bold text-purple-700 mb-3">Neurosurgery</h4>
+                            <div class="space-y-2 text-sm text-neutral-slate">
+                                <p><strong>High risk:</strong> Stop all anticoagulants 5–7 days pre-op</p>
+                                <p><strong>Bridging:</strong> Consider only for highest thrombotic risk</p>
+                                <p><strong>Antiplatelets:</strong> Stop aspirin 7–10 days; P2Y12 5–7 days</p>
+                                <p><strong>Post-op:</strong> Resume when hemostasis confirmed (usually POD 1–2)</p>
+                            </div>
+                        </div>
+                        <div class="bg-green-50 rounded-lg p-4">
+                            <h4 class="font-bold text-green-700 mb-3">Dental Procedures</h4>
+                            <div class="space-y-2 text-sm text-neutral-slate">
+                                <p><strong>Low risk:</strong> No need to stop anticoagulants</p>
+                                <p><strong>DOACs:</strong> Continue normally</p>
+                                <p><strong>Warfarin:</strong> Check INR; no bridging needed</p>
+                                <p><strong>Antiplatelets:</strong> Continue; local hemostasis measures</p>
+                            </div>
+                        </div>
+                        <div class="bg-amber-50 rounded-lg p-4">
+                            <h4 class="font-bold text-amber-700 mb-3">Urgent Surgery</h4>
+                            <div class="space-y-2 text-sm text-neutral-slate">
+                                <p><strong>Emergency:</strong> Reverse if possible; proceed to OR</p>
+                                <p><strong>DOAC reversal:</strong> Idarucizumab (dabigatran) or andexanet (Xa inhibitors)</p>
+                                <p><strong>Warfarin:</strong> Vitamin K + PCC</p>
+                                <p><strong>Antiplatelets:</strong> Platelet transfusion if recent dosing</p>
+                                <p><strong>Post-op:</strong> Resume anticoagulation as soon as hemostasis achieved</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Monitoring & Follow-Up -->
+                <div class="ref-card bg-white rounded-xl p-5 md:p-6 shadow-lg mb-6">
+                    <h3 class="text-lg md:text-xl font-playfair font-bold text-deep-navy mb-4 flex items-center gap-2">
+                        <span class="text-2xl">📊</span> Perioperative Monitoring &amp; Follow-Up
+                    </h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="bg-blue-50 rounded-lg p-4">
+                            <h4 class="font-bold text-clinical-blue mb-3">Pre-Operative Assessment</h4>
+                            <div class="space-y-2 text-sm text-neutral-slate">
+                                <p>• Complete medication reconciliation</p>
+                                <p>• Assess thrombotic vs bleeding risk</p>
+                                <p>• Check renal function for DOAC dosing</p>
+                                <p>• Review recent INR for warfarin patients</p>
+                                <p>• Consider platelet function testing if needed</p>
+                                <p>• Multidisciplinary discussion for complex cases</p>
+                            </div>
+                        </div>
+                        <div class="bg-green-50 rounded-lg p-4">
+                            <h4 class="font-bold text-green-700 mb-3">Post-Operative Management</h4>
+                            <div class="space-y-2 text-sm text-neutral-slate">
+                                <p>• Monitor for bleeding complications</p>
+                                <p>• Restart anticoagulation per protocol</p>
+                                <p>• Bridge with heparin until therapeutic</p>
+                                <p>• Follow-up INR/anti-Xa levels as needed</p>
+                                <p>• Patient education on resuming medications</p>
+                                <p>• Thrombosis prophylaxis if immobilized</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-4 bg-amber-50 rounded-lg p-4">
+                        <h4 class="font-bold text-amber-700 mb-2">Key Decision Points</h4>
+                        <ul class="text-sm text-neutral-slate space-y-1">
+                            <li>• <strong>Thrombotic risk &gt; bleeding risk:</strong> Continue anticoagulation or bridge</li>
+                            <li>• <strong>Bleeding risk &gt; thrombotic risk:</strong> Stop anticoagulation per guidelines</li>
+                            <li>• <strong>Elective surgery:</strong> Plan 4–6 weeks ahead for complex anticoagulation</li>
+                            <li>• <strong>Emergency surgery:</strong> Reverse anticoagulation if possible; prioritize hemostasis</li>
+                            <li>• <strong>Shared decision-making:</strong> Discuss risks/benefits with patient and care team</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="bg-amber-50 border border-amber-200 rounded-xl p-4 md:p-6">
+                    <p class="text-sm text-deep-navy"><strong>⚠️ Disclaimer:</strong> Perioperative anticoagulation management requires individualized assessment. Always consult with cardiology, hematology, and surgery teams. Guidelines may vary by institution. Based on 2023 ACC Expert Consensus and CHEST guidelines.</p>
+                </div>
+            </div>
+        </div>
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="mb-8">
+                    <h2 class="text-2xl md:text-3xl font-playfair font-bold text-deep-navy mb-1">Echocardiography Interpretation Guide</h2>
+                    <p class="text-neutral-slate">POCUS cardiac views, normal measurements, and key findings for acute cardiac conditions. Based on ASE guidelines.</p>
+                </div>
+
+                <!-- POCUS Views -->
+                <div class="ref-card ecg bg-white rounded-xl p-5 md:p-6 shadow-lg mb-8">
+                    <h3 class="text-lg md:text-xl font-playfair font-bold text-deep-navy mb-4 flex items-center gap-2">
+                        <span class="text-2xl">🔍</span> POCUS Cardiac Views &amp; Landmarks
+                    </h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                        <div class="bg-teal-50 rounded-lg p-4">
+                            <h4 class="font-bold text-teal-700 mb-2">Parasternal Long Axis (PLAX)</h4>
+                            <ul class="text-sm text-neutral-slate space-y-1">
+                                <li>• Probe: PS mid-clavicular, marker to left</li>
+                                <li>• Structures: LV, LA, AV, MV, AoV</li>
+                                <li>• Key: LV size/function, AV stenosis/regurg</li>
+                            </ul>
+                        </div>
+                        <div class="bg-teal-50 rounded-lg p-4">
+                            <h4 class="font-bold text-teal-700 mb-2">Parasternal Short Axis (PSAX)</h4>
+                            <ul class="text-sm text-neutral-slate space-y-1">
+                                <li>• Probe: Rotate 90° from PLAX</li>
+                                <li>• Levels: Aortic valve, MV, Papillary muscles</li>
+                                <li>• Key: RV size, septal motion, tamponade</li>
+                            </ul>
+                        </div>
+                        <div class="bg-teal-50 rounded-lg p-4">
+                            <h4 class="font-bold text-teal-700 mb-2">Apical 4-Chamber (A4C)</h4>
+                            <ul class="text-sm text-neutral-slate space-y-1">
+                                <li>• Probe: Apex, marker to left axilla</li>
+                                <li>• Structures: LV, RV, LA, RA, MV, TV</li>
+                                <li>• Key: EF, RV/LV ratio, tamponade, clots</li>
+                            </ul>
+                        </div>
+                        <div class="bg-teal-50 rounded-lg p-4">
+                            <h4 class="font-bold text-teal-700 mb-2">Apical 2-Chamber (A2C)</h4>
+                            <ul class="text-sm text-neutral-slate space-y-1">
+                                <li>• Probe: From A4C, rotate laterally</li>
+                                <li>• Structures: LV apex/anterior, LA appendage</li>
+                                <li>• Key: LV wall motion, thrombus</li>
+                            </ul>
+                        </div>
+                        <div class="bg-teal-50 rounded-lg p-4">
+                            <h4 class="font-bold text-teal-700 mb-2">Apical 3-Chamber (A3C)</h4>
+                            <ul class="text-sm text-neutral-slate space-y-1">
+                                <li>• Probe: From A4C, rotate medially</li>
+                                <li>• Structures: LVOT, AV, LA, posterior wall</li>
+                                <li>• Key: LVOT obstruction, AR severity</li>
+                            </ul>
+                        </div>
+                        <div class="bg-teal-50 rounded-lg p-4">
+                            <h4 class="font-bold text-teal-700 mb-2">Subcostal 4-Chamber</h4>
+                            <ul class="text-sm text-neutral-slate space-y-1">
+                                <li>• Probe: Below xiphoid, marker to left</li>
+                                <li>• Structures: Similar to A4C, IVC</li>
+                                <li>• Key: IVC collapse (preload), tamponade</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Normal Measurements -->
+                <div class="ref-card checklist bg-white rounded-xl p-5 md:p-6 shadow-lg mb-6">
+                    <h3 class="text-lg md:text-xl font-playfair font-bold text-deep-navy mb-4 flex items-center gap-2">
+                        <span class="text-2xl">📏</span> Normal Echo Measurements (Adults)
+                    </h3>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-sm min-w-[600px]">
+                            <thead><tr class="border-b-2 border-teal-100 bg-teal-50">
+                                <th class="text-left py-2.5 px-3 font-semibold text-deep-navy">Parameter</th>
+                                <th class="text-left py-2.5 px-3 font-semibold text-deep-navy">Normal Range</th>
+                                <th class="text-left py-2.5 px-3 font-semibold text-deep-navy">Clinical Significance</th>
+                                <th class="text-left py-2.5 px-3 font-semibold text-deep-navy">View</th>
+                            </tr></thead>
+                            <tbody class="text-neutral-slate">
+                                <tr class="border-b border-gray-100">
+                                    <td class="py-2.5 px-3 font-semibold text-deep-navy">LV Ejection Fraction (EF)</td>
+                                    <td class="py-2.5 px-3">55–70%</td>
+                                    <td class="py-2.5 px-3">EF &lt;40% = HFrEF; EF 40–49% = HFmrEF</td>
+                                    <td class="py-2.5 px-3">A4C, PLAX</td>
+                                </tr>
+                                <tr class="border-b border-gray-100">
+                                    <td class="py-2.5 px-3 font-semibold text-deep-navy">LV End-Diastolic Diameter</td>
+                                    <td class="py-2.5 px-3">4.2–5.9 cm (men), 3.9–5.3 cm (women)</td>
+                                    <td class="py-2.5 px-3">&gt;6.2 cm = severe dilation</td>
+                                    <td class="py-2.5 px-3">PLAX</td>
+                                </tr>
+                                <tr class="border-b border-gray-100">
+                                    <td class="py-2.5 px-3 font-semibold text-deep-navy">IVS Thickness (diastolic)</td>
+                                    <td class="py-2.5 px-3">0.6–1.1 cm</td>
+                                    <td class="py-2.5 px-3">&gt;1.5 cm = LVH; &gt;1.1 cm in athletes</td>
+                                    <td class="py-2.5 px-3">PLAX</td>
+                                </tr>
+                                <tr class="border-b border-gray-100">
+                                    <td class="py-2.5 px-3 font-semibold text-deep-navy">LA Diameter</td>
+                                    <td class="py-2.5 px-3">&lt;4.0 cm (A-P), &lt;5.2 cm (area)</td>
+                                    <td class="py-2.5 px-3">&gt;4.0 cm = LA enlargement (AFib risk)</td>
+                                    <td class="py-2.5 px-3">PLAX</td>
+                                </tr>
+                                <tr class="border-b border-gray-100">
+                                    <td class="py-2.5 px-3 font-semibold text-deep-navy">RV Diameter</td>
+                                    <td class="py-2.5 px-3">&lt;4.2 cm (basal), &lt;3.0 cm (mid)</td>
+                                    <td class="py-2.5 px-3">RV &gt; LV in A4C = RV strain (PE)</td>
+                                    <td class="py-2.5 px-3">A4C</td>
+                                </tr>
+                                <tr class="border-b border-gray-100">
+                                    <td class="py-2.5 px-3 font-semibold text-deep-navy">Aortic Root Diameter</td>
+                                    <td class="py-2.5 px-3">2.0–3.7 cm (annulus), 2.5–4.1 cm (sinuses)</td>
+                                    <td class="py-2.5 px-3">&gt;4.5 cm = aortic root aneurysm</td>
+                                    <td class="py-2.5 px-3">PLAX</td>
+                                </tr>
+                                <tr class="border-b border-gray-100">
+                                    <td class="py-2.5 px-3 font-semibold text-deep-navy">TAPSE (RV function)</td>
+                                    <td class="py-2.5 px-3">&gt;1.7 cm</td>
+                                    <td class="py-2.5 px-3">&lt;1.7 cm = RV dysfunction</td>
+                                    <td class="py-2.5 px-3">A4C</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-2.5 px-3 font-semibold text-deep-navy">IVC Diameter (exp/insp)</td>
+                                    <td class="py-2.5 px-3">&lt;2.1 cm, &gt;50% collapse</td>
+                                    <td class="py-2.5 px-3">&gt;2.1 cm + &lt;50% collapse = elevated RA pressure</td>
+                                    <td class="py-2.5 px-3">Subcostal</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Acute Cardiac Findings -->
+                <div class="ref-card emergency bg-white rounded-xl p-5 md:p-6 shadow-lg mb-6">
+                    <h3 class="text-lg md:text-xl font-playfair font-bold text-deep-navy mb-4 flex items-center gap-2">
+                        <span class="text-2xl">🚨</span> Key Findings in Acute Cardiac Conditions
+                    </h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="bg-red-50 rounded-lg p-4">
+                            <h4 class="font-bold text-red-700 mb-3">Cardiac Tamponade</h4>
                             <ul class="text-sm text-neutral-slate space-y-1.5">
                                 <li>☐ RV diastolic collapse (PLAX/PSAX)</li>
                                 <li>☐ RA systolic collapse (A4C)</li>
@@ -1980,6 +2820,643 @@
 
                 <div class="bg-amber-50 border border-amber-200 rounded-xl p-4 md:p-6">
                     <p class="text-sm text-deep-navy"><strong>⚠️ Disclaimer:</strong> Pediatric cardiology requires specialized training. Always consult pediatric cardiologist for complex cases. Doses are general guidelines; adjust for age, weight, and renal function. Based on 2022 ACC/AHA CHD guidelines and PALS 2020.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ═══════════════════ TAB 11: MED SIDE EFFECTS ═══════════════════ -->
+        <div id="tab-med-side-effects" class="tab-content py-8 md:py-10">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="mb-8">
+                    <h2 class="text-2xl md:text-3xl font-playfair font-bold text-deep-navy mb-1">Medication Side Effect Comparison Tables</h2>
+                    <p class="text-neutral-slate">Comparative side effect profiles for common cardiac medications. Helps guide selection based on patient-specific factors. Based on manufacturer data and major clinical trials.</p>
+                </div>
+
+                <!-- Beta-Blockers Comparison -->
+                <div class="ref-card drug bg-white rounded-xl p-5 md:p-6 shadow-lg mb-8">
+                    <h3 class="text-lg md:text-xl font-playfair font-bold text-deep-navy mb-4 flex items-center gap-2">
+                        <span class="text-2xl">💊</span> Beta-Blockers Side Effect Comparison
+                    </h3>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-sm min-w-[800px]">
+                            <thead><tr class="border-b-2 border-blue-100 bg-blue-50">
+                                <th class="text-left py-3 px-3 font-semibold text-deep-navy">Beta-Blocker</th>
+                                <th class="text-left py-3 px-3 font-semibold text-deep-navy">Selectivity</th>
+                                <th class="text-left py-3 px-3 font-semibold text-deep-navy">Common Side Effects</th>
+                                <th class="text-left py-3 px-3 font-semibold text-deep-navy">Unique Features</th>
+                                <th class="text-left py-3 px-3 font-semibold text-deep-navy">Contraindications</th>
+                            </tr></thead>
+                            <tbody class="text-neutral-slate">
+                                <tr class="border-b border-gray-100">
+                                    <td class="py-3 px-3 font-semibold text-deep-navy">Metoprolol</td>
+                                    <td class="py-3 px-3">β1-selective</td>
+                                    <td class="py-3 px-3">Fatigue, bradycardia, dizziness, cold extremities, nightmares</td>
+                                    <td class="py-3 px-3">Once-daily dosing (metoprolol succinate); IV form available</td>
+                                    <td class="py-3 px-3">Sinus bradycardia, heart block, cardiogenic shock</td>
+                                </tr>
+                                <tr class="border-b border-gray-100">
+                                    <td class="py-3 px-3 font-semibold text-deep-navy">Carvedilol</td>
+                                    <td class="py-3 px-3">Non-selective (β1/β2/α1)</td>
+                                    <td class="py-3 px-3">Fatigue, dizziness, hypotension, bradycardia, hyperglycemia</td>
+                                    <td class="py-3 px-3">Antioxidant properties; improves survival in HF; vasodilation</td>
+                                    <td class="py-3 px-3">Bronchospastic disease, decompensated HF, liver failure</td>
+                                </tr>
+                                <tr class="border-b border-gray-100">
+                                    <td class="py-3 px-3 font-semibold text-deep-navy">Bisoprolol</td>
+                                    <td class="py-3 px-3">β1-selective</td>
+                                    <td class="py-3 px-3">Fatigue, headache, bradycardia, insomnia, erectile dysfunction</td>
+                                    <td class="py-3 px-3">High β1-selectivity; once-daily; proven in HF trials</td>
+                                    <td class="py-3 px-3">Sinus bradycardia, heart block, anaphylaxis history</td>
+                                </tr>
+                                <tr class="border-b border-gray-100">
+                                    <td class="py-3 px-3 font-semibold text-deep-navy">Atenolol</td>
+                                    <td class="py-3 px-3">β1-selective</td>
+                                    <td class="py-3 px-3">Fatigue, cold extremities, bradycardia, depression, impotence</td>
+                                    <td class="py-3 px-3">Renal elimination; longer half-life; inexpensive</td>
+                                    <td class="py-3 px-3">Same as above; avoid in renal failure</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-3 px-3 font-semibold text-deep-navy">Propranolol</td>
+                                    <td class="py-3 px-3">Non-selective</td>
+                                    <td class="py-3 px-3">Fatigue, bradycardia, bronchospasm, nightmares, depression</td>
+                                    <td class="py-3 px-3">Membrane stabilizing; reduces tremor; migraine prophylaxis</td>
+                                    <td class="py-3 px-3">Asthma/COPD, peripheral vascular disease, depression</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="mt-4 text-sm text-neutral-slate">
+                        <p><strong>Clinical Pearls:</strong> β1-selective agents preferred in COPD/asthma. Carvedilol has lowest risk of erectile dysfunction. Fatigue most common limiting factor for adherence.</p>
+                    </div>
+                </div>
+
+                <!-- ACEi vs ARBs -->
+                <div class="ref-card anti bg-white rounded-xl p-5 md:p-6 shadow-lg mb-6">
+                    <h3 class="text-lg md:text-xl font-playfair font-bold text-deep-navy mb-4 flex items-center gap-2">
+                        <span class="text-2xl">🩸</span> ACE Inhibitors vs ARBs Side Effect Comparison
+                    </h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="bg-green-50 rounded-lg p-4">
+                            <h4 class="font-bold text-green-700 mb-3">ACE Inhibitors</h4>
+                            <div class="space-y-3 text-sm text-neutral-slate">
+                                <div>
+                                    <p class="font-semibold">Mechanism-specific side effects:</p>
+                                    <p>• Cough (10–20%): Dry, persistent; bradykinin-mediated</p>
+                                    <p>• Angioedema (0.1–0.7%): Can be life-threatening</p>
+                                    <p>• Hyperkalemia: Due to aldosterone suppression</p>
+                                </div>
+                                <div>
+                                    <p class="font-semibold">Common side effects:</p>
+                                    <p>• Hypotension (first-dose effect)</p>
+                                    <p>• Renal dysfunction (in high-renin states)</p>
+                                    <p>• Headache, dizziness, fatigue</p>
+                                </div>
+                                <div>
+                                    <p class="font-semibold">Advantages:</p>
+                                    <p>• Proven mortality benefit in HF</p>
+                                    <p>• Inexpensive generics available</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-blue-50 rounded-lg p-4">
+                            <h4 class="font-bold text-clinical-blue mb-3">ARBs (Angiotensin II Receptor Blockers)</h4>
+                            <div class="space-y-3 text-sm text-neutral-slate">
+                                <div>
+                                    <p class="font-semibold">Mechanism-specific side effects:</p>
+                                    <p>• Cough: Much less common (&lt;5%)</p>
+                                    <p>• Angioedema: Rare but possible</p>
+                                    <p>• Hyperkalemia: Similar risk</p>
+                                </div>
+                                <div>
+                                    <p class="font-semibold">Common side effects:</p>
+                                    <p>• Hypotension (less first-dose effect)</p>
+                                    <p>• Renal dysfunction</p>
+                                    <p>• Headache, dizziness, fatigue</p>
+                                </div>
+                                <div>
+                                    <p class="font-semibold">Advantages:</p>
+                                    <p>• Better tolerated in cough-prone patients</p>
+                                    <p>• Once-daily dosing</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-4 overflow-x-auto">
+                        <table class="w-full text-sm min-w-[600px]">
+                            <thead><tr class="border-b-2 border-purple-100 bg-purple-50">
+                                <th class="text-left py-2.5 px-3 font-semibold text-deep-navy">Side Effect</th>
+                                <th class="text-left py-2.5 px-3 font-semibold text-deep-navy">ACEi Incidence</th>
+                                <th class="text-left py-2.5 px-3 font-semibold text-deep-navy">ARB Incidence</th>
+                                <th class="text-left py-2.5 px-3 font-semibold text-deep-navy">Management</th>
+                            </tr></thead>
+                            <tbody class="text-neutral-slate">
+                                <tr class="border-b border-gray-100">
+                                    <td class="py-2.5 px-3 font-semibold text-deep-navy">Cough</td>
+                                    <td class="py-2.5 px-3">10–35%</td>
+                                    <td class="py-2.5 px-3">&lt;5%</td>
+                                    <td class="py-2.5 px-3">Switch to ARB; avoid codeine-containing cough syrups</td>
+                                </tr>
+                                <tr class="border-b border-gray-100">
+                                    <td class="py-2.5 px-3 font-semibold text-deep-navy">Angioedema</td>
+                                    <td class="py-2.5 px-3">0.1–0.7%</td>
+                                    <td class="py-2.5 px-3">0.1–0.2%</td>
+                                    <td class="py-2.5 px-3">Discontinue immediately; monitor airway; avoid ACEi/ARB long-term</td>
+                                </tr>
+                                <tr class="border-b border-gray-100">
+                                    <td class="py-2.5 px-3 font-semibold text-deep-navy">Hyperkalemia</td>
+                                    <td class="py-2.5 px-3">2–5%</td>
+                                    <td class="py-2.5 px-3">1–3%</td>
+                                    <td class="py-2.5 px-3">Monitor K⁺; avoid K⁺ supplements; consider spironolactone alternatives</td>
+                                </tr>
+                                <tr class="border-b border-gray-100">
+                                    <td class="py-2.5 px-3 font-semibold text-deep-navy">Acute Renal Failure</td>
+                                    <td class="py-2.5 px-3">1–2%</td>
+                                    <td class="py-2.5 px-3">1–2%</td>
+                                    <td class="py-2.5 px-3">Hold if Cr ↑&gt;30%; restart at lower dose; avoid NSAIDs</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-2.5 px-3 font-semibold text-deep-navy">First-Dose Hypotension</td>
+                                    <td class="py-2.5 px-3">2–5%</td>
+                                    <td class="py-2.5 px-3">&lt;1%</td>
+                                    <td class="py-2.5 px-3">Start low dose at bedtime; ensure adequate hydration</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Antiarrhythmics -->
+                <div class="ref-card ecg bg-white rounded-xl p-5 md:p-6 shadow-lg mb-6">
+                    <h3 class="text-lg md:text-xl font-playfair font-bold text-deep-navy mb-4 flex items-center gap-2">
+                        <span class="text-2xl">⚡</span> Antiarrhythmic Drugs Side Effect Profiles
+                    </h3>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-sm min-w-[700px]">
+                            <thead><tr class="border-b-2 border-orange-100 bg-orange-50">
+                                <th class="text-left py-3 px-3 font-semibold text-deep-navy">Drug (Class)</th>
+                                <th class="text-left py-3 px-3 font-semibold text-deep-navy">Common Side Effects</th>
+                                <th class="text-left py-3 px-3 font-semibold text-deep-navy">Serious Adverse Effects</th>
+                                <th class="text-left py-3 px-3 font-semibold text-deep-navy">Monitoring</th>
+                                <th class="text-left py-3 px-3 font-semibold text-deep-navy">Drug Interactions</th>
+                            </tr></thead>
+                            <tbody class="text-neutral-slate">
+                                <tr class="border-b border-gray-100">
+                                    <td class="py-3 px-3 font-semibold text-deep-navy">Amiodarone (III)</td>
+                                    <td class="py-3 px-3">Fatigue, nausea, corneal deposits, blue-gray skin, constipation</td>
+                                    <td class="py-3 px-3">Pulmonary toxicity (2–5%), hepatotoxicity, thyroid dysfunction, bradycardia</td>
+                                    <td class="py-3 px-3">PFTs, LFTs, TFTs, CXR q6 months; ECG, ophthalmology</td>
+                                    <td class="py-3 px-3">Warfarin (↑INR), digoxin (↑levels), QT-prolongers</td>
+                                </tr>
+                                <tr class="border-b border-gray-100">
+                                    <td class="py-3 px-3 font-semibold text-deep-navy">Sotalol (III)</td>
+                                    <td class="py-3 px-3">Fatigue, dizziness, bradycardia, insomnia</td>
+                                    <td class="py-3 px-3">Torsades de pointes (2–4%), bradycardia, heart failure exacerbation</td>
+                                    <td class="py-3 px-3">QTc monitoring, renal function, electrolytes</td>
+                                    <td class="py-3 px-3">QT-prolongers, K⁺-wasting diuretics</td>
+                                </tr>
+                                <tr class="border-b border-gray-100">
+                                    <td class="py-3 px-3 font-semibold text-deep-navy">Flecainide (Ic)</td>
+                                    <td class="py-3 px-3">Dizziness, visual disturbances, headache, nausea</td>
+                                    <td class="py-3 px-3">Proarrhythmia in structural heart disease, heart failure, atrial flutter with 1:1 conduction</td>
+                                    <td class="py-3 px-3">ECG (QRS widening), cardiac monitoring during initiation</td>
+                                    <td class="py-3 px-3">Amiodarone (↑levels), CYP2D6 inhibitors</td>
+                                </tr>
+                                <tr class="border-b border-gray-100">
+                                    <td class="py-3 px-3 font-semibold text-deep-navy">Dofetilide (III)</td>
+                                    <td class="py-3 px-3">Headache, dizziness, nausea</td>
+                                    <td class="py-3 px-3">Torsades de pointes (3–4%), requires in-hospital initiation</td>
+                                    <td class="py-3 px-3">QTc monitoring q2h ×3 days, CrCl calculation</td>
+                                    <td class="py-3 px-3">Verapamil (↑levels), ketoconazole, trimethoprim</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-3 px-3 font-semibold text-deep-navy">Propafenone (Ic)</td>
+                                    <td class="py-3 px-3">Dizziness, unusual taste, nausea, constipation</td>
+                                    <td class="py-3 px-3">Proarrhythmia, negative inotrope, lupus-like syndrome</td>
+                                    <td class="py-3 px-3">ECG monitoring, LFTs (rare hepatotoxicity)</td>
+                                    <td class="py-3 px-3">Warfarin (↑INR), beta-blockers (bradycardia)</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Statins -->
+                <div class="ref-card checklist bg-white rounded-xl p-5 md:p-6 shadow-lg mb-6">
+                    <h3 class="text-lg md:text-xl font-playfair font-bold text-deep-navy mb-4 flex items-center gap-2">
+                        <span class="text-2xl">📈</span> Statins Side Effect Comparison
+                    </h3>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-sm min-w-[600px]">
+                            <thead><tr class="border-b-2 border-green-100 bg-green-50">
+                                <th class="text-left py-3 px-3 font-semibold text-deep-navy">Statin</th>
+                                <th class="text-left py-3 px-3 font-semibold text-deep-navy">Potency</th>
+                                <th class="text-left py-3 px-3 font-semibold text-deep-navy">Common Side Effects</th>
+                                <th class="text-left py-3 px-3 font-semibold text-deep-navy">Muscle Toxicity Risk</th>
+                                <th class="text-left py-3 px-3 font-semibold text-deep-navy">Hepatotoxicity Risk</th>
+                            </tr></thead>
+                            <tbody class="text-neutral-slate">
+                                <tr class="border-b border-gray-100">
+                                    <td class="py-3 px-3 font-semibold text-deep-navy">Atorvastatin</td>
+                                    <td class="py-3 px-3">High</td>
+                                    <td class="py-3 px-3">Headache, dyspepsia, abdominal pain, insomnia</td>
+                                    <td class="py-3 px-3">Moderate (dose-dependent)</td>
+                                    <td class="py-3 px-3">Low (&lt;1% LFT elevation &gt;3× ULN)</td>
+                                </tr>
+                                <tr class="border-b border-gray-100">
+                                    <td class="py-3 px-3 font-semibold text-deep-navy">Rosuvastatin</td>
+                                    <td class="py-3 px-3">High</td>
+                                    <td class="py-3 px-3">Headache, nausea, myalgia, constipation</td>
+                                    <td class="py-3 px-3">Moderate</td>
+                                    <td class="py-3 px-3">Low</td>
+                                </tr>
+                                <tr class="border-b border-gray-100">
+                                    <td class="py-3 px-3 font-semibold text-deep-navy">Simvastatin</td>
+                                    <td class="py-3 px-3">Moderate</td>
+                                    <td class="py-3 px-3">Abdominal pain, constipation, flatulence, headache</td>
+                                    <td class="py-3 px-3">High (especially 80 mg dose)</td>
+                                    <td class="py-3 px-3">Low</td>
+                                </tr>
+                                <tr class="border-b border-gray-100">
+                                    <td class="py-3 px-3 font-semibold text-deep-navy">Pravastatin</td>
+                                    <td class="py-3 px-3">Low-moderate</td>
+                                    <td class="py-3 px-3">Headache, nausea, diarrhea, rash</td>
+                                    <td class="py-3 px-3">Low</td>
+                                    <td class="py-3 px-3">Very low</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-3 px-3 font-semibold text-deep-navy">Lovastatin</td>
+                                    <td class="py-3 px-3">Low-moderate</td>
+                                    <td class="py-3 px-3">Diarrhea, flatulence, dyspepsia, rash</td>
+                                    <td class="py-3 px-3">Low-moderate</td>
+                                    <td class="py-3 px-3">Low</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="mt-4 bg-amber-50 rounded-lg p-4">
+                        <h4 class="font-bold text-amber-700 mb-2">Statin Intolerance Management</h4>
+                        <ul class="text-sm text-neutral-slate space-y-1">
+                            <li>• Myopathy: CK &gt;10× ULN or symptoms + CK &gt;5× ULN</li>
+                            <li>• Management: Discontinue statin, rechallenge with lower dose/alternate statin</li>
+                            <li>• Ezetimibe or PCSK9 inhibitors for high-risk patients unable to tolerate statins</li>
+                            <li>• Vitamin D deficiency and hypothyroidism can mimic statin myopathy</li>
+                            <li>• CoQ10 supplementation may help symptoms but doesn't prevent myopathy</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- DOACs Comparison -->
+                <div class="ref-card bg-white rounded-xl p-5 md:p-6 shadow-lg mb-6">
+                    <h3 class="text-lg md:text-xl font-playfair font-bold text-deep-navy mb-4 flex items-center gap-2">
+                        <span class="text-2xl">🩸</span> DOAC Side Effect Profiles
+                    </h3>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-sm min-w-[600px]">
+                            <thead><tr class="border-b-2 border-purple-100 bg-purple-50">
+                                <th class="text-left py-3 px-3 font-semibold text-deep-navy">DOAC</th>
+                                <th class="text-left py-3 px-3 font-semibold text-deep-navy">Bleeding Risk</th>
+                                <th class="text-left py-3 px-3 font-semibold text-deep-navy">GI Side Effects</th>
+                                <th class="text-left py-3 px-3 font-semibold text-deep-navy">Drug Interactions</th>
+                                <th class="text-left py-3 px-3 font-semibold text-deep-navy">Reversal Agent</th>
+                            </tr></thead>
+                            <tbody class="text-neutral-slate">
+                                <tr class="border-b border-gray-100">
+                                    <td class="py-3 px-3 font-semibold text-deep-navy">Apixaban</td>
+                                    <td class="py-3 px-3">Moderate (similar to warfarin)</td>
+                                    <td class="py-3 px-3">Low (dyspepsia 1–2%)</td>
+                                    <td class="py-3 px-3">Strong CYP3A4/P-gp inducers/inhibitors</td>
+                                    <td class="py-3 px-3">Andexanet alfa</td>
+                                </tr>
+                                <tr class="border-b border-gray-100">
+                                    <td class="py-3 px-3 font-semibold text-deep-navy">Rivaroxaban</td>
+                                    <td class="py-3 px-3">Moderate</td>
+                                    <td class="py-3 px-3">Moderate (dyspepsia 5–10%)</td>
+                                    <td class="py-3 px-3">CYP3A4/P-gp inducers/inhibitors</td>
+                                    <td class="py-3 px-3">Andexanet alfa</td>
+                                </tr>
+                                <tr class="border-b border-gray-100">
+                                    <td class="py-3 px-3 font-semibold text-deep-navy">Dabigatran</td>
+                                    <td class="py-3 px-3">Moderate</td>
+                                    <td class="py-3 px-3">High (dyspepsia 10–15%)</td>
+                                    <td class="py-3 px-3">P-gp inducers/inhibitors</td>
+                                    <td class="py-3 px-3">Idarucizumab</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-3 px-3 font-semibold text-deep-navy">Edoxaban</td>
+                                    <td class="py-3 px-3">Low-moderate</td>
+                                    <td class="py-3 px-3">Low (dyspepsia 2–3%)</td>
+                                    <td class="py-3 px-3">P-gp inducers</td>
+                                    <td class="py-3 px-3">None specific (PCC)</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="bg-amber-50 border border-amber-200 rounded-xl p-4 md:p-6">
+                    <p class="text-sm text-deep-navy"><strong>⚠️ Disclaimer:</strong> Side effect profiles based on clinical trials and post-marketing data. Individual patient response varies. Always consider comorbidities and drug interactions. Report adverse effects to FDA MedWatch.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ═══════════════════ TAB 10: CARDIAC SURGERY ═══════════════════ -->
+        <div id="tab-cardiac-surgery" class="tab-content py-8 md:py-10">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="mb-8">
+                    <h2 class="text-2xl md:text-3xl font-playfair font-bold text-deep-navy mb-1">Cardiac Surgery Post-Op Care Protocols</h2>
+                    <p class="text-neutral-slate">CABG, valve surgery, transplant management, complications, and recovery milestones. Based on ACC/AHA 2021 CABG and 2020 valve guidelines.</p>
+                </div>
+
+                <!-- CABG Post-Op Care -->
+                <div class="ref-card emergency bg-white rounded-xl p-5 md:p-6 shadow-lg mb-8">
+                    <h3 class="text-lg md:text-xl font-playfair font-bold text-deep-navy mb-4 flex items-center gap-2">
+                        <span class="text-2xl">🫀</span> CABG Post-Operative Care
+                    </h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="bg-red-50 rounded-lg p-4">
+                            <h4 class="font-bold text-red-700 mb-3">Immediate Post-Op (First 24 Hours)</h4>
+                            <ul class="text-sm text-neutral-slate space-y-2">
+                                <li>☐ Hemodynamic monitoring: MAP 65–90 mmHg, CVP 8–12 mmHg</li>
+                                <li>☐ Ventilation: Extubate when stable (usually 4–6 hours)</li>
+                                <li>☐ Pain control: PCA morphine or epidural analgesia</li>
+                                <li>☐ Antiarrhythmics: Amiodarone if AFib; beta-blockers if not contraindicated</li>
+                                <li>☐ Anticoagulation: Heparin 12–24 hours, then aspirin 81–325 mg</li>
+                                <li>☐ Mobilization: Out of bed POD 1; incentive spirometry q1h</li>
+                            </ul>
+                        </div>
+                        <div class="bg-blue-50 rounded-lg p-4">
+                            <h4 class="font-bold text-clinical-blue mb-3">Early Recovery (POD 1–3)</h4>
+                            <ul class="text-sm text-neutral-slate space-y-2">
+                                <li>☐ Telemetry monitoring for arrhythmias (AFib peak POD 2–3)</li>
+                                <li>☐ Daily labs: CBC, BMP, troponin, BNP</li>
+                                <li>☐ Chest tubes: Water seal when output &lt;50 mL/hr × 2 hours</li>
+                                <li>☐ Diet advancement: Clear liquids → regular diet</li>
+                                <li>☐ Physical therapy: Ambulate 3× daily, stairs assessment</li>
+                                <li>☐ Discharge planning: Home medications, follow-up appointment</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="mt-4 bg-green-50 rounded-lg p-4">
+                        <h4 class="font-bold text-green-700 mb-2">Secondary Prevention</h4>
+                        <ul class="text-sm text-neutral-slate space-y-1.5">
+                            <li>• High-intensity statin (atorvastatin 80 mg or rosuvastatin 20 mg)</li>
+                            <li>• Beta-blocker for 3 years (carvedilol/metoprolol)</li>
+                            <li>• ACEI/ARB for LVEF &lt;40% or HTN/DM</li>
+                            <li>• Smoking cessation counseling</li>
+                            <li>• Cardiac rehabilitation referral</li>
+                            <li>• Annual influenza vaccination</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Valve Surgery Protocols -->
+                <div class="ref-card checklist bg-white rounded-xl p-5 md:p-6 shadow-lg mb-6">
+                    <h3 class="text-lg md:text-xl font-playfair font-bold text-deep-navy mb-4 flex items-center gap-2">
+                        <span class="text-2xl">⚙️</span> Valve Surgery Post-Op Protocols
+                    </h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="bg-purple-50 rounded-lg p-4">
+                            <h4 class="font-bold text-purple-700 mb-3">Aortic Valve Replacement</h4>
+                            <div class="space-y-3 text-sm text-neutral-slate">
+                                <div>
+                                    <p class="font-semibold">Mechanical AVR:</p>
+                                    <p>• Warfarin INR 2.5–3.5 lifelong</p>
+                                    <p>• Aspirin 75–100 mg if no contraindication</p>
+                                    <p>• Antibiotic prophylaxis for dental procedures</p>
+                                </div>
+                                <div>
+                                    <p class="font-semibold">Biologic AVR:</p>
+                                    <p>• Aspirin 75–100 mg for 3 months, then lifelong</p>
+                                    <p>• No warfarin unless other indications</p>
+                                    <p>• Consider DOAC if warfarin contraindicated</p>
+                                </div>
+                                <div>
+                                    <p class="font-semibold">Complications to monitor:</p>
+                                    <p>• PPM implantation (10–15% incidence)</p>
+                                    <p>• Paravalvular leak (TEE follow-up)</p>
+                                    <p>• Thrombosis or endocarditis</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-teal-50 rounded-lg p-4">
+                            <h4 class="font-bold text-teal-700 mb-3">Mitral Valve Surgery</h4>
+                            <div class="space-y-3 text-sm text-neutral-slate">
+                                <div>
+                                    <p class="font-semibold">Mitral Repair vs Replacement:</p>
+                                    <p>• Repair preferred when feasible (better outcomes)</p>
+                                    <p>• Anticoagulation: Warfarin 3 months post-repair, lifelong post-replacement</p>
+                                </div>
+                                <div>
+                                    <p class="font-semibold">Post-op monitoring:</p>
+                                    <p>• Echo at discharge and 3–6 months</p>
+                                    <p>• AFib common — rate/rhythm control</p>
+                                    <p>• Mitral regurgitation recurrence (repair)</p>
+                                </div>
+                                <div>
+                                    <p class="font-semibold">Rehabilitation:</p>
+                                    <p>• Gradual return to activity (6–8 weeks)</p>
+                                    <p>• Driving restrictions: 4–6 weeks</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-4 bg-gray-50 rounded-lg p-4">
+                        <h4 class="font-bold text-deep-navy mb-2">Transcatheter Valve Procedures (TAVR/TMVR)</h4>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-neutral-slate">
+                            <div>
+                                <p><strong>Immediate post-procedure:</strong> Vascular access site monitoring, antiplatelets</p>
+                                <p><strong>Anticoagulation:</strong> Aspirin + clopidogrel 75 mg × 3–6 months</p>
+                                <p><strong>Complications:</strong> Stroke (1–2%), vascular complications, paravalvular leak</p>
+                            </div>
+                            <div>
+                                <p><strong>Follow-up:</strong> Echo at 30 days, 1 year, then annually</p>
+                                <p><strong>Pacemaker:</strong> 10–15% incidence post-TAVR</p>
+                                <p><strong>Mobility:</strong> Faster recovery than surgical AVR</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Cardiac Transplant Management -->
+                <div class="ref-card anti bg-white rounded-xl p-5 md:p-6 shadow-lg mb-6">
+                    <h3 class="text-lg md:text-xl font-playfair font-bold text-deep-navy mb-4 flex items-center gap-2">
+                        <span class="text-2xl">🫀</span> Cardiac Transplant Post-Op Care
+                    </h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="bg-red-50 rounded-lg p-4">
+                            <h4 class="font-bold text-red-700 mb-3">Immunosuppression Protocol</h4>
+                            <div class="space-y-3 text-sm text-neutral-slate">
+                                <div>
+                                    <p class="font-semibold">Induction:</p>
+                                    <p>• Basiliximab or antithymocyte globulin</p>
+                                    <p>• High-dose steroids tapered over 1 week</p>
+                                </div>
+                                <div>
+                                    <p class="font-semibold">Maintenance:</p>
+                                    <p>• Tacrolimus (target 10–15 ng/mL) or cyclosporine</p>
+                                    <p>• Mycophenolate mofetil 2–3 g/day</p>
+                                    <p>• Prednisone tapered to 5–10 mg/day by 6 months</p>
+                                </div>
+                                <div>
+                                    <p class="font-semibold">Monitoring:</p>
+                                    <p>• Drug levels weekly initially, then monthly</p>
+                                    <p>• CMV PCR weekly × 3 months</p>
+                                    <p>• Renal function, blood pressure</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-blue-50 rounded-lg p-4">
+                            <h4 class="font-bold text-clinical-blue mb-3">Rejection Surveillance</h4>
+                            <div class="space-y-3 text-sm text-neutral-slate">
+                                <div>
+                                    <p class="font-semibold">Endomyocardial biopsy:</p>
+                                    <p>• Weekly × 4, then monthly × 3, then q3–6 months</p>
+                                    <p>• Echocardiogram weekly × 4, then monthly</p>
+                                </div>
+                                <div>
+                                    <p class="font-semibold">Rejection treatment:</p>
+                                    <p>• Mild: Increase baseline immunosuppression</p>
+                                    <p>• Moderate: Pulse steroids (methylprednisolone 500–1000 mg × 3 days)</p>
+                                    <p>• Severe: Antithymocyte globulin, muromonab-CD3</p>
+                                </div>
+                                <div>
+                                    <p class="font-semibold">Signs of rejection:</p>
+                                    <p>• Fatigue, fever, arrhythmias, HF symptoms</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-4 bg-green-50 rounded-lg p-4">
+                        <h4 class="font-bold text-green-700 mb-2">Infection Prophylaxis</h4>
+                        <ul class="text-sm text-neutral-slate space-y-1">
+                            <li>• CMV prophylaxis: Valganciclovir 900 mg daily × 3–6 months</li>
+                            <li>• Pneumocystis: TMP-SMX daily × 6–12 months</li>
+                            <li>• Toxoplasmosis: TMP-SMX 3× weekly if seropositive donor</li>
+                            <li>• Antifungal: Fluconazole or voriconazole if high risk</li>
+                            <li>• Vaccinations: Inactivated vaccines OK; avoid live vaccines</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Complications Management -->
+                <div class="ref-card emergency bg-white rounded-xl p-5 md:p-6 shadow-lg mb-6">
+                    <h3 class="text-lg md:text-xl font-playfair font-bold text-deep-navy mb-4 flex items-center gap-2">
+                        <span class="text-2xl">🚨</span> Common Complications &amp; Management
+                    </h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                        <div class="bg-red-50 rounded-lg p-4">
+                            <h4 class="font-bold text-red-700 mb-2">Pericardial Effusion</h4>
+                            <ul class="text-sm text-neutral-slate space-y-1">
+                                <li>• Early post-op: Common, usually resolves</li>
+                                <li>• Tamponade signs: Hypotension, tachycardia, pulsus paradoxus</li>
+                                <li>• Management: Echo-guided pericardiocentesis</li>
+                                <li>• Prevention: NSAIDs held for 4–6 weeks</li>
+                            </ul>
+                        </div>
+                        <div class="bg-red-50 rounded-lg p-4">
+                            <h4 class="font-bold text-red-700 mb-2">Post-Pericardiotomy Syndrome</h4>
+                            <ul class="text-sm text-neutral-slate space-y-1">
+                                <li>• Fever, chest pain, friction rub (1–2 weeks post-op)</li>
+                                <li>• Treatment: Aspirin 650 mg TID × 7–10 days, then taper</li>
+                                <li>• Colchicine 0.6 mg BID × 1 month (adjunct)</li>
+                                <li>• Corticosteroids if refractory</li>
+                            </ul>
+                        </div>
+                        <div class="bg-red-50 rounded-lg p-4">
+                            <h4 class="font-bold text-red-700 mb-2">Sternal Wound Infection</h4>
+                            <ul class="text-sm text-neutral-slate space-y-1">
+                                <li>• Risk factors: DM, obesity, prolonged surgery</li>
+                                <li>• Signs: Fever, drainage, instability</li>
+                                <li>• Management: IV antibiotics, surgical debridement</li>
+                                <li>• Prevention: Glycolic acid irrigation, sternal plating</li>
+                            </ul>
+                        </div>
+                        <div class="bg-red-50 rounded-lg p-4">
+                            <h4 class="font-bold text-red-700 mb-2">Acute Kidney Injury</h4>
+                            <ul class="text-sm text-neutral-slate space-y-1">
+                                <li>• Common post-CPB (20–30% incidence)</li>
+                                <li>• Risk factors: Pre-op CKD, emergency surgery</li>
+                                <li>• Management: Avoid nephrotoxins, maintain perfusion</li>
+                                <li>• Dialysis if refractory hyperkalemia or uremia</li>
+                            </ul>
+                        </div>
+                        <div class="bg-red-50 rounded-lg p-4">
+                            <h4 class="font-bold text-red-700 mb-2">Atrial Fibrillation</h4>
+                            <ul class="text-sm text-neutral-slate space-y-1">
+                                <li>• Peaks POD 2–3 (30–40% incidence)</li>
+                                <li>• Management: Rate control with beta-blockers</li>
+                                <li>• Anticoagulation: CHA₂DS₂-VASc score</li>
+                                <li>• Prophylaxis: Amiodarone or beta-blockers</li>
+                            </ul>
+                        </div>
+                        <div class="bg-red-50 rounded-lg p-4">
+                            <h4 class="font-bold text-red-700 mb-2">Stroke</h4>
+                            <ul class="text-sm text-neutral-slate space-y-1">
+                                <li>• Incidence 1–2% CABG, higher in valve surgery</li>
+                                <li>• Risk factors: Prior stroke, aortic atherosclerosis</li>
+                                <li>• Management: Supportive, consider thrombectomy</li>
+                                <li>• Prevention: Intra-op epiaortic ultrasound</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recovery Milestones -->
+                <div class="ref-card bg-white rounded-xl p-5 md:p-6 shadow-lg mb-6">
+                    <h3 class="text-lg md:text-xl font-playfair font-bold text-deep-navy mb-4 flex items-center gap-2">
+                        <span class="text-2xl">📈</span> Recovery Milestones &amp; Follow-Up
+                    </h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="bg-blue-50 rounded-lg p-4">
+                            <h4 class="font-bold text-clinical-blue mb-3">Short-Term Milestones</h4>
+                            <div class="space-y-3 text-sm text-neutral-slate">
+                                <div>
+                                    <p class="font-semibold">Week 1:</p>
+                                    <p>• Remove staples/sutures</p>
+                                    <p>• Resume driving (4–6 weeks for manual transmission)</p>
+                                    <p>• Light household activities</p>
+                                </div>
+                                <div>
+                                    <p class="font-semibold">Month 1:</p>
+                                    <p>• Cardiac rehab 3× weekly</p>
+                                    <p>• Return to sedentary work</p>
+                                    <p>• Sexual activity OK when comfortable</p>
+                                </div>
+                                <div>
+                                    <p class="font-semibold">Month 3:</p>
+                                    <p>• Echo and stress test</p>
+                                    <p>• Resume moderate exercise</p>
+                                    <p>• Assess medication adherence</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-green-50 rounded-lg p-4">
+                            <h4 class="font-bold text-green-700 mb-3">Long-Term Follow-Up</h4>
+                            <div class="space-y-3 text-sm text-neutral-slate">
+                                <div>
+                                    <p class="font-semibold">Year 1:</p>
+                                    <p>• Annual cardiology visit</p>
+                                    <p>• Lipid panel, HbA1c</p>
+                                    <p>• Angiogram if symptoms recur</p>
+                                </div>
+                                <div>
+                                    <p class="font-semibold">Ongoing:</p>
+                                    <p>• Lifestyle modifications</p>
+                                    <p>• Annual flu/pneumococcal vaccines</p>
+                                    <p>• Monitor for graft patency</p>
+                                </div>
+                                <div>
+                                    <p class="font-semibold">Graft surveillance:</p>
+                                    <p>• SVG: 50% occlusion by 10 years</p>
+                                    <p>• LIMA: 90% patency at 20 years</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-amber-50 border border-amber-200 rounded-xl p-4 md:p-6">
+                    <p class="text-sm text-deep-navy"><strong>⚠️ Disclaimer:</strong> Cardiac surgery care requires multidisciplinary team approach. Individualize protocols based on patient comorbidities and surgical complexity. Always follow institutional guidelines and consult cardiothoracic surgery for complex cases. Based on 2021 ACC/AHA CABG and valve guidelines.</p>
                 </div>
             </div>
         </div>

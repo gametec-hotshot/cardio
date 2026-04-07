@@ -234,14 +234,14 @@
                 <button class="tool-nav-btn text-neutral-slate hover:text-clinical-blue transition-colors pb-2" data-target="echo-interpretation-guide">
                     🫀 Echo Interpretation Guide
                 </button>
+                <button class="tool-nav-btn text-neutral-slate hover:text-clinical-blue transition-colors pb-2" data-target="pocus-cardiac-views">
+                    📱 POCUS Cardiac Views Reference
+                </button>
                 <button class="tool-nav-btn text-neutral-slate hover:text-clinical-blue transition-colors pb-2" data-target="electrolyte-management">
                     🧪 Electrolyte Management
                 </button>
                 <button class="tool-nav-btn text-neutral-slate hover:text-clinical-blue transition-colors pb-2" data-target="drug-dosing-charts">
                     💊 Drug Dosing Charts
-                </button>
-                <button class="tool-nav-btn text-neutral-slate hover:text-clinical-blue transition-colors pb-2" data-target="electrolyte-management">
-                    🧪 Electrolyte Management
                 </button>
             </div>
         </div>
@@ -2361,6 +2361,864 @@
                         <li><strong>Subcostal:</strong> IVC size/collapse, tamponade</li>
                         <li><strong>Integrate:</strong> Hyperdynamic LV + flat IVC = hypovolemia; D-sign = RV strain</li>
                     </ol>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Drug Dosing Charts -->
+    <section id="drug-dosing-charts" class="tool-section py-16 bg-light-gray hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-playfair font-bold text-deep-navy mb-4">💊 Drug Dosing Charts</h2>
+                <p class="text-xl text-neutral-slate max-w-3xl mx-auto">
+                    Comprehensive dosing guidelines for cardiovascular medications with weight-based and renal function adjustments.
+                    Includes common cardiac drugs with evidence-based dosing recommendations.
+                </p>
+            </div>
+
+            <!-- Dosing Calculator Input -->
+            <div class="bg-white rounded-2xl p-8 shadow-lg mb-8">
+                <h3 class="text-xl font-playfair font-bold text-deep-navy mb-6">Patient Parameters</h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div>
+                        <label class="block text-sm font-semibold text-deep-navy mb-2">Weight (kg)</label>
+                        <input type="number" id="patient-weight" class="w-full p-3 border border-gray-300 rounded-lg" placeholder="Enter weight in kg" min="30" max="200">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold text-deep-navy mb-2">Creatinine Clearance (mL/min)</label>
+                        <input type="number" id="patient-crcl" class="w-full p-3 border border-gray-300 rounded-lg" placeholder="Enter CrCl or calculate" min="10" max="150">
+                        <button id="calculate-crcl" class="mt-2 text-sm text-clinical-blue hover:text-blue-700 underline">Calculate CrCl</button>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold text-deep-navy mb-2">Age (years)</label>
+                        <input type="number" id="patient-age" class="w-full p-3 border border-gray-300 rounded-lg" placeholder="Enter age" min="18" max="120">
+                    </div>
+                </div>
+                <div class="mt-4 text-sm text-neutral-slate">
+                    <p>💡 <strong>Tip:</strong> Use ideal body weight for obese patients (IBW = 45.5 + 2.3 × (height in inches - 60)).</p>
+                </div>
+            </div>
+
+            <!-- Antiarrhythmics -->
+            <div class="bg-white rounded-2xl p-8 shadow-lg mb-8">
+                <h3 class="text-xl font-playfair font-bold text-deep-navy mb-6">Antiarrhythmic Drugs</h3>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm">
+                        <thead class="bg-clinical-blue text-white">
+                            <tr>
+                                <th class="p-3 text-left rounded-tl-lg">Drug</th>
+                                <th class="p-3 text-left">Indication</th>
+                                <th class="p-3 text-left">Loading Dose</th>
+                                <th class="p-3 text-left">Maintenance Dose</th>
+                                <th class="p-3 text-left">Renal Adjustment</th>
+                                <th class="p-3 text-left rounded-tr-lg">Monitoring</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-neutral-slate">
+                            <tr class="border-b border-gray-100">
+                                <td class="p-3 font-medium">Amiodarone</td>
+                                <td class="p-3">VT/VF, AF</td>
+                                <td class="p-3">150 mg IV over 10 min, then 360 mg over 6h</td>
+                                <td class="p-3">200-400 mg daily</td>
+                                <td class="p-3">No adjustment needed</td>
+                                <td class="p-3">QTc, LFTs, TFTs, PFTs</td>
+                            </tr>
+                            <tr class="border-b border-gray-100 bg-gray-50">
+                                <td class="p-3 font-medium">Lidocaine</td>
+                                <td class="p-3">VT/VF</td>
+                                <td class="p-3">1-1.5 mg/kg IV bolus</td>
+                                <td class="p-3">1-4 mg/min infusion</td>
+                                <td class="p-3">Reduce dose by 50% if CrCl <30</td>
+                                <td class="p-3">Levels (1.5-5 mcg/mL), seizures</td>
+                            </tr>
+                            <tr class="border-b border-gray-100">
+                                <td class="p-3 font-medium">Procainamide</td>
+                                <td class="p-3">SVT, VT</td>
+                                <td class="p-3">10-17 mg/kg IV over 25-30 min</td>
+                                <td class="p-3">1-4 mg/min infusion</td>
+                                <td class="p-3">Reduce dose by 25-50% if CrCl <30</td>
+                                <td class="p-3">QTc, hypotension, lupus-like syndrome</td>
+                            </tr>
+                            <tr class="border-b border-gray-100 bg-gray-50">
+                                <td class="p-3 font-medium">Sotalol</td>
+                                <td class="p-3">AF, VT</td>
+                                <td class="p-3">None</td>
+                                <td class="p-3">80-160 mg BID</td>
+                                <td class="p-3">Reduce dose by 50% if CrCl <40</td>
+                                <td class="p-3">QTc, CrCl, torsades risk</td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 font-medium">Dofetilide</td>
+                                <td class="p-3">AF</td>
+                                <td class="p-3">None</td>
+                                <td class="p-3">125-500 mcg BID (CrCl dependent)</td>
+                                <td class="p-3">125 mcg BID if CrCl 20-40<br>125 mcg daily if CrCl <20</td>
+                                <td class="p-3">QTc monitoring required</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Anticoagulants -->
+            <div class="bg-white rounded-2xl p-8 shadow-lg mb-8">
+                <h3 class="text-xl font-playfair font-bold text-deep-navy mb-6">Anticoagulants</h3>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm">
+                        <thead class="bg-warning-amber text-white">
+                            <tr>
+                                <th class="p-3 text-left rounded-tl-lg">Drug</th>
+                                <th class="p-3 text-left">Indication</th>
+                                <th class="p-3 text-left">Loading Dose</th>
+                                <th class="p-3 text-left">Maintenance Dose</th>
+                                <th class="p-3 text-left">Renal Adjustment</th>
+                                <th class="p-3 text-left rounded-tr-lg">Monitoring</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-neutral-slate">
+                            <tr class="border-b border-gray-100">
+                                <td class="p-3 font-medium">Heparin (IV)</td>
+                                <td class="p-3">ACS, DVT/PE</td>
+                                <td class="p-3">60-70 U/kg bolus</td>
+                                <td class="p-3">12-15 U/kg/h infusion</td>
+                                <td class="p-3">No adjustment needed</td>
+                                <td class="p-3">aPTT 1.5-2.5× control</td>
+                            </tr>
+                            <tr class="border-b border-gray-100 bg-gray-50">
+                                <td class="p-3 font-medium">Enoxaparin</td>
+                                <td class="p-3">ACS, DVT/PE</td>
+                                <td class="p-3">30 mg IV bolus</td>
+                                <td class="p-3">1 mg/kg SC BID (ACS)<br>1.5 mg/kg SC daily (DVT)</td>
+                                <td class="p-3">Reduce to 1 mg/kg daily if CrCl <30</td>
+                                <td class="p-3">Anti-Xa levels if obese/renal failure</td>
+                            </tr>
+                            <tr class="border-b border-gray-100">
+                                <td class="p-3 font-medium">Warfarin</td>
+                                <td class="p-3">AF, DVT/PE</td>
+                                <td class="p-3">5-10 mg daily</td>
+                                <td class="p-3">2.5-10 mg daily</td>
+                                <td class="p-3">No adjustment needed</td>
+                                <td class="p-3">INR 2.0-3.0 (AF), 2.5-3.5 (MVR)</td>
+                            </tr>
+                            <tr class="border-b border-gray-100 bg-gray-50">
+                                <td class="p-3 font-medium">Rivaroxaban</td>
+                                <td class="p-3">AF, DVT/PE</td>
+                                <td class="p-3">None</td>
+                                <td class="p-3">20 mg daily (CrCl >50)<br>15 mg daily (CrCl 15-50)</td>
+                                <td class="p-3">Contraindicated CrCl <15</td>
+                                <td class="p-3">No routine monitoring</td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 font-medium">Apixaban</td>
+                                <td class="p-3">AF, DVT/PE</td>
+                                <td class="p-3">None</td>
+                                <td class="p-3">5 mg BID (standard)<br>2.5 mg BID (reduced)</td>
+                                <td class="p-3">2.5 mg BID if CrCl 15-29 or age ≥80 + weight ≤60kg</td>
+                                <td class="p-3">No routine monitoring</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Antiplatelets -->
+            <div class="bg-white rounded-2xl p-8 shadow-lg mb-8">
+                <h3 class="text-xl font-playfair font-bold text-deep-navy mb-6">Antiplatelet Agents</h3>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm">
+                        <thead class="bg-success-green text-white">
+                            <tr>
+                                <th class="p-3 text-left rounded-tl-lg">Drug</th>
+                                <th class="p-3 text-left">Indication</th>
+                                <th class="p-3 text-left">Loading Dose</th>
+                                <th class="p-3 text-left">Maintenance Dose</th>
+                                <th class="p-3 text-left">Renal Adjustment</th>
+                                <th class="p-3 text-left rounded-tr-lg">Notes</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-neutral-slate">
+                            <tr class="border-b border-gray-100">
+                                <td class="p-3 font-medium">Aspirin</td>
+                                <td class="p-3">ACS, secondary prevention</td>
+                                <td class="p-3">162-325 mg PO</td>
+                                <td class="p-3">81-162 mg daily</td>
+                                <td class="p-3">No adjustment needed</td>
+                                <td class="p-3">Enteric-coated preferred</td>
+                            </tr>
+                            <tr class="border-b border-gray-100 bg-gray-50">
+                                <td class="p-3 font-medium">Clopidogrel</td>
+                                <td class="p-3">ACS, PCI</td>
+                                <td class="p-3">300-600 mg PO</td>
+                                <td class="p-3">75 mg daily</td>
+                                <td class="p-3">No adjustment needed</td>
+                                <td class="p-3">Prodrug, CYP2C19 poor metabolizers</td>
+                            </tr>
+                            <tr class="border-b border-gray-100">
+                                <td class="p-3 font-medium">Prasugrel</td>
+                                <td class="p-3">ACS with PCI</td>
+                                <td class="p-3">60 mg PO</td>
+                                <td class="p-3">10 mg daily</td>
+                                <td class="p-3">No adjustment needed</td>
+                                <td class="p-3">Avoid if age ≥75 or weight &lt;60kg</td>
+                            </tr>
+                            <tr class="border-b border-gray-100 bg-gray-50">
+                                <td class="p-3 font-medium">Ticagrelor</td>
+                                <td class="p-3">ACS</td>
+                                <td class="p-3">180 mg PO</td>
+                                <td class="p-3">90 mg BID</td>
+                                <td class="p-3">No adjustment needed</td>
+                                <td class="p-3">Dyspnea common, hold 5 days pre-op</td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 font-medium">Cangrelor</td>
+                                <td class="p-3">PCI bridge</td>
+                                <td class="p-3">30 mcg/kg IV bolus</td>
+                                <td class="p-3">4 mcg/kg/min infusion</td>
+                                <td class="p-3">No adjustment needed</td>
+                                <td class="p-3">Short half-life, transitions to oral P2Y12</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Heart Failure Medications -->
+            <div class="bg-white rounded-2xl p-8 shadow-lg mb-8">
+                <h3 class="text-xl font-playfair font-bold text-deep-navy mb-6">Heart Failure Medications</h3>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm">
+                        <thead class="bg-cardiac-purple text-white">
+                            <tr>
+                                <th class="p-3 text-left rounded-tl-lg">Drug</th>
+                                <th class="p-3 text-left">Indication</th>
+                                <th class="p-3 text-left">Starting Dose</th>
+                                <th class="p-3 text-left">Target Dose</th>
+                                <th class="p-3 text-left">Renal Adjustment</th>
+                                <th class="p-3 text-left rounded-tr-lg">Monitoring</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-neutral-slate">
+                            <tr class="border-b border-gray-100">
+                                <td class="p-3 font-medium">Lisinopril</td>
+                                <td class="p-3">HFrEF</td>
+                                <td class="p-3">2.5-5 mg daily</td>
+                                <td class="p-3">20-40 mg daily</td>
+                                <td class="p-3">Reduce dose if CrCl <30</td>
+                                <td class="p-3">K⁺, Cr, BP, cough</td>
+                            </tr>
+                            <tr class="border-b border-gray-100 bg-gray-50">
+                                <td class="p-3 font-medium">Carvedilol</td>
+                                <td class="p-3">HFrEF</td>
+                                <td class="p-3">3.125 mg BID</td>
+                                <td class="p-3">25-50 mg BID</td>
+                                <td class="p-3">No adjustment needed</td>
+                                <td class="p-3">HR, BP, titrate slowly</td>
+                            </tr>
+                            <tr class="border-b border-gray-100">
+                                <td class="p-3 font-medium">Spironolactone</td>
+                                <td class="p-3">HFrEF (NYHA III-IV)</td>
+                                <td class="p-3">12.5 mg daily</td>
+                                <td class="p-3">25-50 mg daily</td>
+                                <td class="p-3">Contraindicated CrCl <30</td>
+                                <td class="p-3">K⁺, Cr, gynecomastia</td>
+                            </tr>
+                            <tr class="border-b border-gray-100 bg-gray-50">
+                                <td class="p-3 font-medium">Furosemide</td>
+                                <td class="p-3">HFrEF with congestion</td>
+                                <td class="p-3">20-40 mg daily</td>
+                                <td class="p-3">40-240 mg daily</td>
+                                <td class="p-3">Reduce dose if CrCl <30</td>
+                                <td class="p-3">K⁺, Mg²⁺, Cr, BP</td>
+                            </tr>
+                            <tr class="border-b border-gray-100">
+                                <td class="p-3 font-medium">Sacubitril/Valsartan</td>
+                                <td class="p-3">HFrEF</td>
+                                <td class="p-3">24/26 mg BID</td>
+                                <td class="p-3">97/103 mg BID</td>
+                                <td class="p-3">Not recommended CrCl <30</td>
+                                <td class="p-3">K⁺, Cr, BP, angioedema</td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 font-medium">Dapagliflozin</td>
+                                <td class="p-3">HFrEF</td>
+                                <td class="p-3">10 mg daily</td>
+                                <td class="p-3">10 mg daily</td>
+                                <td class="p-3">No adjustment needed</td>
+                                <td class="p-3">Cr, volume status, genital infections</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Inotropes/Vasopressors -->
+            <div class="bg-white rounded-2xl p-8 shadow-lg mb-8">
+                <h3 class="text-xl font-playfair font-bold text-deep-navy mb-6">Inotropes & Vasopressors</h3>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm">
+                        <thead class="bg-alert-coral text-white">
+                            <tr>
+                                <th class="p-3 text-left rounded-tl-lg">Drug</th>
+                                <th class="p-3 text-left">Indication</th>
+                                <th class="p-3 text-left">Dose Range</th>
+                                <th class="p-3 text-left">Renal Adjustment</th>
+                                <th class="p-3 text-left rounded-tr-lg">Monitoring</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-neutral-slate">
+                            <tr class="border-b border-gray-100">
+                                <td class="p-3 font-medium">Dopamine</td>
+                                <td class="p-3">Shock, hypotension</td>
+                                <td class="p-3">5-20 mcg/kg/min</td>
+                                <td class="p-3">No adjustment needed</td>
+                                <td class="p-3">HR, BP, urine output, arrhythmias</td>
+                            </tr>
+                            <tr class="border-b border-gray-100 bg-gray-50">
+                                <td class="p-3 font-medium">Dobutamine</td>
+                                <td class="p-3">HF, cardiogenic shock</td>
+                                <td class="p-3">2.5-15 mcg/kg/min</td>
+                                <td class="p-3">No adjustment needed</td>
+                                <td class="p-3">HR, BP, arrhythmias, tolerance</td>
+                            </tr>
+                            <tr class="border-b border-gray-100">
+                                <td class="p-3 font-medium">Milrinone</td>
+                                <td class="p-3">HF exacerbation</td>
+                                <td class="p-3">0.375-0.75 mcg/kg/min</td>
+                                <td class="p-3">Reduce dose by 50% if CrCl <30</td>
+                                <td class="p-3">BP, HR, arrhythmias, thrombocytopenia</td>
+                            </tr>
+                            <tr class="border-b border-gray-100 bg-gray-50">
+                                <td class="p-3 font-medium">Norepinephrine</td>
+                                <td class="p-3">Septic/cardiogenic shock</td>
+                                <td class="p-3">0.01-0.5 mcg/kg/min</td>
+                                <td class="p-3">No adjustment needed</td>
+                                <td class="p-3">BP, HR, urine output, extremity perfusion</td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 font-medium">Epinephrine</td>
+                                <td class="p-3">Cardiac arrest, anaphylaxis</td>
+                                <td class="p-3">0.01-0.1 mcg/kg/min (infusion)</td>
+                                <td class="p-3">No adjustment needed</td>
+                                <td class="p-3">HR, BP, arrhythmias, lactate</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- CrCl Calculator Modal/Popup -->
+            <div id="crcl-calculator" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50 flex items-center justify-center">
+                <div class="bg-white rounded-2xl p-6 max-w-md w-full mx-4">
+                    <h3 class="text-xl font-bold text-deep-navy mb-4">Creatinine Clearance Calculator</h3>
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-semibold text-deep-navy mb-1">Gender</label>
+                            <select id="crcl-gender" class="w-full p-2 border border-gray-300 rounded">
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-deep-navy mb-1">Age (years)</label>
+                            <input type="number" id="crcl-age" class="w-full p-2 border border-gray-300 rounded" placeholder="Age">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-deep-navy mb-1">Weight (kg)</label>
+                            <input type="number" id="crcl-weight" class="w-full p-2 border border-gray-300 rounded" placeholder="Weight">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-deep-navy mb-1">Serum Creatinine (mg/dL)</label>
+                            <input type="number" id="crcl-creatinine" class="w-full p-2 border border-gray-300 rounded" placeholder="Creatinine" step="0.1">
+                        </div>
+                        <div class="flex gap-4">
+                            <button id="calculate-crcl-btn" class="flex-1 bg-clinical-blue text-white py-2 px-4 rounded font-semibold">Calculate</button>
+                            <button id="close-crcl" class="flex-1 bg-gray-200 text-neutral-slate py-2 px-4 rounded font-semibold">Close</button>
+                        </div>
+                        <div id="crcl-result" class="mt-4 p-3 bg-gray-50 rounded text-center hidden">
+                            <div class="text-lg font-bold text-clinical-blue" id="crcl-value">--</div>
+                            <div class="text-sm text-neutral-slate">mL/min</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-yellow-50 border border-yellow-200 rounded-xl p-6">
+                <h4 class="font-semibold text-warning-amber mb-2">⚠️ Dosing Considerations</h4>
+                <ul class="text-sm text-neutral-slate space-y-2">
+                    <li><strong>Weight-based dosing:</strong> Use ideal body weight (IBW) for obese patients to avoid overdosing</li>
+                    <li><strong>Renal adjustment:</strong> Most cardiac drugs require dose reduction when CrCl &lt;30 mL/min</li>
+                    <li><strong>Hepatic impairment:</strong> Reduce doses of metabolized drugs (amiodarone, carvedilol) in liver disease</li>
+                    <li><strong>Drug interactions:</strong> Check for CYP450 interactions, especially with antiarrhythmics</li>
+                    <li><strong>Elderly patients:</strong> Start at lower doses, titrate slowly due to comorbidities</li>
+                    <li><strong>Pregnancy:</strong> Avoid ACEI/ARB in pregnancy, use heparin for anticoagulation</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Electrolyte Management in Cardiac Patients -->
+    <section id="electrolyte-management" class="tool-section py-16 bg-white hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-playfair font-bold text-deep-navy mb-4">🧪 Electrolyte Management in Cardiac Patients</h2>
+                <p class="text-xl text-neutral-slate max-w-3xl mx-auto">
+                    Comprehensive guidelines for electrolyte imbalances in cardiovascular disease, including monitoring, treatment, and drug interactions in heart failure, arrhythmias, and acute coronary syndromes.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+                <!-- Potassium Management -->
+                <div class="bg-light-gray rounded-2xl p-6">
+                    <div class="flex items-center mb-6">
+                        <div class="w-12 h-12 bg-warning-amber rounded-lg flex items-center justify-center mr-4">
+                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-playfair font-bold text-deep-navy">Potassium Management</h3>
+                    </div>
+
+                    <div class="space-y-4">
+                        <div class="bg-amber-50 border-l-4 border-amber-500 p-4">
+                            <h4 class="font-semibold text-deep-navy mb-2">Hyperkalemia (K⁺ >5.5 mEq/L)</h4>
+                            <ul class="text-sm text-neutral-slate space-y-1">
+                                <li><strong>ECG Changes:</strong> Peaked T waves, flattened P waves, widened QRS, sine wave</li>
+                                <li><strong>Acute Treatment:</strong> Calcium gluconate 10% (10 mL IV) for cardiac protection</li>
+                                <li><strong>Shift Therapy:</strong> Insulin + glucose (10U regular insulin + 50g dextrose)</li>
+                                <li><strong>Elimination:</strong> Kayexalate (15g PO/PR), loop diuretics, dialysis</li>
+                                <li><strong>ACEI/ARB:</strong> Hold if K⁺ >5.0, restart at lower dose when normalized</li>
+                            </ul>
+                        </div>
+
+                        <div class="bg-blue-50 border-l-4 border-blue-500 p-4">
+                            <h4 class="font-semibold text-deep-navy mb-2">Hypokalemia (K⁺ <3.5 mEq/L)</h4>
+                            <ul class="text-sm text-neutral-slate space-y-1">
+                                <li><strong>ECG Changes:</strong> Flattened T waves, U waves, ST depression, PVCs</li>
+                                <li><strong>Risk:</strong> Increased risk of torsades de pointes with QT prolongation</li>
+                                <li><strong>Replacement:</strong> Oral KCl (20-40 mEq/day), IV KCl (10-20 mEq/hr max)</li>
+                                <li><strong>Monitoring:</strong> Daily BMP, ECG if symptomatic</li>
+                                <li><strong>Causes in HF:</strong> Diuretics, low intake, GI losses, alkalosis</li>
+                            </ul>
+                        </div>
+
+                        <div class="bg-gray-50 p-4">
+                            <h4 class="font-semibold text-deep-navy mb-2">Drug Interactions</h4>
+                            <ul class="text-sm text-neutral-slate space-y-1">
+                                <li><strong>↑ K⁺:</strong> ACEI/ARB, K⁺-sparing diuretics, heparin, NSAIDs, trimethoprim</li>
+                                <li><strong>↓ K⁺:</strong> Loop/thiazide diuretics, corticosteroids, amphotericin, insulin</li>
+                                <li><strong>Monitoring:</strong> Check BMP 48-72h after starting/frequency changes</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Magnesium Management -->
+                <div class="bg-light-gray rounded-2xl p-6">
+                    <div class="flex items-center mb-6">
+                        <div class="w-12 h-12 bg-cardiac-purple rounded-lg flex items-center justify-center mr-4">
+                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-playfair font-bold text-deep-navy">Magnesium Management</h3>
+                    </div>
+
+                    <div class="space-y-4">
+                        <div class="bg-purple-50 border-l-4 border-purple-500 p-4">
+                            <h4 class="font-semibold text-deep-navy mb-2">Hypermagnesemia (Mg²⁺ >2.6 mEq/L)</h4>
+                            <ul class="text-sm text-neutral-slate space-y-1">
+                                <li><strong>Symptoms:</strong> Nausea, weakness, bradycardia, hypotension</li>
+                                <li><strong>ECG:</strong> Prolonged PR/AV block, widened QRS, asystole</li>
+                                <li><strong>Treatment:</strong> Calcium gluconate IV, IV fluids, dialysis if severe</li>
+                                <li><strong>Common in HF:</strong> With renal dysfunction + Mg-containing laxatives</li>
+                            </ul>
+                        </div>
+
+                        <div class="bg-green-50 border-l-4 border-green-500 p-4">
+                            <h4 class="font-semibold text-deep-navy mb-2">Hypomagnesemia (Mg²⁺ <1.7 mEq/L)</h4>
+                            <ul class="text-sm text-neutral-slate space-y-1">
+                                <li><strong>ECG Changes:</strong> QT prolongation, torsades de pointes, atrial fibrillation</li>
+                                <li><strong>Supplementation:</strong> MgSO₄ 1-2g IV, then oral magnesium oxide 400mg BID</li>
+                                <li><strong>Diuretic-Induced:</strong> Common with loop/thiazides, replace Mg with K supplementation</li>
+                                <li><strong>Digitalis Toxicity:</strong> Hypomagnesemia potentiates digoxin toxicity</li>
+                            </ul>
+                        </div>
+
+                        <div class="bg-gray-50 p-4">
+                            <h4 class="font-semibold text-deep-navy mb-2">Clinical Applications</h4>
+                            <ul class="text-sm text-neutral-slate space-y-1">
+                                <li><strong>AF with RVR:</strong> 1-2g MgSO₄ IV for rate control</li>
+                                <li><strong>Torsades:</strong> 1-2g MgSO₄ IV bolus, then infusion</li>
+                                <li><strong>AMI:</strong> Magnesium supplementation may reduce arrhythmias</li>
+                                <li><strong>Monitoring:</strong> Serum Mg levels with renal function</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Calcium and Phosphate -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+                <!-- Calcium Management -->
+                <div class="bg-white rounded-2xl p-6 shadow-lg">
+                    <h3 class="text-xl font-playfair font-bold text-deep-navy mb-6">Calcium & Phosphate Management</h3>
+
+                    <div class="space-y-4">
+                        <div class="bg-red-50 border-l-4 border-red-500 p-4">
+                            <h4 class="font-semibold text-deep-navy mb-2">Hypercalcemia (Ca²⁺ >10.5 mg/dL)</h4>
+                            <ul class="text-sm text-neutral-slate space-y-1">
+                                <li><strong>ECG Changes:</strong> Shortened QT interval, Osborn waves (hypothermia)</li>
+                                <li><strong>Treatment:</strong> IV fluids (NS), loop diuretics, bisphosphonates, calcitonin</li>
+                                <li><strong>Cardiac Effects:</strong> Bradycardia, AV block, digitalis toxicity potentiation</li>
+                                <li><strong>Causes:</strong> Hyperparathyroidism, malignancy, thiazides, vitamin D toxicity</li>
+                            </ul>
+                        </div>
+
+                        <div class="bg-orange-50 border-l-4 border-orange-500 p-4">
+                            <h4 class="font-semibold text-deep-navy mb-2">Hypocalcemia (Ca²⁺ <8.5 mg/dL)</h4>
+                            <ul class="text-sm text-neutral-slate space-y-1">
+                                <li><strong>ECG Changes:</strong> Prolonged QT interval, T wave inversion</li>
+                                <li><strong>Treatment:</strong> IV calcium gluconate (1-2g), oral calcium carbonate</li>
+                                <li><strong>Risk:</strong> Increased risk of torsades, especially with hypomagnesemia</li>
+                                <li><strong>Post-Cardiac Surgery:</strong> Monitor ionized calcium closely</li>
+                            </ul>
+                        </div>
+
+                        <div class="bg-teal-50 border-l-4 border-teal-500 p-4">
+                            <h4 class="font-semibold text-deep-navy mb-2">Phosphate Disorders</h4>
+                            <ul class="text-sm text-neutral-slate space-y-1">
+                                <li><strong>Hyperphosphatemia:</strong> Seen in renal failure, treat with phosphate binders</li>
+                                <li><strong>Hypophosphatemia:</strong> Refeeding syndrome, alcoholism, may cause HF exacerbation</li>
+                                <li><strong>Cardiac Effects:</strong> Myocardial dysfunction, arrhythmias</li>
+                                <li><strong>Monitoring:</strong> Essential in advanced HF with malnutrition</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Special Considerations in Cardiac Disease -->
+                <div class="bg-white rounded-2xl p-6 shadow-lg">
+                    <h3 class="text-xl font-playfair font-bold text-deep-navy mb-6">Special Considerations</h3>
+
+                    <div class="space-y-4">
+                        <div class="bg-blue-50 border-l-4 border-blue-500 p-4">
+                            <h4 class="font-semibold text-deep-navy mb-2">Heart Failure Management</h4>
+                            <ul class="text-sm text-neutral-slate space-y-1">
+                                <li><strong>ACEI/ARB:</strong> Monitor K⁺/Cr weekly for 2 weeks, then monthly</li>
+                                <li><strong>Spironolactone:</strong> K⁺ monitoring critical (hold if K⁺ >5.0)</li>
+                                <li><strong>Loop Diuretics:</strong> Monitor K⁺, Mg²⁺, Ca²⁺ depletion</li>
+                                <li><strong>Cardiorenal Syndrome:</strong> Adjust electrolyte goals with renal function</li>
+                            </ul>
+                        </div>
+
+                        <div class="bg-yellow-50 border-l-4 border-yellow-500 p-4">
+                            <h4 class="font-semibold text-deep-navy mb-2">Arrhythmia Prevention</h4>
+                            <ul class="text-sm text-neutral-slate space-y-1">
+                                <li><strong>QT Prolonging Drugs:</strong> Maintain K⁺ 4.0-5.0, Mg²⁺ 2.0-2.5 mEq/L</li>
+                                <li><strong>Antiarrhythmic Therapy:</strong> Amiodarone requires thyroid/electrolyte monitoring</li>
+                                <li><strong>Pacemaker Patients:</strong> Avoid severe electrolyte imbalances</li>
+                                <li><strong>Post-Cardioversion:</strong> Monitor for electrolyte shifts</li>
+                            </ul>
+                        </div>
+
+                        <div class="bg-green-50 border-l-4 border-green-500 p-4">
+                            <h4 class="font-semibold text-deep-navy mb-2">Acute Coronary Syndromes</h4>
+                            <ul class="text-sm text-neutral-slate space-y-1">
+                                <li><strong>STEMI:</strong> Hypokalemia may occur with catecholamine surge</li>
+                                <li><strong>Cardiogenic Shock:</strong> Monitor ionized calcium, treat aggressively</li>
+                                <li><strong>Post-PCI:</strong> Heparin monitoring, avoid heparin-induced hyperkalemia</li>
+                                <li><strong>Statin Therapy:</strong> Monitor CK, liver enzymes; rare rhabdomyolysis</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Monitoring Guidelines -->
+            <div class="bg-light-gray rounded-2xl p-8">
+                <h3 class="text-2xl font-playfair font-bold text-deep-navy mb-6 text-center">Monitoring Guidelines & Reference Ranges</h3>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div>
+                        <h4 class="text-lg font-semibold text-deep-navy mb-4">Laboratory Reference Ranges</h4>
+                        <table class="w-full text-sm">
+                            <thead class="bg-deep-navy text-white">
+                                <tr>
+                                    <th class="p-3 text-left rounded-tl-lg">Electrolyte</th>
+                                    <th class="p-3 text-left">Normal Range</th>
+                                    <th class="p-3 text-left rounded-tr-lg">Critical Values</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-neutral-slate">
+                                <tr class="border-b border-gray-200">
+                                    <td class="p-3 font-medium">Potassium (K⁺)</td>
+                                    <td class="p-3">3.5–5.1 mEq/L</td>
+                                    <td class="p-3">&lt;3.0 or &gt;6.0 mEq/L</td>
+                                </tr>
+                                <tr class="border-b border-gray-200">
+                                    <td class="p-3 font-medium">Magnesium (Mg²⁺)</td>
+                                    <td class="p-3">1.7–2.2 mEq/L</td>
+                                    <td class="p-3">&lt;1.2 or &gt;3.0 mEq/L</td>
+                                </tr>
+                                <tr class="border-b border-gray-200">
+                                    <td class="p-3 font-medium">Calcium (Ca²⁺)</td>
+                                    <td class="p-3">8.5–10.5 mg/dL</td>
+                                    <td class="p-3">&lt;7.0 or &gt;12.0 mg/dL</td>
+                                </tr>
+                                <tr class="border-b border-gray-200">
+                                    <td class="p-3 font-medium">Phosphate (PO₄³⁻)</td>
+                                    <td class="p-3">2.5–4.5 mg/dL</td>
+                                    <td class="p-3">&lt;1.0 or &gt;8.0 mg/dL</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-3 font-medium">Ionized Calcium</td>
+                                    <td class="p-3">4.5–5.3 mg/dL</td>
+                                    <td class="p-3">&lt;3.0 or &gt;6.0 mg/dL</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div>
+                        <h4 class="text-lg font-semibold text-deep-navy mb-4">Monitoring Frequency</h4>
+                        <div class="space-y-3">
+                            <div class="bg-white rounded-lg p-4 shadow">
+                                <h5 class="font-semibold text-clinical-blue mb-2">Heart Failure Patients</h5>
+                                <ul class="text-sm text-neutral-slate space-y-1">
+                                    <li>• BMP: Weekly ×2 after ACEI/ARB/aldosterone antagonist initiation</li>
+                                    <li>• Monthly thereafter if stable</li>
+                                    <li>• More frequent with diuretic dose changes</li>
+                                    <li>• Magnesium: With loop diuretic use</li>
+                                </ul>
+                            </div>
+
+                            <div class="bg-white rounded-lg p-4 shadow">
+                                <h5 class="font-semibold text-warning-amber mb-2">Antiarrhythmic Therapy</h5>
+                                <ul class="text-sm text-neutral-slate space-y-1">
+                                    <li>• QT prolonging drugs: K⁺/Mg²⁺ monitoring required</li>
+                                    <li>• Amiodarone: TFTs, LFTs, CXR baseline</li>
+                                    <li>• Digoxin: Levels 6-8h post-dose, renal function</li>
+                                    <li>• Antiarrhythmic monitoring: ECG, electrolytes</li>
+                                </ul>
+                            </div>
+
+                            <div class="bg-white rounded-lg p-4 shadow">
+                                <h5 class="font-semibold text-alert-coral mb-2">Critical Care Setting</h5>
+                                <ul class="text-sm text-neutral-slate space-y-1">
+                                    <li>• Ionized calcium: Hourly in cardiogenic shock</li>
+                                    <li>• ABG/electrolytes: Every 2-4h in ICU</li>
+                                    <li>• Phosphate: Daily in refeeding/nutrition support</li>
+                                    <li>• Magnesium: With TPN or prolonged fasting</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-8 bg-yellow-50 border border-yellow-200 rounded-xl p-6">
+                    <h4 class="font-semibold text-warning-amber mb-2">⚠️ Key Clinical Pearls</h4>
+                    <ul class="text-sm text-neutral-slate space-y-2">
+                        <li><strong>Triple Therapy Risk:</strong> ACEI + K⁺-sparing diuretic + ARB = high hyperkalemia risk (avoid)</li>
+                        <li><strong>Digoxin Toxicity:</strong> Hypokalemia, hypomagnesemia, and hypercalcemia increase risk</li>
+                        <li><strong>Diuretic Resistance:</strong> Check for hypokalemia, which impairs diuretic efficacy</li>
+                        <li><strong>Post-Cardiac Surgery:</strong> Ionized hypocalcemia common, treat to maintain cardiac function</li>
+                        <li><strong>Refeeding Syndrome:</strong> Phosphate supplementation critical to prevent cardiac dysfunction</li>
+                        <li><strong>Renal Adjustment:</strong> All electrolyte replacement must account for GFR</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Echo Interpretation Guide -->
+    <section id="echo-interpretation-guide" class="tool-section py-16 bg-white hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-playfair font-bold text-deep-navy mb-4">🫀 Echocardiography Interpretation Guide</h2>
+                <p class="text-xl text-neutral-slate max-w-3xl mx-auto">
+                    Systematic approach to interpreting transthoracic echocardiograms with key views, measurements, and clinical correlations.
+                </p>
+            </div>
+
+            <div class="mb-12">
+                <h3 class="text-2xl font-semibold text-deep-navy mb-6">Standard Echocardiographic Views</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="bg-light-gray p-6 rounded-lg">
+                        <h4 class="font-semibold text-clinical-blue mb-2">Parasternal Long Axis (PLAX)</h4>
+                        <p>Displays LV, LA, aortic valve, mitral valve, and aortic root. Best for LV dimensions and aortic measurements.</p>
+                    </div>
+                    <div class="bg-light-gray p-6 rounded-lg">
+                        <h4 class="font-semibold text-clinical-blue mb-2">Parasternal Short Axis (PSAX)</h4>
+                        <p>Shows circular cross-sections at different levels (mitral, papillary, apex). Essential for regional wall motion analysis.</p>
+                    </div>
+                    <div class="bg-light-gray p-6 rounded-lg">
+                        <h4 class="font-semibold text-clinical-blue mb-2">Apical 4-Chamber (A4C)</h4>
+                        <p>Visualizes all 4 chambers, tricuspid and mitral valves, interventricular septum. Used for EF calculation and valve assessment.</p>
+                    </div>
+                    <div class="bg-light-gray p-6 rounded-lg">
+                        <h4 class="font-semibold text-clinical-blue mb-2">Apical 2-Chamber (A2C)</h4>
+                        <p>Shows LV and LA without RV. Useful for anterior and inferior wall assessment.</p>
+                    </div>
+                    <div class="bg-light-gray p-6 rounded-lg">
+                        <h4 class="font-semibold text-clinical-blue mb-2">Apical 3-Chamber (A3C)</h4>
+                        <p>Long axis view of LV outflow tract, aortic valve, and mitral valve. Ideal for aortic stenosis evaluation.</p>
+                    </div>
+                    <div class="bg-light-gray p-6 rounded-lg">
+                        <h4 class="font-semibold text-clinical-blue mb-2">Subcostal and Suprasternal</h4>
+                        <p>Alternative windows for patients with poor acoustic windows. Subcostal for IVC, abdominal aorta; Suprasternal for aortic arch.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mb-12">
+                <h3 class="text-2xl font-semibold text-deep-navy mb-6">Key Measurements and Normal Values</h3>
+                <div class="overflow-x-auto">
+                    <table class="w-full table-auto border-collapse border border-neutral-slate">
+                        <thead>
+                            <tr class="bg-clinical-blue text-white">
+                                <th class="border border-neutral-slate p-3">Parameter</th>
+                                <th class="border border-neutral-slate p-3">Normal Range</th>
+                                <th class="border border-neutral-slate p-3">View</th>
+                                <th class="border border-neutral-slate p-3">Clinical Significance</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="bg-light-gray">
+                                <td class="border border-neutral-slate p-3">LV End-Diastolic Diameter (LVEDD)</td>
+                                <td class="border border-neutral-slate p-3">3.5-5.7 cm (female), 4.2-5.9 cm (male)</td>
+                                <td class="border border-neutral-slate p-3">PLAX</td>
+                                <td class="border border-neutral-slate p-3">Dilated if >5.7 cm</td>
+                            </tr>
+                            <tr>
+                                <td class="border border-neutral-slate p-3">LV End-Systolic Diameter (LVESD)</td>
+                                <td class="border border-neutral-slate p-3">2.0-4.0 cm</td>
+                                <td class="border border-neutral-slate p-3">PLAX</td>
+                                <td class="border border-neutral-slate p-3">Increased in systolic dysfunction</td>
+                            </tr>
+                            <tr class="bg-light-gray">
+                                <td class="border border-neutral-slate p-3">Left Ventricular Ejection Fraction (LVEF)</td>
+                                <td class="border border-neutral-slate p-3">55-70%</td>
+                                <td class="border border-neutral-slate p-3">A4C/A2C</td>
+                                <td class="border border-neutral-slate p-3">Reduced if <50%</td>
+                            </tr>
+                            <tr>
+                                <td class="border border-neutral-slate p-3">Interventricular Septum (IVS)</td>
+                                <td class="border border-neutral-slate p-3">0.6-1.1 cm</td>
+                                <td class="border border-neutral-slate p-3">PLAX</td>
+                                <td class="border border-neutral-slate p-3">Thickened in LVH</td>
+                            </tr>
+                            <tr class="bg-light-gray">
+                                <td class="border border-neutral-slate p-3">Left Atrial Diameter</td>
+                                <td class="border border-neutral-slate p-3"><3.8 cm (female), <4.1 cm (male)</td>
+                                <td class="border border-neutral-slate p-3">PLAX</td>
+                                <td class="border border-neutral-slate p-3">Dilated in AF, MS</td>
+                            </tr>
+                            <tr>
+                                <td class="border border-neutral-slate p-3">Aortic Root Diameter</td>
+                                <td class="border border-neutral-slate p-3">2.0-3.7 cm</td>
+                                <td class="border border-neutral-slate p-3">PLAX</td>
+                                <td class="border border-neutral-slate p-3">Dilated in aortic regurgitation</td>
+                            </tr>
+                            <tr class="bg-light-gray">
+                                <td class="border border-neutral-slate p-3">Right Ventricular Systolic Pressure (RVSP)</td>
+                                <td class="border border-neutral-slate p-3"><35 mmHg</td>
+                                <td class="border border-neutral-slate p-3">Multiple views with TR jet</td>
+                                <td class="border border-neutral-slate p-3">Elevated in pulmonary hypertension</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-12">
+                <div>
+                    <h3 class="text-2xl font-semibold text-deep-navy mb-6">Valve Assessment</h3>
+                    <div class="space-y-6">
+                        <div class="bg-light-gray p-6 rounded-lg">
+                            <h4 class="font-semibold text-clinical-blue mb-2">Mitral Valve</h4>
+                            <ul class="list-disc list-inside text-sm">
+                                <li>Stenosis: mean gradient >5 mmHg, valve area <1.0 cm²</li>
+                                <li>Regurgitation: color Doppler shows regurgitant jet</li>
+                                <li>Prolapse: leaflets bow into LA in systole</li>
+                            </ul>
+                        </div>
+                        <div class="bg-light-gray p-6 rounded-lg">
+                            <h4 class="font-semibold text-clinical-blue mb-2">Aortic Valve</h4>
+                            <ul class="list-disc list-inside text-sm">
+                                <li>Stenosis: peak velocity >2.5 m/s, mean gradient >20 mmHg</li>
+                                <li>Regurgitation: diastolic flow reversal in descending aorta</li>
+                                <li>Bicuspid: two cusps instead of three</li>
+                            </ul>
+                        </div>
+                        <div class="bg-light-gray p-6 rounded-lg">
+                            <h4 class="font-semibold text-clinical-blue mb-2">Tricuspid Valve</h4>
+                            <ul class="list-disc list-inside text-sm">
+                                <li>Regurgitation: common in pulmonary hypertension</li>
+                                <li>Assess RV function and pulmonary pressures</li>
+                            </ul>
+                        </div>
+                        <div class="bg-light-gray p-6 rounded-lg">
+                            <h4 class="font-semibold text-clinical-blue mb-2">Pulmonic Valve</h4>
+                            <ul class="list-disc list-inside text-sm">
+                                <li>Rarely affected, assess for stenosis or regurgitation</li>
+                                <li>Peak velocity <2 m/s normal</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="text-2xl font-semibold text-deep-navy mb-6">Doppler Principles</h3>
+                    <p class="mb-4">Doppler echocardiography uses ultrasound to assess blood flow velocity and direction.</p>
+                    <div class="space-y-4">
+                        <div class="bg-light-gray p-4 rounded-lg">
+                            <h4 class="font-semibold text-clinical-blue mb-2">Pulsed Wave (PW) Doppler</h4>
+                            <p class="text-sm">Measures velocity at a specific point. Used for mitral inflow, LVOT velocities.</p>
+                        </div>
+                        <div class="bg-light-gray p-4 rounded-lg">
+                            <h4 class="font-semibold text-clinical-blue mb-2">Continuous Wave (CW) Doppler</h4>
+                            <p class="text-sm">Measures highest velocity along the beam. Used for valve gradients.</p>
+                        </div>
+                        <div class="bg-light-gray p-4 rounded-lg">
+                            <h4 class="font-semibold text-clinical-blue mb-2">Color Doppler</h4>
+                            <p class="text-sm">Displays flow direction and turbulence. Red = flow towards probe, Blue = away.</p>
+                        </div>
+                        <div class="bg-light-gray p-4 rounded-lg">
+                            <h4 class="font-semibold text-clinical-blue mb-2">Tissue Doppler</h4>
+                            <p class="text-sm">Assesses myocardial velocity for diastolic function.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <h3 class="text-2xl font-semibold text-deep-navy mb-6">Common Pathological Findings</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="bg-light-gray p-6 rounded-lg">
+                        <h4 class="font-semibold text-alert-coral mb-2">Left Ventricular Hypertrophy (LVH)</h4>
+                        <p>Septal or posterior wall thickness >1.1 cm. Causes: hypertension, aortic stenosis, hypertrophic cardiomyopathy.</p>
+                    </div>
+                    <div class="bg-light-gray p-6 rounded-lg">
+                        <h4 class="font-semibold text-alert-coral mb-2">Left Ventricular Dysfunction</h4>
+                        <p>EF <50%. Assess wall motion abnormalities, regional vs global dysfunction.</p>
+                    </div>
+                    <div class="bg-light-gray p-6 rounded-lg">
+                        <h4 class="font-semibold text-alert-coral mb-2">Valvular Heart Disease</h4>
+                        <p>Stenosis: increased gradients, reduced valve area. Regurgitation: regurgitant fraction, jet size.</p>
+                    </div>
+                    <div class="bg-light-gray p-6 rounded-lg">
+                        <h4 class="font-semibold text-alert-coral mb-2">Pericardial Effusion</h4>
+                        <p>Echo-free space around heart. Tamponade: diastolic RV collapse, respiratory variation in mitral inflow.</p>
+                    </div>
+                    <div class="bg-light-gray p-6 rounded-lg">
+                        <h4 class="font-semibold text-alert-coral mb-2">Cardiac Masses</h4>
+                        <p>Thrombus: in LA appendage (AF), LV apex. Tumors: myxoma in LA.</p>
+                    </div>
+                    <div class="bg-light-gray p-6 rounded-lg">
+                        <h4 class="font-semibold text-alert-coral mb-2">Congenital Defects</h4>
+                        <p>ASD: drop-out in septum. VSD: color flow across septum. PDA: turbulent flow in PA.</p>
+                    </div>
                 </div>
             </div>
         </div>
