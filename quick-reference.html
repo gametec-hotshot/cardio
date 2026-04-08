@@ -126,6 +126,7 @@
                 <button class="tab-btn whitespace-nowrap px-4 py-2 rounded-lg font-semibold text-sm border text-neutral-slate bg-gray-100 transition-colors flex-shrink-0" data-tab="cardiac-surgery">🫀 Cardiac Surgery</button>
                 <button class="tab-btn whitespace-nowrap px-4 py-2 rounded-lg font-semibold text-sm border text-neutral-slate bg-gray-100 transition-colors flex-shrink-0" data-tab="med-side-effects">⚠️ Med Side Effects</button>
                 <button class="tab-btn whitespace-nowrap px-4 py-2 rounded-lg font-semibold text-sm border text-neutral-slate bg-gray-100 transition-colors flex-shrink-0" data-tab="cardioversion">⚡ Cardioversion</button>
+                <button class="tab-btn whitespace-nowrap px-4 py-2 rounded-lg font-semibold text-sm border text-neutral-slate bg-gray-100 transition-colors flex-shrink-0" data-tab="pocus-views">🔍 POCUS Views</button>
             </div>
         </div>
     </section>
@@ -447,6 +448,320 @@
 
                 <div class="bg-amber-50 border border-amber-200 rounded-xl p-4 md:p-6">
                     <p class="text-sm text-deep-navy"><strong>⚠️ Disclaimer:</strong> Doses listed are adult reference values from AHA ACC/AHA/ESC guidelines. Always verify with your institution's formulary and pharmacy. Pediatric dosing requires weight-based calculation. Adjust for renal/hepatic impairment.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ═══════════════════ TAB 14: POCUS VIEWS ═══════════════════ -->
+        <div id="tab-pocus-views" class="tab-content py-8 md:py-10">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="mb-8">
+                    <h2 class="text-2xl md:text-3xl font-playfair font-bold text-deep-navy mb-1">POCUS Cardiac Views Reference</h2>
+                    <p class="text-neutral-slate">Point-of-care ultrasound cardiac windows, probe positions, and key findings for bedside echocardiography. Essential for rapid assessment in acute cardiac conditions.</p>
+                </div>
+
+                <!-- Probe Selection & Basic Technique -->
+                <div class="ref-card ecg bg-white rounded-xl p-5 md:p-6 shadow-lg mb-8">
+                    <h3 class="text-lg md:text-xl font-playfair font-bold text-deep-navy mb-4 flex items-center gap-2">
+                        <span class="text-2xl">🔍</span> Probe Selection & Technique Basics
+                    </h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="bg-teal-50 rounded-lg p-4">
+                            <h4 class="font-bold text-teal-700 mb-3">Cardiac Probe Selection</h4>
+                            <div class="space-y-3 text-sm text-neutral-slate">
+                                <div>
+                                    <p class="font-semibold">Phased Array (Cardiac Probe):</p>
+                                    <p>• Frequency: 2–4 MHz (penetration for deep structures)</p>
+                                    <p>• Footprint: Small, sector-shaped beam</p>
+                                    <p>• Best for: Cardiac chambers, valves, pericardium</p>
+                                    <p>• Position: Left sternal border, apex, subcostal</p>
+                                </div>
+                                <div>
+                                    <p class="font-semibold">Curvilinear (Abdominal Probe):</p>
+                                    <p>• Frequency: 2–5 MHz (deeper penetration)</p>
+                                    <p>• Footprint: Large, curved array</p>
+                                    <p>• Use when: Cardiac probe unavailable, large body habitus</p>
+                                    <p>• Limitations: Lower resolution, harder to identify structures</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-blue-50 rounded-lg p-4">
+                            <h4 class="font-bold text-clinical-blue mb-3">Basic Technique Principles</h4>
+                            <div class="space-y-3 text-sm text-neutral-slate">
+                                <div>
+                                    <p class="font-semibold">Patient Positioning:</p>
+                                    <p>• Supine or left lateral decubitus (30–45°)</p>
+                                    <p>• Head of bed flat for subcostal views</p>
+                                    <p>• Expose chest, apply gel liberally</p>
+                                </div>
+                                <div>
+                                    <p class="font-semibold">Image Optimization:</p>
+                                    <p>• Depth: Adjust to include entire heart</p>
+                                    <p>• Gain: Even brightness across image</p>
+                                    <p>• Focus: Set at level of interest</p>
+                                    <p>• Orientation: Marker points to patient's right</p>
+                                </div>
+                                <div>
+                                    <p class="font-semibold">Pitfalls to Avoid:</p>
+                                    <p>• Rib shadows, lung artifact, poor windows</p>
+                                    <p>• Over-gain causing artifactual thickening</p>
+                                    <p>• Wrong probe orientation confusing anatomy</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Parasternal Views -->
+                <div class="ref-card checklist bg-white rounded-xl p-5 md:p-6 shadow-lg mb-6">
+                    <h3 class="text-lg md:text-xl font-playfair font-bold text-deep-navy mb-4 flex items-center gap-2">
+                        <span class="text-2xl">💓</span> Parasternal Window Views
+                    </h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="bg-gray-50 rounded-lg p-4">
+                            <h4 class="font-bold text-deep-navy mb-3">Parasternal Long Axis (PLAX)</h4>
+                            <div class="space-y-3 text-sm text-neutral-slate">
+                                <div>
+                                    <p class="font-semibold">Probe Position:</p>
+                                    <p>• 2nd–4th intercostal space, left sternal border</p>
+                                    <p>• Marker toward patient's left shoulder (10 o'clock)</p>
+                                    <p>• Slight medial/lateral angulation to optimize</p>
+                                </div>
+                                <div>
+                                    <p class="font-semibold">Key Structures:</p>
+                                    <p>• Aortic valve (AV), mitral valve (MV)</p>
+                                    <p>• Left atrium (LA), left ventricle (LV)</p>
+                                    <p>• Aortic root, ascending aorta</p>
+                                    <p>• Descending thoracic aorta (posterior)</p>
+                                </div>
+                                <div>
+                                    <p class="font-semibold">Clinical Applications:</p>
+                                    <p>• LV function (EF estimation)</p>
+                                    <p>• Aortic stenosis/regurgitation</p>
+                                    <p>• Pericardial effusion (posterior)</p>
+                                    <p>• LV wall motion abnormalities</p>
+                                </div>
+                                <div>
+                                    <p class="font-semibold">Measurements:</p>
+                                    <p>• LVEDD: Base to apex in diastole</p>
+                                    <p>• Aortic annulus diameter</p>
+                                    <p>• LA diameter (A-P dimension)</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-gray-50 rounded-lg p-4">
+                            <h4 class="font-bold text-deep-navy mb-3">Parasternal Short Axis (PSAX)</h4>
+                            <div class="space-y-3 text-sm text-neutral-slate">
+                                <div>
+                                    <p class="font-semibold">Probe Position:</p>
+                                    <p>• Same as PLAX, rotate probe 90° clockwise</p>
+                                    <p>• Marker toward patient's left hip (7 o'clock)</p>
+                                    <p>• Multiple levels: aortic valve, mitral valve, papillary muscles</p>
+                                </div>
+                                <div>
+                                    <p class="font-semibold">Key Structures by Level:</p>
+                                    <p>• <strong>AV Level:</strong> AV cusps, coronary arteries</p>
+                                    <p>• <strong>MV Level:</strong> MV leaflets, LA appendage</p>
+                                    <p>• <strong>Papillary Level:</strong> LV walls, papillary muscles</p>
+                                </div>
+                                <div>
+                                    <p class="font-semibold">Clinical Applications:</p>
+                                    <p>• RV:LV ratio (PE assessment)</p>
+                                    <p>• Septal motion (tamponade, RV strain)</p>
+                                    <p>• Pericardial effusion quantification</p>
+                                    <p>• Valve morphology (stenosis, vegetation)</p>
+                                </div>
+                                <div>
+                                    <p class="font-semibold">Measurements:</p>
+                                    <p>• RV diameter (basal level)</p>
+                                    <p>• LV wall thickness</p>
+                                    <p>• Pericardial fluid thickness</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Apical & Subcostal Views -->
+                <div class="ref-card anti bg-white rounded-xl p-5 md:p-6 shadow-lg mb-6">
+                    <h3 class="text-lg md:text-xl font-playfair font-bold text-deep-navy mb-4 flex items-center gap-2">
+                        <span class="text-2xl">🫀</span> Apical & Subcostal Views
+                    </h3>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div class="bg-purple-50 rounded-lg p-4">
+                            <h4 class="font-bold text-purple-700 mb-2">Apical 4-Chamber (A4C)</h4>
+                            <div class="space-y-2 text-sm text-neutral-slate">
+                                <p><strong>Probe Position:</strong> Cardiac apex, marker to left axilla</p>
+                                <p><strong>Structures:</strong> All 4 chambers, MV, TV, septum</p>
+                                <p><strong>Uses:</strong> EF, RV/LV ratio, tamponade, clots</p>
+                                <p><strong>Measurements:</strong> TAPSE, LV volumes, RV size</p>
+                            </div>
+                        </div>
+                        <div class="bg-purple-50 rounded-lg p-4">
+                            <h4 class="font-bold text-purple-700 mb-2">Apical 2-Chamber (A2C)</h4>
+                            <div class="space-y-2 text-sm text-neutral-slate">
+                                <p><strong>Probe Position:</strong> From A4C, rotate laterally</p>
+                                <p><strong>Structures:</strong> LV apex/anterior wall, LA appendage</p>
+                                <p><strong>Uses:</strong> LV wall motion, thrombus detection</p>
+                                <p><strong>Measurements:</strong> LV length, wall thickness</p>
+                            </div>
+                        </div>
+                        <div class="bg-purple-50 rounded-lg p-4">
+                            <h4 class="font-bold text-purple-700 mb-2">Apical 3-Chamber (A3C)</h4>
+                            <div class="space-y-2 text-sm text-neutral-slate">
+                                <p><strong>Probe Position:</strong> From A4C, rotate medially</p>
+                                <p><strong>Structures:</strong> LVOT, AV, posterior wall</p>
+                                <p><strong>Uses:</strong> LVOT obstruction, AR severity</p>
+                                <p><strong>Measurements:</strong> LVOT diameter, aortic valve area</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-4 bg-green-50 rounded-lg p-4">
+                        <h4 class="font-bold text-green-700 mb-2">Subcostal 4-Chamber</h4>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-neutral-slate">
+                            <div>
+                                <p><strong>Probe Position:</strong> Below xiphoid, marker to patient's left</p>
+                                <p><strong>Structures:</strong> Similar to A4C, IVC visible posteriorly</p>
+                                <p><strong>Advantages:</strong> Works when apical/suprasternal windows poor</p>
+                                <p><strong>Uses:</strong> Tamponade, IVC assessment, abdominal aortic aneurysm</p>
+                            </div>
+                            <div>
+                                <p><strong>IVC Assessment:</strong> Diameter &lt;2.1 cm + &gt;50% collapse = normal RA pressure</p>
+                                <p><strong>Tamponade Signs:</strong> RV diastolic collapse, exaggerated respiratory variation</p>
+                                <p><strong>Limitations:</strong> Harder to quantify EF, valve function</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Key Findings in Acute Conditions -->
+                <div class="ref-card emergency bg-white rounded-xl p-5 md:p-6 shadow-lg mb-6">
+                    <h3 class="text-lg md:text-xl font-playfair font-bold text-deep-navy mb-4 flex items-center gap-2">
+                        <span class="text-2xl">🚨</span> Critical Findings in Acute Cardiac Conditions
+                    </h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="bg-red-50 rounded-lg p-4">
+                            <h4 class="font-bold text-red-700 mb-3">Cardiac Tamponade</h4>
+                            <div class="space-y-2 text-sm text-neutral-slate">
+                                <p><strong>PSAX:</strong> RV free wall diastolic collapse</p>
+                                <p><strong>PLAX:</strong> RA systolic collapse (late finding)</p>
+                                <p><strong>A4C:</strong> RA/RV compression, septal shift with respiration</p>
+                                <p><strong>Subcostal:</strong> IVC dilated, no respiratory variation</p>
+                                <p><strong>Quantification:</strong> Fluid &gt;2 cm anterior-posterior</p>
+                                <p><strong>Action:</strong> Urgent pericardiocentesis (subcostal approach)</p>
+                            </div>
+                        </div>
+                        <div class="bg-red-50 rounded-lg p-4">
+                            <h4 class="font-bold text-red-700 mb-3">Acute LV Failure</h4>
+                            <div class="space-y-2 text-sm text-neutral-slate">
+                                <p><strong>PLAX:</strong> LV dilated, global hypokinesis, EF &lt;40%</p>
+                                <p><strong>A4C:</strong> Mitral regurgitation (functional), pulmonary HTN signs</p>
+                                <p><strong>Lung Ultrasound:</strong> B-lines indicating pulmonary edema</p>
+                                <p><strong>Measurements:</strong> LVEDD &gt;6.2 cm, fractional shortening &lt;20%</p>
+                                <p><strong>Action:</strong> Inotropes, vasodilators, consider MCS</p>
+                            </div>
+                        </div>
+                        <div class="bg-red-50 rounded-lg p-4">
+                            <h4 class="font-bold text-red-700 mb-3">RV Strain (Pulmonary Embolism)</h4>
+                            <div class="space-y-2 text-sm text-neutral-slate">
+                                <p><strong>PSAX:</strong> RV:LV ratio &gt;1.0 at base, septal flattening</p>
+                                <p><strong>A4C:</strong> RV dilated, hypokinetic free wall, TAPSE &lt;1.7 cm</p>
+                                <p><strong>Subcostal:</strong> IVC dilated (&gt;2.1 cm), no collapse</p>
+                                <p><strong>Other signs:</strong> McConnell's sign (RV apex contracts, base doesn't)</p>
+                                <p><strong>Action:</strong> Anticoagulation, consider thrombolysis if shock</p>
+                            </div>
+                        </div>
+                        <div class="bg-red-50 rounded-lg p-4">
+                            <h4 class="font-bold text-red-700 mb-3">Acute Aortic Dissection</h4>
+                            <div class="space-y-2 text-sm text-neutral-slate">
+                                <p><strong>PLAX:</strong> Intimal flap in aortic root/ascending aorta</p>
+                                <p><strong>PSAX:</strong> Aortic root dilatation, false lumen</p>
+                                <p><strong>Suprasternal:</strong> Arch dissection, involvement of great vessels</p>
+                                <p><strong>Associated:</strong> Pericardial effusion, AR, coronary involvement</p>
+                                <p><strong>Action:</strong> Beta-blocker first, then vasodilator, urgent surgery</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Protocol for POCUS in Cardiac Arrest -->
+                <div class="ref-card bg-white rounded-xl p-5 md:p-6 shadow-lg mb-6">
+                    <h3 class="text-lg md:text-xl font-playfair font-bold text-deep-navy mb-4 flex items-center gap-2">
+                        <span class="text-2xl">⚡</span> POCUS in Cardiac Arrest Protocol
+                    </h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="bg-amber-50 rounded-lg p-4">
+                            <h4 class="font-bold text-amber-700 mb-3">Indications</h4>
+                            <div class="space-y-2 text-sm text-neutral-slate">
+                                <p>• Pulseless electrical activity (PEA)</p>
+                                <p>• Asystole with unknown cause</p>
+                                <p>• VF/pVT refractory to shocks</p>
+                                <p>• Post-ROSC assessment</p>
+                                <p>• Traumatic arrest (cardiac tamponade)</p>
+                            </div>
+                        </div>
+                        <div class="bg-gray-50 rounded-lg p-4">
+                            <h4 class="font-bold text-deep-navy mb-3">Protocol Steps</h4>
+                            <div class="space-y-2 text-sm text-neutral-slate">
+                                <p><strong>1. Parasternal Long Axis:</strong> LV function, tamponade</p>
+                                <p><strong>2. Subcostal 4-Chamber:</strong> Overall cardiac motion</p>
+                                <p><strong>3. Aortic Views:</strong> Dissection, aneurysm</p>
+                                <p><strong>4. Lung Views:</strong> Pneumothorax, pulmonary edema</p>
+                                <p><strong>5. IVC Assessment:</strong> Volume status</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-4 bg-red-50 rounded-lg p-4">
+                        <h4 class="font-bold text-red-700 mb-2">Reversible Causes Identified by POCUS</h4>
+                        <ul class="text-sm text-neutral-slate space-y-1">
+                            <li>• <strong>Hypovolemia:</strong> Small, hyperdynamic LV, flat IVC</li>
+                            <li>• <strong>Tamponade:</strong> RV/RA collapse, pericardial fluid</li>
+                            <li>• <strong>Tension pneumothorax:</strong> Lung point, mediastinal shift</li>
+                            <li>• <strong>Pulmonary embolism:</strong> RV strain, septal bowing</li>
+                            <li>• <strong>Aortic dissection:</strong> Intimal flap, aortic dilatation</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Artifacts & Pitfalls -->
+                <div class="ref-card checklist bg-white rounded-xl p-5 md:p-6 shadow-lg mb-6">
+                    <h3 class="text-lg md:text-xl font-playfair font-bold text-deep-navy mb-4 flex items-center gap-2">
+                        <span class="text-2xl">⚠️</span> Common Artifacts & Interpretation Pitfalls
+                    </h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="bg-orange-50 rounded-lg p-4">
+                            <h4 class="font-bold text-orange-700 mb-3">Respiratory Artifacts</h4>
+                            <div class="space-y-2 text-sm text-neutral-slate">
+                                <p><strong>Cardiac Motion with Respiration:</strong> Normal septal shift; exaggerated in tamponade</p>
+                                <p><strong>Lung Sliding:</strong> Normal pleural movement; absent in pneumothorax</p>
+                                <p><strong>B-lines:</strong> Vertical artifacts from alveolar-interstitial syndrome</p>
+                                <p><strong>A-lines:</strong> Horizontal reverberation in normal lung</p>
+                            </div>
+                        </div>
+                        <div class="bg-yellow-50 rounded-lg p-4">
+                            <h4 class="font-bold text-warning-amber mb-3">Technical Pitfalls</h4>
+                            <div class="space-y-2 text-sm text-neutral-slate">
+                                <p><strong>Rib Shadow:</strong> Acoustic shadowing from ribs; angle probe to avoid</p>
+                                <p><strong>Near Field Artifact:</strong> Over-gain causing false thickening</p>
+                                <p><strong>Reverberation:</strong> Mirror artifacts; adjust gain and depth</p>
+                                <p><strong>Side Lobe:</strong> False echoes lateral to main beam</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-4 bg-blue-50 rounded-lg p-4">
+                        <h4 class="font-bold text-clinical-blue mb-2">Tips for Success</h4>
+                        <ul class="text-sm text-neutral-slate space-y-1">
+                            <li>• <strong>Patient Factors:</strong> Obesity, COPD, chest tubes limit windows</li>
+                            <li>• <strong>Machine Settings:</strong> Start with cardiac presets if available</li>
+                            <li>• <strong>Probe Pressure:</strong> Light pressure to avoid deformation</li>
+                            <li>• <strong>Documentation:</strong> Save clips, note findings in real-time</li>
+                            <li>• <strong>Training:</strong> Competency requires 50–100 supervised scans</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="bg-amber-50 border border-amber-200 rounded-xl p-4 md:p-6">
+                    <p class="text-sm text-deep-navy"><strong>⚠️ Disclaimer:</strong> POCUS is operator-dependent and limited compared to comprehensive echocardiography. Always correlate with clinical findings and obtain formal echo when possible. Training and credentialing required for clinical use. Based on ACEP and ASE guidelines for point-of-care ultrasound.</p>
                 </div>
             </div>
         </div>
@@ -2492,6 +2807,468 @@
                     <h2 class="text-2xl md:text-3xl font-playfair font-bold text-deep-navy mb-1">Pediatric Cardiology Reference</h2>
                     <p class="text-neutral-slate">Congenital heart disease overview, pediatric-specific algorithms, and age-adjusted dosing. Based on ACC/AHA 2022 CHD guidelines.</p>
                 </div>
+
+                <!-- Congenital Heart Disease Classification -->
+                <div class="ref-card ecg bg-white rounded-xl p-5 md:p-6 shadow-lg mb-8">
+                    <h3 class="text-lg md:text-xl font-playfair font-bold text-deep-navy mb-4 flex items-center gap-2">
+                        <span class="text-2xl">🫀</span> Common Congenital Heart Diseases
+                    </h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                        <div class="bg-blue-50 rounded-lg p-4">
+                            <h4 class="font-bold text-clinical-blue mb-2">Left-to-Right Shunts</h4>
+                            <ul class="text-sm text-neutral-slate space-y-1">
+                                <li><strong>VSD:</strong> Most common CHD (30–40%); small close spontaneously</li>
+                                <li><strong>ASD:</strong> Secundum type (80%); PFO common in infants</li>
+                                <li><strong>PDA:</strong> Common in preterm; closes with indomethacin</li>
+                                <li><strong>AV Canal:</strong> Associated with Down syndrome</li>
+                            </ul>
+                        </div>
+                        <div class="bg-red-50 rounded-lg p-4">
+                            <h4 class="font-bold text-red-700 mb-2">Right-to-Left Shunts (Cyanotic)</h4>
+                            <ul class="text-sm text-neutral-slate space-y-1">
+                                <li><strong>Tetralogy of Fallot:</strong> Boot-shaped heart, RVOT obstruction</li>
+                                <li><strong>Transposition of Great Arteries:</strong> Parallel circulations; duct-dependent</li>
+                                <li><strong>Tricuspid Atresia:</strong> Hypoplastic RV, ASD required</li>
+                                <li><strong>Total Anomalous Pulmonary Venous Return:</strong> All pulmonary veins drain anomalously</li>
+                            </ul>
+                        </div>
+                        <div class="bg-purple-50 rounded-lg p-4">
+                            <h4 class="font-bold text-purple-700 mb-2">Obstructive Lesions</h4>
+                            <ul class="text-sm text-neutral-slate space-y-1">
+                                <li><strong>Coarctation of Aorta:</strong> Hypertension in upper extremities</li>
+                                <li><strong>Aortic Stenosis:</strong> Bicuspid valve common; may progress</li>
+                                <li><strong>Pulmonary Stenosis:</strong> Often mild; balloon valvuloplasty if severe</li>
+                                <li><strong>Hypertrophic Cardiomyopathy:</strong> Genetic; beta-blockers first-line</li>
+                            </ul>
+                        </div>
+                        <div class="bg-green-50 rounded-lg p-4">
+                            <h4 class="font-bold text-green-700 mb-2">Other Common Defects</h4>
+                            <ul class="text-sm text-neutral-slate space-y-1">
+                                <li><strong>Patent Foramen Ovale:</strong> Probe-patent; usually closes by 1 year</li>
+                                <li><strong>Ventricular Septal Defect:</strong> Muscular vs membranous; Eisenmenger if untreated</li>
+                                <li><strong>Atrioventricular Septal Defect:</strong> Complete vs partial; Rastelli classification</li>
+                                <li><strong>Double Outlet Right Ventricle:</strong> Both great arteries from RV</li>
+                            </ul>
+                        </div>
+                        <div class="bg-orange-50 rounded-lg p-4">
+                            <h4 class="font-bold text-orange-700 mb-2">Single Ventricle Physiology</h4>
+                            <ul class="text-sm text-neutral-slate space-y-1">
+                                <li><strong>Hypoplastic Left Heart Syndrome:</strong> Norwood procedure</li>
+                                <li><strong>Tricuspid Atresia:</strong> Fontan palliation</li>
+                                <li><strong>Double Inlet Left Ventricle:</strong> Variable presentation</li>
+                                <li><strong>Fontan Circulation:</strong> Passive pulmonary blood flow</li>
+                            </ul>
+                        </div>
+                        <div class="bg-teal-50 rounded-lg p-4">
+                            <h4 class="font-bold text-teal-700 mb-2">Associated Syndromes</h4>
+                            <ul class="text-sm text-neutral-slate space-y-1">
+                                <li><strong>Down Syndrome:</strong> AVSD, ASD, VSD common</li>
+                                <li><strong>Turner Syndrome:</strong> Coarctation, bicuspid aortic valve</li>
+                                <li><strong>Williams Syndrome:</strong> Supravalvar AS, peripheral PS</li>
+                                <li><strong>22q11 Deletion:</strong> TOF, interrupted aortic arch</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pediatric Vital Signs -->
+                <div class="ref-card checklist bg-white rounded-xl p-5 md:p-6 shadow-lg mb-6">
+                    <h3 class="text-lg md:text-xl font-playfair font-bold text-deep-navy mb-4 flex items-center gap-2">
+                        <span class="text-2xl">📊</span> Age-Adjusted Vital Signs &amp; Normal Values
+                    </h3>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-sm min-w-[600px]">
+                            <thead><tr class="border-b-2 border-green-100 bg-green-50">
+                                <th class="text-left py-2.5 px-3 font-semibold text-deep-navy">Age</th>
+                                <th class="text-left py-2.5 px-3 font-semibold text-deep-navy">Heart Rate (bpm)</th>
+                                <th class="text-left py-2.5 px-3 font-semibold text-deep-navy">Respiratory Rate</th>
+                                <th class="text-left py-2.5 px-3 font-semibold text-deep-navy">Blood Pressure (mmHg)</th>
+                                <th class="text-left py-2.5 px-3 font-semibold text-deep-navy">Key Notes</th>
+                            </tr></thead>
+                            <tbody class="text-neutral-slate">
+                                <tr class="border-b border-gray-100">
+                                    <td class="py-2.5 px-3 font-semibold text-deep-navy">Newborn (0–1 mo)</td>
+                                    <td class="py-2.5 px-3">120–160</td>
+                                    <td class="py-2.5 px-3">30–60</td>
+                                    <td class="py-2.5 px-3">60–90 / 30–50</td>
+                                    <td class="py-2.5 px-3">Patent ductus common; transitional circulation</td>
+                                </tr>
+                                <tr class="border-b border-gray-100">
+                                    <td class="py-2.5 px-3 font-semibold text-deep-navy">Infant (1–12 mo)</td>
+                                    <td class="py-2.5 px-3">100–140</td>
+                                    <td class="py-2.5 px-3">25–40</td>
+                                    <td class="py-2.5 px-3">80–110 / 50–70</td>
+                                    <td class="py-2.5 px-3">Foramen ovale closes; rapid growth phase</td>
+                                </tr>
+                                <tr class="border-b border-gray-100">
+                                    <td class="py-2.5 px-3 font-semibold text-deep-navy">Toddler (1–3 y)</td>
+                                    <td class="py-2.5 px-3">90–120</td>
+                                    <td class="py-2.5 px-3">20–30</td>
+                                    <td class="py-2.5 px-3">85–115 / 55–75</td>
+                                    <td class="py-2.5 px-3">VSDs may close; ASD evaluation</td>
+                                </tr>
+                                <tr class="border-b border-gray-100">
+                                    <td class="py-2.5 px-3 font-semibold text-deep-navy">Preschool (3–6 y)</td>
+                                    <td class="py-2.5 px-3">80–110</td>
+                                    <td class="py-2.5 px-3">18–25</td>
+                                    <td class="py-2.5 px-3">90–120 / 55–80</td>
+                                    <td class="py-2.5 px-3">School age screening; murmur evaluation</td>
+                                </tr>
+                                <tr class="border-b border-gray-100">
+                                    <td class="py-2.5 px-3 font-semibold text-deep-navy">School Age (6–12 y)</td>
+                                    <td class="py-2.5 px-3">70–100</td>
+                                    <td class="py-2.5 px-3">16–22</td>
+                                    <td class="py-2.5 px-3">95–125 / 60–85</td>
+                                    <td class="py-2.5 px-3">Similar to adults; congenital defect follow-up</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-2.5 px-3 font-semibold text-deep-navy">Adolescent (12–18 y)</td>
+                                    <td class="py-2.5 px-3">60–90</td>
+                                    <td class="py-2.5 px-3">14–20</td>
+                                    <td class="py-2.5 px-3">105–135 / 65–90</td>
+                                    <td class="py-2.5 px-3">Transition to adult care; pregnancy considerations</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Pediatric Medications -->
+                <div class="ref-card drug bg-white rounded-xl p-5 md:p-6 shadow-lg mb-6">
+                    <h3 class="text-lg md:text-xl font-playfair font-bold text-deep-navy mb-4 flex items-center gap-2">
+                        <span class="text-2xl">💊</span> Pediatric Cardiac Medications
+                    </h3>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-sm min-w-[600px]">
+                            <thead><tr class="border-b-2 border-blue-100 bg-blue-50">
+                                <th class="text-left py-3 px-3 font-semibold text-deep-navy">Medication</th>
+                                <th class="text-left py-3 px-3 font-semibold text-deep-navy">Indication</th>
+                                <th class="text-left py-3 px-3 font-semibold text-deep-navy">Dose</th>
+                                <th class="text-left py-3 px-3 font-semibold text-deep-navy">Monitoring</th>
+                            </tr></thead>
+                            <tbody class="text-neutral-slate">
+                                <tr class="border-b border-gray-100">
+                                    <td class="py-3 px-3 font-semibold text-deep-navy">Digoxin</td>
+                                    <td class="py-3 px-3">Heart failure, SVT</td>
+                                    <td class="py-3 px-3">Loading: 30–50 mcg/kg PO/IV; Maintenance: 10–15 mcg/kg/day divided BID</td>
+                                    <td class="py-3 px-3">Levels 0.8–2.0 ng/mL; ECG for toxicity</td>
+                                </tr>
+                                <tr class="border-b border-gray-100">
+                                    <td class="py-3 px-3 font-semibold text-deep-navy">Furosemide</td>
+                                    <td class="py-3 px-3">Congestive heart failure</td>
+                                    <td class="py-3 px-3">1–3 mg/kg/dose IV/PO q8–12h</td>
+                                    <td class="py-3 px-3">Electrolytes, renal function, growth</td>
+                                </tr>
+                                <tr class="border-b border-gray-100">
+                                    <td class="py-3 px-3 font-semibold text-deep-navy">Propranolol</td>
+                                    <td class="py-3 px-3">SVT, HCM, hypertension</td>
+                                    <td class="py-3 px-3">0.5–1 mg/kg/day divided TID; max 4 mg/kg/day</td>
+                                    <td class="py-3 px-3">Heart rate, blood pressure, hypoglycemia</td>
+                                </tr>
+                                <tr class="border-b border-gray-100">
+                                    <td class="py-3 px-3 font-semibold text-deep-navy">Enalapril</td>
+                                    <td class="py-3 px-3">Heart failure, hypertension</td>
+                                    <td class="py-3 px-3">0.1–0.5 mg/kg/day divided BID; max 0.5 mg/kg/day</td>
+                                    <td class="py-3 px-3">Renal function, potassium, blood pressure</td>
+                                </tr>
+                                <tr class="border-b border-gray-100">
+                                    <td class="py-3 px-3 font-semibold text-deep-navy">Spironolactone</td>
+                                    <td class="py-3 px-3">Heart failure (adjunct)</td>
+                                    <td class="py-3 px-3">1–3 mg/kg/day divided BID</td>
+                                    <td class="py-3 px-3">Potassium, renal function</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-3 px-3 font-semibold text-deep-navy">Aspirin</td>
+                                    <td class="py-3 px-3">Post-Kawasaki, post-intervention</td>
+                                    <td class="py-3 px-3">3–5 mg/kg/day once daily</td>
+                                    <td class="py-3 px-3">Bleeding risk, Reye syndrome warning</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="mt-6 bg-amber-50 rounded-lg p-4">
+                        <h4 class="font-bold text-amber-700 mb-2">Key Pediatric Considerations</h4>
+                        <ul class="text-sm text-neutral-slate space-y-1">
+                            <li>• <strong>Dosing:</strong> Weight-based calculations critical; use ideal body weight for obese patients</li>
+                            <li>• <strong>Renal function:</strong> Use Schwartz formula for eGFR; adjust for prematurity</li>
+                            <li>• <strong>Adverse effects:</strong> Monitor for growth suppression with chronic steroids</li>
+                            <li>• <strong>Drug interactions:</strong> CYP2D6 polymorphisms affect propranolol metabolism</li>
+                            <li>• <strong>Compliance:</strong> Liquid formulations preferred; consider palatability</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Pediatric Arrhythmias -->
+                <div class="ref-card ecg bg-white rounded-xl p-5 md:p-6 shadow-lg mb-6">
+                    <h3 class="text-lg md:text-xl font-playfair font-bold text-deep-navy mb-4 flex items-center gap-2">
+                        <span class="text-2xl">⚡</span> Pediatric Arrhythmias &amp; Management
+                    </h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="bg-gray-50 rounded-lg p-4">
+                            <h4 class="font-bold text-deep-navy mb-3">Supraventricular Tachycardia (SVT)</h4>
+                            <div class="space-y-3 text-sm text-neutral-slate">
+                                <div>
+                                    <p class="font-semibold">Presentation:</p>
+                                    <p>Most common pediatric arrhythmia; narrow complex; sudden onset/offset</p>
+                                </div>
+                                <div>
+                                    <p class="font-semibold">Acute Management:</p>
+                                    <p>• Vagal maneuvers (ice to face, valsalva)</p>
+                                    <p>• Adenosine 0.1 mg/kg IV (max 6 mg) → 0.2 mg/kg (max 12 mg)</p>
+                                    <p>• Synchronized cardioversion if unstable</p>
+                                </div>
+                                <div>
+                                    <p class="font-semibold">Chronic:</p>
+                                    <p>• Beta-blockers or digoxin for rate control</p>
+                                    <p>• Radiofrequency ablation if refractory</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-gray-50 rounded-lg p-4">
+                            <h4 class="font-bold text-deep-navy mb-3">Complete Heart Block</h4>
+                            <div class="space-y-3 text-sm text-neutral-slate">
+                                <div>
+                                    <p class="font-semibold">Causes:</p>
+                                    <p>Congenital (maternal SLE), post-surgical, idiopathic</p>
+                                </div>
+                                <div>
+                                    <p class="font-semibold">Symptoms:</p>
+                                    <p>Asymptomatic vs fatigue, syncope, HF</p>
+                                </div>
+                                <div>
+                                    <p class="font-semibold">Management:</p>
+                                    <p>• Pacemaker if symptomatic or HR &lt;50 bpm</p>
+                                    <p>• Epinephrine for unstable bradycardia</p>
+                                    <p>• Isoproterenol infusion bridge</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-4 bg-red-50 rounded-lg p-4">
+                        <h4 class="font-bold text-red-700 mb-2">Wolff-Parkinson-White (WPW) Syndrome</h4>
+                        <ul class="text-sm text-neutral-slate space-y-1">
+                            <li>• <strong>Delta wave:</strong> Short PR, slurred QRS upstroke</li>
+                            <li>• <strong>Risk:</strong> Sudden death from VF if atrial fibrillation conducts rapidly</li>
+                            <li>• <strong>Acute SVT:</strong> Avoid AV nodal blockers (digoxin, beta-blockers, CCB); use procainamide or amiodarone</li>
+                            <li>• <strong>Definitive therapy:</strong> Radiofrequency ablation of accessory pathway</li>
+                            <li>• <strong>Sports restriction:</strong> Until ablation or risk stratification</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Kawasaki Disease -->
+                <div class="ref-card anti bg-white rounded-xl p-5 md:p-6 shadow-lg mb-6">
+                    <h3 class="text-lg md:text-xl font-playfair font-bold text-deep-navy mb-4 flex items-center gap-2">
+                        <span class="text-2xl">🔥</span> Kawasaki Disease Management
+                    </h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="bg-red-50 rounded-lg p-4">
+                            <h4 class="font-bold text-red-700 mb-3">Diagnostic Criteria (≥5 days fever + ≥4 of following)</h4>
+                            <ul class="text-sm text-neutral-slate space-y-1">
+                                <li>☐ Bilateral conjunctival injection</li>
+                                <li>☐ Oral mucosal changes</li>
+                                <li>☐ Peripheral extremity changes</li>
+                                <li>☐ Polymorphous exanthem</li>
+                                <li>☐ Cervical lymphadenopathy</li>
+                            </ul>
+                            <p class="text-xs mt-2 font-semibold">Incomplete KD: Fever ≥5 days + 2–3 criteria + elevated CRP/ESR</p>
+                        </div>
+                        <div class="bg-green-50 rounded-lg p-4">
+                            <h4 class="font-bold text-green-700 mb-3">Treatment Protocol</h4>
+                            <div class="space-y-2 text-sm text-neutral-slate">
+                                <p><strong>Acute Phase (IVIG + Aspirin):</strong></p>
+                                <p>• IVIG 2 g/kg IV over 10–12 hours</p>
+                                <p>• Aspirin 80–100 mg/kg/day divided q6h</p>
+                                <p>• Give within 10 days of fever onset</p>
+                                <p class="mt-2"><strong>Refractory Cases:</strong></p>
+                                <p>• Repeat IVIG or corticosteroids</p>
+                                <p>• Infliximab 5 mg/kg IV</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-4 bg-purple-50 rounded-lg p-4">
+                        <h4 class="font-bold text-purple-700 mb-2">Subacute Phase (Platelets 2–8 weeks)</h4>
+                        <ul class="text-sm text-neutral-slate space-y-1">
+                            <li>• <strong>Aspirin:</strong> 3–5 mg/kg/day once daily</li>
+                            <li>• <strong>Echo surveillance:</strong> Weekly until normal, then monthly ×6 months</li>
+                            <li>• <strong>CAA risk:</strong> Highest 2–4 weeks post-fever; monitor for aneurysms</li>
+                            <li>• <strong>Coronary artery aneurysms:</strong> Z-score &gt;2.5 = dilated; &gt;10 = giant</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="bg-amber-50 border border-amber-200 rounded-xl p-4 md:p-6">
+                    <p class="text-sm text-deep-navy"><strong>⚠️ Disclaimer:</strong> Pediatric cardiology requires specialized expertise. Early referral to pediatric cardiologist for suspected CHD. Growth and development monitoring essential. Based on 2022 ACC/AHA Guidelines for Management of Patients With Congenital Heart Disease.</p>
+                </div>
+            </div>
+        </div>
+
+                <!-- Pediatric Vital Signs -->
+                <div class="ref-card checklist bg-white rounded-xl p-5 md:p-6 shadow-lg mb-6">
+                    <h3 class="text-lg md:text-xl font-playfair font-bold text-deep-navy mb-4 flex items-center gap-2">
+                        <span class="text-2xl">📊</span> Age-Adjusted Vital Signs &amp; Normal Values
+                    </h3>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-sm min-w-[600px]">
+                            <thead><tr class="border-b-2 border-green-100 bg-green-50">
+                                <th class="text-left py-2.5 px-3 font-semibold text-deep-navy">Age</th>
+                                <th class="text-left py-2.5 px-3 font-semibold text-deep-navy">Heart Rate (bpm)</th>
+                                <th class="text-left py-2.5 px-3 font-semibold text-deep-navy">Respiratory Rate</th>
+                                <th class="text-left py-2.5 px-3 font-semibold text-deep-navy">Blood Pressure (mmHg)</th>
+                                <th class="text-left py-2.5 px-3 font-semibold text-deep-navy">Key Notes</th>
+                            </tr></thead>
+                            <tbody class="text-neutral-slate">
+                                <tr class="border-b border-gray-100">
+                                    <td class="py-2.5 px-3 font-semibold text-deep-navy">Newborn (0–1 mo)</td>
+                                    <td class="py-2.5 px-3">120–160</td>
+                                    <td class="py-2.5 px-3">30–60</td>
+                                    <td class="py-2.5 px-3">60–90 / 30–50</td>
+                                    <td class="py-2.5 px-3">Patent ductus common; transitional circulation</td>
+                                </tr>
+                                <tr class="border-b border-gray-100">
+                                    <td class="py-2.5 px-3 font-semibold text-deep-navy">Infant (1–12 mo)</td>
+                                    <td class="py-2.5 px-3">100–140</td>
+                                    <td class="py-2.5 px-3">25–40</td>
+                                    <td class="py-2.5 px-3">80–110 / 50–70</td>
+                                    <td class="py-2.5 px-3">Foramen ovale closes; rapid growth phase</td>
+                                </tr>
+                                <tr class="border-b border-gray-100">
+                                    <td class="py-2.5 px-3 font-semibold text-deep-navy">Toddler (1–3 y)</td>
+                                    <td class="py-2.5 px-3">90–120</td>
+                                    <td class="py-2.5 px-3">20–30</td>
+                                    <td class="py-2.5 px-3">85–115 / 55–75</td>
+                                    <td class="py-2.5 px-3">VSDs may close; ASD evaluation</td>
+                                </tr>
+                                <tr class="border-b border-gray-100">
+                                    <td class="py-2.5 px-3 font-semibold text-deep-navy">Preschool (3–6 y)</td>
+                                    <td class="py-2.5 px-3">80–110</td>
+                                    <td class="py-2.5 px-3">18–25</td>
+                                    <td class="py-2.5 px-3">90–120 / 55–80</td>
+                                    <td class="py-2.5 px-3">School age screening; murmur evaluation</td>
+                                </tr>
+                                <tr class="border-b border-gray-100">
+                                    <td class="py-2.5 px-3 font-semibold text-deep-navy">School Age (6–12 y)</td>
+                                    <td class="py-2.5 px-3">70–100</td>
+                                    <td class="py-2.5 px-3">16–22</td>
+                                    <td class="py-2.5 px-3">95–125 / 60–85</td>
+                                    <td class="py-2.5 px-3">Similar to adults; congenital defect follow-up</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-2.5 px-3 font-semibold text-deep-navy">Adolescent (12–18 y)</td>
+                                    <td class="py-2.5 px-3">60–90</td>
+                                    <td class="py-2.5 px-3">14–20</td>
+                                    <td class="py-2.5 px-3">105–135 / 65–90</td>
+                                    <td class="py-2.5 px-3">Transition to adult care; pregnancy considerations</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Pediatric Medications -->
+                <div class="ref-card drug bg-white rounded-xl p-5 md:p-6 shadow-lg mb-6">
+                    <h3 class="text-lg md:text-xl font-playfair font-bold text-deep-navy mb-4 flex items-center gap-2">
+                        <span class="text-2xl">💊</span> Pediatric Cardiac Medications
+                    </h3>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-sm min-w-[600px]">
+                            <thead><tr class="border-b-2 border-blue-100 bg-blue-50">
+                                <th class="text-left py-3 px-3 font-semibold text-deep-navy">Medication</th>
+                                <th class="text-left py-3 px-3 font-semibold text-deep-navy">Indication</th>
+                                <th class="text-left py-3 px-3 font-semibold text-deep-navy">Dose</th>
+                                <th class="text-left py-3 px-3 font-semibold text-deep-navy">Monitoring</th>
+                            </tr></thead>
+                            <tbody class="text-neutral-slate">
+                                <tr class="border-b border-gray-100">
+                                    <td class="py-3 px-3 font-semibold text-deep-navy">Digoxin</td>
+                                    <td class="py-3 px-3">Heart failure, SVT</td>
+                                    <td class="py-3 px-3">Loading: 30–50 mcg/kg PO/IV; Maintenance: 10–15 mcg/kg/day divided BID</td>
+                                    <td class="py-3 px-3">Levels 0.8–2.0 ng/mL; ECG for toxicity</td>
+                                </tr>
+                                <tr class="border-b border-gray-100">
+                                    <td class="py-3 px-3 font-semibold text-deep-navy">Furosemide</td>
+                                    <td class="py-3 px-3">Congestive heart failure</td>
+                                    <td class="py-3 px-3">1–3 mg/kg/dose IV/PO q8–12h</td>
+                                    <td class="py-3 px-3">Electrolytes, renal function, growth</td>
+                                </tr>
+                                <tr class="border-b border-gray-100">
+                                    <td class="py-3 px-3 font-semibold text-deep-navy">Propranolol</td>
+                                    <td class="py-3 px-3">SVT, HCM, hypertension</td>
+                                    <td class="py-3 px-3">0.5–1 mg/kg/day divided TID; max 4 mg/kg/day</td>
+                                    <td class="py-3 px-3">Heart rate, blood pressure, hypoglycemia</td>
+                                </tr>
+                                <tr class="border-b border-gray-100">
+                                    <td class="py-3 px-3 font-semibold text-deep-navy">Enalapril</td>
+                                    <td class="py-3 px-3">Heart failure, hypertension</td>
+                                    <td class="py-3 px-3">0.1–0.5 mg/kg/day divided BID; max 0.5 mg/kg/day</td>
+                                    <td class="py-3 px-3">Renal function, potassium, blood pressure</td>
+                                </tr>
+                                <tr class="border-b border-gray-100">
+                                    <td class="py-3 px-3 font-semibold text-deep-navy">Spironolactone</td>
+                                    <td class="py-3 px-3">Heart failure (adjunct)</td>
+                                    <td class="py-3 px-3">1–3 mg/kg/day divided BID</td>
+                                    <td class="py-3 px-3">Potassium, renal function</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-3 px-3 font-semibold text-deep-navy">Aspirin</td>
+                                    <td class="py-3 px-3">Post-Kawasaki, post-intervention</td>
+                                    <td class="py-3 px-3">3–5 mg/kg/day once daily</td>
+                                    <td class="py-3 px-3">Bleeding risk, Reye syndrome warning</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- PALS Algorithms -->
+                <div class="ref-card emergency bg-white rounded-xl p-5 md:p-6 shadow-lg mb-6">
+                    <h3 class="text-lg md:text-xl font-playfair font-bold text-deep-navy mb-4 flex items-center gap-2">
+                        <span class="text-2xl">🫀</span> PALS Key Differences from ACLS
+                    </h3>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-sm min-w-[500px]">
+                            <thead><tr class="border-b-2 border-orange-100 bg-orange-50">
+                                <th class="text-left py-2 px-3 font-semibold text-deep-navy">Parameter</th>
+                                <th class="text-left py-2 px-3 font-semibold text-deep-navy">ACLS (Adult)</th>
+                                <th class="text-left py-2 px-3 font-semibold text-deep-navy">PALS (Pediatric)</th>
+                            </tr></thead>
+                            <tbody class="text-neutral-slate">
+                                <tr class="border-b border-gray-100">
+                                    <td class="py-2.5 px-3 font-semibold">Compression ratio</td>
+                                    <td class="py-2.5 px-3">30:2 (single rescuer) / continuous w/ advanced airway</td>
+                                    <td class="py-2.5 px-3">15:2 (2 rescuers) / 30:2 (single)</td>
+                                </tr>
+                                <tr class="border-b border-gray-100">
+                                    <td class="py-2.5 px-3 font-semibold">Compression depth</td>
+                                    <td class="py-2.5 px-3">At least 2 in (5 cm)</td>
+                                    <td class="py-2.5 px-3">⅓ AP diameter (~5 cm child, 1.5 cm infant)</td>
+                                </tr>
+                                <tr class="border-b border-gray-100">
+                                    <td class="py-2.5 px-3 font-semibold">Epinephrine</td>
+                                    <td class="py-2.5 px-3">1 mg q3–5 min</td>
+                                    <td class="py-2.5 px-3">0.01 mg/kg (0.1 mL/kg of 1:10,000) q3–5 min</td>
+                                </tr>
+                                <tr class="border-b border-gray-100">
+                                    <td class="py-2.5 px-3 font-semibold">Initial defibrillation</td>
+                                    <td class="py-2.5 px-3">120–200 J (biphasic)</td>
+                                    <td class="py-2.5 px-3">2 J/kg (→ 4 J/kg → ≥4 J/kg)</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-2.5 px-3 font-semibold">Bradycardia algorithm</td>
+                                    <td class="py-2.5 px-3">Atropine → pacing</td>
+                                    <td class="py-2.5 px-3">O₂/ventilation first → epinephrine → pacing</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="bg-amber-50 border border-amber-200 rounded-xl p-4 md:p-6">
+                    <p class="text-sm text-deep-navy"><strong>⚠️ Disclaimer:</strong> Pediatric dosing must be weight-based. Always verify with a pharmacist and institutional protocols. Growth and developmental monitoring essential in pediatric cardiology.</p>
+                </div>
+            </div>
+        </div>
 
                 <!-- Congenital Heart Disease Classification -->
                 <div class="ref-card ecg bg-white rounded-xl p-5 md:p-6 shadow-lg mb-8">
